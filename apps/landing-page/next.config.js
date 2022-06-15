@@ -9,6 +9,12 @@ const nextConfig = {
     svgr: true,
   },
   swcMinify: true,
+  basePath: process.env.NEXT_BASE_PATH || '',
+  publicRuntimeConfig: {
+    analyticsWriteKey: process.env.ANALYTICS_WRITE_KEY || '',
+    segmentClientId: 'landing-page',
+    basePath: process.env.NEXT_BASE_PATH || '',
+  },
 };
 
 module.exports = withNx(nextConfig);

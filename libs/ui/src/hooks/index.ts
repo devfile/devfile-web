@@ -1,1 +1,1 @@
-/* eslint-disable unicorn/no-empty-file */
+export * from './use-analytics/use-analytics';

@@ -13,7 +13,7 @@ export default async function (host: Tree, schema: any) {
 export interface ${className}Props {}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-function ${className}(props: ${className}Props): JSX.Element {
+export function ${className}(props: ${className}Props): JSX.Element {
 
   return (
     <div>

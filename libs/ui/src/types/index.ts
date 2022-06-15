@@ -1,1 +1,1 @@
-/* eslint-disable unicorn/no-empty-file */
+export * from './get-config';

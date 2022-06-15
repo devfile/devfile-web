@@ -84,7 +84,8 @@
         "import/no-extraneous-dependencies": "off",
         // Import for import of components
         "import/no-cycle": "off",
-        "eslint-comments/disable-enable-pair": "off"
+        "eslint-comments/disable-enable-pair": "off",
+        "promise/no-nesting": "off"
       }
     },
     {
@@ -134,7 +135,8 @@
         // Requires the T[] type syntax for an array
         "@typescript-eslint/array-type": "error",
         // Next.js does not require all anchor tags to have an href
-        "jsx-a11y/anchor-is-valid": "off"
+        "jsx-a11y/anchor-is-valid": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
       }
     },
     {

@@ -16,7 +16,7 @@ export interface Use${className} {
   increment: () => void;
 }
 
-function use${className}(): Use${className} {
+export function use${className}(): Use${className} {
   const [count, setCount] = useState(0);
   const increment = useCallback(() => setCount((x) => x + 1), []);
   return { count, increment };

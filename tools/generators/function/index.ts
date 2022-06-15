@@ -9,7 +9,7 @@ export default async function (host: Tree, schema: any) {
   host.write(
     `${project?.root}/src/functions/${fileName}/${fileName}.tsx`,
     `
-function ${propertyName}(): boolean {
+export function ${propertyName}(): boolean {
   return true;
 }
 
