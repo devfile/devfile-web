@@ -11,6 +11,13 @@
     "prettier",
     "next"
   ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
+    }
+  },
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -85,7 +92,8 @@
         // Import for import of components
         "import/no-cycle": "off",
         "eslint-comments/disable-enable-pair": "off",
-        "promise/no-nesting": "off"
+        "promise/no-nesting": "off",
+        "@next/next/no-img-element": "off"
       }
     },
     {
@@ -136,17 +144,19 @@
         "@typescript-eslint/array-type": "error",
         // Next.js does not require all anchor tags to have an href
         "jsx-a11y/anchor-is-valid": "off",
-        "@typescript-eslint/ban-ts-comment": "off"
+        "@typescript-eslint/ban-ts-comment": "off",
+        "react/no-unused-prop-types": "off"
       }
     },
     {
-      "files": ["*.js", "*.jsx"],
+      "files": ["*.js", "*.jsx", "*.mjs"],
       "extends": ["plugin:@nrwl/nx/javascript"],
       "rules": {
         // Allow CJS until ESM support improves
         "unicorn/prefer-module": "off",
         "unicorn/import-style": "off",
-        "no-param-reassign": "off"
+        "no-param-reassign": "off",
+        "import/extensions": "off"
       }
     },
     {

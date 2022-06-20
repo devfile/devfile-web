@@ -1,70 +1,55 @@
 import { AppProps } from 'next/app';
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import getConfig from 'next/config';
 import {
-  LandingPageMeta,
   AnalyticsProvider,
-  useAnalytics,
-  getAnonymousId,
-  getUserRegion,
+  AnalyticsWrapper,
+  DocsLayout,
+  Footer,
   GetConfig,
+  Header,
+  LandingPageMeta,
 } from '@devfile-web/ui';
+import { useRouter } from 'next/router';
 import './styles.css';
 
 const { publicRuntimeConfig } = getConfig() as GetConfig;
 
 function LandingPage(props: AppProps): JSX.Element {
+  const router = useRouter();
+
+  if (router.asPath.startsWith('/docs')) {
+    return (
+      <div className="flex h-screen flex-col justify-between">
+        <div className="grow">
+          <LandingPageMeta />
+          <Header />
+          <main className="h-full">
+            <DocsLayout>
+              <AnalyticsProvider writeKey={publicRuntimeConfig.analyticsWriteKey}>
+                <AnalyticsWrapper {...props} />
+              </AnalyticsProvider>
+            </DocsLayout>
+          </main>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
-    <>
-      <LandingPageMeta />
+    <div className="flex h-screen flex-col justify-between">
       <div>
+        <LandingPageMeta />
+        <Header />
         <main>
           <AnalyticsProvider writeKey={publicRuntimeConfig.analyticsWriteKey}>
             <AnalyticsWrapper {...props} />
           </AnalyticsProvider>
         </main>
       </div>
-    </>
+      <Footer />
+    </div>
   );
-}
-
-function AnalyticsWrapper(props: AppProps): JSX.Element {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const { Component, pageProps } = props;
-
-  const router = useRouter();
-  const { analytics } = useAnalytics();
-
-  useEffect(() => {
-    const sendAnalytics = async (): Promise<void> => {
-      const region = getUserRegion(router.locale);
-      const anonymousId = await getAnonymousId(analytics);
-
-      await analytics.identify(
-        anonymousId,
-        {
-          id: anonymousId,
-        },
-        {
-          context: { ip: '0.0.0.0', location: { country: region } },
-        },
-      );
-
-      await analytics.track(
-        router.asPath,
-        { client: publicRuntimeConfig.segmentClientId },
-        {
-          context: { ip: '0.0.0.0', location: { country: region } },
-          userId: anonymousId,
-        },
-      );
-    };
-
-    sendAnalytics().catch(() => {});
-  }, [analytics, router.asPath, router.locale]);
-
-  return <Component {...pageProps} />;
 }
 
 export default LandingPage;
