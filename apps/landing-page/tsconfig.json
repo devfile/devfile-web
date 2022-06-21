@@ -3,16 +3,14 @@
   "compilerOptions": {
     "jsx": "preserve",
     "allowJs": true,
+    "types": ["node", "@docusaurus/module-type-aliases", "@docusaurus/theme-classic", "jest"],
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["node", "jest"],
-    "strict": false,
-    "forceConsistentCasingInFileNames": true,
+    "lib": ["DOM"],
     "noEmit": true,
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "incremental": true
+    "noImplicitAny": true,
+    "paths": {
+      "@devfile-web/ui": ["libs/ui/src/index.ts"]
+    }
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts", "next.config.mjs"],
-  "exclude": ["node_modules"]
+  "include": ["**/*.ts", "**/*.tsx"]
 }

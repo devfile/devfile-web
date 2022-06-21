@@ -1,7 +1,8 @@
 import { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import Link from 'next/link';
+import NextLink from 'next/link';
+import DocuLink from '@docusaurus/Link';
 import { DevfileLogo } from '../devfile-logo/devfile-logo';
 
 const navigation = [
@@ -12,7 +13,13 @@ const navigation = [
   { name: 'Slack', href: '/', image: '/images/slack.svg', external: true },
 ];
 
-export function Header(): JSX.Element {
+export interface HeaderProps {
+  Link: typeof NextLink | typeof DocuLink;
+}
+
+export function Header(props: HeaderProps): JSX.Element {
+  const { Link } = props;
+
   return (
     <Popover className="relative border-b border-gray-300 bg-white">
       <div className="flex items-center justify-between px-4 py-6 md:justify-start md:space-x-10">

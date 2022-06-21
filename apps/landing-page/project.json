@@ -1,52 +1,18 @@
 {
-  "root": "apps/landing-page",
-  "sourceRoot": "apps/landing-page",
+  "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "projectType": "application",
+  "sourceRoot": "apps/landing-page/src",
   "targets": {
     "build": {
-      "executor": "@nrwl/next:build",
-      "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "executor": "@nx-plus/docusaurus:browser",
       "options": {
-        "root": "apps/landing-page",
         "outputPath": "dist/apps/landing-page"
-      },
-      "configurations": {
-        "production": {}
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx-plus/docusaurus:dev-server",
       "options": {
-        "buildTarget": "landing-page:build",
-        "dev": true
-      },
-      "configurations": {
-        "production": {
-          "buildTarget": "landing-page:build:production",
-          "dev": false
-        }
-      }
-    },
-    "export": {
-      "executor": "@nrwl/next:export",
-      "options": {
-        "buildTarget": "landing-page:build:production"
-      }
-    },
-    "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/landing-page"],
-      "options": {
-        "jestConfig": "apps/landing-page/jest.config.js",
-        "passWithNoTests": true
-      }
-    },
-    "lint": {
-      "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
-      "options": {
-        "lintFilePatterns": ["apps/landing-page/**/*.{ts,tsx,js,jsx}"]
+        "port": 4200
       }
     }
   },
