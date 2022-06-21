@@ -3,7 +3,8 @@ import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import HomepageFeatures from '../components/HomepageFeatures';
-import { Header } from '@devfile-web/ui';
+import { Header } from '../../node_modules/@devfile-web/core/src/components/header/header';
+import { CncfBanner } from '../../node_modules/@devfile-web/core/src/components/cncf-banner/cncf-banner';
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -31,6 +32,7 @@ export default function Home(): JSX.Element {
       description="Description will go into a meta tag in <head />"
     >
       <Header Link={Link} />
+      <CncfBanner />
       <HomepageHeader />
       <main>
         <HomepageFeatures />

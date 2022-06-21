@@ -8,10 +8,10 @@
     "test": "nx test",
     "lint": "nx affected --target=lint",
     "prepare": "husky install",
-    "create:component": "nx workspace-generator component --project=ui",
-    "create:hook": "nx workspace-generator hook --project=ui",
-    "create:function": "nx workspace-generator function --project=ui",
-    "create:type": "nx workspace-generator type --project=ui"
+    "create:component": "nx workspace-generator component --project=core",
+    "create:hook": "nx workspace-generator hook --project=core",
+    "create:function": "nx workspace-generator function --project=core",
+    "create:type": "nx workspace-generator type --project=core"
   },
   "private": true,
   "dependencies": {
@@ -85,6 +85,7 @@
     "eslint-plugin-unicorn": "^42.0.0",
     "husky": "^8.0.1",
     "jest": "27.2.3",
+    "lerna": "^5.1.4",
     "nx": "^14.3.6",
     "postcss": "^8.4.14",
     "prettier": "^2.5.1",

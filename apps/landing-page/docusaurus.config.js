@@ -19,23 +19,23 @@ const config = {
   organizationName: 'facebook', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
 
-  webpack: {
-    jsLoader: (isServer) => ({
-      loader: require.resolve('swc-loader'),
-      options: {
-        jsc: {
-          parser: {
-            syntax: 'typescript',
-            tsx: true,
-          },
-          target: 'es2017',
-        },
-        module: {
-          type: isServer ? 'commonjs' : 'es6',
-        },
-      },
-    }),
-  },
+  // webpack: {
+  //   jsLoader: (isServer) => ({
+  //     loader: require.resolve('swc-loader'),
+  //     options: {
+  //       jsc: {
+  //         parser: {
+  //           syntax: 'typescript',
+  //           tsx: true,
+  //         },
+  //         target: 'es2017',
+  //       },
+  //       module: {
+  //         type: isServer ? 'commonjs' : 'es6',
+  //       },
+  //     },
+  //   }),
+  // },
 
   presets: [
     [
@@ -59,34 +59,34 @@ const config = {
     ],
   ],
 
-  plugins: [
-    // @ts-ignore
-    function (context, options) {
-      return {
-        name: 'custom-docusaurus-plugin',
-        configureWebpack(config, isServer) {
-          return {
-            resolve: {
-              plugins: [
-                // @ts-ignore
-                new TsconfigPathsPlugin({
-                  configFile: path.resolve(__dirname, '../../tsconfig.base.json'),
-                }),
-              ],
-            },
-          };
-        },
-      };
-    },
-    [
-      'docusaurus-plugin-module-alias',
-      {
-        alias: {
-          '@devfile/ui': path.resolve(__dirname, '../../libs/ui/src/index.ts'),
-        },
-      },
-    ],
-  ],
+  // plugins: [
+  //   // @ts-ignore
+  //   function (context, options) {
+  //     return {
+  //       name: 'custom-docusaurus-plugin',
+  //       configureWebpack(config, isServer) {
+  //         return {
+  //           resolve: {
+  //             plugins: [
+  //               // @ts-ignore
+  //               new TsconfigPathsPlugin({
+  //                 configFile: path.resolve(__dirname, '../../tsconfig.base.json'),
+  //               }),
+  //             ],
+  //           },
+  //         };
+  //       },
+  //     };
+  //   },
+  //   [
+  //     'docusaurus-plugin-module-alias',
+  //     {
+  //       alias: {
+  //         '@devfile/ui': path.resolve(__dirname, '../../libs/ui/src/index.ts'),
+  //       },
+  //     },
+  //   ],
+  // ],
 
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */

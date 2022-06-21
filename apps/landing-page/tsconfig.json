@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react",
     "allowJs": true,
     "types": ["node", "@docusaurus/module-type-aliases", "@docusaurus/theme-classic", "jest"],
     "esModuleInterop": true,
@@ -9,7 +9,7 @@
     "noEmit": true,
     "noImplicitAny": true,
     "paths": {
-      "@devfile-web/ui": ["libs/ui/src/index.ts"]
+      "@site/*": ["./*"]
     }
   },
   "include": ["**/*.ts", "**/*.tsx"]
