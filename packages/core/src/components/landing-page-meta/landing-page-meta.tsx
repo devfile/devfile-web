@@ -1,20 +1,15 @@
-import Head from 'next/head';
-import getConfig from 'next/config';
-import type { GetConfig } from '../../types';
+import React from 'react';
 
 export interface LandingPageMetaProps {
   title?: string;
   keywords?: string;
   description?: string;
 }
-
-const { publicRuntimeConfig } = getConfig() as GetConfig;
-
 export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
   const { title, keywords, description } = props;
 
   return (
-    <Head>
+    <head>
       <title>{title}</title>
       <meta name="keywords" content={keywords} />
       <meta name="description" content={description} />
@@ -26,9 +21,7 @@ export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
       />
       <meta name="theme-color" content="#151515" />
-
-      <link rel="icon" href={`${publicRuntimeConfig.basePath}/images/icons/favicon.ico`} />
-    </Head>
+    </head>
   );
 }
 

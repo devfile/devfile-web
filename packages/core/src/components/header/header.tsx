@@ -1,30 +1,26 @@
 import React, { Fragment } from 'react';
 import { Popover, Transition } from '@headlessui/react';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import NextLink from 'next/link';
-import DocuLink from '@docusaurus/Link';
-import { DevfileLogo } from '../devfile-logo/devfile-logo';
+import { DevfileBanner } from '../devfile-banner/devfile-banner';
+import { GithubIcon, SlackIcon } from '../../images';
+import { useMonorepo } from '../../hooks';
 
 const navigation = [
-  { name: 'Viewer', href: '/', external: false },
+  { name: 'Viewer', href: '/' },
   { name: 'Docs', href: '/' },
   { name: 'Get Started', href: '/' },
-  { name: 'Github', href: '/', image: '/images/github.svg', external: false },
-  { name: 'Slack', href: '/', image: '/images/slack.svg', external: false },
+  { name: 'Github', href: '/', image: GithubIcon },
+  { name: 'Slack', href: '/', image: SlackIcon },
 ];
 
-export interface HeaderProps {
-  Link: typeof NextLink | typeof DocuLink;
-}
-
-export function Header(props: HeaderProps): JSX.Element {
-  const { Link } = props;
+export function Header(): JSX.Element {
+  const { repo, Link } = useMonorepo();
 
   return (
     <Popover className="relative border-b border-gray-300 bg-white">
       <div className="flex items-center justify-between px-4 py-6 md:justify-start md:space-x-10">
         <div className="ml-8">
-          <DevfileLogo />
+          <DevfileBanner />
         </div>
         <div className="-my-2 -mr-2 md:hidden">
           <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -35,23 +31,19 @@ export function Header(props: HeaderProps): JSX.Element {
         <div className="hidden md:flex md:flex-1 md:items-center md:justify-end md:pr-8">
           <Popover.Group as="nav" className="flex items-center space-x-10">
             {navigation.map((item) =>
-              item.external ? (
-                <a
+              repo === 'landing-page' ? (
+                <Link
                   key={item.name}
                   href={item.href}
                   className="text-base font-medium text-gray-500 hover:text-gray-900"
                 >
-                  {item.image ? (
-                    <img className="h-6 w-auto" src={item.image} alt={item.name} />
-                  ) : (
-                    item.name
-                  )}
-                </a>
+                  {item.image ? <item.image className="h-6 w-6 hover:fill-blue-900" /> : item.name}
+                </Link>
               ) : (
                 <Link key={item.name} href={item.href}>
                   <a className="text-base font-medium text-gray-500 hover:text-gray-900">
                     {item.image ? (
-                      <img className="h-6 w-auto" src={item.image} alt={item.name} />
+                      <item.image className="h-6 w-6 hover:fill-blue-900" />
                     ) : (
                       item.name
                     )}
@@ -80,7 +72,7 @@ export function Header(props: HeaderProps): JSX.Element {
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">
                 <div className="ml-4">
-                  <DevfileLogo />
+                  <DevfileBanner />
                 </div>
                 <div className="-mr-2">
                   <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -93,14 +85,14 @@ export function Header(props: HeaderProps): JSX.Element {
             <div className="py-6 px-5">
               <div className="grid grid-cols-2 gap-4">
                 {navigation.map((item) =>
-                  item.external ? (
-                    <a
+                  repo === 'landing-page' ? (
+                    <Link
                       key={item.name}
                       href={item.href}
                       className="text-base font-medium text-gray-500 hover:text-gray-900"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ) : (
                     <Link key={item.name} href={item.href}>
                       <a className="text-base font-medium text-gray-500 hover:text-gray-900">

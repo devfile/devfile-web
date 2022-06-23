@@ -1,3 +1,5 @@
+import React from 'react';
+
 export function IntroSection(): JSX.Element {
   return (
     <div className="bg-slate-200 lg:relative">

@@ -1,9 +1,20 @@
+import React from 'react';
+import {
+  DevfileLogoGrayscaleIcon,
+  GithubIcon,
+  SlackIcon,
+  AmazonWebServicesIcon,
+  IbmIcon,
+  JetBrainsIcon,
+  RedHatIcon,
+} from '../../images';
+
 const navigation = {
   contributors: [
-    { name: 'Amazon Web Services', href: '#', image: '/images/amazon-web-services.svg' },
-    { name: 'IBM', href: '#', image: '/images/ibm.svg' },
-    { name: 'JetBrains', href: '#', image: '/images/jetbrains.svg' },
-    { name: 'Red Hat', href: '#', image: '/images/red-hat.svg' },
+    { name: 'Amazon Web Services', href: '#', image: AmazonWebServicesIcon },
+    { name: 'IBM', href: '#', image: IbmIcon },
+    { name: 'JetBrains', href: '#', image: JetBrainsIcon },
+    { name: 'Red Hat', href: '#', image: RedHatIcon },
   ],
   links: [
     { name: 'Cloud Native Computing Foundation', href: '#' },
@@ -14,12 +25,12 @@ const navigation = {
     {
       name: 'Github',
       href: '#',
-      image: '/images/github.svg',
+      image: GithubIcon,
     },
     {
       name: 'Slack',
       href: '#',
-      image: '/images/slack.svg',
+      image: SlackIcon,
     },
   ],
 };
@@ -33,7 +44,7 @@ export function Footer(): JSX.Element {
       <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <img className="h-10" src="/images/devfile-logo-grayscale.svg" alt="Company name" />
+            <DevfileLogoGrayscaleIcon className="h-10" />
             <p className="text-base text-gray-500">
               An open standard defining containerized development environments.
             </p>
@@ -41,7 +52,7 @@ export function Footer(): JSX.Element {
               {navigation.social.map((item) => (
                 <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
                   <span className="sr-only">{item.name}</span>
-                  <img className="h-6 w-6" aria-hidden="true" src={item.image} alt={item.name} />
+                  <item.image className="h-6 w-6" aria-hidden="true" />
                 </a>
               ))}
             </div>
@@ -55,13 +66,7 @@ export function Footer(): JSX.Element {
                 {navigation.contributors.map((item) => (
                   <li key={item.name}>
                     <a href={item.href} className="text-base text-gray-500  hover:text-gray-900">
-                      <img
-                        className="inline h-6 w-6"
-                        aria-hidden="true"
-                        src={item.image}
-                        alt={item.name}
-                      />{' '}
-                      {item.name}
+                      <item.image className="inline h-6 w-6" aria-hidden="true" /> {item.name}
                     </a>
                   </li>
                 ))}

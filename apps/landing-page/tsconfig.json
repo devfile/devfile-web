@@ -1,16 +1,27 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
-    "types": ["node", "@docusaurus/module-type-aliases", "@docusaurus/theme-classic", "jest"],
     "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
     "lib": ["DOM"],
     "noEmit": true,
     "noImplicitAny": true,
-    "paths": {
-      "@site/*": ["./*"]
-    }
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "types": ["@docusaurus/module-type-aliases", "@docusaurus/theme-classic"]
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./tsconfig.lib.json"
+    },
+    {
+      "path": "./tsconfig.spec.json"
+    }
+  ]
 }

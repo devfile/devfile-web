@@ -1,4 +1,4 @@
-import { createContext, useMemo, useContext } from 'react';
+import React, { createContext, useMemo, useContext } from 'react';
 import { AnalyticsBrowser } from '@segment/analytics-next';
 import type { ID } from '@segment/analytics-next';
 
@@ -13,7 +13,9 @@ export interface UseAnalytics {
 
 const AnalyticsContext = createContext<AnalyticsBrowser | undefined>(undefined);
 
-export function AnalyticsProvider({ children, writeKey }: AnalyticsProviderProps): JSX.Element {
+export function AnalyticsProvider(props: AnalyticsProviderProps): JSX.Element {
+  const { children, writeKey } = props;
+
   const analytics = useMemo(() => AnalyticsBrowser.load({ writeKey }), [writeKey]);
   return <AnalyticsContext.Provider value={analytics}>{children}</AnalyticsContext.Provider>;
 }
