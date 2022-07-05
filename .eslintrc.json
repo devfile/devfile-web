@@ -94,7 +94,9 @@
         "eslint-comments/disable-enable-pair": "off",
         "promise/no-nesting": "off",
         "@next/next/no-img-element": "off",
-        "react/require-default-props": "off"
+        "react/require-default-props": "off",
+        "unicorn/no-abusive-eslint-disable": "off",
+        "eslint-comments/no-unlimited-disable": "off"
       }
     },
     {

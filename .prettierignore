@@ -1,2 +1,4 @@
 .prettierignore
-.docusaurus/
+**/*.mdx
+**/generated/
+**/snippet.*

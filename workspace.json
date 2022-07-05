@@ -1,8 +1,8 @@
 {
   "version": 2,
   "projects": {
-    "core": "packages/core",
-    "core-e2e": "apps/core-e2e",
-    "landing-page": "apps/landing-page"
+    "core": "libs/core",
+    "landing-page": "apps/landing-page",
+    "landing-page-e2e": "apps/landing-page-e2e"
   }
 }

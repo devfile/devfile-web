@@ -42,5 +42,6 @@
         "linter": "eslint"
       }
     }
-  }
+  },
+  "defaultProject": "landing-page"
 }
