@@ -1,96 +1,80 @@
-import { DevfileTitle } from '../devfile-title/devfile-title';
-import {
-  GithubIcon,
-  SlackIcon,
-  AmazonWebServicesIcon,
-  IbmIcon,
-  JetBrainsIcon,
-  RedHatIcon,
-} from '../../icons';
-
-const navigation = {
-  contributors: [
-    { name: 'Amazon Web Services', href: '#', image: AmazonWebServicesIcon },
-    { name: 'IBM', href: '#', image: IbmIcon },
-    { name: 'JetBrains', href: '#', image: JetBrainsIcon },
-    { name: 'Red Hat', href: '#', image: RedHatIcon },
-  ],
-  links: [
-    { name: 'Cloud Native Computing Foundation', href: '#' },
-    { name: 'Registry', href: '#' },
-    { name: 'Documentation', href: '#' },
-  ],
-  social: [
-    {
-      name: 'Github',
-      href: '#',
-      image: GithubIcon,
-    },
-    {
-      name: 'Slack',
-      href: '#',
-      image: SlackIcon,
-    },
-  ],
-};
+import Link from 'next/link';
+import { DevfileIcon } from '../../icons';
+import { useNavigation } from '../../hooks';
 
 export function Footer(): JSX.Element {
+  const { footerNavigation } = useNavigation();
+
   return (
-    <footer className="bg-slate-50" aria-labelledby="footer-heading">
+    <footer
+      className="border-t bg-slate-50 dark:border-slate-800 dark:bg-slate-900"
+      aria-labelledby="footer-heading"
+    >
       <h2 id="footer-heading" className="sr-only">
         Footer
       </h2>
-      <div className="mx-auto max-w-7xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+      <div className="mx-auto max-w-screen-2xl py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
         <div className="xl:grid xl:grid-cols-3 xl:gap-8">
           <div className="space-y-8 xl:col-span-1">
-            <DevfileTitle grayscale title="Devfile.io" />
-            <p className="text-base text-gray-500">
+            <Link href="/" aria-label="Home page" passHref className="flex items-center gap-4">
+              <DevfileIcon className="fill-devfile h-9 w-auto" />
+              <h3 className="text-xl font-semibold text-slate-700 dark:text-sky-100">Devfile.io</h3>
+            </Link>
+            <p className="text-base text-slate-500 dark:text-slate-400">
               An open standard defining containerized development environments.
             </p>
             <div className="flex space-x-6">
-              {navigation.social.map((item) => (
-                <a key={item.name} href={item.href} className="text-gray-400 hover:text-gray-500">
+              {footerNavigation.social.map((item) => (
+                <Link key={item.name} href={item.href} passHref>
                   <span className="sr-only">{item.name}</span>
-                  <item.image
-                    className="h-6 w-auto fill-gray-500 hover:fill-gray-900"
-                    aria-hidden="true"
-                  />
-                </a>
+                  {item.image && (
+                    <item.image
+                      className="h-6 w-auto fill-slate-500 hover:fill-slate-600 dark:fill-slate-400 dark:hover:fill-slate-300"
+                      aria-hidden="true"
+                    />
+                  )}
+                </Link>
               ))}
             </div>
           </div>
           <div className="mt-12 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0">
             <div>
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-sky-100">
                 Contributors
               </h3>
               <ul className="mt-4 space-y-4">
-                {navigation.contributors.map((item) => (
+                {footerNavigation.contributors.map((item) => (
                   <li key={item.name}>
-                    <a
+                    <Link
                       href={item.href}
-                      className="group text-base  text-gray-500 hover:text-gray-900"
+                      className="group text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                      passHref
                     >
-                      <item.image
-                        className="inline h-auto w-6 fill-gray-500 group-hover:fill-gray-900"
-                        aria-hidden="true"
-                      />{' '}
+                      {item.image && (
+                        <item.image
+                          className="inline h-auto w-6 fill-slate-500 group-hover:fill-slate-600 dark:fill-slate-400 dark:group-hover:fill-slate-300"
+                          aria-hidden="true"
+                        />
+                      )}{' '}
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="mt-12 md:mt-0">
-              <h3 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
+              <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-sky-100">
                 Links
               </h3>
               <ul className="mt-4 space-y-4">
-                {navigation.links.map((item) => (
+                {footerNavigation.links.map((item) => (
                   <li key={item.name}>
-                    <a href={item.href} className="text-base text-gray-500 hover:text-gray-900">
+                    <Link
+                      href={item.href}
+                      className="text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                    >
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>

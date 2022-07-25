@@ -96,7 +96,8 @@
         "@next/next/no-img-element": "off",
         "react/require-default-props": "off",
         "unicorn/no-abusive-eslint-disable": "off",
-        "eslint-comments/no-unlimited-disable": "off"
+        "eslint-comments/no-unlimited-disable": "off",
+        "unicorn/no-null": "off"
       }
     },
     {

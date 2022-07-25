@@ -1,90 +1,82 @@
 import Link from 'next/link';
-import { Fragment } from 'react';
-import { Popover, Transition } from '@headlessui/react';
-import { MenuIcon, XIcon } from '@heroicons/react/outline';
-import { DevfileTitle } from '../devfile-title/devfile-title';
-import { GithubIcon, SlackIcon } from '../../icons';
-
-const navigation = [
-  { name: 'Viewer', href: '/' },
-  { name: 'Docs', href: '/' },
-  { name: 'Get Started', href: '/' },
-  { name: 'Github', href: '/', image: GithubIcon },
-  { name: 'Slack', href: '/', image: SlackIcon },
-];
+import clsx from 'clsx';
+import { useState, useEffect } from 'react';
+import { DevfileIcon } from '../../icons';
+import { MobileNavigation } from '../mobile-navigation/mobile-navigation';
+import { LandingPageSearch as Search } from '../landing-page-search/landing-page-search';
+import { ThemeSelector } from '../theme-selector/theme-selector';
+import { VersionSelector } from '../version-selector/version-selector';
+import { useNavigation } from '../../hooks';
 
 export function Header(): JSX.Element {
+  const { headerNavigation } = useNavigation();
+
+  const [isScrolled, setIsScrolled] = useState<boolean>(false);
+
+  useEffect(() => {
+    function onScroll(): void {
+      setIsScrolled(window.scrollY > 0);
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   return (
-    <Popover className="relative border-b border-gray-300 bg-white">
-      <div className="flex items-center justify-between px-4 py-6 md:justify-start md:space-x-10">
-        <div className="ml-8">
-          <DevfileTitle title="Devfile.io" />
+    <header
+      className={clsx(
+        'sticky top-0 z-50 flex justify-center bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none sm:px-6 lg:px-8',
+        isScrolled
+          ? 'dark:bg-slate-900/95 dark:backdrop-blur dark:[@supports(backdrop-filter:blur(0))]:bg-slate-900/75'
+          : 'dark:bg-transparent',
+      )}
+    >
+      <div className="flex max-w-screen-2xl grow flex-wrap items-center justify-between">
+        <div className="mr-6 flex lg:hidden">
+          <MobileNavigation />
         </div>
-        <div className="-my-2 -mr-2 md:hidden">
-          <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-            <span className="sr-only">Open menu</span>
-            <MenuIcon className="h-6 w-6" aria-hidden="false" />
-          </Popover.Button>
+        <div className="relative my-2 flex flex-grow basis-0 items-center">
+          <Link
+            href="/"
+            aria-label="Home page"
+            passHref
+            className="lg:flex lg:items-center lg:gap-4"
+          >
+            <DevfileIcon className="fill-devfile h-9 w-9 lg:hidden" />
+            <DevfileIcon className="fill-devfile hidden h-9 w-auto lg:block" />
+            <h3 className="hidden text-xl font-semibold text-slate-700 dark:text-sky-100 lg:block">
+              Devfile.io
+            </h3>
+          </Link>
         </div>
-        <div className="hidden md:flex md:flex-1 md:items-center md:justify-end md:pr-8">
-          <Popover.Group as="nav" className="flex items-center space-x-10">
-            {navigation.map((item) => (
-              <Link key={item.name} href={item.href}>
-                <a className="text-base font-medium text-gray-500 hover:text-gray-900">
-                  {item.image ? (
-                    <item.image className="h-6 w-auto fill-gray-500 hover:fill-gray-900" />
-                  ) : (
-                    item.name
-                  )}
-                </a>
-              </Link>
-            ))}
-          </Popover.Group>
+        <div className="relative my-2 flex basis-0 items-center justify-end gap-8 sm:gap-8 lg:flex-grow">
+          <div className="lg:hidden">
+            <Search />
+          </div>
+          <VersionSelector />
+          <ThemeSelector className="relative z-10" />
+          {headerNavigation.map((item) => (
+            <Link
+              key={item.name}
+              href={item.href}
+              aria-label={item.name}
+              className={clsx(
+                !item.image &&
+                  'hidden whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300 lg:block',
+              )}
+            >
+              {item.image ? (
+                <item.image className="h-6 w-6 fill-slate-500 hover:fill-slate-800 dark:fill-slate-400 dark:hover:fill-slate-300" />
+              ) : (
+                item.name
+              )}
+            </Link>
+          ))}
         </div>
       </div>
-
-      <Transition
-        as={Fragment}
-        enter="duration-200 ease-out"
-        enterFrom="opacity-0 scale-95"
-        enterTo="opacity-100 scale-100"
-        leave="duration-100 ease-in"
-        leaveFrom="opacity-100 scale-100"
-        leaveTo="opacity-0 scale-95"
-      >
-        <Popover.Panel
-          focus
-          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition md:hidden"
-        >
-          <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
-            <div className="px-5 pt-5 pb-6">
-              <div className="flex items-center justify-between">
-                <div className="ml-4">
-                  <DevfileTitle title="Devfile.io" />
-                </div>
-                <div className="-mr-2">
-                  <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                    <span className="sr-only">Close menu</span>
-                    <XIcon className="h-6 w-6" aria-hidden="false" />
-                  </Popover.Button>
-                </div>
-              </div>
-            </div>
-            <div className="py-6 px-5">
-              <div className="grid grid-cols-2 gap-4">
-                {navigation.map((item) => (
-                  <Link key={item.name} href={item.href}>
-                    <a className="text-base font-medium text-gray-500 hover:text-gray-900">
-                      {item.name}
-                    </a>
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </div>
-        </Popover.Panel>
-      </Transition>
-    </Popover>
+    </header>
   );
 }
 

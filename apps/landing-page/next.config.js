@@ -1,6 +1,7 @@
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withPlugins = require('next-compose-plugins');
 const withMarkdoc = require('@markdoc/next.js');
+const withImages = require('next-images');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -9,12 +10,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  * */
 const nextConfig = {
-  basePath: process.env.NEXT_BASE_PATH || '',
-  publicRuntimeConfig: {
-    analyticsWriteKey: process.env.NEXT_ANALYTICS_WRITE_KEY || '',
-    basePath: process.env.NEXT_BASE_PATH || '',
-    segmentClientId: 'landing-page',
-  },
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   pageExtensions: ['js', 'jsx', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
@@ -29,4 +25,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withMarkdoc, withNx], nextConfig);
+module.exports = withPlugins([withBundleAnalyzer, withImages, withMarkdoc(), withNx], nextConfig);

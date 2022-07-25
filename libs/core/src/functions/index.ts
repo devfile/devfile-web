@@ -1,1 +1,1 @@
-export * from './get-use-region/get-use-region';
+export * from './get-user-region/get-user-region';

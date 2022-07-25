@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useState } from 'react';
 import { XIcon } from '@heroicons/react/outline';
 
@@ -16,10 +17,10 @@ export function CncfBanner(): JSX.Element | undefined {
                 Foundation sandbox project.
               </span>
               <span className="block sm:ml-2 sm:inline-block">
-                <a href="#" className="font-bold text-white underline">
+                <Link href="#" className="font-bold text-white underline" passHref>
                   {' '}
                   Learn more <span aria-hidden="true">&rarr;</span>
-                </a>
+                </Link>
               </span>
             </p>
           </div>

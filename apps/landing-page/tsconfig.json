@@ -13,6 +13,14 @@
     "incremental": true,
     "types": ["jest", "node"]
   },
-  "include": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "next-env.d.ts", "next.config.js", "next.config.js"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.js",
+    "**/*.jsx",
+    "next-env.d.ts",
+    "next.config.js",
+    "next.config.js"
+  ],
   "exclude": ["node_modules", "jest.config.ts"]
 }

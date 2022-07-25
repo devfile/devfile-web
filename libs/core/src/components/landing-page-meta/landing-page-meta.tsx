@@ -1,6 +1,4 @@
 import Head from 'next/head';
-import getConfig from 'next/config';
-import type { GetConfig } from '../../types';
 
 export interface LandingPageMetaProps {
   title?: string;
@@ -8,7 +6,8 @@ export interface LandingPageMetaProps {
   description?: string;
 }
 
-const { publicRuntimeConfig } = getConfig() as GetConfig;
+// @ts-ignore
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
   const { title, keywords, description } = props;
@@ -26,7 +25,7 @@ export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=5"
       />
       <meta name="theme-color" content="#151515" />
-      <link rel="icon" href={`${publicRuntimeConfig.basePath}favicon.ico`} />
+      <link rel="icon" href={`${basePath}/favicon.ico`} />
     </Head>
   );
 }

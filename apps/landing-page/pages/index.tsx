@@ -1,9 +1,9 @@
-import { IntroSection, KeyFeaturesSection, ValuePropositionSection } from '@devfile-web/core';
+import { Hero, KeyFeaturesSection, ValuePropositionSection } from '@devfile-web/core';
 
 export function Index(): JSX.Element {
   return (
     <>
-      <IntroSection />
+      <Hero />
       <ValuePropositionSection />
       <KeyFeaturesSection />
     </>
