@@ -1,23 +1,23 @@
 Using the devfile library, you can:
 
--   Validate a devfile.
+- Validate a devfile.
 
--   Parse a `devfile.yaml` file as specified by the devfile API
+- Parse a `devfile.yaml` file as specified by the devfile API
     reference.
 
--   Write updated data to a `devfile.yaml` file.
+- Write updated data to a `devfile.yaml` file.
 
--   Generate Kubernetes objects for various devfile resources.
+- Generate Kubernetes objects for various devfile resources.
 
--   Define the `util` functions for the devfile.
+- Define the `util` functions for the devfile.
 
 The library is written in Go and the following projects consume the
 library as a Go dependency:
 
--   odo
+- odo
 
--   OpenShift Console
+- OpenShift Console
 
 # Additional resources
 
--   [???](#using-the-devfile-library.adoc)
+- [???](/docs/2.1.0/using-the-devfile-library.adoc)

@@ -10,7 +10,7 @@ following table for `schemaVersion` properties in a devfile:
 * Key
 * Type
 * Required
-* Description 
+* Description
 ---
 * schemaVersion
 * string
@@ -18,13 +18,13 @@ following table for `schemaVersion` properties in a devfile:
 * The version of the devfile schema that the devfile uses.
 {% /table %}
 
-- Define the `schemaVersion` attribute in the devfile:
+* Define the `schemaVersion` attribute in the devfile:
 
-```yaml
-schemaVersion: 2.2.0
-metadata:
-  name: devfile-sample
-  version: 2.1.0
-```
+  ```yaml
+  schemaVersion: 2.2.0
+  metadata:
+    name: devfile-sample
+    version: 2.1.0
+  ```
 
-- [???](#api-reference.adoc)
+* [???](/docs/2.1.0/api-reference)

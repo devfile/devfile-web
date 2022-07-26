@@ -19,6 +19,12 @@ const nodes = {
       language: {
         type: String,
       },
+      title: {
+        type: String || undefined,
+      },
+      filename: {
+        type: String || undefined,
+      },
     },
   },
 };

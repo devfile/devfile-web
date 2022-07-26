@@ -22,22 +22,22 @@ the following:
   tool](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html/cli_tools/developer-cli-odo#installing-odo)
   to execute the devfile specification.
 
-1.  View the available devfiles:
+1. View the available devfiles:
 
 ```bash
-$ odo catalog list components
+odo catalog list components
 ```
 
-2.  Run `odo create nodejs _<name of your project>_ --starter` to create
+2. Run `odo create nodejs _<name of your project>_ --starter` to create
     a devfile project.
 
     - Add the `--starter` parameter to include the starter project
       currently inside the Node.js devfile specification, which makes
       it easier for you to develop an application.
 
-3.  Run `minikube IP` to find your cluster IP address.
+3. Run `minikube IP` to find your cluster IP address.
 
-4.  Run
+4. Run
     `odo url create _<name you give the url>_ --ingress --host _<IP address>_.nip.io`.
     Doing so creates an ingress inside your cluster that you can use to
     access your application using the cluster IP address.
@@ -45,7 +45,7 @@ $ odo catalog list components
     - Example:
       `odo url create myfirstproject --ingress --host 192.168.64.2.nip.io`.
 
-5.  Run `odo push` to build the URL.
+5. Run `odo push` to build the URL.
 
 - To verify that you built your Node.js "Hello World" application
   successfully, view the application in a web browser by copying and
@@ -55,4 +55,4 @@ $ odo catalog list components
 **Additional resources**
 
 To continue working with devfiles, go to [Authoring
-devfiles](#authoring-devfiles.adoc).
+devfiles](/docs/2.1.0/authoring-devfiles.adoc).

@@ -5,22 +5,22 @@ You can configure the devfile based on your unique development needs.
 See the following documents to help you use a devfile based on your
 development needs:
 
--   [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
--   [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
--   [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
--   [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
--   [???](#adding-projects-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-projects-to-a-devfile.adoc)
 
--   [???](#adding-commands-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-commands-to-a-devfile.adoc)
 
--   [???](#adding-components-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-components-to-a-devfile.adoc)
 
--   [???](#adding-attributes-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-attributes-to-a-devfile.adoc)
 
--   [???](#referring-to-a-parent-devfile-in-a-devfile.adoc)
+- [???](/docs/2.1.0/referring-to-a-parent-devfile-in-a-devfile.adoc)
 
 :!context:

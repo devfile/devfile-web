@@ -27,7 +27,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        devfile: '#2f9af2',
+        devfile: 'rgb(47, 154, 242, <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],

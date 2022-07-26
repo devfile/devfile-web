@@ -3,18 +3,18 @@ command can contain a subset of actions. The actions in each subset are
 related to a specific component and run in the containers for that
 component.
 
-- [???](#devfile-commands.adoc)
+- [???](/docs/2.1.0/devfile-commands.adoc)
 
-- [???](#adding-a-command-section-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-command-section-to-a-devfile.adoc)
 
-- [???](#adding-a-command-group-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-command-group-to-a-devfile.adoc)
 
-- [???](#adding-exec-commands-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-exec-commands-to-a-devfile.adoc)
 
-- [???](#adding-apply-commands-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-apply-commands-to-a-devfile.adoc)
 
-- [???](#adding-composite-commands-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-composite-commands-to-a-devfile.adoc)
 
-- [???](#api-reference.adoc)
+- [???](/docs/2.1.0/api-reference.adoc)
 
-- [???](#devfile-resources.adoc)
+- [???](/docs/2.1.0/devfile-resources.adoc)

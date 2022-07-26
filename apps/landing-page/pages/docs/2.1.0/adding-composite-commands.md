@@ -1,18 +1,18 @@
 Connect multiple commands together by defining a composite command.
 
-- [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
-- [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
-- [???](#adding-projects-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-projects-to-a-devfile.adoc)
 
-1.  Reference the individual commands that are called from a composite
+1. Reference the individual commands that are called from a composite
     command by using the `name` of the command.
 
-2.  Specify whether to run the commands within a composite command in
+2. Specify whether to run the commands within a composite command in
     sequence or parallel.
 
-3.  Define the `parallel` boolean.
+3. Define the `parallel` boolean.
 
 ```yaml
 schemaVersion: 2.2.0

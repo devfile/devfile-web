@@ -17,21 +17,21 @@ templates to get started developing cloud-native applications.
 
 A devfile registry has two components:
 
--   Devfile index server
+- Devfile index server
 
--   OCI registry server
+- OCI registry server
 
 **Devfile index container**
 
 The devfile index container image does the following actions:
 
--   Uses the `index.json` file to obtain metadata about the stacks and
+- Uses the `index.json` file to obtain metadata about the stacks and
     samples and hosts this metadata in the registry for tools to
     consume.
 
--   Bootstraps the OCI registry with the devfile stacks.
+- Bootstraps the OCI registry with the devfile stacks.
 
--   Provides an API to interact with the OCI registry and to retrieve
+- Provides an API to interact with the OCI registry and to retrieve
     devfile stacks.
 
 **OCI registry**
@@ -67,4 +67,4 @@ stacks suited to the needs of the owner organization.
 
 # Additional resources
 
--   [???](#building-a-custom-devfile-registry.adoc).
+- [???](/docs/2.1.0/building-a-custom-devfile-registry.adoc).
