@@ -13,11 +13,11 @@ devfile objects can have attributes:
 
 - `starterProjects`
 
-- [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
-- [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
-1.  Define a custom attribute
+1. Define a custom attribute
 
 When no editor is specified, a default editor is provided. To
 represent this user-defined example, use the `editorFree` attribute
@@ -35,6 +35,6 @@ components:
       uri: my-app.yaml
 ```
 
-- [???](#api-reference.adoc)
+- [???](/docs/2.1.0/api-reference.adoc)
 
-- [???](#devfile-resources.adoc)
+- [???](/docs/2.1.0/devfile-resources.adoc)

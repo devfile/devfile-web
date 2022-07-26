@@ -12,13 +12,13 @@ processes across different languages and tools.
 Using the recommended best practices from the devfile, the tools and IDE
 can:
 
--   Take in the repository hosting your application source code.
+- Take in the repository hosting your application source code.
 
--   Build your code.
+- Build your code.
 
--   Run your application on your local container.
+- Run your application on your local container.
 
--   Deploy your application to cloud-native containers.
+- Deploy your application to cloud-native containers.
 
 **Benefits of devfiles**
 
@@ -31,21 +31,21 @@ experience and build, run, deploy behaviors.
 
 Devfiles include the following features:
 
--   Guidance for using runtime images
+- Guidance for using runtime images
 
--   Example code
+- Example code
 
--   Build and CI commands
+- Build and CI commands
 
--   Deployment options
+- Deployment options
 
 Devfiles have the following benefits:
 
--   Reduce the gap between development and deployment
+- Reduce the gap between development and deployment
 
--   Find available devfile stacks or samples in a devfile registry
+- Find available devfile stacks or samples in a devfile registry
 
--   Produce consistent build and run behaviors
+- Produce consistent build and run behaviors
 
 **Roles that use devfiles**
 
@@ -62,18 +62,18 @@ With devfiles, developers do not need to set up the environment for
 building and running their applications. Instead, you have the
 flexibility to use different tools, like Che and `odo`.
 
--   To access the devfile stacks so you can begin creating container
+- To access the devfile stacks so you can begin creating container
     workspaces, see [devfile registry
     stacks](https://github.com/devfile/registry/tree/main/stacks).
 
--   To write a devfile stack so you can begin using devfiles in your
-    application development, see [???](#authoring-devfiles.adoc).
+- To write a devfile stack so you can begin using devfiles in your
+    application development, see [???](/docs/2.1.0/authoring-devfiles.adoc).
 
--   To migrate an existing devfile to the most updated version, see
-    [???](#migrating-to-devfile-v2.adoc).
+- To migrate an existing devfile to the most updated version, see
+    [???](/docs/2.1.0/migrating-to-devfile-v2.adoc).
 
--   To understand the schema attributes of devfiles, see
-    [???](#api-reference.adoc).
+- To understand the schema attributes of devfiles, see
+    [???](/docs/2.1.0/api-reference.adoc).
 
 **Additional resources**
 

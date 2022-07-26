@@ -7,19 +7,23 @@ To incorporate custom tools into the workspace, define an image-based
 configuration of a container in a workspace. Define this configuration
 by using the `container` component type.
 
+## Prerequisites
+
 A devfile can contain one or more components of the `container` type.
 The `component name` attribute identifies each component, including the
 container.
 
-- [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
-- [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
-- [???](#adding-components-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-components-to-a-devfile.adoc)
 
-1.  Define a component using the type `container`.
+## Procedure
 
-A `container` component
+1. Define a component using the type `container`.
+
+### A `container` component
 
 ```yaml
 components:
@@ -46,7 +50,7 @@ components:
       args: ['-f', '/dev/null']
 ```
 
-A minimal `container` component
+### A minimal `container` component
 
 ```yaml
 schemaVersion: 2.2.0
@@ -71,10 +75,10 @@ resources and information. This component allows you to integrate
 the tooling provided by the image with the application that consumes
 the devfile.
 
-2.  Mounting project sources
+2. Mounting project sources
 
-    For the `container` component to have access to the project sources,
-    you must set the `mountSources` attribute to `true`.
+For the `container` component to have access to the project sources,
+you must set the `mountSources` attribute to `true`.
 
 ```yaml
 schemaVersion: 2.2.0
@@ -96,13 +100,13 @@ of the image. This location defaults to `/projects`. If
 `PROJECT_ROOT` value and mounts the source to the path defined by
 `sourceMapping`.
 
-3.  Specify a volume
+3. Specify a volume
 
     For the `container` component to have a shared volume. You must
     define a volume component in the devfile, and reference the volume
     using `volumeMount` in container component. For more information on
     volume component, see
-    [???](#adding-a-volume-component-to-a-devfile.adoc)
+    [???](/docs/2.1.0/adding-a-volume-component-to-a-devfile.adoc)
 
 ```yaml
 components:
@@ -119,7 +123,7 @@ components:
       size: 1Gi
 ```
 
-4.  Container Entrypoint
+4. Container Entrypoint
 
     Use the `command` attribute of the `container` type to modify the
     `entrypoint` command of the container created from the image. The
@@ -127,6 +131,8 @@ components:
     `infinity` argument depend on the base image used in the particular
     images.
 
-- [???](#api-reference.adoc)
+## Additional Resources
 
-- [???](#devfile-resources.adoc)
+- [???](/docs/2.1.0/api-reference.adoc)
+
+- [???](/docs/2.1.0/devfile-resources.adoc)

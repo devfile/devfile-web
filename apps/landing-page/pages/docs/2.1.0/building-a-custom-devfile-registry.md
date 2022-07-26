@@ -4,35 +4,35 @@ improve their containerized application development.
 
 To create a devfile registry for your team’s container development:
 
-1.  Create a Git repository.
+1. Create a Git repository.
 
-2.  Build a devfile registry.
+2. Build a devfile registry.
 
-3.  Tag and push the registry container image.
+3. Tag and push the registry container image.
 
 # Creating a Git repository
 
 Set up a Git repository to store the devfile stacks to package into the
 devfile registry.
 
-1.  Fork the [devfile/registry](https://github.com/devfile/registry)
+1. Fork the [devfile/registry](https://github.com/devfile/registry)
     repository.
 
-2.  Name your forked repository.
+2. Name your forked repository.
 
-3.  Add or remove any stacks you need from this repository.
+3. Add or remove any stacks you need from this repository.
 
-4.  Create a `stacks/` directory for storing the devfile stacks. Each
+4. Create a `stacks/` directory for storing the devfile stacks. Each
     directory under `stacks/` must correspond to a specific stack, for
     example, `stacks/java-wildfly/`.
 
-5.  To package any external devfile stacks or samples in your devfile
+5. To package any external devfile stacks or samples in your devfile
     registry, go to the root of your repository and create an
     `extraDevfileEntries.yaml` file.
 
-6.  Add your devfile stacks to your `stacks/` directory.
+6. Add your devfile stacks to your `stacks/` directory.
 
-7.  Verify every devfile stack contains at least one `devfile.yaml`
+7. Verify every devfile stack contains at least one `devfile.yaml`
     file. Add other required files to the stacks. These files can
     include VSX plug-ins, Dockerfiles, or Kubernetes manifests.
 
@@ -42,7 +42,7 @@ registry.
 - Example of
   [extraDevfileEntries.yaml](https://github.com/devfile/registry/blob/main/extraDevfileEntries.yaml).
 
-- To create devfile stacks, see [???](#creating-a-devfile-stack.adoc).
+- To create devfile stacks, see [???](/docs/2.1.0/creating-a-devfile-stack.adoc).
 
 # Building a custom devfile registry
 
@@ -56,10 +56,10 @@ your cloud or cluster to form the devfile registry.
 
 - Git
 
-1.  Run `./build_image.sh <path-to-devfile-registry-folder>` to build a
+1. Run `./build_image.sh <path-to-devfile-registry-folder>` to build a
     devfile registry repository.
 
-2.  In a multi-stage Docker build, add a Dockerfile to your devfile
+2. In a multi-stage Docker build, add a Dockerfile to your devfile
     registry repository. Make sure the Dockerfile contains the
     following:
 
@@ -77,7 +77,7 @@ COPY --from=builder /build/index.json /index.json
 COPY --from=builder /build/stacks /stacks
 ```
 
-3.  Run `docker build -t devfile-index` to build the devfile registry
+3. Run `docker build -t devfile-index` to build the devfile registry
     into a container image.
 
 The build script builds the index generator, generates the `index.json`
@@ -85,17 +85,17 @@ file from the specified devfile registry, and builds the stacks and
 `index.json` into a devfile index container image. The registry build
 process takes the contents of your devfile registry Git repository and:
 
-1.  Packages the content of each devfile stack based on the supported
+1. Packages the content of each devfile stack based on the supported
     media types for the devfile registry.
 
-2.  Validates the content of the devfile registry repository based on
+2. Validates the content of the devfile registry repository based on
     the expected registry structure.
 
-3.  Generates `index.json` from the stacks in the repository and from
+3. Generates `index.json` from the stacks in the repository and from
     any extra stacks or samples mentioned in the
     `extraDevfileEntries.yaml` file.
 
-4.  Builds a devfile index container image with the devfile stack
+4. Builds a devfile index container image with the devfile stack
     contents and `index.json`.
 
 - For examples on how to add Dockerfiles to your devfile registry, see
@@ -111,21 +111,21 @@ process takes the contents of your devfile registry Git repository and:
 Use the devfile index container image to create a container in which you
 build, run, and deploy your application.
 
-1.  Choose a container registry.
+1. Choose a container registry.
 
-2.  Consult the documentation for your container registry and log in to
+2. Consult the documentation for your container registry and log in to
     the registry with the Docker CLI.
 
-3.  Push the devfile index container image to your chosen container
+3. Push the devfile index container image to your chosen container
     registry:
 
 ```bash
-$ docker tag -f devfile-index __<registry-hostname>__/__<registry-username>__/devfile-index:latest
-$ docker push __<registry-hostname>__/__<registry-username>__/devfile-index:latest
+docker tag -f devfile-index __<registry-hostname>__/__<registry-username>__/devfile-index:latest
+docker push __<registry-hostname>__/__<registry-username>__/devfile-index:latest
 ```
 
-4.  If your container does not build properly, consult the documentation
+4. If your container does not build properly, consult the documentation
     for your container registry.
 
 - For information on deploying the devfile index container image, see
-  [???](#deploying-a-devfile-registry.adoc).
+  [???](/docs/2.1.0/deploying-a-devfile-registry.adoc).

@@ -1,12 +1,12 @@
 You can add an `image` component to a devfile.
 
-- [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
-- [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
-- [???](#adding-components-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-components-to-a-devfile.adoc)
 
-1.  Define a component using the type `image`.
+1. Define a component using the type `image`.
 
 Specify the location of the Dockerfile using the `uri` property.
 Specify arguments to be passed during the build with `args`.

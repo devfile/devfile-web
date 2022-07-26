@@ -8,10 +8,10 @@ stack that is used in multiple other devfiles.
 
 - Define the `schemaVersion` to v2.x. If you need to define your
   `schemaVersion`, go to
-  [???](#adding-schema-version-to-a-devfile.adoc).
+  [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc).
 
 - Define a name for the devfile. If you need to define a name for your
-  devfile, go to [???](#adding-a-name-to-a-devfile.adoc).
+  devfile, go to [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc).
 
 **Procedure**
 
@@ -72,6 +72,6 @@ parent:
 
 For more information about referring to parent devfiles, see:
 
-- [???](#api-reference.adoc)
+- [???](/docs/2.1.0/api-reference.adoc)
 
-- [???](#devfile-resources.adoc)
+- [???](/docs/2.1.0/devfile-resources.adoc)

@@ -25,18 +25,24 @@ links you to the devfile registry if listed.
 * The version of your devfile.
 {% /table %}
 
-- [???](#adding-schema-version-to-a-devfile.adoc)
+## Prerequisites
 
-1.  To specify a static name for the workspace, define the `name`
+* [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
+
+## Procedure
+
+1. To specify a static name for the workspace, define the `name`
     attribute.
 
-Adding a static name to a devfile
+    Adding a static name to a devfile
 
-```yaml
-schemaVersion: 2.2.0
-metadata:
-  name: devfile-sample
-  version: 2.0.0
-```
+    ```yaml
+    schemaVersion: 2.2.0
+    metadata:
+      name: devfile-sample
+      version: 2.0.0
+    ```
 
-- [???](#api-reference.adoc)
+## Additional Resources
+
+* [???](/docs/2.1.0/api-reference.adoc)

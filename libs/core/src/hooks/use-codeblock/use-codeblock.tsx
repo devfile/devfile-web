@@ -1,4 +1,4 @@
-import { useState, createContext, useContext, useEffect, useMemo } from 'react';
+import { useState, createContext, useContext, useMemo } from 'react';
 // @ts-ignore - no types available
 import { dump as jsToYaml } from 'js-yaml';
 
@@ -18,14 +18,12 @@ export function CodeblockProvider(props: CodeblockProviderProps): JSX.Element {
   const { children } = props;
 
   const [codeblock, setCodeblock] = useState<Record<string, unknown> | undefined>();
-  const [yaml, setYaml] = useState<string | undefined>();
 
-  useEffect(() => {
+  const value = useMemo(
     // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-    setYaml(() => (jsToYaml(codeblock) as string).trimEnd());
-  }, [codeblock]);
-
-  const value = useMemo(() => ({ codeblock, setCodeblock, yaml }), [codeblock, yaml]);
+    () => ({ codeblock, setCodeblock, yaml: jsToYaml(codeblock) as string }),
+    [codeblock],
+  );
 
   return <CodeblockContext.Provider value={value}>{children}</CodeblockContext.Provider>;
 }

@@ -1,140 +1,98 @@
+---
+title: Adding a registry schema
+description: Adding a registry schema
+---
+
 To add samples and stacks from other repositories, place the
 `extraDevfileEntries.yaml` file under the root of a devfile registry.
 
-<table>
-<caption>extraDevfileEntries.yaml schema</caption>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><p>Name</p></td>
-<td style="text-align: left;"><p>Type</p></td>
-<td style="text-align: left;"><p>Description</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>samples</code></p></td>
-<td style="text-align: left;"><p><code>schema[]</code></p></td>
-<td style="text-align: left;"><p>The sample list.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>stacks</code></p></td>
-<td style="text-align: left;"><p><code>schema[]</code></p></td>
-<td style="text-align: left;"><p>The stack list stack or sample
-attributes.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>name</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The stack name.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>displayName</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The display name of a devfile.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>description</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The description of a devfile.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>tags</code></p></td>
-<td style="text-align: left;"><p><code>string[]</code></p></td>
-<td style="text-align: left;"><p>The tags associated to a
-devfile.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>icon</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>A devfile icon.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>language</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The project language that is used in a
-devfile.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>git</code></p></td>
-<td style="text-align: left;"><p><code>git</code></p></td>
-<td style="text-align: left;"><p>The information of remote
-repositories.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>versions</code></p></td>
-<td style="text-align: left;"><p><code>version[]</code></p></td>
-<td style="text-align: left;"><p>The information of each stack or sample
-version.</p></td>
-</tr>
-</tbody>
-</table>
+## extraDevfileEntries.yaml schema
 
-extraDevfileEntries.yaml schema
+{% table %}
+* Name
+* Type
+* Description
+---
+* `samples`
+* `schema[]`
+* The sample list.
+---
+* `stacks`
+* `schema`
+* The stack list stack or sample attributes.
+---
+* `name`
+* `string`
+* The stack name.
+---
+* `displayName`
+* `string`
+* The display name of a devfile.
+---
+* `description`
+* `string`
+* The description of a devfile.
+---
+* `tags`
+* `string[]`
+* The tags associated to a devfile.
+---
+* `icon`
+* `string`
+* A devfile icon.
+---
+* `language`
+* `string`
+* The project language that is used in a devfile.
+---
+* `git`
+* `git`
+* The information of remote repositories.
+---
+* `versions`
+* `string[]`
+* The information of each stack or sample version.
+{% /table %}
 
-<table>
-<caption>version schema</caption>
-<colgroup>
-<col style="width: 33%" />
-<col style="width: 33%" />
-<col style="width: 33%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><p>Name</p></td>
-<td style="text-align: left;"><p>Type</p></td>
-<td style="text-align: left;"><p>Description</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>version</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The stack version.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>schemaVersion</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The devfile schema version.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>default</code></p></td>
-<td style="text-align: left;"><p><code>boolean</code></p></td>
-<td style="text-align: left;"><p>The default stack version.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>git</code></p></td>
-<td style="text-align: left;"><p><code>git</code></p></td>
-<td style="text-align: left;"><p>The information of remote
-repositories.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>description</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>The description of the stack
-version.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>tags</code></p></td>
-<td style="text-align: left;"><p><code>string[]</code></p></td>
-<td style="text-align: left;"><p>The tags associated to the stack
-version.</p></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><p><code>icon</code></p></td>
-<td style="text-align: left;"><p><code>string</code></p></td>
-<td style="text-align: left;"><p>Icon of the stack version.</p></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><p><code>architectures</code></p></td>
-<td style="text-align: left;"><p><code>string[]</code></p></td>
-<td style="text-align: left;"><p>The architectures associated to the
-stack version.</p></td>
-</tr>
-</tbody>
-</table>
+## version schema
 
-version schema
+{% table %}
+* Name
+* Type
+* Description
+---
+* `version`
+* `string`
+* The stack version.
+---
+* `schemaVersion`
+* `string`
+* The devfile schema version.
+---
+* `default`
+* `boolean`
+* The default stack version.
+---
+* `git`
+* `git`
+* The information of remote repositories.
+---
+* `description`
+* `string`
+* The description of the stack version.
+---
+* `tags`
+* `string[]`
+* The tags associated to the stack version.
+---
+* `icon`
+* `string`
+* Icon of the stack version.
+---
+* `architectures`
+* `string[]`
+* The architectures associated to the stack version.
+{% /table %}
 
 ```yaml
 schemaVersion: 2.0.0

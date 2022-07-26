@@ -253,38 +253,38 @@ create.</p></td>
 
 volume object
 
--   [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
--   [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
-1.  Add a `components` section in the devfile, containing a list of one
+1. Add a `components` section in the devfile, containing a list of one
     or more components.
 
-2.  For each component, define a unique value for the mandatory `name`
+2. For each component, define a unique value for the mandatory `name`
     attribute.
 
-3.  For each component, define one of the following types for the
+3. For each component, define one of the following types for the
     mandatory `type` attribute: `kubernetes`, `container`, `openshift`,
     or `volume`.
 
-4.  [???](#adding-a-kubernetes-or-openshift-component-to-a-devfile.adoc)
+4. [???](/docs/2.1.0/adding-a-kubernetes-or-openshift-component-to-a-devfile.adoc)
 
-5.  [???](#adding-a-container-component-to-a-devfile.adoc)
+5. [???](/docs/2.1.0/adding-a-container-component-to-a-devfile.adoc)
 
-6.  [???](#adding-a-volume-component-to-a-devfile.adoc)
+6. [???](/docs/2.1.0/adding-a-volume-component-to-a-devfile.adoc)
 
-7.  [???](#adding-a-image-component-to-a-devfile.adoc)
+7. [???](/docs/2.1.0/adding-a-image-component-to-a-devfile.adoc)
 
-8.  [???](#specifying-persistent-storage.adoc)
+8. [???](/docs/2.1.0/specifying-persistent-storage.adoc)
 
-9.  [???](#limiting-resources-usage.adoc)
+9. [???](/docs/2.1.0/limiting-resources-usage.adoc)
 
-10. [???](#defining-environment-variables.adoc)
+10. [???](/docs/2.1.0/defining-environment-variables.adoc)
 
-11. [???](#defining-endpoints.adoc)
+11. [???](/docs/2.1.0/defining-endpoints.adoc)
 
-12. [???](#defining-kubernetes-resources.adoc)
+12. [???](/docs/2.1.0/defining-kubernetes-resources.adoc)
 
--   [???](#api-reference.adoc)
+- [???](/docs/2.1.0/api-reference.adoc)
 
--   [???](#devfile-resources.adoc)
+- [???](/docs/2.1.0/devfile-resources.adoc)

@@ -101,11 +101,11 @@ git object
 
 zip object
 
-- [???](#adding-schema-version-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-schema-version-to-a-devfile.adoc)
 
-- [???](#adding-a-name-to-a-devfile.adoc)
+- [???](/docs/2.1.0/adding-a-name-to-a-devfile.adoc)
 
-1.  Add a `projects` section in the devfile, containing a list of one or
+1. Add a `projects` section in the devfile, containing a list of one or
     more projects.
 
 \+ .A minimal devfile with one single project
@@ -142,10 +142,10 @@ projects:
         origin: 'https://github.com/acmecorp/backend.git'
 ```
 
-1.  For each project, define an unique value for the mandatory `name`
+1. For each project, define an unique value for the mandatory `name`
     attribute.
 
-2.  For each project, define a mandatory source of either the `git` or
+2. For each project, define a mandatory source of either the `git` or
     `zip` type.
 
     `git`  
@@ -172,7 +172,7 @@ source:
     location: http://host.net/path/project-src.zip
 ```
 
-3.  For each project, define the optional `clonePath` attribute to
+3. For each project, define the optional `clonePath` attribute to
     specify the path into which the project is to be cloned. The path
     must be relative to the `/projects/` directory, and it cannot leave
     the `/projects/` directory. The default value is the project name.
@@ -195,7 +195,7 @@ projects:
           revision: develop
 ```
 
-4.  For each project, define the optional `sparseCheckoutDir` attribute
+4. For each project, define the optional `sparseCheckoutDir` attribute
     to populate the project sparsely with selected directories.
 
     - Set the project to `/my-module/` to create only the root
@@ -215,6 +215,6 @@ projects:
     For more information, see [Sparse checkout in Git
     documentation](https://git-scm.com/docs/git-read-tree#_sparse_checkout).
 
-- [???](#api-reference.adoc)
+- [???](/docs/2.1.0/api-reference.adoc)
 
-- [???](#devfile-resources.adoc)
+- [???](/docs/2.1.0/devfile-resources.adoc)
