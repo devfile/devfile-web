@@ -81,6 +81,12 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
       `${(markdoc?.frontmatter.title as string) ?? ''} - Docs`;
 
     description = (markdoc?.frontmatter.description as string) ?? '';
+
+    if (router.asPath.includes('/api-reference')) {
+      pageTitle = 'Devfile schema - Docs';
+
+      description = 'Devfile schema';
+    }
   }
 
   const tableOfContents = markdoc?.content ? collectHeadings(markdoc.content) : [];

@@ -1,4 +1,18 @@
+import { Callout, QuickLink, QuickLinks } from '@devfile-web/core';
+
 const tags = {
+  callout: {
+    attributes: {
+      title: { type: String },
+      type: {
+        type: String,
+        default: 'note',
+        matches: ['note', 'warning'],
+        errorLevel: 'critical',
+      },
+    },
+    render: Callout,
+  },
   figure: {
     selfClosing: true,
     attributes: {
@@ -16,6 +30,26 @@ const tags = {
           <figcaption>{caption}</figcaption>
         </figure>
       );
+    },
+  },
+  'quick-links': {
+    // eslint bug
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    render: QuickLinks,
+  },
+  'quick-link': {
+    selfClosing: true,
+    // eslint bug
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    render: QuickLink,
+    attributes: {
+      title: { type: String },
+      description: { type: String },
+      icon: {
+        type: String,
+        matches: ['installation', 'presets', 'plugins', 'theming', 'lightbulb', 'warning'],
+      },
+      href: { type: String },
     },
   },
 };

@@ -10,7 +10,8 @@ pre[class*='language-'] {
 .token.function,
 .token.module,
 .token.key.atrule,
-.token.keyword.module {
+.token.keyword.module,
+.token.property {
   color: theme('colors.pink.400');
 }
 
@@ -25,7 +26,6 @@ pre[class*='language-'] {
 .token.attr-value,
 .token.class,
 .token.string,
-.token.property,
 .token.plain {
   color: theme('colors.sky.300');
 }

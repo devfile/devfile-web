@@ -24,7 +24,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
   const { docsNavigation } = useNavigation();
   const router = useRouter();
   const isDocsPage = router.pathname.includes('docs');
-  const isApiReference = router.pathname.includes('api-reference');
+  const isDevfileSchema = router.pathname.includes('/devfile-schema');
   const allLinks = docsNavigation.flatMap((section) => section.links);
   const linkIndex = allLinks.findIndex((link) => link.href === router.pathname);
   const previousPage = allLinks[linkIndex - 1];
@@ -55,7 +55,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
       <>
         {router.asPath === '/docs' && <Hero />}
         <div className="flex sm:px-6 lg:px-8">
-          <div className="relative mx-auto flex max-w-screen-2xl justify-center ">
+          <div className="relative mx-auto flex max-w-screen-2xl justify-center">
             <div className="hidden lg:relative lg:block lg:flex-none">
               <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
               <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto py-16 pl-0.5">
@@ -67,7 +67,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                 <DesktopNavigation className="w-64 pr-8 xl:w-72 xl:pr-16" />
               </div>
             </div>
-            <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
+            <div className="min-w-0 max-w-2xl flex-auto grow px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
               <article>
                 {(title || section) && (
                   <header className="mb-9 space-y-1">
@@ -83,7 +83,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                     )}
                   </header>
                 )}
-                {isApiReference ? children : <Prose>{children}</Prose>}
+                {isDevfileSchema ? children : <Prose>{children}</Prose>}
               </article>
               <dl className="mt-12 flex border-t border-slate-200 pt-6 dark:border-slate-800">
                 {previousPage && (
@@ -123,13 +123,13 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
 
             <div
               className={clsx(
-                isApiReference
+                isDevfileSchema
                   ? 'xl:top-60 xl:h-[calc(100vh-15rem)] 2xl:h-[calc(100vh-15rem)]'
                   : 'xl:top-[4.5rem] xl:-mr-6 xl:h-[calc(100vh-4.5rem)] xl:py-16 xl:pr-6',
                 'hidden xl:sticky xl:block xl:flex-none xl:overflow-y-auto 2xl:h-[calc(100vh-4.5rem)] ',
               )}
             >
-              {isApiReference ? (
+              {isDevfileSchema ? (
                 <ApiReferenceCodeblock className="prose w-[20rem]" />
               ) : (
                 <nav aria-labelledby="on-this-page-title" className="w-56">
