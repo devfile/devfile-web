@@ -57,7 +57,7 @@ export function Hero(): JSX.Element {
               />
             </div>
             <div className="relative">
-              <p className="font-display inline bg-gradient-to-r from-indigo-200 via-sky-400 to-indigo-200 bg-clip-text text-5xl tracking-tight text-transparent">
+              <p className="font-display via-devfile inline bg-gradient-to-r from-indigo-200 to-indigo-200 bg-clip-text text-5xl tracking-tight text-transparent">
                 Simplify and accelerate your workflow.
               </p>
               <p className="mt-3 text-2xl tracking-tight text-slate-400">

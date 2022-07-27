@@ -1,11 +1,15 @@
 import { Fence } from '@devfile-web/core';
+import Link from 'next/link';
+import { nodes as defaultNodes } from '@markdoc/markdoc';
 
 const nodes = {
   document: {
     render: undefined,
   },
   th: {
+    ...defaultNodes.th,
     attributes: {
+      ...defaultNodes.th.attributes,
       scope: {
         type: String,
         default: 'col',
@@ -20,10 +24,20 @@ const nodes = {
         type: String,
       },
       title: {
-        type: String || undefined,
+        type: String,
       },
       filename: {
-        type: String || undefined,
+        type: String,
+      },
+    },
+  },
+  link: {
+    // eslint bug
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    render: Link,
+    attributes: {
+      href: {
+        type: String,
       },
     },
   },

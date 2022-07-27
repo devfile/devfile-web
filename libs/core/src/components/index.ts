@@ -15,3 +15,6 @@ export * from './button/button';
 export * from './hero/hero';
 export * from './hero-background/hero-background';
 export * from './json-schema-viewer/json-schema-viewer';
+export * from './icon/icon';
+export * from './callout/callout';
+export * from './quick-links/quick-links';

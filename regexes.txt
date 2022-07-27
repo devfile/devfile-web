@@ -1,0 +1,6 @@
+Substitutions
+(-to-a-devfile)?.adoc\)
+)
+
+\[\?\?\?\]\(/docs/2\.1\.0/([a-z\-]*)
+[$1](/docs/2.1.0/$1

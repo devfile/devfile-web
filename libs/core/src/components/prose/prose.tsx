@@ -12,7 +12,7 @@ export function Prose(props: ProseProps): JSX.Element {
     <div
       className={clsx(
         className,
-        'prose prose-slate dark:prose-invert max-w-none dark:text-slate-400',
+        'prose prose-slate dark:prose-invert max-w-lg dark:text-slate-400 sm:max-w-xl lg:max-w-2xl xl:max-w-4xl',
         // headings
         'prose-headings:scroll-mt-28 prose-headings:font-display prose-headings:font-normal lg:prose-headings:scroll-mt-[8.5rem]',
         // lead
