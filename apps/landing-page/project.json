@@ -3,10 +3,17 @@
   "sourceRoot": "apps/landing-page",
   "projectType": "application",
   "targets": {
+    "build-navigation": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "node --loader ts-node/esm --inspect ./libs/core/src/scripts/build-navigation.ts"
+      }
+    },
     "build": {
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
+      "dependsOn": ["build-navigation"],
       "options": {
         "root": "apps/landing-page",
         "outputPath": "dist/apps/landing-page"
@@ -19,6 +26,7 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
+      "dependsOn": ["build-navigation"],
       "options": {
         "buildTarget": "landing-page:build",
         "dev": true

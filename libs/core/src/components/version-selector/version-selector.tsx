@@ -11,7 +11,7 @@ export interface VersionSelectorProps {
 export function VersionSelector(props: VersionSelectorProps): JSX.Element | null {
   const { className } = props;
 
-  const { selectedVersion, setSelectedVersion, possibleVersions } = useNavigation();
+  const { selectedVersion, setSelectedVersion, docVersions } = useNavigation();
   const router = useRouter();
 
   if (!router.asPath.includes('/docs')) {
@@ -27,7 +27,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
         {selectedVersion}
       </Menu.Button>
       <Menu.Items className="absolute top-full left-1/2 mt-3 w-36 -translate-x-1/2 space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
-        {possibleVersions.map((version) => (
+        {docVersions.map((version) => (
           <Menu.Item
             // Eslint bug
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment

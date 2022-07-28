@@ -8,18 +8,14 @@ import {
   Header,
   Footer,
   LandingPageLayout as Layout,
+  githubDocsUrl,
 } from '@devfile-web/core';
 import '../styles/tailwind.css';
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
 import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
-import type { TableOfContents } from '@devfile-web/core';
+import type { TableOfContents, DocsNavigation } from '@devfile-web/core';
 import { useRouter } from 'next/router';
-import {
-  overallDocsNavigation,
-  headerNavigation,
-  footerNavigation,
-  githubDocsUrl,
-} from '../navigation';
+import { docsNavigation, headerNavigation, footerNavigation } from '../navigation';
 
 const analyticsConfig = {
   writeKey: process.env.NEXT_PUBLIC_ANALYTICS_WRITE_KEY,
@@ -95,7 +91,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
       <NavigationProvider
         headerNavigation={headerNavigation}
         footerNavigation={footerNavigation}
-        overallDocsNavigation={overallDocsNavigation}
+        docsNavigation={docsNavigation as DocsNavigation}
       >
         <div className="flex h-screen flex-col justify-between">
           <LandingPageMeta title={pageTitle} description={description} />

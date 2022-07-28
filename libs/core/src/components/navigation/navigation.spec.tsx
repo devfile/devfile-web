@@ -1,5 +1,5 @@
 import { render } from '@testing-library/react';
-import DocsNavigation from './desktop-navigation';
+import DocsNavigation from './navigation';
 
 describe('Navigation', () => {
   it('should render successfully', () => {

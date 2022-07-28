@@ -44,6 +44,4 @@ Thumbs.db
 **/*/.env.test.local
 **/*/.env.production.local
 
-# Generated Docusaurus files
-.docusaurus/
-.cache-loader/
+**/docs-navigation.json

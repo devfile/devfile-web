@@ -1,0 +1,6 @@
+- title: Introduction
+  links:
+    - title: Getting started
+      href: /docs
+    - title: Installation
+      href: /docs/installation
