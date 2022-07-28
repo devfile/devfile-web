@@ -37,7 +37,7 @@ export function DevfileSchema(props: DevfileSchemaProps): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async () => {
   const schemaString = await fs.readFile(
-    './apps/landing-page/public/2.2.0-alpha/devfile-schema.json',
+    './apps/landing-page/public/devfile-schema/2.2.0-alpha.json',
     'utf8',
   );
   const schema = JSON.parse(schemaString) as JSONSchema7;

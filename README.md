@@ -30,9 +30,9 @@ Landing Page project for [devfile.io](https://devfile.io/).
 
 ### Configuring navigation
 
-Navigation can be configured on [`navigation.ts`](https://github.com/devfile/devfile-web/blob/main/apps/landing-page/navigation.ts).
-
 - Header
+
+  Header navigation can be configured on [`navigation.ts`](https://github.com/devfile/devfile-web/blob/main/apps/landing-page/navigation.ts).
 
   ```ts
   export const headerNavigation: HeaderNavigation = [
@@ -53,6 +53,8 @@ Navigation can be configured on [`navigation.ts`](https://github.com/devfile/dev
   ```
 
 - Footer
+
+  Footer navigation can be configured on [`navigation.ts`](https://github.com/devfile/devfile-web/blob/main/apps/landing-page/navigation.ts).
 
   ```ts
   export const footerNavigation: FooterNavigation = {
@@ -87,72 +89,28 @@ Navigation can be configured on [`navigation.ts`](https://github.com/devfile/dev
 
 - Sidebar
 
-  To add a new version, you need to update the allowed versions which can be configured on [`use-navigation.tsx`](https://github.com/devfile/devfile-web/blob/main/libs/core/src/hooks/use-navigation/use-navigation.tsx#L28). The allowed versions must be the same name as the directories under [`/docs`](https://github.com/devfile/devfile-web/tree/main/apps/landing-page/pages/docs).
+  Sidebar navigation can be configured under [`./docs-navigation`](https://github.com/devfile/devfile-web/blob/main/apps/landing-page/public/docs-navigation).
 
-  ```ts
-  export type DocVersions = '2.0.0' | '2.1.0' | '2.2.0-alpha';
+  Each file under `/docs-navigation` corresponds to a version except `no-version.yaml` which allows uniform navigation pages between all versions.
+
+  Whenever you update the sidebar navigation you **MUST** restart the server.
+
+  Each sidebar section requires a `title` and `links`. Each element in `links` requires a `title` and `href`. Currently, sidebar navigation is only supported one layer deep.
+
+  ```yaml
+  - title: Example section 1
+    links:
+      - title: Element 1
+        href: /element1
+      - title: Element 2
+        href: /element2
+  - title: Example section 2
+    links:
+      - title: Element 3
+        href: /element3
+      - title: Element 3
+        href: /element4
   ```
-
-  ```ts
-  export const overallDocsNavigation: OverallDocsNavigation = {
-    versionNonspecific: [
-      ...
-    ],
-    versionSpecific: {
-      <version>: [
-        ...
-      ],
-    },
-    defaultVersion: <version>,
-  };
-  ```
-
-  - `versionNonspecific`
-  
-    `versionNonspecific` is meant for pages not related to any specific version. e.g. A getting started page.
-
-    Each element in `versionNonspecific` is as follows:
-
-    ```ts
-    [
-      { 
-        title: 'Example group', // the title of the navigation group
-        links: [ // the children under the navigation group
-          {
-            title: 'Example child', // the title of a navigation group child
-            href: '/docs/<version>/example-child', // the href of a navigation group child
-          },
-          ...
-        ],
-      },
-      ...
-    ]
-    ```
-
-    - `versionSpecific`
-  
-    `versionSpecific` is meant for pages related to a specific version. e.g. A new API documentation page.
-
-    Each element in `versionSpecific` is as follows:
-
-    ```ts
-    {
-      <version>: [
-        { 
-          title: 'Example group', // the title of the navigation group
-          links: [ // the children under the navigation group
-            {
-              title: 'Example child', // the title of a navigation group child
-              href: '/docs/<version>/example-child', // the href of a navigation group child
-            },
-            ...
-          ],
-        },
-        ...
-      ],
-      ...
-    },
-    ```
 
 ### Updating documentation
 
@@ -216,4 +174,6 @@ To update or add documentation, edit or create a markdown file under [`./docs`](
     {% /quick-links %}
     ```
 
-After you update any documentation, update the navigation if you added a new page or changed a file name.
+  After you update any documentation, update the navigation if you added a new page or changed a file name.
+
+### Releasing a new version
