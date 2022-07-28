@@ -37,7 +37,7 @@ export function Header(): JSX.Element {
         <div className="mr-6 flex lg:hidden">
           <MobileNavigation />
         </div>
-        <div className="relative my-2 flex flex-grow basis-0 items-center">
+        <div className="relative flex flex-grow basis-0 items-center">
           <Link
             href="/"
             aria-label="Home page"
@@ -51,7 +51,7 @@ export function Header(): JSX.Element {
             </h3>
           </Link>
         </div>
-        <div className="relative my-2 flex basis-0 items-center justify-end gap-8 sm:gap-8 lg:flex-grow">
+        <div className="relative flex basis-0 items-center justify-end gap-8 sm:gap-8 lg:flex-grow">
           <div className="lg:hidden">
             <Search />
           </div>

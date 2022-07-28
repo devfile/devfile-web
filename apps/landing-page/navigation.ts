@@ -42,6 +42,9 @@ export const footerNavigation: FooterNavigation = {
   ],
 };
 
+export const githubDocsUrl =
+  'https://github.com/devfile/devfile-web/tree/main/apps/landing-page/pages';
+
 export const overallDocsNavigation: OverallDocsNavigation = {
   versionNonspecific: [
     {

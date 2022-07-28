@@ -1,24 +1,36 @@
-import { JsonSchemaViewer, useCodeblock } from '@devfile-web/core';
+import { JsonSchemaViewer, useCodeblock, Prose, LandingPageMeta as Meta } from '@devfile-web/core';
 import { promises as fs } from 'node:fs';
+import Link from 'next/link';
 import type { GetStaticProps } from 'next';
 import type { JSONSchema7 } from 'json-schema';
 
-export interface ApiReferenceProps {
+export interface DevfileSchemaProps {
   schema: JSONSchema7;
 }
 
-export function ApiReference(props: ApiReferenceProps): JSX.Element {
+export function DevfileSchema(props: DevfileSchemaProps): JSX.Element {
   const { schema } = props;
 
   const { codeblock, setCodeblock } = useCodeblock();
 
   return (
     <>
-      <div className="text-3xl font-medium tracking-tight text-slate-700 dark:text-sky-100">
-        {schema.title}
-      </div>
-      <div className="text-base text-slate-500 dark:text-slate-400">{schema.description}</div>
+      <Meta title="Devfile schema - Docs" description="Devfile schema" />
+      <Prose>
+        <h1 className="font-display text-3xl tracking-tight text-slate-900 dark:text-white">
+          {schema.title}
+        </h1>
+        <p>{schema.description}</p>
+      </Prose>
       <JsonSchemaViewer schema={schema} codeblock={codeblock} setCodeblock={setCodeblock} />
+      <Prose>
+        <h2>Additional resources</h2>
+        <ul>
+          <li>
+            <Link href="/2.2.0-alpha/devfile-schema.json">Download the current JSON Schema</Link>
+          </li>
+        </ul>
+      </Prose>
     </>
   );
 }
@@ -37,4 +49,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default ApiReference;
+export default DevfileSchema;
