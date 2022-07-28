@@ -3,20 +3,20 @@ import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { useNavigation } from '../../hooks';
 
-export interface DesktopNavigationProps {
+export interface NavigationProps {
   className?: string;
 }
 
-export function DesktopNavigation(props: DesktopNavigationProps): JSX.Element {
+export function Navigation(props: NavigationProps): JSX.Element {
   const { className } = props;
 
-  const { docsNavigation } = useNavigation();
+  const { versionedDocsNavigation } = useNavigation();
   const router = useRouter();
 
   return (
     <nav className={clsx('text-base lg:text-sm', className)}>
       <ul className="space-y-9 overflow-x-hidden">
-        {docsNavigation.map((section) => (
+        {versionedDocsNavigation.map((section) => (
           <li key={section.title}>
             <h2 className="font-display font-medium text-slate-900 dark:text-white">
               {section.title}
@@ -45,4 +45,4 @@ export function DesktopNavigation(props: DesktopNavigationProps): JSX.Element {
   );
 }
 
-export default DesktopNavigation;
+export default Navigation;

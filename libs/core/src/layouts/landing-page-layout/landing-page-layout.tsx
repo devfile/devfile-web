@@ -2,13 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { PencilIcon } from '@heroicons/react/solid';
-import {
-  DesktopNavigation,
-  Prose,
-  LandingPageSearch as Search,
-  Hero,
-  Fence,
-} from '../../components';
+import { Navigation, Prose, LandingPageSearch as Search, Hero, Fence } from '../../components';
 import { useTableOfContents, useNavigation, useCodeblock, CodeblockProvider } from '../../hooks';
 import type { TableOfContents, TableOfContentsChild } from '../../hooks';
 
@@ -22,7 +16,7 @@ export interface LandingPageLayoutProps {
 export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
   const { children, title, tableOfContents, githubDocsUrl } = props;
 
-  const { docsNavigation } = useNavigation();
+  const { versionedDocsNavigation: docsNavigation } = useNavigation();
   const router = useRouter();
   const isDocsPage = router.pathname.includes('docs');
   const isDevfileSchema = router.pathname.includes('/devfile-schema');
@@ -65,7 +59,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                 <div className="mb-4 mr-4">
                   <Search />
                 </div>
-                <DesktopNavigation className="w-64 pr-8 xl:w-72 xl:pr-16" />
+                <Navigation className="w-64 pr-8 xl:w-72 xl:pr-16" />
               </div>
             </div>
             <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">

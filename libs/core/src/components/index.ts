@@ -6,7 +6,7 @@ export * from './key-features-section/key-features-section';
 export * from './footer/footer';
 export * from './fence/fence';
 export * from './mobile-navigation/mobile-navigation';
-export * from './desktop-navigation/desktop-navigation';
+export * from './navigation/navigation';
 export * from './prose/prose';
 export * from './landing-page-search/landing-page-search';
 export * from './theme-selector/theme-selector';

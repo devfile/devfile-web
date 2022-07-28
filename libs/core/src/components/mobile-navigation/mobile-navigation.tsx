@@ -5,7 +5,7 @@ import { Dialog } from '@headlessui/react';
 import { MenuIcon, XIcon as CloseIcon } from '@heroicons/react/outline';
 import clsx from 'clsx';
 import { DevfileIcon } from '../../icons';
-import { DesktopNavigation } from '../desktop-navigation/desktop-navigation';
+import { Navigation } from '../navigation/navigation';
 import { useNavigation } from '../../hooks';
 
 export function MobileNavigation(): JSX.Element {
@@ -79,7 +79,7 @@ export function MobileNavigation(): JSX.Element {
               </Link>
             ))}
           </div>
-          <DesktopNavigation className="mt-5 px-1" />
+          <Navigation className="mt-5 px-1" />
         </Dialog.Panel>
       </Dialog>
     </>

@@ -1,98 +1,67 @@
-import { createContext, useState, useContext, useEffect, useMemo } from 'react';
+import { createContext, useState, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
+import {
+  docVersions,
+  DocVersions,
+  VersionedDocsNavigation,
+  DocsNavigation,
+} from '../../scripts/build-navigation-misc';
 
-export interface Navigation {
+export interface NavigationElement {
   name: string;
   href: string;
   image?: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 }
 
-export type HeaderNavigation = Navigation[];
+export type HeaderNavigation = NavigationElement[];
 
 export interface FooterNavigation {
-  contributors: Navigation[];
-  links: Navigation[];
-  social: Navigation[];
-}
-
-export interface Section {
-  title: string;
-  links: {
-    title: string;
-    href: string;
-  }[];
-}
-
-export type DocsNavigation = Section[];
-
-export type DocVersions = '2.0.0' | '2.1.0' | '2.2.0-alpha';
-
-export interface OverallDocsNavigation {
-  versionNonspecific: DocsNavigation;
-  versionSpecific: Record<DocVersions, DocsNavigation>;
-  defaultVersion: DocVersions;
+  contributors: NavigationElement[];
+  links: NavigationElement[];
+  social: NavigationElement[];
 }
 
 export interface NavigationProviderProps {
   children: JSX.Element;
   headerNavigation: HeaderNavigation;
   footerNavigation: FooterNavigation;
-  overallDocsNavigation: OverallDocsNavigation;
+  docsNavigation: DocsNavigation;
 }
 
 export interface UseNavigation {
   headerNavigation: HeaderNavigation;
   footerNavigation: FooterNavigation;
-  docsNavigation: DocsNavigation;
+  versionedDocsNavigation: VersionedDocsNavigation;
   selectedVersion: DocVersions;
   setSelectedVersion: React.Dispatch<React.SetStateAction<DocVersions>>;
-  possibleVersions: DocVersions[];
+  docVersions: typeof docVersions;
 }
 
 const NavigationContext = createContext<UseNavigation | undefined>(undefined);
 
 export function NavigationProvider(props: NavigationProviderProps): JSX.Element {
-  const { children, headerNavigation, footerNavigation, overallDocsNavigation } = props;
+  const { children, headerNavigation, footerNavigation, docsNavigation } = props;
 
   const router = useRouter();
-  const possibleVersions = useMemo(
-    () =>
-      Object.keys(
-        overallDocsNavigation.versionSpecific,
-      ) as (keyof typeof overallDocsNavigation.versionSpecific)[],
-    [overallDocsNavigation],
-  );
   const [selectedVersion, setSelectedVersion] = useState<DocVersions>(
-    possibleVersions.find((version) => router.asPath.includes(version)) ??
-      overallDocsNavigation.defaultVersion,
+    docVersions.find((version) => router.asPath.includes(version)) ?? docsNavigation.defaultVersion,
   );
 
-  const [docsNavigation, setDocsNavigation] = useState<DocsNavigation>([
-    ...overallDocsNavigation.versionNonspecific,
-    ...overallDocsNavigation.versionSpecific[selectedVersion],
-  ]);
-
-  useEffect(() => {
-    setDocsNavigation(() => [
-      ...overallDocsNavigation.versionNonspecific,
-      ...overallDocsNavigation.versionSpecific[selectedVersion],
-    ]);
-  }, [
-    overallDocsNavigation.versionNonspecific,
-    overallDocsNavigation.versionSpecific,
-    selectedVersion,
-  ]);
+  const versionedDocsNavigation = useMemo(
+    () => docsNavigation[selectedVersion],
+    [docsNavigation, selectedVersion],
+  );
 
   const value = useMemo(
     () => ({
       headerNavigation,
       footerNavigation,
-      docsNavigation,
+      versionedDocsNavigation,
       selectedVersion,
       setSelectedVersion,
-      possibleVersions,
+      docVersions,
     }),
-    [docsNavigation, footerNavigation, headerNavigation, possibleVersions, selectedVersion],
+    [versionedDocsNavigation, footerNavigation, headerNavigation, selectedVersion],
   );
 
   return <NavigationContext.Provider value={value}>{children}</NavigationContext.Provider>;
