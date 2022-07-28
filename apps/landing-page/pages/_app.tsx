@@ -14,7 +14,12 @@ import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
 import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
 import type { TableOfContents } from '@devfile-web/core';
 import { useRouter } from 'next/router';
-import { overallDocsNavigation, headerNavigation, footerNavigation } from '../navigation';
+import {
+  overallDocsNavigation,
+  headerNavigation,
+  footerNavigation,
+  githubDocsUrl,
+} from '../navigation';
 
 const analyticsConfig = {
   writeKey: process.env.NEXT_PUBLIC_ANALYTICS_WRITE_KEY,
@@ -81,12 +86,6 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
       `${(markdoc?.frontmatter.title as string) ?? ''} - Docs`;
 
     description = (markdoc?.frontmatter.description as string) ?? '';
-
-    if (router.asPath.includes('/api-reference')) {
-      pageTitle = 'Devfile schema - Docs';
-
-      description = 'Devfile schema';
-    }
   }
 
   const tableOfContents = markdoc?.content ? collectHeadings(markdoc.content) : [];
@@ -102,7 +101,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
           <LandingPageMeta title={pageTitle} description={description} />
           <div className="grow">
             <Header />
-            <Layout title={title} tableOfContents={tableOfContents}>
+            <Layout title={title} tableOfContents={tableOfContents} githubDocsUrl={githubDocsUrl}>
               <Component {...pageProps} />
             </Layout>
           </div>
