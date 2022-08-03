@@ -19,7 +19,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
   }
 
   return (
-    <Menu as="div" className={clsx('relative', className)}>
+    <Menu as="div" className={className}>
       <Menu.Button
         className="flex h-6 w-28 items-center justify-center rounded-lg text-sm font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:text-slate-400 dark:ring-inset dark:ring-white/5"
         aria-label={selectedVersion}
@@ -33,7 +33,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             as={Link}
             key={version}
-            href="/docs"
+            href="/docs/quick-start"
             onClick={(): void => setSelectedVersion(version)}
             className={({ active }): string =>
               clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {

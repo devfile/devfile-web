@@ -31,14 +31,14 @@ the following:
 
 1. View the available devfiles:
 
-    ```bash
-    odo catalog list components
+    ```console
+    $ odo catalog list components
     ```
 
 2. Create a devfile project.
 
-    ```bash
-    odo create nodejs _<name of your project>_ --starter
+    ```console
+    $ odo create nodejs _<name of your project>_ --starter
     ```
 
     {% callout title="Note!" %}
@@ -49,24 +49,24 @@ the following:
 
 3. Find your cluster IP address.
 
-    ```bash
-    minikube IP
+    ```console
+    $ minikube IP
     ```
 
 4. Create an ingress inside your cluster that you can use to access your application using the cluster IP address.
 
-    ```bash
-    odo url create _<name you give the url>_ --ingress --host _<IP address>_.nip.io
+    ```console
+    $ odo url create _<name you give the url>_ --ingress --host _<IP address>_.nip.io
     ```
 
-    ```bash {% title="Example" %}
-    odo url create myfirstproject --ingress --host 192.168.64.2.nip.io
+    ```console {% title="Example" %}
+    $ odo url create myfirstproject --ingress --host 192.168.64.2.nip.io
     ```
 
 5. Build the URL.
 
-    ```bash
-    odo push
+    ```console
+    $ odo push
     ```
 
 ## Verification
@@ -79,4 +79,4 @@ the following:
 ## Additional resources
 
 To continue working with devfiles, go to [Authoring
-devfiles](/docs/2.2.0-alpha/authoring-devfiles).
+devfiles](./authoring-devfiles).

@@ -6,21 +6,21 @@ description: Migrating to devfile v2
 To migrate a devfile from version 1.x to 2.x, see the following
 documents:
 
-- [Migrating schema version](/docs/2.2.0-alpha/migrating-schema-version)
+- [Migrating schema version](./migrating-schema-version)
 
-- [Migrating projects](/docs/2.2.0-alpha/migrating-projects)
+- [Migrating projects](./migrating-projects)
 
-- [Migrating components](/docs/2.2.0-alpha/migrating-components)
+- [Migrating components](./migrating-components)
 
-- [Migrating plug-ins](/docs/2.2.0-alpha/migrating-plug-ins)
+- [Migrating plug-ins](./migrating-plug-ins)
 
-- [Migrating commands](/docs/2.2.0-alpha/migrating-commands)
+- [Migrating commands](./migrating-commands)
 
-- [Referring to a parent devfile in a devfile](/docs/2.2.0-alpha/referring-to-a-parent-devfile-in-a-devfile)
+- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile-in-a-devfile)
 
-- [Adding event bindings](/docs/2.2.0-alpha/adding-event-bindings)
+- [Adding event bindings](./adding-event-bindings)
 
-- [Troubleshooting](/docs/2.2.0-alpha/troubleshooting)
+- [Troubleshooting](./troubleshooting)
 
 ## Additional resources
 

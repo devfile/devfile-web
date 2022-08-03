@@ -8,26 +8,26 @@ define the name. See the following table for metadata properties in a
 devfile:
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `name`
-* `string`
-* yes
-* The name of your devfile. This name
+- `name`
+- `string`
+- yes
+- The name of your devfile. This name
 links you to the devfile registry if listed.
 ---
-* `version`
-* `string`
-* yes
-* The version of your devfile.
+- `version`
+- `string`
+- yes
+- The version of your devfile.
 {% /table %}
 
 ## Prerequisites
 
-* [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
 ## Procedure
 
@@ -43,4 +43,4 @@ links you to the devfile registry if listed.
 
 ## Additional Resources
 
-* [API Reference](/docs/2.2.0-alpha/devfile-schema)
+- [API Reference](./devfile-schema)

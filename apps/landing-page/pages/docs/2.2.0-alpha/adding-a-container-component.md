@@ -13,11 +13,11 @@ A devfile can contain one or more components of the `container` type.
 The `component name` attribute identifies each component, including the
 container.
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
-- [Adding components](/docs/2.2.0-alpha/adding-components)
+- [Adding components](./adding-components)
 
 ## Procedure
 
@@ -101,7 +101,7 @@ container.
     For the `container` component to have a shared volume. You must
     define a volume component in the devfile, and reference the volume
     using `volumeMount` in container component. For more information on
-    volume component, see [adding a volume component](/docs/2.2.0-alpha/adding-a-volume-component).
+    volume component, see [adding a volume component](./adding-a-volume-component).
 
     ```yaml  {% filename="devfile.yaml" %}
     components:
@@ -128,6 +128,6 @@ container.
 
 ## Additional Resources
 
-- [API Reference](/docs/2.2.0-alpha/devfile-schema)
+- [API Reference](./devfile-schema)
 
-- [Devfile resources](/docs/2.2.0-alpha/devfile-resources)
+- [Devfile resources](./devfile-resources)

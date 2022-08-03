@@ -9,45 +9,45 @@ To include multiple stack versions in a particular stack, place the
 #### stack.yaml schema
 
 {% table %}
-* Name {% width="33%" %}
-* Type {% width="33%" %}
-* Description {% width="33%" %}
+- Name {% width="33%" %}
+- Type {% width="33%" %}
+- Description {% width="33%" %}
 ---
-* `name`
-* `string`
-* The stack name.
+- `name`
+- `string`
+- The stack name.
 ---
-* `displayName`
-* `string`
-* The display name of a stack.
+- `displayName`
+- `string`
+- The display name of a stack.
 ---
-* `description`
-* `string`
-* The description of a stack.
+- `description`
+- `string`
+- The description of a stack.
 ---
-* `versions`
-* `version[]`
-* The information of each stack version.
+- `versions`
+- `version[]`
+- The information of each stack version.
 ---
-* `icon`
-* `string`
-* A stack icon.
+- `icon`
+- `string`
+- A stack icon.
 {% /table %}
 
 #### version spec
 
 {% table %}
-* Name {% width="33%" %}
-* Type {% width="33%" %}
-* Description {% width="33%" %}
+- Name {% width="33%" %}
+- Type {% width="33%" %}
+- Description {% width="33%" %}
 ---
-* `version`
-* `string`
-* The stack version.
+- `version`
+- `string`
+- The stack version.
 ---
-* `default`
-* `boolean`
-* The default stack version.
+- `default`
+- `boolean`
+- The default stack version.
 {% /table %}
 
 ```yaml {% title="extraDevfileEntries.yaml sample" filename="devfile.yaml" %}

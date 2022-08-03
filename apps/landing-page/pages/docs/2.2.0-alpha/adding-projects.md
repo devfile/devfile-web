@@ -10,65 +10,65 @@ following tables for project properties in a devfile:
 #### starterProject object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `name`
-* `string`
-* yes
-* The name of your devfile.
+- `name`
+- `string`
+- yes
+- The name of your devfile.
 ---
-* `description`
-* `string`
-* no
-* The description of your starterProject.
+- `description`
+- `string`
+- no
+- The description of your starterProject.
 ---
-* `clonePath`
-* `string`
-* no
-* The path relative to the root of your projects. Clone your projects into this path.
+- `clonePath`
+- `string`
+- no
+- The path relative to the root of your projects. Clone your projects into this path.
 {% /table %}
 
 #### git object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `checkoutFrom`
-* `string`
-* no
-* The location of your git repository.
+- `checkoutFrom`
+- `string`
+- no
+- The location of your git repository.
 ---
-* `remotes`
-* `string`
-* yes
-* The branch that you use.
+- `remotes`
+- `string`
+- yes
+- The branch that you use.
 {% /table %}
 
 #### zip object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `location`
-* `string`
-* no
-* The location of your zip.
+- `location`
+- `string`
+- no
+- The location of your zip.
 {% /table %}
 
 ## Prerequisites
 
-* [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-* [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
 ## Procedure
 
@@ -160,17 +160,17 @@ following tables for project properties in a devfile:
     to populate the project sparsely with selected directories.
 
     {% callout title="Note!" %}
-    * Set the project to `/my-module/` to create only the root
+    - Set the project to `/my-module/` to create only the root
       `my-module` directory along with its content.
 
-    * Omit the leading slash (`my-module/`) to create all `my-module`
+    - Omit the leading slash (`my-module/`) to create all `my-module`
       directories that exist in the project. Including, for example,
       `/addons/my-module/`.
 
-      * Add a trailing slash to create only directories with the
+      - Add a trailing slash to create only directories with the
         given name (and its content).
 
-    * Use wildcards to specify more than one directory name. For
+    - Use wildcards to specify more than one directory name. For
       example, setting `module-*` checks out all directories of the
       given project that start with `module-`.
 
@@ -180,6 +180,6 @@ following tables for project properties in a devfile:
 
 ## Additional Resources
 
-* [Api reference](/docs/2.2.0-alpha/devfile-schema)
+- [Api reference](./devfile-schema)
 
-* [Devfile resources](/docs/2.2.0-alpha/devfile-resources)
+- [Devfile resources](./devfile-resources)

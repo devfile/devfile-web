@@ -25,6 +25,6 @@ various projects.
 
 ## Additional resources
 
-- To create `stack.yaml`, see [adding a stack YAML file](/docs/2.2.0-alpha/adding-a-stack-yaml-file).
+- To create `stack.yaml`, see [adding a stack YAML file](./adding-a-stack-yaml-file).
 
-- To create devfiles, see [authoring devfiles](/docs/2.2.0-alpha/authoring-devfiles).
+- To create devfiles, see [authoring devfiles](./authoring-devfiles).

@@ -1,6 +1,4 @@
 - title: Introduction
   links:
-    - title: Getting started
-      href: /docs
-    - title: Installation
-      href: /docs/installation
+    - title: Quick start
+      href: /docs/quick-start

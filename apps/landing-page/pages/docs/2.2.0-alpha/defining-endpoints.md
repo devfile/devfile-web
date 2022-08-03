@@ -62,11 +62,9 @@ port. See the following attributes that you can set on the endpoint:
   outside the workspace and is exposed on port `80` or `443` depending
   on whether TLS is enabled in devfiles. Access this endpoint from the
   devfile user interface.
-
 - `protocol`: For public endpoints, the protocol indicates to the
   devfile consumer how to construct the URL for the endpoint access.
   Typical values are `http`, `https`, `ws`, `wss`.
-
 - `secure`: Boolean. The default value is `false`. Setting this value
   to `true` puts the endpoint behind a JWT proxy. When the endpoint is
   secured this way, clients must supply a JWT workspace token to call

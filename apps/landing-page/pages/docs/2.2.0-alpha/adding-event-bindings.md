@@ -37,20 +37,20 @@ See the following list for event properties in a devfile:
 #### envObject
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* name
-* string
-* yes
-* The name of the environment variable.
+- name
+- string
+- yes
+- The name of the environment variable.
 ---
-* value
-* string
-* yes
-* The value of the environment variable.
+- value
+- string
+- yes
+- The value of the environment variable.
 {% /table %}
 
 1. Add an `events` section in the devfile, containing a list of

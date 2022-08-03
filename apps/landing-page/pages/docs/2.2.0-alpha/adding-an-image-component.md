@@ -7,11 +7,11 @@ You can add an `image` component to a devfile.
 
 ## Prerequisites
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
-- [Adding components](/docs/2.2.0-alpha/adding-components)
+- [Adding components](./adding-components)
 
 ## Procedure
 

@@ -7,11 +7,11 @@ You can add either a `kubernetes` or `openshift` component to a devfile.
 
 ## Prerequisites
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
-- [Adding components](/docs/2.2.0-alpha/adding-components)
+- [Adding components](./adding-components)
 
 ## Procedure
 
@@ -57,4 +57,4 @@ You can add either a `kubernetes` or `openshift` component to a devfile.
     `openshift` component uses an image built by an image component
     defined in the devfile, you can create a composite `deploy` command
     to build the image and deploy the Kubernetes or openshift component.
-    For more information on `deploy` commands, see [adding a command group](/docs/2.2.0-alpha/adding-a-command-group).
+    For more information on `deploy` commands, see [adding a command group](./adding-a-command-group).

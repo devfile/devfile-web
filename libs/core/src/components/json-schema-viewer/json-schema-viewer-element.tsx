@@ -130,11 +130,7 @@ export function JsonSchemaViewerElement(props: JsonSchemaViewerElementProps): JS
         <div className="pl-5">
           <Description description={schema.description} />
 
-          <Tags
-            schema={schema}
-            className="text-slate-700 dark:text-slate-400 [&>*]:py-0.5"
-            spanClassName="rounded-md p-1 text-left text-sm font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:text-slate-400 dark:ring-inset dark:ring-white/5"
-          />
+          <Tags schema={schema} className="text-slate-700 dark:text-slate-400 [&>*]:py-0.5" />
         </div>
 
         {isOpen && (

@@ -7,11 +7,9 @@ Create command groups to help automate your devfile.
 
 ## Prerequisites
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
-
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
-
-- [Adding projects](/docs/2.2.0-alpha/adding-projects)
+- [Adding schema version](./adding-schema-version)
+- [Adding a name](./adding-a-name)
+- [Adding projects](./adding-projects)
 
 ## Procedure
 

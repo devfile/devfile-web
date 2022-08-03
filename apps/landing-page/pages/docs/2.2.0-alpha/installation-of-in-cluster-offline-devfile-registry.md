@@ -48,14 +48,14 @@ Download / clone the
 
 - Clone through HTTPS
 
-    ```bash
-    git clone https://github.com/devfile/registry.git /path/to/registry
+    ```console
+    $ git clone https://github.com/devfile/registry.git /path/to/registry
     ```
 
 - Clone through SSH
 
-    ```bash
-    git clone git@github.com:devfile/registry.git /path/to/registry
+    ```console
+    $ git clone git@github.com:devfile/registry.git /path/to/registry
     ```
 
 ### Install Stack Images
@@ -71,23 +71,23 @@ devfile**.
 1. Use the `docker pull` or the `podman pull` to pull down an image for
     a stack component:
 
-    ```bash
-    podman pull registry.access.redhat.com/ubi8/nodejs-16:latest
+    ```console
+    $ podman pull registry.access.redhat.com/ubi8/nodejs-16:latest
     ```
 
 2. Use the `docker tag` or the `podman tag` to re-tag the image that
     uses the form `<registry_host>:<port>/<project>/<image>`:
 
-    ```bash
-    podman tag registry.access.redhat.com/ubi8/nodejs-16:latest \
+    ```console
+    $ podman tag registry.access.redhat.com/ubi8/nodejs-16:latest \
         <registry_host>:<port>/<project>/nodejs-16:latest
     ```
 
 3. Use the `docker push` or `podman push` to push the re-tagged image
     to the image repository at `<registry_host>:<port>`:
 
-    ```bash
-    podman push <registry_host>:<port>/<project>/nodejs-16:latest
+    ```console
+    $ podman push <registry_host>:<port>/<project>/nodejs-16:latest
     ```
 
 ### Packaging Starter Projects
@@ -105,20 +105,20 @@ suffix `-offline` to be pulled into the registry.
 
 1. `zip` - Download archive
 
-    ```bash {% title="Example" %}
-    cd /path/to/registry
-    curl -L https://code.quarkus.io/d?e=io.quarkus%3Aquarkus-resteasy&e=io.quarkus%3Aquarkus-micrometer&e=io.quarkus%3Aquarkus-smallrye-health&e=io.quarkus%3Aquarkus-openshift&cn=devfile \
+    ```console {% title="Example" %}
+    $ cd /path/to/registry
+    $ curl -L https://code.quarkus.io/d?e=io.quarkus%3Aquarkus-resteasy&e=io.quarkus%3Aquarkus-micrometer&e=io.quarkus%3Aquarkus-smallrye-health&e=io.quarkus%3Aquarkus-openshift&cn=devfile \
         -o stacks/java-quarkus/community-offline.zip
     ```
 
 2. `git` - Package cloned contents into a directory then archive
 
-    ```bash {% title="Example" %}
-    cd /path/to/registry
-    git clone https://github.com/odo-devfiles/nodejs-ex.git \
+    ```console {% title="Example" %}
+    $ cd /path/to/registry
+    $ git clone https://github.com/odo-devfiles/nodejs-ex.git \
         stacks/nodejs/nodejs-starter-offline
-    cd stacks/nodejs
-    zip -r nodejs-starter-offline.zip nodejs-starter-offline
+    $ cd stacks/nodejs
+    $ zip -r nodejs-starter-offline.zip nodejs-starter-offline
     ```
 
 ### Modify Devfile
@@ -181,31 +181,31 @@ starterProjects:
 1. If not already at the root of the registry, change to the root of
     the registry.
 
-    ```bash
-    cd /path/to/registry
+    ```console
+    $ cd /path/to/registry
     ```
 
 2. Build the registry image.
 
-    ```bash
-    bash .ci/build.sh
+    ```console
+    $ bash .ci/build.sh
     ```
 
 ### Additional resources
 
 - To create your own registry Git repository, see [Building a custom
-  devfile registry](/docs/2.2.0-alpha/building-a-custom-devfile-registry)
+  devfile registry](./building-a-custom-devfile-registry)
 
 - For more on interacting with the OpenShift Image Registry, see
   [Accessing the
   registry](https://docs.openshift.com/container-platform/4.10/registry/accessing-the-registry.html)
 
 - To learn more about starter projects in devfiles, see [Adding
-  projects to a devfile](/docs/2.2.0-alpha/adding-projects)
+  projects to a devfile](./adding-projects)
 
 - For more information about building your own registry image, see
   [Building a custom devfile
-  registry](/docs/2.2.0-alpha/building-a-custom-devfile-registry)
+  registry](./building-a-custom-devfile-registry)
 
 ## Stage 2: Install a Devfile Registry to a cluster
 
@@ -227,15 +227,15 @@ registry you have access to.
 1. Use the `docker tag` or the `podman tag` to re-tag the image using
     the form `<registry_host>:<port>/<project>/<image>`:
 
-    ```bash
-    podman tag devfile-index <registry_host>:<port>/<project>/devfile-index
+    ```console
+    $ podman tag devfile-index <registry_host>:<port>/<project>/devfile-index
     ```
 
 2. Use the `docker push` or `podman push` to push the re-tagged image
     to the cluster image registry at `<registry_host>:<port>`:
 
-    ```bash
-    podman push <registry_host>:<port>/<project>/devfile-index
+    ```console
+    $ podman push <registry_host>:<port>/<project>/devfile-index
     ```
 
 ### Additional resources

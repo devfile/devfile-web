@@ -62,7 +62,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                 <Navigation className="w-64 pr-8 xl:w-72 xl:pr-16" />
               </div>
             </div>
-            <div className="min-w-0 max-w-2xl flex-auto px-4 py-16 lg:max-w-none lg:pr-0 lg:pl-8 xl:px-16">
+            <div className="max-w-2xl flex-auto px-4 py-16 lg:pr-0 lg:pl-8 xl:px-16 2xl:max-w-none">
               {isDevfileSchema ? (
                 children
               ) : (
@@ -87,7 +87,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
               {!isDevfileSchema && (
                 <Prose className="my-8">
                   <Link href={`${githubDocsUrl}${router.pathname}.md`} passHref>
-                    <PencilIcon className="inline h-4 w-auto" /> Edit this page
+                    <PencilIcon className="mb-1 inline h-4 w-auto" /> Edit this page
                   </Link>
                 </Prose>
               )}
@@ -130,8 +130,8 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
               className={clsx(
                 isDevfileSchema
                   ? 'xl:top-60 xl:h-[calc(100vh-15rem)] 2xl:h-[calc(100vh-15rem)]'
-                  : 'xl:top-[4.5rem] xl:-mr-6 xl:h-[calc(100vh-4.5rem)] xl:py-16 xl:pr-6',
-                'hidden xl:sticky xl:block xl:flex-none xl:overflow-y-auto 2xl:h-[calc(100vh-4.5rem)] ',
+                  : 'xl:top-[4.5rem] xl:-mr-6 xl:h-[calc(100vh-4.5rem)] xl:py-16 xl:pr-6 2xl:h-[calc(100vh-4.5rem)]',
+                'hidden xl:sticky xl:block xl:flex-none xl:overflow-y-auto',
               )}
             >
               {isDevfileSchema ? (

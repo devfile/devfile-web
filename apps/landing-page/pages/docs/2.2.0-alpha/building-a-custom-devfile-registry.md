@@ -51,7 +51,7 @@ registry.
 - Example of
   [extraDevfileEntries.yaml](https://github.com/devfile/registry/blob/main/extraDevfileEntries.yaml).
 
-- To create devfile stacks, see [creating a devfile stack](/docs/2.2.0-alpha/creating-a-devfile-stack).
+- To create devfile stacks, see [creating a devfile stack](./creating-a-devfile-stack).
 
 ## Building a custom devfile registry
 
@@ -76,7 +76,7 @@ your cloud or cluster to form the devfile registry.
     registry repository. Make sure the Dockerfile contains the
     following:
 
-    ```dockerfile {% filename="Dockerfile" %}
+    ```docker {% filename="Dockerfile" %}
     FROM quay.io/openshift-pipeline/golang:1.15-alpine AS builder
     # Install dependencies
     RUN apk add --no-cache git bash
@@ -136,9 +136,9 @@ build, run, and deploy your application.
 3. Push the devfile index container image to your chosen container
     registry:
 
-    ```bash
-    docker tag -f devfile-index __<registry-hostname>__/__<registry-username>__/devfile-index:latest
-    docker push __<registry-hostname>__/__<registry-username>__/devfile-index:latest
+    ```console
+    $ docker tag -f devfile-index __<registry-hostname>__/__<registry-username>__/devfile-index:latest
+    $ docker push __<registry-hostname>__/__<registry-username>__/devfile-index:latest
     ```
 
 4. If your container does not build properly, consult the documentation
@@ -147,4 +147,4 @@ build, run, and deploy your application.
 ### Additional resources
 
 - For information on deploying the devfile index container image, see
-  [Deploying a devfile registry](/docs/2.2.0-alpha/deploying-a-devfile-registry).
+  [Deploying a devfile registry](./deploying-a-devfile-registry).

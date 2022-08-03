@@ -35,7 +35,7 @@ export function Fence(props: FenceProps): JSX.Element {
       {title && <h4>{title}</h4>}
       <Highlight {...defaultProps} code={children.trimEnd()} language={language} theme={undefined}>
         {({ className, style, tokens, getTokenProps }): JSX.Element => (
-          <pre className={clsx(className, 'group relative p-0')} style={style}>
+          <pre className={clsx(className, 'not-prose group relative p-0')} style={style}>
             <button
               type="button"
               onClick={(): (() => void) => onClick()}

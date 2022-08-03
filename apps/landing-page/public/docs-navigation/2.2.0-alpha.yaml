@@ -1,7 +1,5 @@
 - title: Quick start
   links:
-    - title: Quick start
-      href: /docs/2.2.0-alpha
     - title: Overview
       href: /docs/2.2.0-alpha/authoring-devfiles
     - title: Versions
@@ -94,7 +92,7 @@
       href: /docs/2.2.0-alpha/migrating-projects
     - title: Migrating components
       href: /docs/2.2.0-alpha/migrating-components
-    - title: Migrating plug ins
+    - title: Migrating plug-ins
       href: /docs/2.2.0-alpha/migrating-plug-ins
     - title: Migrating commands
       href: /docs/2.2.0-alpha/migrating-commands
