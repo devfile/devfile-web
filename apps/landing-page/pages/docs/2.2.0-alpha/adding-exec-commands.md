@@ -44,7 +44,7 @@ Use the the `exec` command to automate the container actions.
           workingDir: '${PROJECTS_ROOT}/src/github.com/acme/my-go-project'
     ```
 
-    {% callout title="You should know!" %}
+    {% callout title="Note!" %}
     A command can have only one action, though you can use
     `composite` commands to run several commands either in sequence
     or in parallel.

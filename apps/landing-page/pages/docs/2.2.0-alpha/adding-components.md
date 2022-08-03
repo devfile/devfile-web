@@ -10,164 +10,164 @@ the following tables for component properties in a devfile:
 #### Component object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `container`
-* `componentObject`
-* no
-* The list of containers.
+- `container`
+- `componentObject`
+- no
+- The list of containers.
 ---
-* `kubernetes`
-* `componentObject`
-* no
-* The Kubernetes cluster.
+- `kubernetes`
+- `componentObject`
+- no
+- The Kubernetes cluster.
 ---
-* `openshift`
-* `componentObject`
-* no
-* The OpenShift container.
+- `openshift`
+- `componentObject`
+- no
+- The OpenShift container.
 ---
-* `volume`
-* `componentObject`
-* no
-* The list of volume components.
+- `volume`
+- `componentObject`
+- no
+- The list of volume components.
 ---
 {% /table %}
 
 #### container object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `name`
-* `string`
-* yes
-* The name of your container.
+- `name`
+- `string`
+- yes
+- The name of your container.
 ---
-* `image`
-* `string`
-* yes
-* The image version.
+- `image`
+- `string`
+- yes
+- The image version.
 ---
-* `memoryLimit`
-* `string`
-* no
-* The memory limit that you use with your container.
+- `memoryLimit`
+- `string`
+- no
+- The memory limit that you use with your container.
 ---
-* `mountSources`
-* `boolean`
-* no
-* Choose to mount the source or not.
+- `mountSources`
+- `boolean`
+- no
+- Choose to mount the source or not.
 ---
-* `sourceMapping`
-* `string`
-* no
-* The path in the container where you transfer and mount the project sources. This path is available in the container through the environment, `PROJECTS_ROOT`.
+- `sourceMapping`
+- `string`
+- no
+- The path in the container where you transfer and mount the project sources. This path is available in the container through the environment, `PROJECTS_ROOT`.
 ---
-* `endpoints`
-* `endpointObject`
-* no
-* The list of endpoints to use.
+- `endpoints`
+- `endpointObject`
+- no
+- The list of endpoints to use.
 ---
-* `volumeMounts`
-* `volumeMountsObject`
-* no
-* The list of volumes to mount.
+- `volumeMounts`
+- `volumeMountsObject`
+- no
+- The list of volumes to mount.
 ---
-* `environment`
-* `envObject`
-* no
-* The list of environment variables to use.
+- `environment`
+- `envObject`
+- no
+- The list of environment variables to use.
 {% /table %}
 
 #### endpoint object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `name`
-* `string`
-* yes
-* The name of your endpoint.
+- `name`
+- `string`
+- yes
+- The name of your endpoint.
 ---
-* `targetPort`
-* `integer`
-* yes
-* The port number that you target.
+- `targetPort`
+- `integer`
+- yes
+- The port number that you target.
 ---
-* `exposure`
-* `string`
-* no
-* Use the following attributes to describe how to expose the endpoints on the network: `public`, `internal`, `none`. If not specified, the default attribute is `public`.
+- `exposure`
+- `string`
+- no
+- Use the following attributes to describe how to expose the endpoints on the network: `public`, `internal`, `none`. If not specified, the default attribute is `public`.
 ---
-* `path`
-* `string`
-* no
-* The path to the endpoint URL.
+- `path`
+- `string`
+- no
+- The path to the endpoint URL.
 ---
-* `protocol`
-* `string`
-* no
-* Use the following attributes to describe the application and transport protocols of the traffic that goes through the endpoint: `http`, `https`, `ws`, `wss`, `tcp`, `udp`. If not specified, the default attribute is `http`.
+- `protocol`
+- `string`
+- no
+- Use the following attributes to describe the application and transport protocols of the traffic that goes through the endpoint: `http`, `https`, `ws`, `wss`, `tcp`, `udp`. If not specified, the default attribute is `http`.
 ---
-* `secure`
-* `boolean`
-* no
-* Choose whether to define the endpoint as secure.
+- `secure`
+- `boolean`
+- no
+- Choose whether to define the endpoint as secure.
 {% /table %}
 
 #### volumeMount object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `name`
-* `string`
-* yes
-* The name of the volume components that you use.
+- `name`
+- `string`
+- yes
+- The name of the volume components that you use.
 ---
-* `path`
-* `string`
-* no
-* The path in the component container where you mount the volume.
+- `path`
+- `string`
+- no
+- The path in the component container where you mount the volume.
 {% /table %}
 
 #### volume object
 
 {% table %}
-* Key {% width="25%" %}
-* Type {% width="25%" %}
-* Required {% width="25%" %}
-* Description {% width="25%" %}
+- Key {% width="25%" %}
+- Type {% width="25%" %}
+- Required {% width="25%" %}
+- Description {% width="25%" %}
 ---
-* `name`
-* `string`
-* yes
-* The name of the volume component.
+- `name`
+- `string`
+- yes
+- The name of the volume component.
 ---
-* `size`
-* `string`
-* no
-* The size of the storage you create.
+- `size`
+- `string`
+- no
+- The size of the storage you create.
 {% /table %}
 
 ## Prerequisites
 
-* [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-* [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
 ## Procedure
 
@@ -181,26 +181,26 @@ the following tables for component properties in a devfile:
     mandatory `type` attribute: `kubernetes`, `container`, `openshift`,
     or `volume`.
 
-4. [Adding a kubernetes or openshift component](/docs/2.2.0-alpha/adding-a-kubernetes-or-openshift-component)
+4. [Adding a kubernetes or openshift component](./adding-a-kubernetes-or-openshift-component)
 
-5. [Adding a container component](/docs/2.2.0-alpha/adding-a-container-component)
+5. [Adding a container component](./adding-a-container-component)
 
-6. [Adding a volume component](/docs/2.2.0-alpha/adding-a-volume-component)
+6. [Adding a volume component](./adding-a-volume-component)
 
-7. [Adding a image component](/docs/2.2.0-alpha/adding-a-image-component)
+7. [Adding a image component](./adding-a-image-component)
 
-8. [Specifying persistent storage](/docs/2.2.0-alpha/specifying-persistent-storage)
+8. [Specifying persistent storage](./specifying-persistent-storage)
 
-9. [Limiting resources usage](/docs/2.2.0-alpha/limiting-resources-usage)
+9. [Limiting resources usage](./limiting-resources-usage)
 
-10. [Defining environment variables](/docs/2.2.0-alpha/defining-environment-variables)
+10. [Defining environment variables](./defining-environment-variables)
 
-11. [Defining endpoints](/docs/2.2.0-alpha/defining-endpoints)
+11. [Defining endpoints](./defining-endpoints)
 
-12. [Defining kubernetes resources](/docs/2.2.0-alpha/defining-kubernetes-resources)
+12. [Defining kubernetes resources](./defining-kubernetes-resources)
 
 ## Additional resources
 
-* [API reference](/docs/2.2.0-alpha/devfile-schema)
+- [API reference](./devfile-schema)
 
-* [Devfile resources](/docs/2.2.0-alpha/devfile-resources)
+- [Devfile resources](./devfile-resources)

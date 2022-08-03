@@ -14,13 +14,13 @@ v2.x devfile.
 {% table %}
 ---
 
-* ```yaml
+- ```yaml
   apiVersion: 1.0.0
   metadata:
     name: devfile-sample
   ```
 
-* ```yaml
+- ```yaml
   schemaVersion: 2.2.0
   metadata:
     name: devfile-sample

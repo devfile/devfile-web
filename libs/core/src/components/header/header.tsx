@@ -34,15 +34,16 @@ export function Header(): JSX.Element {
       )}
     >
       <div className="flex max-w-screen-2xl grow flex-wrap items-center justify-between">
-        <div className="mr-6 flex lg:hidden">
-          <MobileNavigation />
-        </div>
-        <div className="relative flex flex-grow basis-0 items-center">
+        <div className="flex items-center">
+          <div className="mr-6 flex lg:hidden">
+            <MobileNavigation />
+          </div>
+
           <Link
             href="/"
             aria-label="Home page"
             passHref
-            className="lg:flex lg:items-center lg:gap-4"
+            className="my-2 lg:flex lg:items-center lg:gap-4"
           >
             <DevfileIcon className="fill-devfile h-9 w-9 lg:hidden" />
             <DevfileIcon className="fill-devfile hidden h-9 w-auto lg:block" />
@@ -51,11 +52,12 @@ export function Header(): JSX.Element {
             </h3>
           </Link>
         </div>
-        <div className="relative flex basis-0 items-center justify-end gap-8 sm:gap-8 lg:flex-grow">
+
+        <div className="relative my-2 flex grow items-center justify-end gap-8">
           <div className="lg:hidden">
             <Search />
           </div>
-          <VersionSelector />
+          <VersionSelector className="relative z-10" />
           <ThemeSelector className="relative z-10" />
           {headerNavigation.map((item) => (
             <Link

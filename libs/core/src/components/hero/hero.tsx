@@ -41,7 +41,7 @@ function TrafficLightsIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
 
 export function Hero(): JSX.Element {
   return (
-    <div className="overflow-hidden bg-slate-900 dark:-mb-32 dark:mt-[-4.5rem] dark:pb-32 dark:pt-[4.5rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
+    <div className="overflow-hidden bg-slate-900 dark:-mb-16 dark:mt-[-12rem] dark:pb-32 dark:pt-[12rem] dark:lg:mt-[-4.75rem] dark:lg:pt-[4.75rem]">
       <div className="py-16 sm:px-2 lg:relative lg:py-20 lg:px-0">
         <div className="lg:max-w-8xl mx-auto grid max-w-2xl grid-cols-1 items-center gap-y-16 gap-x-8 px-4 lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">

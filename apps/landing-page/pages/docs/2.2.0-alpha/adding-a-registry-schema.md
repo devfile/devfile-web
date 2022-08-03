@@ -9,89 +9,89 @@ To add samples and stacks from other repositories, place the
 #### extraDevfileEntries.yaml schema
 
 {% table %}
-* Name {% width="33%" %}
-* Type {% width="33%" %}
-* Description {% width="33%" %}
+- Name {% width="33%" %}
+- Type {% width="33%" %}
+- Description {% width="33%" %}
 ---
-* `samples`
-* `schema[]`
-* The sample list.
+- `samples`
+- `schema[]`
+- The sample list.
 ---
-* `stacks`
-* `schema`
-* The stack list stack or sample attributes.
+- `stacks`
+- `schema`
+- The stack list stack or sample attributes.
 ---
-* `name`
-* `string`
-* The stack name.
+- `name`
+- `string`
+- The stack name.
 ---
-* `displayName`
-* `string`
-* The display name of a devfile.
+- `displayName`
+- `string`
+- The display name of a devfile.
 ---
-* `description`
-* `string`
-* The description of a devfile.
+- `description`
+- `string`
+- The description of a devfile.
 ---
-* `tags`
-* `string[]`
-* The tags associated to a devfile.
+- `tags`
+- `string[]`
+- The tags associated to a devfile.
 ---
-* `icon`
-* `string`
-* A devfile icon.
+- `icon`
+- `string`
+- A devfile icon.
 ---
-* `language`
-* `string`
-* The project language that is used in a devfile.
+- `language`
+- `string`
+- The project language that is used in a devfile.
 ---
-* `git`
-* `git`
-* The information of remote repositories.
+- `git`
+- `git`
+- The information of remote repositories.
 ---
-* `versions`
-* `version[]`
-* The information of each stack or sample version.
+- `versions`
+- `version[]`
+- The information of each stack or sample version.
 {% /table %}
 
 #### version schema
 
 {% table %}
-* Name {% width="33%" %}
-* Type {% width="33%" %}
-* Description {% width="33%" %}
+- Name {% width="33%" %}
+- Type {% width="33%" %}
+- Description {% width="33%" %}
 ---
-* `version`
-* `string`
-* The stack version.
+- `version`
+- `string`
+- The stack version.
 ---
-* `schemaVersion`
-* `string`
-* The devfile schema version.
+- `schemaVersion`
+- `string`
+- The devfile schema version.
 ---
-* `default`
-* `boolean`
-* The default stack version.
+- `default`
+- `boolean`
+- The default stack version.
 ---
-* `git`
-* `git`
-* The information of remote repositories.
+- `git`
+- `git`
+- The information of remote repositories.
 ---
-* `description`
-* `string`
-* The description of the stack version.
+- `description`
+- `string`
+- The description of the stack version.
 ---
-* `tags`
-* `string[]`
-* The tags associated to the stack version.
+- `tags`
+- `string[]`
+- The tags associated to the stack version.
 ---
-* `icon`
-* `string`
-* Icon of the stack version.
+- `icon`
+- `string`
+- Icon of the stack version.
 ---
-* `architectures`
-* `string[]`
-* The architectures associated to the stack version.
+- `architectures`
+- `string[]`
+- The architectures associated to the stack version.
 {% /table %}
 
 ```yaml {% title="extraDevfileEntries.yaml sample" filename="devfile.yaml" %}
@@ -163,102 +163,102 @@ information such as name, language, and resources.
 #### Devfile index schema
 
 {% table %}
-* Name {% width="33%" %}
-* Type {% width="33%" %}
-* Description {% width="33%" %}
+- Name {% width="33%" %}
+- Type {% width="33%" %}
+- Description {% width="33%" %}
 ---
-* `name`
-* `string`
-* The stack name.
+- `name`
+- `string`
+- The stack name.
 ---
-* `versions`
-* `version[]`
-* The information of each stack or sample version.
+- `versions`
+- `version[]`
+- The information of each stack or sample version.
 ---
-* `attributes`
-* `map[string]apiext.JSON`
-* Map of implementation-dependant free-form YAML attributes.
+- `attributes`
+- `map[string]apiext.JSON`
+- Map of implementation-dependant free-form YAML attributes.
 ---
-* `displayName`
-* `string`
-* The display name of a stack.
+- `displayName`
+- `string`
+- The display name of a stack.
 ---
-* `description`
-* `string`
-* The description of a stack.
+- `description`
+- `string`
+- The description of a stack.
 ---
-* `type`
-* `DevfileType`
-* The type: stack or sample.
+- `type`
+- `DevfileType`
+- The type: stack or sample.
 ---
-* `tags`
-* `string[]`
-* The tags for a stack.
+- `tags`
+- `string[]`
+- The tags for a stack.
 ---
-* `icon`
-* `string`
-* A stack icon.
+- `icon`
+- `string`
+- A stack icon.
 ---
-* `globalMemoryLimit`
-* `string`
-* A stack global memory limit.
+- `globalMemoryLimit`
+- `string`
+- A stack global memory limit.
 ---
-* `projectType`
-* `string`
-* The project framework that is used in a stack.
+- `projectType`
+- `string`
+- The project framework that is used in a stack.
 {% /table %}
 
 #### version schema
 
 {% table %}
-* Name {% width="33%" %}
-* Type {% width="33%" %}
-* Description {% width="33%" %}
+- Name {% width="33%" %}
+- Type {% width="33%" %}
+- Description {% width="33%" %}
 ---
-* `version`
-* `string`
-* The stack version.
+- `version`
+- `string`
+- The stack version.
 ---
-* `schemaVersion`
-* `string`
-* The devfile schema version.
+- `schemaVersion`
+- `string`
+- The devfile schema version.
 ---
-* `default`
-* `boolean`
-* The default stack version.
+- `default`
+- `boolean`
+- The default stack version.
 ---
-* `git`
-* `git`
-* The information of remote repositories.
+- `git`
+- `git`
+- The information of remote repositories.
 ---
-* `description`
-* `string`
-* The description of the stack version.
+- `description`
+- `string`
+- The description of the stack version.
 ---
-* `tags`
-* `string[]`
-* The tags associated to the stack version.
+- `tags`
+- `string[]`
+- The tags associated to the stack version.
 ---
-* `icon`
-* `string`
-* Icon of the stack version.
+- `icon`
+- `string`
+- Icon of the stack version.
 ---
-* `architectures`
-* `string[]`
-* The architectures associated to the stack version.
+- `architectures`
+- `string[]`
+- The architectures associated to the stack version.
 ---
-* `links`
-* `map[string]string`
-* Links related to a devfile.
+- `links`
+- `map[string]string`
+- Links related to a devfile.
 ---
-* `resources`
-* `string[]`
-* The file resources that compose a devfile stack
+- `resources`
+- `string[]`
+- The file resources that compose a devfile stack
 ---
 
-* `starterProjects`
-* `string[]`
-* The project templates that can be used in a devfile.
+- `starterProjects`
+- `string[]`
+- The project templates that can be used in a devfile.
 {% /table %}
 
 ```json {% title="Index.json sample" %}

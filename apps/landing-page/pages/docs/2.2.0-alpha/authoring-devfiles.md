@@ -10,18 +10,18 @@ You can configure the devfile based on your unique development needs.
 See the following documents to help you author a devfile based on your
 development needs:
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
-- [Adding projects](/docs/2.2.0-alpha/adding-projects)
+- [Adding projects](./adding-projects)
 
-- [Adding commands](/docs/2.2.0-alpha/adding-commands)
+- [Adding commands](./adding-commands)
 
-- [Adding components](/docs/2.2.0-alpha/adding-components)
+- [Adding components](./adding-components)
 
-- [Adding attributes](/docs/2.2.0-alpha/adding-attributes)
+- [Adding attributes](./adding-attributes)
 
-- [Adding event bindings](/docs/2.2.0-alpha/adding-event-bindings)
+- [Adding event bindings](./adding-event-bindings)
 
-- [Referring to a parent devfile in a devfile](/docs/2.2.0-alpha/referring-to-a-parent-devfile-in-a-devfile)
+- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile-in-a-devfile)

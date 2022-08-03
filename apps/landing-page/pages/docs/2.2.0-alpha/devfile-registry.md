@@ -5,19 +5,19 @@ description: Devfile registry
 
 Get started with devfile registries:
 
-- [Understanding a devfile registry](/docs/2.2.0-alpha/understanding-a-devfile-registry)
+- [Understanding a devfile registry](./understanding-a-devfile-registry)
 
-- [Building a custom devfile registry](/docs/2.2.0-alpha/building-a-custom-devfile-registry)
+- [Building a custom devfile registry](./building-a-custom-devfile-registry)
 
-- [Installation of in-cluster offline devfile registry](/docs/2.2.0-alpha/installation-of-in-cluster-offline-devfile-registry)
+- [Installation of in-cluster offline devfile registry](./installation-of-in-cluster-offline-devfile-registry)
 
-- [Deploying a devfile registry](/docs/2.2.0-alpha/deploying-a-devfile-registry)
+- [Deploying a devfile registry](./deploying-a-devfile-registry)
 
-- [Adding a registry schema](/docs/2.2.0-alpha/adding-a-registry-schema)
+- [Adding a registry schema](./adding-a-registry-schema)
 
-- [Creating a devfile stack](/docs/2.2.0-alpha/creating-a-devfile-stack)
+- [Creating a devfile stack](./creating-a-devfile-stack)
 
-- [Adding a stack YAML file](/docs/2.2.0-alpha/adding-a-stack-yaml-file)
+- [Adding a stack YAML file](./adding-a-stack-yaml-file)
 
 For more information about the devfile registry, see the [Registry REST
 API](https://github.com/devfile/registry-support/blob/main/index/server/registry-REST-API).

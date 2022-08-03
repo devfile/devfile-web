@@ -15,7 +15,7 @@ To use the devfile Operator to deploy a devfile registry, use:
 ## Prerequisites
 
 - A built devfile registry container image. To build your own devfile
-  registry, see [building a custom devfile registry](/docs/2.2.0-alpha/building-a-custom-devfile-registry).
+  registry, see [building a custom devfile registry](./building-a-custom-devfile-registry).
 
 - If you do not have publicly signed certificates for your cluster,
   disable TLS for the devfile registry so that you can use the devfile
@@ -40,15 +40,15 @@ devfile registry.
     3. Run the `operator-sdk` command to install the devfile registry
         Operator:
 
-        ```bash
-        operator-sdk run bundle quay.io/devfile/registry-operator-bundle:next
+        ```console
+        $ operator-sdk run bundle quay.io/devfile/registry-operator-bundle:next
         ```
 
 2. Deploy the devfile registry:
 
     1. On an OpenShift cluster, run:
 
-        ```bash
+        ```console
         $ cat <<EOF | oc apply -f -
         apiVersion: registry.devfile.io/v1alpha1
         kind: DevfileRegistry
@@ -61,7 +61,7 @@ devfile registry.
 
     2. On a Kubernetes cluster, run:
 
-        ```bash
+        ```console
         $ cat <<EOF | kubectl apply -f -
         apiVersion: registry.devfile.io/v1alpha1
         kind: DevfileRegistry
@@ -102,8 +102,8 @@ the devfile registry Operator to deploy the devfile registry.
 
 1. Clone the repository containing the Helm chart:
 
-    ```bash
-    git clone https://github.com/devfile/registry-support
+    ```console
+    $ git clone https://github.com/devfile/registry-support
     ```
 
 2. Navigate to the `deploy/chart/devfile-registry` directory.

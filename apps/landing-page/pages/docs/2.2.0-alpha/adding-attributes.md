@@ -20,9 +20,9 @@ devfile objects can have attributes:
 
 ## Prerequisites
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
 ## Procedure
 
@@ -46,6 +46,6 @@ devfile objects can have attributes:
 
 ## Additional resources
 
-- [API reference](/docs/2.2.0-alpha/devfile-schema)
+- [API reference](./devfile-schema)
 
-- [Devfile resources](/docs/2.2.0-alpha/devfile-resources)
+- [Devfile resources](./devfile-resources)

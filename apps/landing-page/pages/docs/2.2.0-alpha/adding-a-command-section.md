@@ -7,11 +7,11 @@ Specify the commands you want to run in your workspace.
 
 ## Prerequisites
 
-- [Adding schema version](/docs/2.2.0-alpha/adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
-- [Adding a name](/docs/2.2.0-alpha/adding-a-name)
+- [Adding a name](./adding-a-name)
 
-- [Adding projects](/docs/2.2.0-alpha/adding-projects)
+- [Adding projects](./adding-projects)
 
 ## Procedure
 

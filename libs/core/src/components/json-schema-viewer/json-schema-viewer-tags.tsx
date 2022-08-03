@@ -1,59 +1,59 @@
 import type { JSONSchema7 } from 'json-schema';
+import { Prose } from '../prose/prose';
 
 export interface JsonSchemaViewerTagsProps {
   schema: JSONSchema7;
   className?: string;
-  spanClassName?: string;
 }
 
 export function JsonSchemaViewerTags(props: JsonSchemaViewerTagsProps): JSX.Element {
-  const { className, spanClassName, schema } = props;
+  const { className, schema } = props;
 
   return (
-    <div className={className}>
+    <Prose className={className}>
       {schema.default && (
         <div>
-          Default: <span className={spanClassName}>{String(schema.default)}</span>
+          Default: <code>{String(schema.default)}</code>
         </div>
       )}
       {schema.multipleOf && (
         <div>
-          Multiple of: <span className={spanClassName}>{schema.multipleOf}</span>
+          Multiple of: <code>{schema.multipleOf}</code>
         </div>
       )}
       {schema.maximum && (
         <div>
-          <span className={spanClassName}>{`<= ${schema.maximum}`}</span>
+          <code>{`<= ${schema.maximum}`}</code>
         </div>
       )}
       {schema.exclusiveMaximum && (
         <div>
-          <span className={spanClassName}>{`< ${schema.exclusiveMaximum}`}</span>
+          <code>{`< ${schema.exclusiveMaximum}`}</code>
         </div>
       )}
       {schema.minimum && (
         <div>
-          <span className={spanClassName}>{`>= ${schema.minimum}`}</span>
+          <code>{`>= ${schema.minimum}`}</code>
         </div>
       )}
       {schema.exclusiveMinimum && (
         <div>
-          <span className={spanClassName}>{`> ${schema.exclusiveMinimum}`}</span>
+          <code>{`> ${schema.exclusiveMinimum}`}</code>
         </div>
       )}
       {schema.maxLength && (
         <div>
-          <span className={spanClassName}>{`<= ${schema.maxLength} characters`}</span>
+          <code>{`<= ${schema.maxLength} characters`}</code>
         </div>
       )}
       {schema.minLength && (
         <div>
-          <span className={spanClassName}>{`>= ${schema.minLength} characters`}</span>
+          <code>{`>= ${schema.minLength} characters`}</code>
         </div>
       )}
       {schema.pattern && (
         <div>
-          Match pattern: <span className={spanClassName}>{schema.pattern}</span>
+          Match pattern: <code>{schema.pattern}</code>
         </div>
       )}
       {schema.enum && (
@@ -62,12 +62,12 @@ export function JsonSchemaViewerTags(props: JsonSchemaViewerTagsProps): JSX.Elem
           {schema.enum.map((e, eIndex) => (
             // eslint-disable-next-line react/no-array-index-key
             <span key={eIndex} className="pr-1">
-              <span className="rounded-md bg-slate-800 p-0.5">{String(e)}</span>
+              <code className="rounded-md bg-slate-800 p-0.5">{String(e)}</code>
             </span>
           ))}
         </div>
       )}
-    </div>
+    </Prose>
   );
 }
 

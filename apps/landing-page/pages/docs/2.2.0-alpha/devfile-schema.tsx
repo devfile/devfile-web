@@ -27,7 +27,7 @@ export function DevfileSchema(props: DevfileSchemaProps): JSX.Element {
         <h2>Additional resources</h2>
         <ul>
           <li>
-            <Link href="/2.2.0-alpha/devfile-schema.json">Download the current JSON Schema</Link>
+            <Link href="/devfile-schema/2.2.0-alpha.json">Download the current JSON Schema</Link>
           </li>
         </ul>
       </Prose>

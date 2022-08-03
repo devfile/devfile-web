@@ -15,10 +15,10 @@ stack that is used in multiple other devfiles.
 
 - Define the `schemaVersion` to v2.x. If you need to define your
   `schemaVersion`, go to
-  [Adding schema version](/docs/2.2.0-alpha/adding-schema-version).
+  [Adding schema version](./adding-schema-version).
 
 - Define a name for the devfile. If you need to define a name for your
-  devfile, go to [Adding a name](/docs/2.2.0-alpha/adding-a-name).
+  devfile, go to [Adding a name](./adding-a-name).
 
 ## Procedure
 
@@ -79,6 +79,6 @@ parent:
 
 For more information about referring to parent devfiles, see:
 
-- [API reference](/docs/2.2.0-alpha/devfile-schema)
+- [API reference](./devfile-schema)
 
-- [Devfile resources](/docs/2.2.0-alpha/devfile-resources)
+- [Devfile resources](./devfile-resources)
