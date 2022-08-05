@@ -240,6 +240,6 @@ Ingress or OpenShift Route.
 
 ## Additional resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile samples](./devfile-samples)

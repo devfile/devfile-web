@@ -8,7 +8,7 @@ are optional attributes, but at least one of them must be defined.
 
 ## Prerequisites
 
-- [Adding schema-version](./adding-schema-version)
+- [Adding schema version](./adding-schema-version)
 
 ## Procedure
 
@@ -43,4 +43,4 @@ name prefix: `<name>YYYYY` or `<generateName>YYYYY`. When both
 
 ## Additional resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)

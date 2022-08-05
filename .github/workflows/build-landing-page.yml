@@ -1,0 +1,32 @@
+name: Build Landing Page
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  main:
+    name: Main Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Install and Build
+        run: |
+          yarn install --frozen-lockfile
+          yarn nx affected --target=build --project=landing-page
+          yarn nx affected --target=export --project=landing-page
+
+      - name: Deploy to Branch
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+          branch: landing-page-dist
+          folder: dist/apps/landing-page/exported

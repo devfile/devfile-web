@@ -26,4 +26,4 @@ development needs:
 
 - [Adding attributes](./adding-attributes)
 
-- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile-in-a-devfile)
+- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile)

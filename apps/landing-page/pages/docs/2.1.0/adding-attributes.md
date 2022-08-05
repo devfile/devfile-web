@@ -37,6 +37,6 @@ following devfile objects: `metadata`, `components`, `commands`,
 
 ## Additional resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile resources](./devfile-resources)

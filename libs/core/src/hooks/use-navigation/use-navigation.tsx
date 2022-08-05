@@ -1,11 +1,12 @@
 import { createContext, useState, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import {
-  docVersions,
+import { docVersions, defaultVersion } from '../../scripts/build-navigation/build-navigation-misc';
+
+import type {
   DocVersions,
   VersionedDocsNavigation,
   DocsNavigation,
-} from '../../scripts/build-navigation-misc';
+} from '../../scripts/build-navigation/build-navigation-misc';
 
 export interface NavigationElement {
   name: string;
@@ -44,7 +45,7 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
 
   const router = useRouter();
   const [selectedVersion, setSelectedVersion] = useState<DocVersions>(
-    docVersions.find((version) => router.asPath.includes(version)) ?? docsNavigation.defaultVersion,
+    docVersions.find((version) => router.asPath.includes(version)) ?? defaultVersion,
   );
 
   const versionedDocsNavigation = useMemo(

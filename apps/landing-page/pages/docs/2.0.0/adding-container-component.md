@@ -90,6 +90,6 @@ identified by its image.
 
 ## Additional resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile samples](./devfile-samples)

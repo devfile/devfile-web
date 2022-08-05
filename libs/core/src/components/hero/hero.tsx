@@ -47,7 +47,7 @@ export function Hero(): JSX.Element {
           <div className="relative z-10 md:text-center lg:text-left">
             <div className="absolute bottom-full right-full -mr-72 -mb-56 opacity-50">
               <Image
-                src={blurCyanImage as string}
+                src={blurCyanImage}
                 alt=""
                 layout="fixed"
                 width={530}
@@ -78,7 +78,7 @@ export function Hero(): JSX.Element {
             <div className="relative">
               <div className="absolute -top-64 -right-64">
                 <Image
-                  src={blurCyanImage as string}
+                  src={blurCyanImage}
                   alt=""
                   layout="fixed"
                   width={530}
@@ -89,7 +89,7 @@ export function Hero(): JSX.Element {
               </div>
               <div className="absolute -bottom-40 -right-44">
                 <Image
-                  src={blurIndigoImage as string}
+                  src={blurIndigoImage}
                   alt=""
                   layout="fixed"
                   width={567}

@@ -44,4 +44,4 @@ Thumbs.db
 **/*/.env.test.local
 **/*/.env.production.local
 
-**/docs-navigation.json
+**/dist/docs-navigation.json

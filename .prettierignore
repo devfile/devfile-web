@@ -1,4 +1,6 @@
 .prettierignore
 **/*.mdx
+**/*.md
+**/*.mdoc
 **/generated/
 **/snippet.*

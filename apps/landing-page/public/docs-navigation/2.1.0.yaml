@@ -1,5 +1,7 @@
 - title: Unorganized
   links:
+    - title: Devfile schema
+      href: /docs/2.1.0/devfile-schema
     - title: Adding a name
       href: /docs/2.1.0/adding-a-name
     - title: Adding a registry schema

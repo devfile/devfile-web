@@ -187,7 +187,7 @@ the following tables for component properties in a devfile:
 
 6. [Adding a volume component](./adding-a-volume-component)
 
-7. [Adding a image component](./adding-a-image-component)
+7. [Adding an image component](./adding-an-image-component)
 
 8. [Specifying persistent storage](./specifying-persistent-storage)
 

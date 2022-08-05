@@ -16,7 +16,7 @@ documents:
 
 - [Migrating commands](./migrating-commands)
 
-- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile-in-a-devfile)
+- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile)
 
 - [Adding event bindings](./adding-event-bindings)
 

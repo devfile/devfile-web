@@ -128,6 +128,6 @@ This section describes how to add one or more projects to a devfile.
 
 ## Additional Resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile samples](./devfile-samples)
