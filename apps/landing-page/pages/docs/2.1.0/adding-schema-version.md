@@ -18,4 +18,4 @@ The `schemaVersion` attribute is mandatory in a devfile.
 
 ## Additional Resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)

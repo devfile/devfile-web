@@ -38,6 +38,6 @@ Each component in a single devfile must have a unique name.
 
 ## Additional Resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile resources](./devfile-resources)

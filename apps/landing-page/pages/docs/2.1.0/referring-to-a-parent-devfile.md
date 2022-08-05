@@ -74,6 +74,6 @@ parent:
 For more information on referring to parent devfiles, go to the
 following topics:
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile resources](./devfile-resources)

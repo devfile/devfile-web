@@ -1,0 +1,28 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  main:
+    name: Main Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Lint, Test, and Build
+        run: |
+          yarn install --frozen-lockfile
+          yarn nx workspace-lint
+          yarn nx format:check
+          yarn nx affected --target=lint --parallel=3
+          yarn nx affected --target=test --parallel=3 --ci --code-coverage
+          yarn nx affected --target=build --parallel=3

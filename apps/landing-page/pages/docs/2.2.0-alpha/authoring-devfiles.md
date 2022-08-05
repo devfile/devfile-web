@@ -24,4 +24,4 @@ development needs:
 
 - [Adding event bindings](./adding-event-bindings)
 
-- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile-in-a-devfile)
+- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile)

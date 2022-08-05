@@ -93,6 +93,6 @@ identified by its image.
 
 ## Additional Resources
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
 
 - [Devfile resources](./devfile-resources)

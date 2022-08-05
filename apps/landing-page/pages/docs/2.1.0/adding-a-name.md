@@ -42,4 +42,4 @@ are optional attributes, but at least one of them must be defined.
     `generateName` and `name` are defined, `generateName` takes precedence.
     {% /callout %}
 
-- [API reference](./api-reference)
+- [API reference](./devfile-schema)
