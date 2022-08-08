@@ -27,7 +27,7 @@ links you to the devfile registry if listed.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
 ## Procedure
 
@@ -35,7 +35,7 @@ links you to the devfile registry if listed.
     attribute.
 
     ```yaml {% title="Adding a static name" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     metadata:
       name: devfile-sample
       version: 2.0.0
@@ -43,4 +43,4 @@ links you to the devfile registry if listed.
 
 ## Additional Resources
 
-- [API Reference](./devfile-schema)
+- {% versioned-link href="./devfile-schema" text="API reference" /%}

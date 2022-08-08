@@ -136,7 +136,7 @@ build, run, and deploy your application.
 3. Push the devfile index container image to your chosen container
     registry:
 
-    ```console
+    ```shell-session
     $ docker tag -f devfile-index __<registry-hostname>__/__<registry-username>__/devfile-index:latest
     $ docker push __<registry-hostname>__/__<registry-username>__/devfile-index:latest
     ```

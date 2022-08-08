@@ -18,3 +18,5 @@ export * from './json-schema-viewer/json-schema-viewer';
 export * from './icon/icon';
 export * from './callout/callout';
 export * from './quick-links/quick-links';
+export * from './versioned-link/versioned-link';
+export * from './current-version/current-version';

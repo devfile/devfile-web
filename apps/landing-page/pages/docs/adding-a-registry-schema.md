@@ -95,7 +95,7 @@ To add samples and stacks from other repositories, place the
 {% /table %}
 
 ```yaml {% title="extraDevfileEntries.yaml sample" filename="devfile.yaml" %}
-schemaVersion: 2.0.0
+schemaVersion: <version>
 samples:
   - name: nodejs-basic
     displayName: Basic Node.js

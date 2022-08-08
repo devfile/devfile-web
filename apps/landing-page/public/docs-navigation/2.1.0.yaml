@@ -60,8 +60,6 @@
       href: /docs/2.1.0/referring-to-a-parent-devfile
     - title: Specifying persistent storage
       href: /docs/2.1.0/specifying-persistent-storage
-    - title: Troubleshooting
-      href: /docs/2.1.0/troubleshooting
     - title: Understanding a devfile registry
       href: /docs/2.1.0/understanding-a-devfile-registry
     - title: Using devfiles

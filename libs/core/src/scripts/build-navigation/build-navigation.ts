@@ -8,19 +8,27 @@ import { load as yamlToJs } from 'js-yaml';
 import { docVersions } from './build-navigation-misc';
 import type { DocsNavigation, VersionedDocsNavigation } from './build-navigation-misc';
 
+export interface NoVersionNavigation {
+  top: VersionedDocsNavigation;
+  bottom: VersionedDocsNavigation;
+}
+
 export function getDocsNavigation(): DocsNavigation {
   const noVersionNavigation = yamlToJs(
     fs.readFileSync('./apps/landing-page/public/docs-navigation/no-version.yaml', 'utf8'),
-  ) as VersionedDocsNavigation;
+  ) as NoVersionNavigation;
+
+  const { top, bottom } = noVersionNavigation;
 
   const docsNavigation = docVersions.reduce((nav, version) => {
     const newNav = nav;
 
     newNav[version] = [
-      ...noVersionNavigation,
+      ...top,
       ...(yamlToJs(
         fs.readFileSync(`./apps/landing-page/public/docs-navigation/${version}.yaml`, 'utf8'),
       ) as VersionedDocsNavigation),
+      ...bottom,
     ];
 
     return newNav;

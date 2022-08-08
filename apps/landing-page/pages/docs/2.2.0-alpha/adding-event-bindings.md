@@ -56,7 +56,7 @@ See the following list for event properties in a devfile:
 1. Add an `events` section in the devfile, containing a list of
     `preStart` and `postStart` commands.
 
-```yaml
+```yaml {% filename="devfile.yaml" %}
 commands:
   - id: init-project
     apply:

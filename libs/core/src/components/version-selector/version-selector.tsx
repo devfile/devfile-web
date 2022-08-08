@@ -33,7 +33,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
             // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             as={Link}
             key={version}
-            href="/docs/quick-start"
+            href="/docs/what-is-a-devfile"
             onClick={(): void => setSelectedVersion(version)}
             className={({ active }): string =>
               clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {

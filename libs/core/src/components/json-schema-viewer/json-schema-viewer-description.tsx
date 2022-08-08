@@ -1,6 +1,6 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import type { Language } from 'prism-react-renderer';
+import type { Language } from '@schultzp2020/prism-react-renderer';
 import { Fence } from '../fence/fence';
 import { Prose } from '../prose/prose';
 

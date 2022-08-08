@@ -32,8 +32,6 @@ const nodes = {
     },
   },
   link: {
-    // eslint bug
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     render: Link,
     attributes: {
       href: {

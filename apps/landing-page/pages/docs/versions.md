@@ -23,7 +23,7 @@ following table for `schemaVersion` properties in a devfile:
 - Define the `schemaVersion` attribute in the devfile:
 
 ```yaml  {% title="Adding schema version to a devfile" filename="devfile.yaml" %}
-schemaVersion: 2.2.0
+schemaVersion: <version>
 metadata:
   name: devfile-sample
   version: 2.1.0
@@ -31,4 +31,4 @@ metadata:
 
 ## Additional resources
 
-- [API reference](./devfile-schema)
+- {% versioned-link href="./devfile-schema" text="API Reference" /%}

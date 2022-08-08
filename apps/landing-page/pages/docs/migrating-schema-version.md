@@ -9,7 +9,7 @@ v2.x devfile.
 ## Procedure
 
 1. To migrate a schema version from a v1.x devfile to a v2.x devfile,
-    replace `apiVersion: 1.0.0` with `schemaVersion: 2.1.0`:
+    replace `apiVersion: 1.0.0` with {% current-version beforeVersion="schemaVersion: " isCodeblock="true" /%}:
 
 {% table %}
 ---
@@ -21,7 +21,7 @@ v2.x devfile.
   ```
 
 - ```yaml
-  schemaVersion: 2.1.0
+  schemaVersion: <version>
   metadata:
     name: devfile-sample
   ```

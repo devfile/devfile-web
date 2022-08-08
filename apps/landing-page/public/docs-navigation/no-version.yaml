@@ -1,4 +1,60 @@
-- title: Introduction
-  links:
-    - title: Quick start
-      href: /docs/quick-start
+top:
+  - title: Introduction
+    links:
+      - title: What is a devfile
+        href: /docs/what-is-a-devfile
+      - title: Benefits of devfile
+        href: /docs/benefits-of-devfile
+      - title: Users of devfile
+        href: /docs/users-of-devfile
+      - title: How to work with devfiles
+        href: /docs/how-to-work-with-devfiles
+      - title: Developing with devfiles
+        href: /docs/developing-with-devfiles
+  - title: Quick start
+    links:
+      - title: Overview
+        href: /docs/overview
+      - title: Versions
+        href: /docs/versions
+      - title: Metadata
+        href: /docs/metadata
+      - title: Library
+        href: /docs/library
+      - title: Resources
+        href: /docs/resources
+bottom:
+  - title: Registry
+    links:
+      - title: Devfile Registry
+        href: /docs/devfile-registry
+      - title: Understanding a devfile registry
+        href: /docs/understanding-a-devfile-registry
+      - title: Building a custom devfile registry
+        href: /docs/building-a-custom-devfile-registry
+      - title: Installation of in-cluster offline devfile registry
+        href: /docs/installation-of-in-cluster-offline-devfile-registry
+      - title: Deploying a devfile registry
+        href: /docs/deploying-a-devfile-registry
+      - title: Adding a registry schema
+        href: /docs/adding-a-registry-schema
+      - title: Creating a devfile stack
+        href: /docs/creating-a-devfile-stack
+      - title: Adding a stack yaml file
+        href: /docs/adding-a-stack-yaml-file
+  - title: Migrating
+    links:
+      - title: Migrating to devfile v2
+        href: /docs/migrating-to-devfile-v2
+      - title: Migrating schema version
+        href: /docs/migrating-schema-version
+      - title: Migrating projects
+        href: /docs/migrating-projects
+      - title: Migrating components
+        href: /docs/migrating-components
+      - title: Migrating plug-ins
+        href: /docs/migrating-plug-ins
+      - title: Migrating commands
+        href: /docs/migrating-commands
+      - title: Troubleshooting
+        href: /docs/troubleshooting

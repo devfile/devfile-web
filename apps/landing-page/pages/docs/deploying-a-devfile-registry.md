@@ -40,7 +40,7 @@ devfile registry.
     3. Run the `operator-sdk` command to install the devfile registry
         Operator:
 
-        ```console
+        ```shell-session
         $ operator-sdk run bundle quay.io/devfile/registry-operator-bundle:next
         ```
 
@@ -48,7 +48,7 @@ devfile registry.
 
     1. On an OpenShift cluster, run:
 
-        ```console
+        ```shell-session
         $ cat <<EOF | oc apply -f -
         apiVersion: registry.devfile.io/v1alpha1
         kind: DevfileRegistry
@@ -61,7 +61,7 @@ devfile registry.
 
     2. On a Kubernetes cluster, run:
 
-        ```console
+        ```shell-session
         $ cat <<EOF | kubectl apply -f -
         apiVersion: registry.devfile.io/v1alpha1
         kind: DevfileRegistry
@@ -102,7 +102,7 @@ the devfile registry Operator to deploy the devfile registry.
 
 1. Clone the repository containing the Helm chart:
 
-    ```console
+    ```shell-session
     $ git clone https://github.com/devfile/registry-support
     ```
 

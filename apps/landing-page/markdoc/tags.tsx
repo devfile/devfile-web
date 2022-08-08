@@ -1,4 +1,4 @@
-import { Callout, QuickLink, QuickLinks } from '@devfile-web/core';
+import { Callout, QuickLink, QuickLinks, VersionedLink, CurrentVersion } from '@devfile-web/core';
 
 const tags = {
   callout: {
@@ -33,14 +33,10 @@ const tags = {
     },
   },
   'quick-links': {
-    // eslint bug
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     render: QuickLinks,
   },
   'quick-link': {
     selfClosing: true,
-    // eslint bug
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     render: QuickLink,
     attributes: {
       title: { type: String },
@@ -50,6 +46,23 @@ const tags = {
         matches: ['installation', 'presets', 'plugins', 'theming', 'lightbulb', 'warning'],
       },
       href: { type: String },
+    },
+  },
+  'versioned-link': {
+    selfClosing: true,
+    render: VersionedLink,
+    attributes: {
+      href: { type: String },
+      text: { type: String },
+    },
+  },
+  'current-version': {
+    selfClosing: true,
+    render: CurrentVersion,
+    attributes: {
+      beforeVersion: { type: String },
+      afterVersion: { type: String },
+      isCodeblock: { type: Boolean },
     },
   },
 };
