@@ -1,7 +1,6 @@
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withPlugins = require('next-compose-plugins');
 const withMarkdoc = require('@markdoc/next.js');
-const withImages = require('next-images');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -15,16 +14,13 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    disableStaticImages: true,
+    loader: 'akamai',
     path: '',
   },
   assetPrefix: './',
   experimental: {
     newNextLinkBehavior: true,
-    images: {
-      unoptimized: true,
-    },
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withImages, withMarkdoc(), withNx], nextConfig);
+module.exports = withPlugins([withBundleAnalyzer, withMarkdoc(), withNx], nextConfig);

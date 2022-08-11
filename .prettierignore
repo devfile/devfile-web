@@ -2,5 +2,7 @@
 **/*.mdx
 **/*.md
 **/*.mdoc
+**/*.json
+**/*.yaml
 **/generated/
 **/snippet.*
