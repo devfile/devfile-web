@@ -5,12 +5,14 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 /**
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  * */
 const nextConfig = {
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  basePath,
+  assetPrefix: basePath,
   pageExtensions: ['js', 'jsx', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
@@ -20,6 +22,14 @@ const nextConfig = {
   },
   experimental: {
     newNextLinkBehavior: true,
+  },
+  async rewrites() {
+    return [
+      {
+        source: '/fonts/:path*',
+        destination: `${basePath}/fonts/:path*`,
+      },
+    ];
   },
 };
 

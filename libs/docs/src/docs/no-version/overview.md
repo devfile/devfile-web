@@ -14,12 +14,12 @@ development needs:
 
 - [Adding a name](./metadata)
 
-- {% versioned-link href="./adding-projects" text="Adding projects" /%}
+- [Adding projects](./adding-projects)
 
-- {% versioned-link href="./adding-commands" text="Adding commands" /%}
+- [Adding commands](./adding-commands)
 
-- {% versioned-link href="./adding-components" text="Adding components" /%}
+- [Adding components](./adding-components)
 
-- {% versioned-link href="./adding-attributes" text="Adding attributes" /%}
+- [Adding attributes](./adding-attributes)
 
-- {% versioned-link href="./referring-to-a-parent-devfile" text="Referring to a parent devfile in a devfile" /%}
+- [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile)

@@ -31,4 +31,4 @@ metadata:
 
 ## Additional resources
 
-- {% versioned-link href="./devfile-schema" text="API Reference" /%}
+- [API Reference](./devfile-schema)

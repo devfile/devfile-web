@@ -43,4 +43,4 @@ links you to the devfile registry if listed.
 
 ## Additional Resources
 
-- {% versioned-link href="./devfile-schema" text="API reference" /%}
+- [API reference](./devfile-schema)
