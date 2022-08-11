@@ -3,6 +3,17 @@ import docsNavigation from '../../../../libs/docs/src/scripts/build-navigation/d
 
 const generatedLinkQuery = '[data-testid="generated-link"]';
 
+describe('Landing Page', () => {
+  beforeEach(() => cy.visit('/'));
+
+  it('has valid links', () => {
+    cy.get('a').each(($a) => {
+      const href = $a.attr('href');
+      cy.request(href).its('status').should('eq', 200);
+    });
+  });
+});
+
 describe('Docs', () => {
   Object.entries(docsNavigation as DocsNavigation).forEach(([version, versionedDocsNavigation]) => {
     describe(`Version: ${version}`, () => {
