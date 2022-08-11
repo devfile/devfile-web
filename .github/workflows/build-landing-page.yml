@@ -9,6 +9,7 @@ jobs:
     name: Main Job
     runs-on: ubuntu-latest
 
+    # fonts in /styles/fonts.css have hard coded urls and must be changed if NEXT_PUBLIC_BASE_PATH changes besides /devfile-web
     env:
       NEXT_PUBLIC_BASE_PATH: /devfile-web
 
