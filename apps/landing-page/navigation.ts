@@ -8,7 +8,7 @@ import {
 } from '@devfile-web/core';
 import type { HeaderNavigation, FooterNavigation } from '@devfile-web/core';
 
-export { docsNavigation } from '@devfile-web/core';
+export { docsNavigation } from '@devfile-web/docs';
 
 export const headerNavigation: HeaderNavigation = [
   { name: 'Registry', href: '/' },

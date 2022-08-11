@@ -8,12 +8,13 @@ import {
   Header,
   Footer,
   LandingPageLayout as Layout,
-  githubDocsUrl,
 } from '@devfile-web/core';
+import { githubDocsUrl } from '@devfile-web/docs';
 import '../styles/tailwind.css';
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
 import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
-import type { TableOfContents, DocsNavigation } from '@devfile-web/core';
+import type { TableOfContents } from '@devfile-web/core';
+import type { DocsNavigation } from '@devfile-web/docs';
 import { useRouter } from 'next/router';
 import { docsNavigation, headerNavigation, footerNavigation } from '../navigation';
 

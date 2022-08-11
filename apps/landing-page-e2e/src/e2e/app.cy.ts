@@ -1,5 +1,5 @@
-import type { DocsNavigation } from '@devfile-web/core';
-import docsNavigation from '../../../../libs/core/src/scripts/build-navigation/dist/docs-navigation.json';
+import type { DocsNavigation } from '@devfile-web/docs';
+import docsNavigation from '../../../../libs/docs/src/scripts/build-navigation/dist/docs-navigation.json';
 
 describe('Docs', () => {
   Object.entries(docsNavigation as DocsNavigation).forEach(([version, versionedDocsNavigation]) => {

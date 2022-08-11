@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import { docsNavigation } from '../../scripts';
+import { docsNavigation } from '@devfile-web/docs';
+import type { DocsNavigation } from '@devfile-web/docs';
 import { useNavigation } from '../../hooks';
-import type { DocsNavigation } from '../../scripts';
 
 export interface DocsLinkProps {
   section: string;

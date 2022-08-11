@@ -1,12 +1,8 @@
 import { createContext, useState, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { docVersions, defaultVersion } from '../../scripts/build-navigation/build-navigation-misc';
+import { docVersions, defaultVersion } from '@devfile-web/docs';
 
-import type {
-  DocVersions,
-  VersionedDocsNavigation,
-  DocsNavigation,
-} from '../../scripts/build-navigation/build-navigation-misc';
+import type { DocVersions, VersionedDocsNavigation, DocsNavigation } from '@devfile-web/docs';
 
 export interface NavigationElement {
   name: string;
