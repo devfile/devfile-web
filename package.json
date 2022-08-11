@@ -12,7 +12,8 @@
     "prepare": "husky install",
     "create:component": "nx workspace-generator component --project=core",
     "create:hook": "nx workspace-generator hook --project=core",
-    "create:function": "nx workspace-generator function --project=core"
+    "create:function": "nx workspace-generator function --project=core",
+    "create:devfile-schema": "nx workspace-generator devfile-schema --project=docs"
   },
   "browserslist": "defaults, not ie <= 11",
   "private": true,

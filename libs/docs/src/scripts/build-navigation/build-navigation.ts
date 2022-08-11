@@ -15,7 +15,7 @@ export interface NoVersionNavigation {
   bottom: VersionedDocsNavigation;
 }
 
-export function buildNavigation(): DocsNavigation {
+export function getNavigation(): DocsNavigation {
   const noVersionNavigation = yamlToJs(
     fs.readFileSync(`${sourceDir}/no-version.yaml`, 'utf8'),
   ) as NoVersionNavigation;
@@ -39,14 +39,18 @@ export function buildNavigation(): DocsNavigation {
   return docsNavigation;
 }
 
-if (!fs.existsSync(outputDir)) {
-  fs.mkdirSync(outputDir);
+export function buildNavigation(): void {
+  if (!fs.existsSync(outputDir)) {
+    fs.mkdirSync(outputDir);
+  }
+
+  fs.writeFileSync(
+    path.join(outputDir, 'docs-navigation.json'),
+    JSON.stringify(getNavigation(), null, 2),
+    {
+      encoding: 'utf8',
+    },
+  );
 }
 
-fs.writeFileSync(
-  path.join(outputDir, 'docs-navigation.json'),
-  JSON.stringify(buildNavigation(), null, 2),
-  {
-    encoding: 'utf8',
-  },
-);
+buildNavigation();
