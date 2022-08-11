@@ -16,7 +16,9 @@ const nextConfig = {
   swcMinify: true,
   images: {
     disableStaticImages: true,
+    path: '',
   },
+  assetPrefix: './',
   experimental: {
     newNextLinkBehavior: true,
     images: {
