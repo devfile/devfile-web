@@ -48,3 +48,9 @@ container.
     - The predefined variables are available for use in custom
         definitions.
     {% /callout %}
+
+## Additional resources
+
+- {% docs-link section="API reference" title="Devfile schema" /%}
+
+- {% docs-link section="General" title="Devfile samples" /%}

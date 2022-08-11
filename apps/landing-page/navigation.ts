@@ -12,7 +12,7 @@ export { docsNavigation } from '@devfile-web/core';
 
 export const headerNavigation: HeaderNavigation = [
   { name: 'Registry', href: '/' },
-  { name: 'Docs', href: '/docs/quick-start' },
+  { name: 'Docs', href: '/docs/what-is-a-devfile' },
   { name: 'Get Started', href: '/' },
   { name: 'Github', href: 'https://github.com/orgs/devfile/repositories', image: GithubIcon },
   { name: 'Slack', href: '/', image: SlackIcon },
@@ -33,7 +33,7 @@ export const footerNavigation: FooterNavigation = {
   social: [
     {
       name: 'Github',
-      href: '/',
+      href: 'https://github.com/orgs/devfile/repositories',
       image: GithubIcon,
     },
     {

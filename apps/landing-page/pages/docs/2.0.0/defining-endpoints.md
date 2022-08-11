@@ -132,3 +132,9 @@ components:
         targetPort: 27017
         exposure: public
 ```
+
+## Additional resources
+
+- {% docs-link section="API reference" title="Devfile schema" /%}
+
+- {% docs-link section="General" title="Devfile samples" /%}

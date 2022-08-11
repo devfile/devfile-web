@@ -1,26 +1,26 @@
 ---
-title: Adding plug-in components
-description: Adding plug-in components
+title: Adding plugin components
+description: Adding plugin components
 ---
 
 This section describes how to add a `plugin` component to a devfile.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- {% docs-link section="Quick start" title="Versions" /%}
 
-- [Adding a name](./adding-a-name)
+- {% docs-link section="Quick start" title="Metadata" /%}
 
-- [Adding components](./adding-components)
+- {% docs-link section="Components" title="Adding components" /%}
 
 ## Procedure
 
 1. Define a component using the type `plugin`.
 
-2. Define the `id` attribute. It is slash-separated publisher, name and version of plug-in from the
-    Plug-in registry. List of available {prod-short} plug-ins and more information about registry can be found in the [{prod-short} plug-in registry](https://github.com/eclipse/che-plugin-registry) GitHub repository.
+2. Define the `id` attribute. It is slash-separated publisher, name and version of plugin from the
+    Plugin registry. List of available {prod-short} plugins and more information about registry can be found in the [{prod-short} plugin registry](https://github.com/eclipse/che-plugin-registry) GitHub repository.
 
-    ```yaml {% title="A devfile defining a plug-in id" filename="devfile.yaml" %}
+    ```yaml {% title="A devfile defining a plugin id" filename="devfile.yaml" %}
     components:
            - name: exec-plugin
              plugin:
@@ -30,7 +30,7 @@ This section describes how to add a `plugin` component to a devfile.
 3. Optionally, specify an alternative component registry using the
     `registryUrl` parameter:
 
-    ```yaml {% title="A devfile defining a plug-in id and an alternative component registry" filename="devfile.yaml" %}
+    ```yaml {% title="A devfile defining a plugin id and an alternative component registry" filename="devfile.yaml" %}
     components:
       - name: exec-plugin
         plugin:
@@ -42,7 +42,7 @@ This section describes how to add a `plugin` component to a devfile.
     (typically named `meta.yaml`) using the `reference` attribute,
     instead of using the `id`.
 
-    ```yaml {% title="A devfile defining a plug-in with a direct link to the component descriptor" filename="devfile.yaml" %}
+    ```yaml {% title="A devfile defining a plugin with a direct link to the component descriptor" filename="devfile.yaml" %}
     components:
       - name: exec-plugin
         plugin:
@@ -57,7 +57,7 @@ This section describes how to add a `plugin` component to a devfile.
 5. Optionally, provide plugin component configuration using the
     `preferences` attribute
 
-    ```yaml {% title="Configuring JVM using plug-in preferences" filename="devfile.yaml" %}
+    ```yaml {% title="Configuring JVM using plugin preferences" filename="devfile.yaml" %}
     id: redhat/java/0.38.0
     plugin:
       preferences:
@@ -71,8 +71,8 @@ This section describes how to add a `plugin` component to a devfile.
         go.lintFlags: ["--enable-all", "--new"]
     ```
 
-## Additional Resources
+## Additional resources
 
-- [API reference](./devfile-schema)
+- {% docs-link section="API reference" title="Devfile schema" /%}
 
-- [Devfile samples](./devfile-samples)
+- {% docs-link section="General" title="Devfile samples" /%}

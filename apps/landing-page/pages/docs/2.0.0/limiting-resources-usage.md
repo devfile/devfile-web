@@ -94,3 +94,9 @@ description: Deploying a devfile registry
     For the `plugin` component type, CPU requests can be described in the plug-in descriptor file, typically named `meta.yaml`.
 
     If they are not specified, the values are undetermined: they may or may not be inferred from the application that consumes the devfile or from Kubernetes.
+
+## Additional resources
+
+- {% docs-link section="API reference" title="Devfile schema" /%}
+
+- {% docs-link section="General" title="Devfile samples" /%}

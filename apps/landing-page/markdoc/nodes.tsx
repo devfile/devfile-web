@@ -32,7 +32,7 @@ const nodes = {
     },
   },
   link: {
-    render: Link,
+    render: (props): JSX.Element => <Link data-testid="generated-link" {...props} />,
     attributes: {
       href: {
         type: String,

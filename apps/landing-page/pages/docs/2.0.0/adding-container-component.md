@@ -9,11 +9,15 @@ or more component(s) of the `container` type. The `container` type of
 component brings in custom tools into the workspace. The component is
 identified by its image.
 
-- [Adding schema version](./adding-schema-version)
+## Prerequisites
 
-- [Adding a name](./adding-a-name)
+- {% docs-link section="Quick start" title="Versions" /%}
 
-- [Adding components](./adding-components)
+- {% docs-link section="Quick start" title="Metadata" /%}
+
+- {% docs-link section="Components" title="Adding components" /%}
+
+## Procedure
 
 1. Define a component using the type `container`.
 
@@ -90,6 +94,6 @@ identified by its image.
 
 ## Additional resources
 
-- [API reference](./devfile-schema)
+- {% docs-link section="API reference" title="Devfile schema" /%}
 
-- [Devfile samples](./devfile-samples)
+- {% docs-link section="General" title="Devfile samples" /%}

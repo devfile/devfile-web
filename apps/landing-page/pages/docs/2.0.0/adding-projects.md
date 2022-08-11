@@ -7,9 +7,9 @@ This section describes how to add one or more projects to a devfile.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- {% docs-link section="Quick start" title="Versions" /%}
 
-- [Adding a name](./adding-a-name)
+- {% docs-link section="Quick start" title="Metadata" /%}
 
 ## Procedure
 
@@ -128,6 +128,6 @@ This section describes how to add one or more projects to a devfile.
 
 ## Additional Resources
 
-- [API reference](./devfile-schema)
+- {% docs-link section="API reference" title="Devfile schema" /%}
 
-- [Devfile samples](./devfile-samples)
+- {% docs-link section="General" title="Devfile samples" /%}

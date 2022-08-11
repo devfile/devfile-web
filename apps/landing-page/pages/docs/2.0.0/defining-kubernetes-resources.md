@@ -130,3 +130,9 @@ components:
 Additionally, it is also possible to modify the entrypoints (command and
 arguments) of the containers present in the resource list. For details
 of the advanced use case, see the reference (TODO: link).
+
+## Additional resources
+
+- {% docs-link section="API reference" title="Devfile schema" /%}
+
+- {% docs-link section="General" title="Devfile samples" /%}

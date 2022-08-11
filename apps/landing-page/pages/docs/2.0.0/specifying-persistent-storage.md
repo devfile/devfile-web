@@ -8,6 +8,8 @@ specific locations within the image. Note that the volume names are
 shared across all components and therefore this mechanism can also be
 used to share file systems between components.
 
+## Procedure
+
 1. Specify volumes for `container` type:
 
     ```yaml {% title="Specifying volumes for container type" filename="devfile.yaml" %}
@@ -58,3 +60,9 @@ used to share file systems between components.
           - name: mongo-persistent-storage
             path: /data/db
     ```
+
+## Additional resources
+
+- {% docs-link section="API reference" title="Devfile schema" /%}
+
+- {% docs-link section="General" title="Devfile samples" /%}

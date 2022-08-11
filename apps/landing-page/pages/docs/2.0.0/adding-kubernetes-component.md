@@ -9,11 +9,11 @@ of Kubernetes or OpenShift components.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- {% docs-link section="Quick start" title="Versions" /%}
 
-- [Adding a name](./adding-a-name)
+- {% docs-link section="Quick start" title="Metadata" /%}
 
-- [Adding components](./adding-components)
+- {% docs-link section="Components" title="Adding components" /%}
 
 ## Procedure
 
@@ -138,3 +138,9 @@ of Kubernetes or OpenShift components.
     If enabled, project sources mounts will be applied to every
     container of the given component. This parameter is also applicable
     for `plugin` type components.
+
+## Additional resources
+
+- {% docs-link section="API reference" title="Devfile schema" /%}
+
+- {% docs-link section="General" title="Devfile samples" /%}

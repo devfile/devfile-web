@@ -1,4 +1,4 @@
-import { Callout, QuickLink, QuickLinks, VersionedLink, CurrentVersion } from '@devfile-web/core';
+import { Callout, QuickLink, QuickLinks, DocsLink, CurrentVersion } from '@devfile-web/core';
 
 const tags = {
   callout: {
@@ -48,11 +48,12 @@ const tags = {
       href: { type: String },
     },
   },
-  'versioned-link': {
+  'docs-link': {
     selfClosing: true,
-    render: VersionedLink,
+    render: DocsLink,
     attributes: {
-      href: { type: String },
+      section: { type: String },
+      title: { type: String },
       text: { type: String },
     },
   },

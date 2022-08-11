@@ -1,68 +1,38 @@
-- title: Unorganized
+- title: Components
   links:
-    - title: Devfile schema
-      href: /docs/2.1.0/devfile-schema
-    - title: Adding a name
-      href: /docs/2.1.0/adding-a-name
-    - title: Adding a registry schema
-      href: /docs/2.1.0/adding-a-registry-schema
-    - title: Adding attributes
-      href: /docs/2.1.0/adding-attributes
-    - title: Adding commands
-      href: /docs/2.1.0/adding-commands
     - title: Adding components
       href: /docs/2.1.0/adding-components
     - title: Adding container component
       href: /docs/2.1.0/adding-container-component
-    - title: Adding event bindings
-      href: /docs/2.1.0/adding-event-bindings
     - title: Adding kubernetes component
       href: /docs/2.1.0/adding-kubernetes-component
-    - title: Adding projects
-      href: /docs/2.1.0/adding-projects
-    - title: Adding schema version
-      href: /docs/2.1.0/adding-schema-version
-    - title: Authoring devfiles
-      href: /docs/2.1.0/authoring-devfiles
-    - title: Building a custom devfile registry
-      href: /docs/2.1.0/building-a-custom-devfile-registry
+    - title: Specifying persistent storage
+      href: /docs/2.1.0/specifying-persistent-storage
+    - title: Limiting resources usage
+      href: /docs/2.1.0/limiting-resources-usage
     - title: Defining endpoints
       href: /docs/2.1.0/defining-endpoints
     - title: Defining environment variables
       href: /docs/2.1.0/defining-environment-variables
     - title: Defining kubernetes resources
       href: /docs/2.1.0/defining-kubernetes-resources
-    - title: Deploying a devfile registry
-      href: /docs/2.1.0/deploying-a-devfile-registry
-    - title: Developing with devfiles
-      href: /docs/2.1.0/developing-with-devfiles
-    - title: Devfile library
-      href: /docs/2.1.0/devfile-library
-    - title: Devfile registry
-      href: /docs/2.1.0/devfile-registry
-    - title: Devfile resources
-      href: /docs/2.1.0/devfile-resources
-    - title: Limiting resources usage
-      href: /docs/2.1.0/limiting-resources-usage
-    - title: Migrating commands
-      href: /docs/2.1.0/migrating-commands
-    - title: Migrating components
-      href: /docs/2.1.0/migrating-components
-    - title: Migrating plug-ins
-      href: /docs/2.1.0/migrating-plug-ins
-    - title: Migrating projects
-      href: /docs/2.1.0/migrating-projects
-    - title: Migrating schema version
-      href: /docs/2.1.0/migrating-schema-version
-    - title: Migrating to devfile v2
-      href: /docs/2.1.0/migrating-to-devfile-v2
+- title: Commands
+  links:
+    - title: Adding commands
+      href: /docs/2.1.0/adding-commands
+- title: Events
+  links:
+    - title: Adding event bindings
+      href: /docs/2.1.0/adding-event-bindings
+- title: General
+  links:
+    - title: Adding attributes
+      href: /docs/2.1.0/adding-attributes
+    - title: Adding projects
+      href: /docs/2.1.0/adding-projects
     - title: Referring to a parent devfile
       href: /docs/2.1.0/referring-to-a-parent-devfile
-    - title: Specifying persistent storage
-      href: /docs/2.1.0/specifying-persistent-storage
-    - title: Understanding a devfile registry
-      href: /docs/2.1.0/understanding-a-devfile-registry
-    - title: Using devfiles
-      href: /docs/2.1.0/using-devfiles
-    - title: Using the devfile library
-      href: /docs/2.1.0/using-the-devfile-library
+- title: API reference
+  links:
+    - title: Devfile schema
+      href: /docs/2.1.0/devfile-schema

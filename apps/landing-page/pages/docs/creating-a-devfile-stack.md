@@ -25,6 +25,6 @@ various projects.
 
 ## Additional resources
 
-- To create `stack.yaml`, see [adding a stack YAML file](./adding-a-stack-yaml-file).
+- To create `stack.yaml`, see {% docs-link section="Registry" title="Adding a stack yaml file" text="adding a stack YAML file" /%}.
 
-- To create devfiles, see [authoring devfiles](./authoring-devfiles).
+- To create devfiles, see {% docs-link section="Quick start" title="Overview" /%}.

@@ -7,9 +7,9 @@ Devfile attributes can be used to configure various features.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- {% docs-link section="Quick start" title="Versions" /%}
 
-- [Adding a name](./adding-a-name)
+- {% docs-link section="Quick start" title="Metadata" /%}
 
 ## Procedure
 
@@ -56,6 +56,6 @@ Devfile attributes can be used to configure various features.
 
 ## Additional resources
 
-- [API reference](./devfile-schema)
+- {% docs-link section="API reference" title="Devfile schema" /%}
 
-- [Devfile samples](./devfile-samples)
+- {% docs-link section="General" title="Devfile samples" /%}

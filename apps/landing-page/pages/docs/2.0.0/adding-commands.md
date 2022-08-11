@@ -9,11 +9,11 @@ related to a specific component in whose container it will be executed.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- {% docs-link section="Quick start" title="Versions" /%}
 
-- [Adding a name](./adding-a-name)
+- {% docs-link section="Quick start" title="Metadata" /%}
 
-- [Adding projects](./adding-projects)
+- {% docs-link section="General" title="Adding projects" /%}
 
 ## Procedure
 
@@ -240,6 +240,6 @@ Ingress or OpenShift Route.
 
 ## Additional resources
 
-- [API reference](./devfile-schema)
+- {% docs-link section="API reference" title="Devfile schema" /%}
 
-- [Devfile samples](./devfile-samples)
+- {% docs-link section="General" title="Devfile samples" /%}

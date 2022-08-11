@@ -11,7 +11,7 @@ describe('Docs', () => {
               beforeEach(() => cy.visit(page.href));
 
               it('has valid links', () => {
-                cy.get('a').each(($a) => {
+                cy.get('a[data-testid="generated-link"]').each(($a) => {
                   const href = $a.attr('href');
                   cy.request(href).its('status').should('eq', 200);
                 });
