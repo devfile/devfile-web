@@ -29,11 +29,9 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
       <Menu.Items className="absolute top-full left-1/2 mt-3 w-36 -translate-x-1/2 space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
         {docVersions.map((version) => (
           <Menu.Item
-            // Eslint bug
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             as={Link}
             key={version}
-            href="/docs/quick-start"
+            href={`/docs/${version}/what-is-a-devfile`}
             onClick={(): void => setSelectedVersion(version)}
             className={({ active }): string =>
               clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {

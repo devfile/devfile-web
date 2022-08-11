@@ -11,7 +11,10 @@ pre[class*='language-'] {
 .token.module,
 .token.key.atrule,
 .token.keyword.module,
-.token.property {
+.token.property,
+.token.command.bash.language-bash.function,
+.token.instruction.options.property,
+.token.instruction.keyword {
   color: theme('colors.pink.400');
 }
 
@@ -19,14 +22,17 @@ pre[class*='language-'] {
 .token.keyword,
 .token.rule,
 .token.pseudo-class,
-.token.important {
+.token.important,
+.token.command.shell-symbol.important,
+.token.instruction {
   color: theme('colors.slate.300');
 }
 
 .token.attr-value,
 .token.class,
 .token.string,
-.token.plain {
+.token.plain,
+.token.command.bash.language-bash {
   color: theme('colors.sky.300');
 }
 

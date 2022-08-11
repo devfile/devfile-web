@@ -1,0 +1,60 @@
+top:
+  - title: Introduction
+    links:
+      - title: What is a devfile
+        href: ./what-is-a-devfile
+      - title: Benefits of devfile
+        href: ./benefits-of-devfile
+      - title: Users of devfile
+        href: ./users-of-devfile
+      - title: How to work with devfiles
+        href: ./how-to-work-with-devfiles
+      - title: Developing with devfiles
+        href: ./developing-with-devfiles
+  - title: Quick start
+    links:
+      - title: Overview
+        href: ./overview
+      - title: Versions
+        href: ./versions
+      - title: Metadata
+        href: ./metadata
+      - title: Library
+        href: ./library
+      - title: Resources
+        href: ./resources
+bottom:
+  - title: Registry
+    links:
+      - title: Devfile registry
+        href: ./devfile-registry
+      - title: Understanding a devfile registry
+        href: ./understanding-a-devfile-registry
+      - title: Building a custom devfile registry
+        href: ./building-a-custom-devfile-registry
+      - title: Installation of in-cluster offline devfile registry
+        href: ./installation-of-in-cluster-offline-devfile-registry
+      - title: Deploying a devfile registry
+        href: ./deploying-a-devfile-registry
+      - title: Adding a registry schema
+        href: ./adding-a-registry-schema
+      - title: Creating a devfile stack
+        href: ./creating-a-devfile-stack
+      - title: Adding a stack yaml file
+        href: ./adding-a-stack-yaml-file
+  - title: Migrating
+    links:
+      - title: Migrating to devfile v2
+        href: ./migrating-to-devfile-v2
+      - title: Migrating schema version
+        href: ./migrating-schema-version
+      - title: Migrating projects
+        href: ./migrating-projects
+      - title: Migrating components
+        href: ./migrating-components
+      - title: Migrating plugins
+        href: ./migrating-plugins
+      - title: Migrating commands
+        href: ./migrating-commands
+      - title: Troubleshooting
+        href: ./troubleshooting

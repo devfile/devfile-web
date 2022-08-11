@@ -3,17 +3,17 @@
   "sourceRoot": "apps/landing-page",
   "projectType": "application",
   "targets": {
-    "build-docs-navigation": {
+    "build-docs": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn build-docs-navigation"
+        "command": "yarn docs"
       }
     },
     "build": {
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
-      "dependsOn": ["build-docs-navigation"],
+      "dependsOn": ["build-docs"],
       "options": {
         "root": "apps/landing-page",
         "outputPath": "dist/apps/landing-page"
@@ -26,7 +26,7 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
-      "dependsOn": ["build-docs-navigation"],
+      "dependsOn": ["build-docs"],
       "options": {
         "buildTarget": "landing-page:build",
         "dev": true

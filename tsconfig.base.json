@@ -17,7 +17,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "@devfile-web/core": ["libs/core/src/index.ts"]
+      "@devfile-web/core": ["libs/core/src/index.ts"],
+      "@devfile-web/docs": ["libs/docs/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

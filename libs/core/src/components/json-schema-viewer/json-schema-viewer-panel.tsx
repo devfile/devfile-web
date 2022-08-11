@@ -9,8 +9,8 @@ export interface JsonSchemaViewerPanelProps {
   selectedOneOf?: PropertyRestrictions;
   propertyRestrictions?: string[];
   slug: string;
-  codeblock: Record<string, unknown>;
-  setCodeblock: React.Dispatch<React.SetStateAction<Record<string, unknown>>>;
+  codeblock?: Record<string, unknown>;
+  setCodeblock: React.Dispatch<React.SetStateAction<Record<string, unknown> | undefined>>;
   parentProperties: CodeProperties[];
 }
 

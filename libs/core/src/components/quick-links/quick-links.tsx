@@ -28,7 +28,7 @@ export function QuickLink(props: QuickLinkProps): JSX.Element {
       <div className="relative overflow-hidden rounded-xl p-6">
         <Icon icon={icon} className="h-8 w-8" />
         <h2 className="font-display mt-4 text-base text-slate-900 dark:text-white">
-          <Link href={href} passHref>
+          <Link href={href} passHref data-testid="generated-link">
             <span className="absolute -inset-px rounded-xl" />
             {title}
           </Link>
