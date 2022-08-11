@@ -11,10 +11,10 @@ description: How to work with devfiles
     application development, see [overview](./overview).
 
 - To migrate an existing devfile to the most updated version, see
-    {% versioned-link href="./migrating-to-devfile-v2" text="migrating to devfile v2" /%}.
+    [migrating to devfile v2](./migrating-to-devfile-v2).
 
 - To understand the schema attributes of devfiles, see
-    {% versioned-link href="./devfile-schema" text="API reference" /%}.
+    [API reference](./devfile-schema).
 
 ## Additional resources
 
