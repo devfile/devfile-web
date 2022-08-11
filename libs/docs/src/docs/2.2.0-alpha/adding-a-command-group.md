@@ -7,8 +7,10 @@ Create command groups to help automate your devfile.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
-- [Adding a name](./adding-a-name)
+- [Adding schema version](./versions)
+
+- [Adding a name](./metadata)
+
 - [Adding projects](./adding-projects)
 
 ## Procedure

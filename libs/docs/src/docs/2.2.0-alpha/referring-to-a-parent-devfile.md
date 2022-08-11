@@ -13,12 +13,9 @@ stack that is used in multiple other devfiles.
 
 ## Prerequisites
 
-- Define the `schemaVersion` to v2.x. If you need to define your
-  `schemaVersion`, go to
-  [Adding schema version](./adding-schema-version).
+- [Adding schema version](./versions)
 
-- Define a name for the devfile. If you need to define a name for your
-  devfile, go to [Adding a name](./adding-a-name).
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -81,4 +78,4 @@ For more information about referring to parent devfiles, see:
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

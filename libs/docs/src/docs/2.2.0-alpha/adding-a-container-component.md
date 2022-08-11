@@ -13,9 +13,9 @@ A devfile can contain one or more components of the `container` type.
 The `component name` attribute identifies each component, including the
 container.
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 - [Adding components](./adding-components)
 
@@ -130,4 +130,4 @@ container.
 
 - [API Reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

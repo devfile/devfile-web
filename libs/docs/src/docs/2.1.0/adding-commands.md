@@ -9,9 +9,9 @@ related to a specific component in whose container it will be executed.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 - [Adding projects](./adding-projects)
 
@@ -167,4 +167,4 @@ related to a specific component in whose container it will be executed.
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

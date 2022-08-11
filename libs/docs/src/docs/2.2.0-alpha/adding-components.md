@@ -165,9 +165,9 @@ the following tables for component properties in a devfile:
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -203,4 +203,4 @@ the following tables for component properties in a devfile:
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

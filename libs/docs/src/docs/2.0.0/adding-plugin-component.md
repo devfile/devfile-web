@@ -7,11 +7,11 @@ This section describes how to add a `plugin` component to a devfile.
 
 ## Prerequisites
 
-- {% docs-link section="Quick start" title="Versions" /%}
+- [Adding schema version](./versions)
 
-- {% docs-link section="Quick start" title="Metadata" /%}
+- [Adding a name](./metadata)
 
-- {% docs-link section="Components" title="Adding components" /%}
+- [Adding components](./adding-components)
 
 ## Procedure
 
@@ -73,6 +73,6 @@ This section describes how to add a `plugin` component to a devfile.
 
 ## Additional resources
 
-- {% docs-link section="API reference" title="Devfile schema" /%}
+- [API reference](./devfile-schema)
 
-- {% docs-link section="General" title="Devfile samples" /%}
+- [Devfile samples](./devfile-samples)

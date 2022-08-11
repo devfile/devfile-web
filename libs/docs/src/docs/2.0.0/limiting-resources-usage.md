@@ -97,6 +97,6 @@ description: Deploying a devfile registry
 
 ## Additional resources
 
-- {% docs-link section="API reference" title="Devfile schema" /%}
+- [API reference](./devfile-schema)
 
-- {% docs-link section="General" title="Devfile samples" /%}
+- [Devfile samples](./devfile-samples)

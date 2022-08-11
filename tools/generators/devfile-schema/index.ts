@@ -38,7 +38,7 @@ export function DevfileSchema(props: DevfileSchemaProps): JSX.Element {
         <h2>Additional resources</h2>
         <ul>
           <li>
-            <Link href="/devfile-schema/${version}.json">Download the current JSON Schema</Link>
+            <Link data-testid="generated-link" href="/devfile-schemas/${version}.json">Download the current JSON Schema</Link>
           </li>
         </ul>
       </Prose>
@@ -48,7 +48,7 @@ export function DevfileSchema(props: DevfileSchemaProps): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async () => {
   const schemaString = await fs.readFile(
-    './apps/landing-page/public/devfile-schema/${version}.json',
+    './apps/landing-page/public/devfile-schemas/${version}.json',
     'utf8',
   );
   const schema = JSON.parse(schemaString) as JSONSchema7;

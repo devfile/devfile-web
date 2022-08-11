@@ -66,9 +66,9 @@ following tables for project properties in a devfile:
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -182,4 +182,4 @@ following tables for project properties in a devfile:
 
 - [Api reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

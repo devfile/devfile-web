@@ -11,12 +11,11 @@ correct content, you can reuse the same parent devfile in multiple other
 devfiles. If you do reuse a parent devfile, the parent turns into a
 stack that is used in multiple other devfiles.
 
-- Define the `schemaVersion` to v2.x. If you need to define your
-    `schemaVersion`, go to
-    [adding schema version](./adding-schema-version).
+## Prerequisites
 
-- Define a name for the devfile. If you need to define a name for your
-    devfile, go to [adding a name](./adding-a-name).
+- [Adding schema version](./versions)
+
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -76,4 +75,4 @@ following topics:
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

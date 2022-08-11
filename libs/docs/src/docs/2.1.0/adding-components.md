@@ -7,9 +7,9 @@ Each component in a single devfile must have a unique name.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -40,4 +40,4 @@ Each component in a single devfile must have a unique name.
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

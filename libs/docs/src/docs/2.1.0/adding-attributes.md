@@ -11,9 +11,9 @@ following devfile objects: `metadata`, `components`, `commands`,
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -39,4 +39,4 @@ following devfile objects: `metadata`, `components`, `commands`,
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

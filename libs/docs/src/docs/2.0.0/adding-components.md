@@ -7,9 +7,9 @@ Each component in a single devfile must have a unique name.
 
 ## Prerequisites
 
-- {% docs-link section="Quick start" title="Versions" /%}
+- [Adding schema version](./versions)
 
-- {% docs-link section="Quick start" title="Metadata" /%}
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -21,24 +21,24 @@ Each component in a single devfile must have a unique name.
 3. For each component, define a mandatory type of one of the following
     types: `plugin`, `kubernetes` or `container`.
 
-4. {% docs-link section="Components" title="Adding plugin component" /%}
+4. [Adding plugin component](./adding-plugin-component)
 
-5. {% docs-link section="Components" title="Adding kubernetes component" /%}
+5. [Adding kubernetes component](./adding-kubernetes-component)
 
-6. {% docs-link section="Components" title="Adding container component" /%}
+6. [Adding container component](./adding-container-component)
 
-7. {% docs-link section="Components" title="Specifying persistent storage" /%}
+7. [Specifying persistent storage](./specifying-persistent-storage)
 
-8. {% docs-link section="Components" title="Limiting resources usage" /%}
+8. [Limiting resources usage](./limiting-resources-usage)
 
-9. {% docs-link section="Components" title="Defining environment variables" /%}
+9. [Defining environment variables](./defining-environment-variables)
 
-10. {% docs-link section="Components" title="Defining endpoints" /%}
+10. [Defining endpoints](./defining-endpoints)
 
-11. {% docs-link section="Components" title="Defining kubernetes resources" /%}
+11. [Defining kubernetes resources](./defining-kubernetes-resources)
 
 ## Additional resources
 
-- {% docs-link section="API reference" title="Devfile schema" /%}
+- [API reference](./devfile-schema)
 
-- {% docs-link section="General" title="Devfile samples" /%}
+- [Devfile samples](./devfile-samples)

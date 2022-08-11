@@ -7,9 +7,9 @@ This section describes how to add one or more projects to a devfile.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -123,4 +123,4 @@ This section describes how to add one or more projects to a devfile.
 
 - [API reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

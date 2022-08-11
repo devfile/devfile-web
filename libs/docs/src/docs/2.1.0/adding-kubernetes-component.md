@@ -7,9 +7,9 @@ This section describes how to add either a `kubernetes` or `openshfit` component
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 - [Adding components](./adding-components)
 

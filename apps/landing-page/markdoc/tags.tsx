@@ -1,4 +1,4 @@
-import { Callout, QuickLink, QuickLinks, DocsLink, CurrentVersion } from '@devfile-web/core';
+import { Callout, QuickLink, QuickLinks, CurrentVersion } from '@devfile-web/core';
 
 const tags = {
   callout: {
@@ -46,15 +46,6 @@ const tags = {
         matches: ['installation', 'presets', 'plugins', 'theming', 'lightbulb', 'warning'],
       },
       href: { type: String },
-    },
-  },
-  'docs-link': {
-    selfClosing: true,
-    render: DocsLink,
-    attributes: {
-      section: { type: String },
-      title: { type: String },
-      text: { type: String },
     },
   },
   'current-version': {

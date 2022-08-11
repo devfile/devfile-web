@@ -7,7 +7,7 @@ import { load as yamlToJs } from 'js-yaml';
 import { docVersions } from '../../types';
 import type { DocsNavigation, VersionedDocsNavigation } from '../../types';
 
-const sourceDir = './apps/landing-page/public/docs-navigation';
+const sourceDir = path.join(__dirname, '../../navigation');
 const outputDir = path.join(__dirname, 'dist');
 
 export interface NoVersionNavigation {

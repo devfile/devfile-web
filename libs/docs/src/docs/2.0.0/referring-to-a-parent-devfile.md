@@ -12,9 +12,9 @@ multiple devfiles the same parent (the stack).
 
 ## Prerequisites
 
-- {% docs-link section="Quick start" title="Versions" /%}
+- [Adding schema version](./versions)
 
-- {% docs-link section="Quick start" title="Metadata" /%}
+- [Adding a name](./metadata)
 
 ## Procedure
 
@@ -64,6 +64,6 @@ multiple devfiles the same parent (the stack).
 
 ## Additional Resources
 
-- {% docs-link section="API reference" title="Devfile schema" /%}
+- [API reference](./devfile-schema)
 
-- {% docs-link section="General" title="Devfile samples" /%}
+- [Devfile samples](./devfile-samples)

@@ -9,9 +9,9 @@ process.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 - [Adding components](./adding-components)
 
@@ -51,4 +51,4 @@ Specifying the size of a `volume` component is dependent on the tools you use an
 
 - [API Reference](./devfile-schema)
 
-- [Devfile resources](./devfile-resources)
+- [Devfile resources](./resources)

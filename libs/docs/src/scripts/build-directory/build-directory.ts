@@ -1,7 +1,7 @@
 /* eslint-disable unicorn/prefer-module */
 import fs from 'fs-extra';
 import path from 'node:path';
-import { exec } from 'node:child_process';
+import { execSync } from 'node:child_process';
 import { docVersions } from '../../types';
 
 const sourceDir = path.join(__dirname, '../../docs');
@@ -16,13 +16,13 @@ function buildDirectory(): void {
   docVersions.forEach((version) => {
     fs.copySync(`${sourceDir}/${version}`, `${outputDir}/${version}`, { overwrite: true });
     fs.copySync(`${sourceDir}/no-version`, `${outputDir}/${version}`, { overwrite: true });
-    exec(`yarn create:devfile-schema ${version}`);
+    execSync(`yarn create:devfile-schema ${version}`);
   });
-}
 
-export function exportBuildDirectory(): void {
+  if (fs.existsSync(nextjsDocsDir)) {
+    fs.rmSync(nextjsDocsDir, { recursive: true, force: true });
+  }
   fs.copySync(outputDir, nextjsDocsDir, { overwrite: true });
 }
 
 buildDirectory();
-exportBuildDirectory();

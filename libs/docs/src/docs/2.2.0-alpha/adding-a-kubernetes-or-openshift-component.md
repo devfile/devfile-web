@@ -7,9 +7,9 @@ You can add either a `kubernetes` or `openshift` component to a devfile.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 - [Adding components](./adding-components)
 

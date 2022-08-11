@@ -7,9 +7,9 @@ Specify the commands you want to run in your workspace.
 
 ## Prerequisites
 
-- [Adding schema version](./adding-schema-version)
+- [Adding schema version](./versions)
 
-- [Adding a name](./adding-a-name)
+- [Adding a name](./metadata)
 
 - [Adding projects](./adding-projects)
 
