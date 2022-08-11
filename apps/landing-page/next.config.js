@@ -10,6 +10,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * */
 const nextConfig = {
   basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
   pageExtensions: ['js', 'jsx', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
@@ -17,7 +18,6 @@ const nextConfig = {
     loader: 'akamai',
     path: '',
   },
-  assetPrefix: './',
   experimental: {
     newNextLinkBehavior: true,
   },

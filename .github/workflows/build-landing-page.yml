@@ -9,6 +9,9 @@ jobs:
     name: Main Job
     runs-on: ubuntu-latest
 
+    env:
+      NEXT_PUBLIC_BASE_PATH: /devfile-web
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
