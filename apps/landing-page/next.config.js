@@ -5,6 +5,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
+// fonts in /styles/fonts.css have hard coded urls and must be changed if NEXT_PUBLIC_BASE_PATH changes besides /devfile-web
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 /**
@@ -22,14 +23,6 @@ const nextConfig = {
   },
   experimental: {
     newNextLinkBehavior: true,
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/fonts/:path*',
-        destination: `${basePath}/fonts/:path*`,
-      },
-    ];
   },
 };
 
