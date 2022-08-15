@@ -87,7 +87,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
   const tableOfContents = markdoc?.content ? collectHeadings(markdoc.content) : [];
 
   return (
-    <AnalyticsProvider writeKey={analyticsConfig.writeKey} client={analyticsConfig.client}>
+    <AnalyticsProvider {...analyticsConfig}>
       <NavigationProvider
         headerNavigation={headerNavigation}
         footerNavigation={footerNavigation}
