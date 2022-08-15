@@ -9,7 +9,6 @@ import {
   Footer,
   LandingPageLayout as Layout,
 } from '@devfile-web/core';
-import { githubDocsUrl } from '@devfile-web/docs';
 import '../styles/tailwind.css';
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
 import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
@@ -98,7 +97,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
           <LandingPageMeta title={pageTitle} description={description} />
           <div className="grow">
             <Header />
-            <Layout title={title} tableOfContents={tableOfContents} githubDocsUrl={githubDocsUrl}>
+            <Layout title={title} tableOfContents={tableOfContents}>
               <Component {...pageProps} />
             </Layout>
           </div>

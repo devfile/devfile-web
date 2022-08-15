@@ -21,7 +21,7 @@ describe('Docs', () => {
         describe(`Section: ${section.title}`, () => {
           section.links.forEach((page) => {
             describe(`Page: ${page.title}`, () => {
-              beforeEach(() => cy.visit(`/docs/${version}/${page.href.slice(1)}`));
+              beforeEach(() => cy.visit(page.href));
 
               it('has valid links', () => {
                 if (Cypress.$(generatedLinkQuery).length > 0) {

@@ -9,9 +9,11 @@ jobs:
     name: Main Job
     runs-on: ubuntu-latest
 
-    # fonts in /styles/fonts.css have hard coded urls and must be changed if NEXT_PUBLIC_BASE_PATH changes besides /devfile-web
     env:
-      NEXT_PUBLIC_BASE_PATH: /devfile-web
+      NEXT_PUBLIC_ANALYTICS_WRITE_KEY: HZudPLHdFLbeHIrhYuTXS84S1XDmDv1W
+      NEXT_PUBLIC_DOCSEARCH_APP_ID: FCRPEMIKYK
+      NEXT_PUBLIC_DOCSEARCH_API_KEY: 3f20b782c93da03c6626d6cacae0ceb5
+      NEXT_PUBLIC_DOCSEARCH_INDEX_NAME: devfile
 
     steps:
       - name: Checkout
@@ -32,5 +34,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
-          branch: landing-page-dist
+          branch: master
           folder: dist/apps/landing-page/exported
+          REPOSITORY_NAME: devfile/devfile.github.io
