@@ -10,11 +10,10 @@ export interface LandingPageLayoutProps {
   children: JSX.Element;
   title: string;
   tableOfContents: TableOfContents[];
-  githubDocsUrl: string;
 }
 
 export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
-  const { children, title, tableOfContents, githubDocsUrl } = props;
+  const { children, title, tableOfContents } = props;
 
   const { versionedDocsNavigation: docsNavigation } = useNavigation();
   const router = useRouter();
@@ -86,7 +85,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
               )}
               {!isDevfileSchema && (
                 <Prose className="my-8">
-                  <Link href={`${githubDocsUrl}${router.pathname}.md`} passHref>
+                  <Link data-testid="edit-link" href={allLinks[linkIndex].githubHref} passHref>
                     <PencilIcon className="mb-1 inline h-4 w-auto" /> Edit this page
                   </Link>
                 </Prose>
@@ -99,6 +98,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                     </dt>
                     <dd className="mt-1">
                       <Link
+                        data-testid="generated-link"
                         href={previousPage.href}
                         className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                         passHref
@@ -115,6 +115,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                     </dt>
                     <dd className="mt-1">
                       <Link
+                        data-testid="generated-link"
                         href={nextPage.href}
                         className="text-base font-semibold text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                         passHref
@@ -151,6 +152,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                           <li key={section_.id}>
                             <h3>
                               <Link
+                                data-testid="generated-link"
                                 href={`#${section_.id}`}
                                 className={clsx(
                                   isActive(section_)
@@ -166,6 +168,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                                 {section_.children.map((subSection) => (
                                   <li key={subSection.id}>
                                     <Link
+                                      data-testid="generated-link"
                                       href={`#${subSection.id}`}
                                       className={
                                         isActive(subSection)

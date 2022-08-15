@@ -4,8 +4,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 // @ts-ignore - no types available
 import { load as yamlToJs } from 'js-yaml';
-import { docVersions } from '../../types';
-import type { DocsNavigation, VersionedDocsNavigation } from '../../types';
+import { docVersions, githubDocsUrl } from '../../types';
+import type { DocsNavigation, VersionedDocsNavigation, Section, DocVersions } from '../../types';
 
 const sourceDir = path.join(__dirname, '../../navigation');
 const outputDir = path.join(__dirname, 'dist');
@@ -26,17 +26,35 @@ export function getNavigation(): DocsNavigation {
     const newNav = nav;
 
     newNav[version] = [
-      ...top,
-      ...(yamlToJs(
-        fs.readFileSync(`${sourceDir}/${version}.yaml`, 'utf8'),
-      ) as VersionedDocsNavigation),
-      ...bottom,
+      ...top.map((section) => absoluteLinkMap(version, section, true)),
+      ...(
+        yamlToJs(fs.readFileSync(`${sourceDir}/${version}.yaml`, 'utf8')) as VersionedDocsNavigation
+      ).map((section) => absoluteLinkMap(version, section)),
+      ...bottom.map((section) => absoluteLinkMap(version, section, true)),
     ];
 
     return newNav;
   }, {} as DocsNavigation);
 
   return docsNavigation;
+}
+
+export function absoluteLinkMap(
+  version: DocVersions,
+  section: Section,
+  noVersion?: boolean,
+): Section {
+  return {
+    title: section.title,
+    links: section.links.map((link) => {
+      const href = link.href.replace(/^\.?\//, '');
+      return {
+        title: link.title,
+        href: `/docs/${version}/${href}`,
+        githubHref: `${githubDocsUrl}/${noVersion ? 'no-version' : version}/${href}.md`,
+      };
+    }),
+  };
 }
 
 export function buildNavigation(): void {

@@ -1,9 +1,8 @@
 export const docVersions = ['2.0.0', '2.1.0', '2.2.0-alpha'] as const;
 
-export const defaultVersion: DocVersions = '2.2.0-alpha';
+export const defaultVersion: DocVersions = '2.1.0';
 
-export const githubDocsUrl =
-  'https://github.com/devfile/devfile-web/tree/main/apps/landing-page/pages';
+export const githubDocsUrl = 'https://github.com/devfile/devfile-web/tree/main/libs/docs/src/docs';
 
 export type DocVersions = typeof docVersions[number];
 
@@ -12,6 +11,7 @@ export interface Section {
   links: {
     title: string;
     href: string;
+    githubHref: string;
   }[];
 }
 
