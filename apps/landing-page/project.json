@@ -43,17 +43,16 @@
         }
       }
     },
-    "preexport": {
+    "export": {
+      "executor": "@nrwl/next:export",
+      "options": {
+        "buildTarget": "landing-page:build:production"
+      }
+    },
+    "postexport": {
       "executor": "nx:run-commands",
       "options": {
         "command": "next-sitemap --config ./apps/landing-page/next-sitemap.config.mjs"
-      }
-    },
-    "export": {
-      "executor": "@nrwl/next:export",
-      "dependsOn": ["preexport"],
-      "options": {
-        "buildTarget": "landing-page:build:production"
       }
     },
     "test": {

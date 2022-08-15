@@ -29,6 +29,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn nx affected --target=build --project=landing-page
           yarn nx affected --target=export --project=landing-page
+          yarn nx affected --target=postexport --project=landing-page
 
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
