@@ -26,6 +26,8 @@ export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
       />
       <meta name="theme-color" content="#151515" />
       <link rel="icon" href={`${basePath}/favicon.ico`} />
+      {/* @ts-ignore copied from https://docsearch.algolia.com/docs/DocSearch-v3#preconnect */}
+      <link rel="preconnect" href="https://FCRPEMIKYK-dsn.algolia.net" crossOrigin />
     </Head>
   );
 }

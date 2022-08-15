@@ -16,7 +16,7 @@ export interface LandingPageLayoutProps {
 export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
   const { children, title, tableOfContents } = props;
 
-  const { versionedDocsNavigation } = useNavigation();
+  const { versionedDocsNavigation, selectedVersion } = useNavigation();
   const router = useRouter();
   const isDocsPage = router.pathname.includes('docs');
   const isDevfileSchema = router.pathname.includes('/devfile-schema');
@@ -48,7 +48,11 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
   return (
     <CodeblockProvider>
       <>
+        <meta name="docsearch:language" content="en" />
+        <meta name="docsearch:version" content={selectedVersion} />
+
         {router.asPath === '/docs' && <Hero />}
+
         <div className="block sm:flex sm:px-6 lg:px-8">
           <div className="relative mx-auto block max-w-screen-2xl grow justify-center sm:flex">
             <div className="hidden lg:relative lg:block lg:flex-none">
@@ -68,7 +72,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
               ) : (
                 <article>
                   {(title || section) && (
-                    <div className="mb-9 space-y-1">
+                    <header className="mb-9 space-y-1">
                       {section && (
                         <p className="font-display text-devfile text-sm font-medium">
                           {section.title}
@@ -79,7 +83,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                           {title}
                         </h1>
                       )}
-                    </div>
+                    </header>
                   )}
                   <Prose>{children}</Prose>
                 </article>
