@@ -6,6 +6,14 @@ const nodes = {
   document: {
     render: undefined,
   },
+  table: {
+    ...defaultNodes.table,
+    render: (props): JSX.Element => (
+      <div className="overflow-x-auto">
+        <table {...props} />
+      </div>
+    ),
+  },
   th: {
     ...defaultNodes.th,
     attributes: {

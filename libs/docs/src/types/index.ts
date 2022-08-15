@@ -11,7 +11,7 @@ export interface Section {
   links: {
     title: string;
     href: string;
-    githubHref: string;
+    githubHref?: string;
   }[];
 }
 

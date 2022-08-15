@@ -58,15 +58,16 @@ export function Header(): JSX.Element {
             <Search />
           </div>
           <VersionSelector className="relative z-10" />
-          <ThemeSelector className="relative z-10" />
+          <ThemeSelector className="relative z-10 hidden sm:block" />
           {headerNavigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
               aria-label={item.name}
               className={clsx(
-                !item.image &&
-                  'hidden whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300 lg:block',
+                item.image
+                  ? 'hidden [@media(min-width:450px)]:block'
+                  : 'hidden whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300 lg:block',
               )}
             >
               {item.image ? (

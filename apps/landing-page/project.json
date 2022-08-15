@@ -3,17 +3,18 @@
   "sourceRoot": "apps/landing-page",
   "projectType": "application",
   "targets": {
-    "build-docs": {
+    "prebuild": {
       "executor": "nx:run-commands",
       "options": {
-        "command": "yarn docs"
+        "command": "yarn docs",
+        "outputPath": ["libs/docs/src/scripts/build-directory/dist", "libs/docs/src/scripts/build-navigation/dist", "libs/docs/src/scripts/copy-devfile-schemas/dist"]
       }
     },
     "build": {
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
-      "dependsOn": ["build-docs"],
+      "dependsOn": ["prebuild"],
       "options": {
         "root": "apps/landing-page",
         "outputPath": "dist/apps/landing-page"
@@ -26,7 +27,7 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
-      "dependsOn": ["build-docs"],
+      "dependsOn": ["prebuild"],
       "options": {
         "buildTarget": "landing-page:build",
         "dev": true
@@ -42,8 +43,15 @@
         }
       }
     },
+    "preexport": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "next-sitemap --config ./apps/landing-page/next-sitemap.config.mjs"
+      }
+    },
     "export": {
       "executor": "@nrwl/next:export",
+      "dependsOn": ["preexport"],
       "options": {
         "buildTarget": "landing-page:build:production"
       }
@@ -64,5 +72,6 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "implicitDependencies": ["docs"]
 }
