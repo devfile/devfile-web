@@ -3,15 +3,9 @@
   "sourceRoot": "apps/landing-page-e2e/src",
   "projectType": "application",
   "targets": {
-    "build": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "yarn nx build landing-page --configuration=production"
-      }
-    },
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
-      "dependsOn": ["build"],
+      "dependsOn": ["^build"],
       "options": {
         "cypressConfig": "apps/landing-page-e2e/cypress.config.js",
         "devServerTarget": "landing-page:serve:production"

@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
 import { PencilIcon } from '@heroicons/react/solid';
+import { githubDocsUrl } from '@devfile-web/docs';
 import { Navigation, Prose, LandingPageSearch as Search, Hero, Fence } from '../../components';
 import { useTableOfContents, useNavigation, useCodeblock, CodeblockProvider } from '../../hooks';
 import type { TableOfContents, TableOfContentsChild } from '../../hooks';
@@ -15,15 +16,15 @@ export interface LandingPageLayoutProps {
 export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
   const { children, title, tableOfContents } = props;
 
-  const { versionedDocsNavigation: docsNavigation } = useNavigation();
+  const { versionedDocsNavigation } = useNavigation();
   const router = useRouter();
   const isDocsPage = router.pathname.includes('docs');
   const isDevfileSchema = router.pathname.includes('/devfile-schema');
-  const allLinks = docsNavigation.flatMap((section) => section.links);
+  const allLinks = versionedDocsNavigation.flatMap((section) => section.links);
   const linkIndex = allLinks.findIndex((link) => link.href === router.pathname);
   const previousPage = allLinks[linkIndex - 1];
   const nextPage = allLinks[linkIndex + 1];
-  const section = docsNavigation.find((section_) =>
+  const section = versionedDocsNavigation.find((section_) =>
     section_.links.find((link) => link.href === router.pathname),
   );
   const { currentSection } = useTableOfContents(tableOfContents);
@@ -48,8 +49,8 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
     <CodeblockProvider>
       <>
         {router.asPath === '/docs' && <Hero />}
-        <div className="flex sm:px-6 lg:px-8">
-          <div className="relative mx-auto flex max-w-screen-2xl grow justify-center">
+        <div className="block sm:flex sm:px-6 lg:px-8">
+          <div className="relative mx-auto block max-w-screen-2xl grow justify-center sm:flex">
             <div className="hidden lg:relative lg:block lg:flex-none">
               <div className="absolute inset-y-0 right-0 w-[50vw] bg-slate-50 dark:hidden" />
               <div className="sticky top-[4.5rem] -ml-0.5 h-[calc(100vh-4.5rem)] overflow-y-auto py-16 pl-0.5">
@@ -67,7 +68,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
               ) : (
                 <article>
                   {(title || section) && (
-                    <header className="mb-9 space-y-1">
+                    <div className="mb-9 space-y-1">
                       {section && (
                         <p className="font-display text-devfile text-sm font-medium">
                           {section.title}
@@ -78,14 +79,18 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                           {title}
                         </h1>
                       )}
-                    </header>
+                    </div>
                   )}
                   <Prose>{children}</Prose>
                 </article>
               )}
               {!isDevfileSchema && (
                 <Prose className="my-8">
-                  <Link data-testid="edit-link" href={allLinks[linkIndex].githubHref} passHref>
+                  <Link
+                    data-testid="edit-link"
+                    href={allLinks[linkIndex]?.githubHref ?? githubDocsUrl}
+                    passHref
+                  >
                     <PencilIcon className="mb-1 inline h-4 w-auto" /> Edit this page
                   </Link>
                 </Prose>

@@ -72,7 +72,7 @@ export function Fence(props: FenceProps): JSX.Element {
               </div>
             )}
 
-            <pre className={clsx(className, 'overflow-x-auto px-4 py-3')} style={style}>
+            <pre className={clsx(className, 'flex overflow-x-auto px-4 py-3')} style={style}>
               <code>
                 {tokens.map((line, lineIndex) => (
                   // eslint-disable-next-line react/no-array-index-key

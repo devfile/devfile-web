@@ -62,7 +62,7 @@ export function Footer(): JSX.Element {
                 ))}
               </ul>
             </div>
-            <div className="mt-12 md:mt-0">
+            <div>
               <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-sky-100">
                 Links
               </h3>

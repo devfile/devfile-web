@@ -93,7 +93,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
         footerNavigation={footerNavigation}
         docsNavigation={docsNavigation as DocsNavigation}
       >
-        <div className="flex h-screen flex-col justify-between">
+        <div className="flex h-screen min-w-[300px] flex-col justify-between">
           <LandingPageMeta title={pageTitle} description={description} />
           <div className="grow">
             <Header />
