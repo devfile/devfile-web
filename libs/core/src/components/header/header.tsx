@@ -25,7 +25,7 @@ export function Header(): JSX.Element {
   }, []);
 
   return (
-    <header
+    <div
       className={clsx(
         'sticky top-0 z-50 flex justify-center bg-white px-4 py-5 shadow-md shadow-slate-900/5 transition duration-500 dark:shadow-none sm:px-6 lg:px-8',
         isScrolled
@@ -79,7 +79,7 @@ export function Header(): JSX.Element {
           ))}
         </div>
       </div>
-    </header>
+    </div>
   );
 }
 

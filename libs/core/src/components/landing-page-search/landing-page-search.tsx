@@ -5,6 +5,7 @@ import Router, { useRouter } from 'next/router';
 import { DocSearchModal, useDocSearchKeyboardEvents } from '@docsearch/react';
 import { SearchIcon } from '@heroicons/react/solid';
 import type { InternalDocSearchHit, StoredDocSearchHit } from '@docsearch/react/dist/esm/types';
+import { useNavigation } from '../../hooks';
 
 interface HitProps {
   hit: InternalDocSearchHit | StoredDocSearchHit;
@@ -30,6 +31,7 @@ export function LandingPageSearch(): JSX.Element | null {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [modifierKey, setModifierKey] = useState();
   const router = useRouter();
+  const { selectedVersion } = useNavigation();
 
   const onOpen = useCallback(() => {
     setIsOpen(true);
@@ -75,6 +77,9 @@ export function LandingPageSearch(): JSX.Element | null {
             initialScrollY={window.scrollY}
             onClose={onClose}
             hitComponent={Hit}
+            searchParameters={{
+              facetFilters: ['language:en', `version:${selectedVersion}`],
+            }}
             navigator={{
               navigate({ itemUrl }): void {
                 Router.push(itemUrl).catch(() => {});
