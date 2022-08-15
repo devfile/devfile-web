@@ -33,7 +33,7 @@ jobs:
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          GITHUB_TOKEN: ${{ secrets.DEPLOY_TOKEN }}
+          token: ${{ secrets.DEPLOY_TOKEN }}
           branch: master
           folder: dist/apps/landing-page/exported
-          REPOSITORY_NAME: devfile/devfile.github.io
+          repository-name: devfile/devfile.github.io
