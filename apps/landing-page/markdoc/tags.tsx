@@ -1,4 +1,5 @@
 import { Callout, QuickLink, QuickLinks, CurrentVersion } from '@devfile-web/core';
+import clsx from 'clsx';
 
 const tags = {
   callout: {
@@ -19,14 +20,25 @@ const tags = {
       src: { type: String },
       alt: { type: String },
       caption: { type: String },
+      isZoomable: { type: Boolean, default: false },
+      hasBackground: { type: Boolean, default: false },
     },
-    render: (props: { src: string; alt: string; caption: string }): JSX.Element => {
-      const { src, alt = '', caption } = props;
+    render: (props: {
+      src: string;
+      alt: string;
+      caption: string;
+      hasBackground: boolean;
+    }): JSX.Element => {
+      const { src, alt = '', caption, hasBackground } = props;
 
       return (
-        <figure>
+        <figure className="">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt={alt} />
+          <img
+            src={src}
+            alt={alt}
+            className={clsx(hasBackground && 'rounded-md border bg-slate-50 p-2')}
+          />
           <figcaption>{caption}</figcaption>
         </figure>
       );

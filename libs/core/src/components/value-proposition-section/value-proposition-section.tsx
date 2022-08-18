@@ -53,7 +53,7 @@ export function ValuePropositionSection(): JSX.Element {
                   <div className="-mt-6">
                     <div>
                       <span className="bg-devfile inline-flex items-center justify-center rounded-md p-3 shadow-lg">
-                        <feature.icon className="h-6 w-6 text-sky-100" aria-hidden="true" />
+                        <feature.icon className="h-6 w-auto text-sky-100" aria-hidden="true" />
                       </span>
                     </div>
                     <h3 className="mt-8 text-lg font-medium tracking-tight text-slate-700 dark:text-sky-100">

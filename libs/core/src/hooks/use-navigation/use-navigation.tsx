@@ -2,7 +2,13 @@ import { createContext, useState, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { docVersions, defaultVersion } from '@devfile-web/docs';
 
-import type { DocVersions, VersionedDocsNavigation, DocsNavigation } from '@devfile-web/docs';
+import type {
+  DocVersions,
+  VersionedDocsNavigation,
+  DocsNavigation,
+  Page,
+  Section,
+} from '@devfile-web/docs';
 
 export interface NavigationElement {
   name: string;
@@ -19,10 +25,10 @@ export interface FooterNavigation {
 }
 
 export interface NavigationProviderProps {
-  children: JSX.Element;
   headerNavigation: HeaderNavigation;
   footerNavigation: FooterNavigation;
   docsNavigation: DocsNavigation;
+  children: React.ReactNode;
 }
 
 export interface UseNavigation {
@@ -32,6 +38,10 @@ export interface UseNavigation {
   selectedVersion: DocVersions;
   setSelectedVersion: React.Dispatch<React.SetStateAction<DocVersions>>;
   docVersions: typeof docVersions;
+  currentSection?: Section;
+  previousPage?: Page;
+  currentPage?: Page;
+  nextPage?: Page;
 }
 
 const NavigationContext = createContext<UseNavigation | undefined>(undefined);
@@ -49,6 +59,15 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
     [docsNavigation, selectedVersion],
   );
 
+  const allLinks = useMemo(
+    () => versionedDocsNavigation.flatMap((section) => section.links),
+    [versionedDocsNavigation],
+  );
+  const linkIndex = useMemo(
+    () => allLinks.findIndex((link) => link.href === router.pathname),
+    [allLinks, router.pathname],
+  );
+
   const value = useMemo(
     () => ({
       headerNavigation,
@@ -57,8 +76,22 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
       selectedVersion,
       setSelectedVersion,
       docVersions,
+      currentSection: versionedDocsNavigation.find((section_) =>
+        section_.links.find((link) => link.href === router.pathname),
+      ),
+      previousPage: allLinks[linkIndex - 1],
+      currentPage: allLinks[linkIndex],
+      nextPage: allLinks[linkIndex + 1],
     }),
-    [versionedDocsNavigation, footerNavigation, headerNavigation, selectedVersion],
+    [
+      headerNavigation,
+      footerNavigation,
+      versionedDocsNavigation,
+      selectedVersion,
+      allLinks,
+      linkIndex,
+      router.pathname,
+    ],
   );
 
   return <NavigationContext.Provider value={value}>{children}</NavigationContext.Provider>;

@@ -4,13 +4,14 @@ export interface LandingPageMetaProps {
   title?: string;
   keywords?: string;
   description?: string;
+  children?: React.ReactNode;
 }
 
 // @ts-ignore
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
-  const { title, keywords, description } = props;
+  const { title, keywords, description, children } = props;
 
   return (
     <Head>
@@ -27,6 +28,7 @@ export function LandingPageMeta(props: LandingPageMetaProps): JSX.Element {
       <meta name="theme-color" content="#151515" />
       <link rel="icon" href={`${basePath}/favicon.ico`} />
       <link rel="preconnect" href="https://FCRPEMIKYK-dsn.algolia.net" crossOrigin="true" />
+      {children}
     </Head>
   );
 }

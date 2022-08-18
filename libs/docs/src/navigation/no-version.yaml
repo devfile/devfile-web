@@ -23,6 +23,18 @@ top:
         href: ./library
       - title: Resources
         href: ./resources
+  - title: Get started
+    links:
+      - title: Devfile ecosystem
+        href: ./devfile-ecosystem
+      - title: Application developer
+        href: ./application-developer
+      - title: Enterprise architect and runtime provider
+        href: ./enterprise-architect-and-runtime-provider
+      - title: Registry administrator
+        href: ./registry-administrator
+      - title: Technology and tool builders
+        href: ./technology-and-tool-builders
 bottom:
   - title: Registry
     links:
