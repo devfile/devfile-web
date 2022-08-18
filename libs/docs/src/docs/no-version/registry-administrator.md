@@ -19,6 +19,6 @@ Customize the registry build tools to provide extra validations to ensure the de
 
 - [Building a custom devfile registry](./building-a-custom-devfile-registry)
 
-- [Deploying a devfile registry](./deploying-a-devfile-registry.md)
+- [Deploying a devfile registry](./deploying-a-devfile-registry)
 
-- [Adding a registry schema](./adding-a-registry-schema.md)
+- [Adding a registry schema](./adding-a-registry-schema)
