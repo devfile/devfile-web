@@ -5,7 +5,7 @@ import type { ID } from '@segment/analytics-next';
 import { getUserRegion } from '../../functions';
 
 export interface AnalyticsProviderProps {
-  children: JSX.Element;
+  children: React.ReactNode;
   writeKey: string;
   client: string;
 }

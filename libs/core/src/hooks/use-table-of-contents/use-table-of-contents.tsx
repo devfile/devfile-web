@@ -13,11 +13,13 @@ export interface TableOfContents {
 }
 
 export interface UseTableOfContents {
-  currentSection?: string;
+  currentPageSection?: string;
 }
 
 export function useTableOfContents(tableOfContents: TableOfContents[]): UseTableOfContents {
-  const [currentSection, setCurrentSection] = useState<string | undefined>(tableOfContents[0]?.id);
+  const [currentPageSection, setCurrentPageSection] = useState<string | undefined>(
+    tableOfContents[0]?.id,
+  );
 
   const getHeadings = useCallback(
     (tableOfContents_: TableOfContents[]) =>
@@ -34,6 +36,7 @@ export function useTableOfContents(tableOfContents: TableOfContents[]): UseTable
           const scrollMt = Number.parseFloat(style.scrollMarginTop);
 
           const top = window.scrollY + el.getBoundingClientRect().top - scrollMt;
+
           return { id, top };
         }),
     [],
@@ -52,7 +55,7 @@ export function useTableOfContents(tableOfContents: TableOfContents[]): UseTable
           break;
         }
       }
-      setCurrentSection(current);
+      setCurrentPageSection(current);
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
@@ -61,7 +64,7 @@ export function useTableOfContents(tableOfContents: TableOfContents[]): UseTable
     };
   }, [getHeadings, tableOfContents]);
 
-  return { currentSection };
+  return { currentPageSection };
 }
 
 export default useTableOfContents;

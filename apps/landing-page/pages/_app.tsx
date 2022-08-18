@@ -14,7 +14,6 @@ import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
 import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
 import type { TableOfContents } from '@devfile-web/core';
 import type { DocsNavigation } from '@devfile-web/docs';
-import { useRouter } from 'next/router';
 import { docsNavigation, headerNavigation, footerNavigation } from '../navigation';
 
 const analyticsConfig = {
@@ -69,20 +68,13 @@ function collectHeadings(
 function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
   const { markdoc } = pageProps as MarkdocNextJsPageProps;
 
-  const router = useRouter();
-
   const title = (markdoc?.frontmatter.title as string) ?? '';
 
-  let pageTitle: string;
-  let description: string;
+  const pageTitle =
+    (markdoc?.frontmatter.pageTitle as string) ||
+    `${(markdoc?.frontmatter.title as string) ?? ''} - Docs`;
 
-  if (router.asPath.includes('/docs')) {
-    pageTitle =
-      (markdoc?.frontmatter.pageTitle as string) ||
-      `${(markdoc?.frontmatter.title as string) ?? ''} - Docs`;
-
-    description = (markdoc?.frontmatter.description as string) ?? '';
-  }
+  const pageDescription = (markdoc?.frontmatter.description as string) ?? '';
 
   const tableOfContents = markdoc?.content ? collectHeadings(markdoc.content) : [];
 
@@ -94,10 +86,15 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
         docsNavigation={docsNavigation as DocsNavigation}
       >
         <div className="flex h-screen min-w-[300px] flex-col justify-between">
-          <LandingPageMeta title={pageTitle} description={description} />
           <div className="grow">
+            <LandingPageMeta />
             <Header />
-            <Layout title={title} tableOfContents={tableOfContents}>
+            <Layout
+              title={title}
+              tableOfContents={tableOfContents}
+              pageTitle={pageTitle}
+              pageDescription={pageDescription}
+            >
               <Component {...pageProps} />
             </Layout>
           </div>

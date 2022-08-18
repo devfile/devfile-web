@@ -4,8 +4,8 @@ import clsx from 'clsx';
 import type { SVGProps } from 'react';
 import Highlight, { defaultProps } from '@schultzp2020/prism-react-renderer';
 import type { Language } from '@schultzp2020/prism-react-renderer';
-import { defaultVersion } from '@devfile-web/docs';
 import { Button } from '../button/button';
+import { useNavigation } from '../../hooks';
 import { HeroBackground } from '../hero-background/hero-background';
 import blurCyanImage from '../../images/blur-cyan.png';
 import blurIndigoImage from '../../images/blur-indigo.png';
@@ -41,6 +41,8 @@ function TrafficLightsIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
 }
 
 export function Hero(): JSX.Element {
+  const { headerNavigation } = useNavigation();
+
   return (
     <div className="overflow-hidden bg-slate-900 dark:-mb-16 dark:mt-[-12rem] dark:pb-32 dark:pt-[12rem] ">
       <div className="py-16 sm:px-2 lg:relative lg:py-20 lg:px-0">
@@ -65,9 +67,19 @@ export function Hero(): JSX.Element {
                 An open standard defining containerized development environments.
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
-                <Button href={`/docs/${defaultVersion}/what-is-a-devfile`}>Get started</Button>
-                <Button href="https://github.com/orgs/devfile/repositories" variant="secondary">
-                  View on GitHub
+                <Button
+                  href={headerNavigation.find((el) => el.name === 'Get Started')?.href ?? '/docs'}
+                >
+                  Get started
+                </Button>
+                <Button
+                  href={
+                    headerNavigation.find((el) => el.name === 'Github')?.href ??
+                    'https://github.com/devfile/api'
+                  }
+                  variant="secondary"
+                >
+                  View on Github
                 </Button>
               </div>
             </div>

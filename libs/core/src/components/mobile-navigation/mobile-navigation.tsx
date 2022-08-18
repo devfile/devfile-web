@@ -3,16 +3,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dialog } from '@headlessui/react';
 import { MenuIcon, XIcon as CloseIcon } from '@heroicons/react/outline';
-import clsx from 'clsx';
 import { DevfileIcon } from '../../icons';
 import { Navigation } from '../navigation/navigation';
-import { useNavigation } from '../../hooks';
 
 export function MobileNavigation(): JSX.Element {
-  const { headerNavigation } = useNavigation();
-
   const router = useRouter();
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -38,7 +34,7 @@ export function MobileNavigation(): JSX.Element {
         className="relative"
         aria-label="Open navigation"
       >
-        <MenuIcon className="h-6 w-6 stroke-slate-500" />
+        <MenuIcon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
       </button>
       <Dialog
         open={isOpen}
@@ -53,31 +49,11 @@ export function MobileNavigation(): JSX.Element {
               onClick={(): void => setIsOpen(false)}
               aria-label="Close navigation"
             >
-              <CloseIcon className="h-6 w-6 stroke-slate-500" />
+              <CloseIcon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
             </button>
             <Link href="/" className="ml-6" aria-label="Home page" passHref>
               <DevfileIcon className="fill-devfile h-9 w-9" />
             </Link>
-          </div>
-          <div className="mt-4">
-            {headerNavigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                aria-label={item.name}
-                className={clsx(
-                  !item.image
-                    ? 'block px-1 text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300'
-                    : 'hidden',
-                )}
-              >
-                {item.image ? (
-                  <item.image className="h-6 w-6 fill-slate-500 hover:fill-slate-800 dark:fill-slate-400 dark:hover:fill-slate-300" />
-                ) : (
-                  item.name
-                )}
-              </Link>
-            ))}
           </div>
           <Navigation className="mt-5 px-1" />
         </Dialog.Panel>

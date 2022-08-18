@@ -3,7 +3,7 @@ import { useState, createContext, useContext, useMemo } from 'react';
 import { dump as jsToYaml } from 'js-yaml';
 
 export interface CodeblockProviderProps {
-  children: JSX.Element;
+  children: React.ReactNode;
 }
 
 export interface UseCodeblock {
