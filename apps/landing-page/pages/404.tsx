@@ -1,28 +1,12 @@
 import { ChevronRightIcon } from '@heroicons/react/solid';
 import { DevfileIcon, LandingPageMeta } from '@devfile-web/core';
-import { defaultVersion } from '@devfile-web/docs';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { custom404Navigation } from '../navigation';
 
 export function Custom404(): JSX.Element {
-  const router = useRouter();
-
-  const isDocsPage = router.asPath === '/docs';
-
   return (
     <div className="bg-slate-50 dark:bg-slate-900">
-      <LandingPageMeta title="404: Page not found">
-        {isDocsPage && (
-          <meta
-            httpEquiv="refresh"
-            content={`0; url=${
-              custom404Navigation.find((el) => el.name === 'Documentation').href ??
-              `/docs/${defaultVersion}/what-is-a-devfile`
-            }`}
-          />
-        )}
-      </LandingPageMeta>
+      <LandingPageMeta title="404: Page not found" />
 
       <main className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex-shrink-0 pt-16">
@@ -44,28 +28,28 @@ export function Custom404(): JSX.Element {
             </h2>
             <ul className="mt-4 divide-y divide-slate-200 border-t border-b border-slate-200 dark:divide-slate-800 dark:border-slate-800">
               {custom404Navigation.map((link) => (
-                <li key={link.name} className="group relative flex items-start space-x-4 py-6">
-                  <div className="flex-shrink-0">
-                    <span className="bg-devfile flex h-12 w-12 items-center justify-center rounded-lg">
-                      <link.image className="h-6 w-auto text-sky-100" aria-hidden="true" />
-                    </span>
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="text-base font-medium text-slate-700 group-hover:text-slate-800 dark:text-sky-100 dark:group-hover:text-sky-50">
-                      <Link href={link.href} passHref>
+                <li key={link.name} className="group py-6">
+                  <Link href={link.href} passHref className="flex items-start space-x-4">
+                    <div className="flex-shrink-0">
+                      <span className="bg-devfile flex h-12 w-12 items-center justify-center rounded-lg">
+                        <link.image className="h-6 w-auto text-sky-100" aria-hidden="true" />
+                      </span>
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="text-base font-medium text-slate-700 group-hover:text-slate-800 dark:text-sky-100 dark:group-hover:text-sky-50">
                         {link.name}
-                      </Link>
-                    </h3>
-                    <p className="text-base text-slate-500 group-hover:text-slate-600 dark:text-slate-400 dark:group-hover:text-slate-300">
-                      {link.description}
-                    </p>
-                  </div>
-                  <div className="flex-shrink-0 self-center">
-                    <ChevronRightIcon
-                      className="h-5 w-5 text-slate-500 group-hover:text-slate-600 dark:text-slate-400 dark:group-hover:text-slate-300"
-                      aria-hidden="true"
-                    />
-                  </div>
+                      </h3>
+                      <p className="text-base text-slate-500 group-hover:text-slate-600 dark:text-slate-400 dark:group-hover:text-slate-300">
+                        {link.description}
+                      </p>
+                    </div>
+                    <div className="flex-shrink-0 self-center">
+                      <ChevronRightIcon
+                        className="h-5 w-5 text-slate-500 group-hover:text-slate-600 dark:text-slate-400 dark:group-hover:text-slate-300"
+                        aria-hidden="true"
+                      />
+                    </div>
+                  </Link>
                 </li>
               ))}
             </ul>

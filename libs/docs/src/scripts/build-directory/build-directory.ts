@@ -13,6 +13,8 @@ function buildDirectory(): void {
     fs.rmSync(outputDir, { recursive: true, force: true });
   }
 
+  fs.copySync(`${nextjsDocsDir}/index.tsx`, `${outputDir}/index.tsx`);
+
   docVersions.forEach((version) => {
     fs.copySync(`${sourceDir}/${version}`, `${outputDir}/${version}`, { overwrite: true });
     fs.copySync(`${sourceDir}/no-version`, `${outputDir}/${version}`, { overwrite: true });

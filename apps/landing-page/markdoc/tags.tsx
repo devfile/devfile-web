@@ -20,7 +20,6 @@ const tags = {
       src: { type: String },
       alt: { type: String },
       caption: { type: String },
-      isZoomable: { type: Boolean, default: false },
       hasBackground: { type: Boolean, default: false },
     },
     render: (props: {

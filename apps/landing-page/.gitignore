@@ -1,2 +1,4 @@
-**/docs
-**/devfile-schemas
+pages/docs/**
+!pages/docs/index.tsx
+
+public/devfile-schemas
