@@ -48,6 +48,7 @@ export const footerNavigation: FooterNavigation = {
 
 export interface Custom404NavigationElement extends NavigationElement {
   description: string;
+  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 }
 
 export type Custom404Navigation = Custom404NavigationElement[];

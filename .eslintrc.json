@@ -8,8 +8,7 @@
     "plugin:eslint-comments/recommended",
     "plugin:promise/recommended",
     "plugin:unicorn/recommended",
-    "prettier",
-    "next"
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -93,7 +92,6 @@
         "import/no-cycle": "off",
         "eslint-comments/disable-enable-pair": "off",
         "promise/no-nesting": "off",
-        "@next/next/no-img-element": "off",
         "react/require-default-props": "off",
         "unicorn/no-abusive-eslint-disable": "off",
         "eslint-comments/no-unlimited-disable": "off",

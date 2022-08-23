@@ -8,7 +8,7 @@ export function Index(): JSX.Element {
       <meta
         httpEquiv="refresh"
         content={`0; url=${
-          custom404Navigation.find((el) => el.name === 'Documentation').href ??
+          custom404Navigation.find((el) => el.name === 'Documentation')?.href ??
           `/docs/${defaultVersion}/what-is-a-devfile`
         }`}
       />

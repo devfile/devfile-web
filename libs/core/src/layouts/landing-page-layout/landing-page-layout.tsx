@@ -167,7 +167,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                           <h3>
                             <Link
                               data-testid="generated-link"
-                              href={`#${section_.id}`}
+                              href={`#${section_.id ?? ''}`}
                               className={clsx(
                                 isActive(section_)
                                   ? 'text-devfile'
@@ -183,7 +183,7 @@ export function LandingPageLayout(props: LandingPageLayoutProps): JSX.Element {
                                 <li key={subSection.id}>
                                   <Link
                                     data-testid="generated-link"
-                                    href={`#${subSection.id}`}
+                                    href={`#${subSection.id ?? ''}`}
                                     className={
                                       isActive(subSection)
                                         ? 'text-devfile'
