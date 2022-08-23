@@ -5,9 +5,9 @@
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",
+      "dependsOn": ["^build"],
       "options": {
-        "command": "yarn docs",
-        "outputPath": ["libs/docs/src/scripts/build-directory/dist", "libs/docs/src/scripts/build-navigation/dist", "libs/docs/src/scripts/copy-devfile-schemas/dist"]
+        "command": "yarn docs"
       }
     },
     "build": {

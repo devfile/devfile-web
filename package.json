@@ -5,17 +5,13 @@
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
-    "docs": "yarn docs:copy-devfile-schemas && yarn docs:build-directory && yarn docs:build-navigation",
-    "docs:copy-devfile-schemas": "node --loader ts-node/esm --inspect ./libs/docs/src/scripts/copy-devfile-schemas/copy-devfile-schemas.ts",
-    "docs:build-directory": "node --loader ts-node/esm --inspect ./libs/docs/src/scripts/build-directory/build-directory.ts",
-    "docs:build-navigation": "node --loader ts-node/esm --inspect ./libs/docs/src/scripts/build-navigation/build-navigation.ts",
+    "docs": "./scripts/docs.sh",
     "test": "nx test",
     "lint": "nx affected --target=lint",
     "prepare": "husky install",
     "create:component": "nx workspace-generator component --project=core",
     "create:hook": "nx workspace-generator hook --project=core",
-    "create:function": "nx workspace-generator function --project=core",
-    "create:devfile-schema": "nx workspace-generator devfile-schema --project=docs"
+    "create:function": "nx workspace-generator function --project=core"
   },
   "browserslist": "defaults, not ie <= 11",
   "private": true,
