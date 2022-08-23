@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import { execSync } from 'node:child_process';
-import { docVersions } from '@devfile-web/docs';
+import { docVersions } from '../../types';
 
 export interface Config {
   sourceDir: string;

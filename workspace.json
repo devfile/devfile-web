@@ -4,7 +4,6 @@
     "core": "libs/core",
     "docs": "libs/docs",
     "landing-page": "apps/landing-page",
-    "landing-page-e2e": "apps/landing-page-e2e",
-    "scripts": "libs/scripts"
+    "landing-page-e2e": "apps/landing-page-e2e"
   }
 }

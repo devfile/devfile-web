@@ -3,13 +3,8 @@ import fs from 'fs-extra';
 import path from 'node:path';
 // @ts-ignore - no types available
 import { load as yamlToJs } from 'js-yaml';
-import { docVersions, githubDocsUrl } from '@devfile-web/docs';
-import type {
-  DocsNavigation,
-  VersionedDocsNavigation,
-  Section,
-  DocVersions,
-} from '@devfile-web/docs';
+import { docVersions, githubDocsUrl } from '../../types';
+import type { DocsNavigation, VersionedDocsNavigation, Section, DocVersions } from '../../types';
 
 export interface Config {
   sourceDir: string;
