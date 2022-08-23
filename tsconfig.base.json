@@ -20,6 +20,7 @@
     "paths": {
       "@devfile-web/core": ["libs/core/src/index.ts"],
       "@devfile-web/docs": ["libs/docs/src/index.ts"],
+      "@devfile-web/docs1": ["libs/docs1/src/index.ts"],
       "@devfile-web/scripts": ["libs/scripts/src/index.ts"]
     }
   },
