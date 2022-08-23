@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { existsSync, rmSync, copySync } from 'fs-extra';
 import { execSync } from 'node:child_process';
 import { docVersions } from '../../types';
 
@@ -11,20 +11,18 @@ export interface Config {
 export default function buildDirectory(config: Config): void {
   const { sourceDir, outputDir, nextjsDocsDir } = config;
 
-  if (fs.existsSync(outputDir)) {
-    fs.rmSync(outputDir, { recursive: true, force: true });
+  if (existsSync(outputDir)) {
+    rmSync(outputDir, { recursive: true, force: true });
   }
 
-  fs.copySync(`${nextjsDocsDir}/index.tsx`, `${outputDir}/index.tsx`);
-
   docVersions.forEach((version) => {
-    fs.copySync(`${sourceDir}/${version}`, `${outputDir}/${version}`, { overwrite: true });
-    fs.copySync(`${sourceDir}/no-version`, `${outputDir}/${version}`, { overwrite: true });
+    copySync(`${sourceDir}/${version}`, `${outputDir}/${version}`, { overwrite: true });
+    copySync(`${sourceDir}/no-version`, `${outputDir}/${version}`, { overwrite: true });
     execSync(`yarn create:devfile-schema ${version}`);
   });
 
-  if (fs.existsSync(nextjsDocsDir)) {
-    fs.rmSync(nextjsDocsDir, { recursive: true, force: true });
+  if (existsSync(nextjsDocsDir)) {
+    rmSync(nextjsDocsDir, { recursive: true, force: true });
   }
-  fs.copySync(outputDir, nextjsDocsDir, { overwrite: true });
+  copySync(outputDir, nextjsDocsDir, { overwrite: true });
 }

@@ -15,5 +15,11 @@ buildDirectory({
   outputDir: join(outputDir, 'docs'),
   nextjsDocsDir: join(nextjsDir, 'pages/docs'),
 });
-// buildNavigation();
-// copyDevfileSchemas();
+buildNavigation({
+  sourceDir: join(sourceDir, 'navigation'),
+  outputDir: join(outputDir, 'navigation'),
+});
+copyDevfileSchemas({
+  sourceDir: join(sourceDir, 'devfile-schemas'),
+  outputDir: join(nextjsDir, 'public/devfile-schemas'),
+});

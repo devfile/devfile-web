@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import fs from 'fs-extra';
-import path from 'node:path';
+import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs-extra';
+import { join } from 'node:path';
 // @ts-ignore - no types available
 import { load as yamlToJs } from 'js-yaml';
 import { docVersions, githubDocsUrl } from '../../types';
@@ -20,7 +20,7 @@ export function getNavigation(config: Config): DocsNavigation {
   const { sourceDir } = config;
 
   const noVersionNavigation = yamlToJs(
-    fs.readFileSync(`${sourceDir}/no-version.yaml`, 'utf8'),
+    readFileSync(`${sourceDir}/no-version.yaml`, 'utf8'),
   ) as NoVersionNavigation;
 
   const { top, bottom } = noVersionNavigation;
@@ -31,7 +31,7 @@ export function getNavigation(config: Config): DocsNavigation {
     newNav[version] = [
       ...top.map((section) => absoluteLinkMap(version, section, true)),
       ...(
-        yamlToJs(fs.readFileSync(`${sourceDir}/${version}.yaml`, 'utf8')) as VersionedDocsNavigation
+        yamlToJs(readFileSync(`${sourceDir}/${version}.yaml`, 'utf8')) as VersionedDocsNavigation
       ).map((section) => absoluteLinkMap(version, section)),
       ...bottom.map((section) => absoluteLinkMap(version, section, true)),
     ];
@@ -63,12 +63,12 @@ export function absoluteLinkMap(
 export default function buildNavigation(config: Config): void {
   const { outputDir } = config;
 
-  if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir);
+  if (!existsSync(outputDir)) {
+    mkdirSync(outputDir);
   }
 
-  fs.writeFileSync(
-    path.join(outputDir, 'navigation.json'),
+  writeFileSync(
+    join(outputDir, 'navigation.json'),
     JSON.stringify(getNavigation(config), null, 2),
     {
       encoding: 'utf8',
