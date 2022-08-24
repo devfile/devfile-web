@@ -11,18 +11,32 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "paths": {
-      "@devfile-web/core": ["libs/core/src/index.ts"],
-      "@devfile-web/docs": ["libs/docs/src/index.ts"],
-      "@devfile-web/docs1": ["libs/docs1/src/index.ts"],
-      "@devfile-web/scripts": ["libs/scripts/src/index.ts"]
+      "@devfile-web/core": [
+        "libs/core/src/index.ts"
+      ],
+      "@devfile-web/docs": [
+        "libs/docs/src/index.ts"
+      ],
+      "@devfile-web/docs1": [
+        "libs/docs1/src/index.ts"
+      ],
+      "@devfile-web/scripts": [
+        "libs/scripts/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

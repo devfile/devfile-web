@@ -4,6 +4,7 @@
 **/*.mdoc
 **/*.json
 **/*.yaml
+**/*.swcrc
 **/generated/
 **/snippet.*
 **/dist
