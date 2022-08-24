@@ -3,7 +3,7 @@ import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'fs-extra';
 import { join } from 'node:path';
 // @ts-ignore - no types available
 import { load as yamlToJs } from 'js-yaml';
-import { docVersions, githubDocsUrl } from '../../types';
+import { docVersions, githubDocsUrl } from '../../config';
 import type { DocsNavigation, VersionedDocsNavigation, Section, DocVersions } from '../../types';
 
 export interface Config {

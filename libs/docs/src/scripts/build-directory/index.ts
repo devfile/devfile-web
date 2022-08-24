@@ -1,6 +1,6 @@
 import { existsSync, rmSync, copySync, writeFileSync } from 'fs-extra';
 import { join } from 'node:path';
-import { docVersions } from '../../types';
+import { docVersions } from '../../config';
 import type { DocVersions } from '../../types';
 
 export interface Config {
