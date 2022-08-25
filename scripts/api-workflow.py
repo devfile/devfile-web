@@ -176,11 +176,13 @@ def main():
   if version_change:
     rename_directory(version_change)
     create_devfile_schema(version_change, devfile_schema, delete_old_devfile_schema=True)
+    rename_navigation(version_change)
 
   # Create the directory if there is a new version
   if version_release[-1]:
     create_directory(version_release)
     create_devfile_schema(version_release, devfile_schema)
+    create_navigation(version_release)
 
 if __name__ == '__main__':
   main()
