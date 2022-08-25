@@ -5,14 +5,14 @@ import os
 import typing
 import shutil
 
-def get_version_breakdown(version: str, version_type: str) -> typing.Tuple[str, str, str]:
+def get_version_breakdown(version: str, version_type: str) -> typing.Tuple[int, int, int]:
   '''get the version breakdown'''
   major, minor, bug_fix = re.search(r'^(\d+)\.(\d+)\.(\d+)', version).groups()
 
   if not (isinstance(major, str) and isinstance(minor, str) and isinstance(bug_fix, str)):
     raise TypeError(f'{version_type} could not be read: {version}')
 
-  return major, minor, bug_fix
+  return int(major), int(minor), int(bug_fix)
 
 def update_stable_versions(release: bool, version: str) -> typing.List[str]:
   '''update stable-versions.txt'''
@@ -129,6 +129,23 @@ def create_devfile_schema(versions: typing.Tuple[str, str], devfile_schema: str,
 
   with open(f'{cwd}/libs/docs/src/devfile-schemas/{new_version}.json', 'w', encoding='UTF-8') as f:
     f.write(devfile_schema)
+
+def rename_navigation(version_change: typing.Tuple[str, str]) -> None:
+  '''rename the navigation after a version change'''
+  previous_version, new_version = version_change
+  if previous_version is new_version:
+    return None
+
+  cwd = os.getcwd()
+
+  os.rename(f'{cwd}/libs/docs/src/navigation/{previous_version}.yaml', f'{cwd}/libs/docs/src/navigation/{new_version}.yaml')
+
+def create_navigation(version_release: typing.Tuple[str, str]) -> None:
+  '''create the navigation for the new version'''
+  previous_version, new_version = version_release
+  cwd = os.getcwd()
+
+  shutil.copy2(f'{cwd}/libs/docs/src/navigation/{previous_version}.yaml', f'{cwd}/libs/docs/src/navigation/{new_version}.yaml')
 
 def main():
   '''main method'''
