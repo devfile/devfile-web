@@ -31,8 +31,6 @@ jobs:
       - name: Install and Build
         run: |
           yarn install --frozen-lockfile
-          yarn nx affected --target=build --project=landing-page
-          yarn nx affected --target=export --project=landing-page
           yarn nx affected --target=postexport --project=landing-page
 
       - name: Deploy to Branch

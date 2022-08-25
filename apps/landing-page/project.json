@@ -45,12 +45,14 @@
     },
     "export": {
       "executor": "@nrwl/next:export",
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "landing-page:build:production"
       }
     },
     "postexport": {
       "executor": "nx:run-commands",
+      "dependsOn": ["export"],
       "options": {
         "command": "next-sitemap --config ./apps/landing-page/next-sitemap.config.mjs"
       }
