@@ -29,12 +29,12 @@ def update_stable_versions(release: bool, version: str) -> typing.List[str]:
 
       # Cannot change a stable version unless its a new release
       if release and (line_major is major) and (line_minor is minor):
-        # Cannot change a bug fix version unless its the same bug fix version or newer
-        if line_bug_fix <= bug_fix:
+        # Cannot change a bug fix version unless its a newer version
+        if line_bug_fix < bug_fix:
           is_bug_fix = True
           stable_versions.append(version)
         else:
-          raise RuntimeError(f'Version {version} needs to be the same version or newer than {line}')
+          raise RuntimeError(f'Version {version} needs to be a newer version than {line}')
 
       else:
         stable_versions.append(line)
@@ -67,15 +67,15 @@ def update_versions(stable_versions: typing.List[str], version: str) -> typing.T
 
       if (line_major is major) and (line_minor is minor):
         # Cannot change a stable version unless its a new release
-        # Cannot change a bug fix version unless its the same bug fix version or newer
-        if line_bug_fix <= bug_fix:
+        # Cannot change a bug fix version unless its a newer version
+        if line_bug_fix < bug_fix:
           if line in stable_versions:
             raise RuntimeError(f'Version {version} is a stable version and cannot be changed unless the argument "--release" is passed')
 
           version_change = (line, version)
           versions.append(version)
         else:
-          raise RuntimeError(f'Version {version} needs to be the same version or newer than {line}')
+          raise RuntimeError(f'Version {version} needs to be a newer version than {line}')
 
       else:
         versions.append(line)
