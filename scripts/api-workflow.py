@@ -8,6 +8,10 @@ import shutil
 config = {
   'stable-version': 'libs/docs/src/config/stable-version.txt',
   'versions': 'libs/docs/src/config/versions.txt',
+  'typescript': 'libs/docs/src/config/version.ts',
+  'doc-pages': 'libs/docs/src/docs',
+  'devfile-schemas': 'libs/docs/src/devfile-schemas',
+  'navigation': 'libs/docs/src/navigation',
 }
 
 
@@ -21,14 +25,14 @@ def get_version_breakdown(new_version: str, version_type: str) -> typing.Tuple[i
   return int(major), int(minor), int(bug_fix)
 
 def update_stable_versions(release: bool, new_version: str) -> str:
-  '''update stable-version.txt'''
+  '''update the stable version'''
   # Parse the version
   new_major_version, new_minor_version, new_bug_fix_version = get_version_breakdown(new_version, 'Inputted version')
 
   cwd = os.getcwd()
   stable_version: typing.List[str] = []
 
-  with open(f'{cwd}/libs/docs/src/config/stable-version.txt', encoding='UTF-8') as f:
+  with open(f'{cwd}/{config["stable-version"]}', encoding='UTF-8') as f:
     for version in f.readlines():
       version = version.strip()
       major_stable_version, minor_stable_version, line_bug_fix_stable_version = get_version_breakdown(version, 'Stable version')
@@ -44,13 +48,13 @@ def update_stable_versions(release: bool, new_version: str) -> str:
         stable_version = new_version
 
   if release:
-    with open(f'{cwd}/libs/docs/src/config/stable-version.txt', 'w', encoding='UTF-8') as f:
-      f.write(f'{stable_version}\n\n')
+    with open(f'{cwd}/{config["stable-version"]}', 'w', encoding='UTF-8') as f:
+      f.write(stable_version)
 
   return stable_version
 
 def update_versions(stable_version: str, new_version: str) -> typing.Tuple[typing.List[str], typing.Tuple[str, str] | None]:
-  '''update versions.txt'''
+  '''update the versions'''
   # Parse the version
   new_major_version, new_minor_version, new_bug_fix_version = get_version_breakdown(new_version, 'Inputted version')
 
@@ -58,13 +62,13 @@ def update_versions(stable_version: str, new_version: str) -> typing.Tuple[typin
   versions: typing.List[str] = []
   renamed_version = None
 
-  with open(f'{cwd}/libs/docs/src/config/versions.txt', encoding='UTF-8') as f:
+  with open(f'{cwd}/{config["versions"]}', encoding='UTF-8') as f:
     for version in f.readlines():
       version = version.strip()
       major_version, minor_version, bug_fix_version = get_version_breakdown(version, 'Version')
 
       # If the new major and minor versions are the same, then we need to update the bug fix version
-      if (major_version is not new_major_version) and (minor_version is not new_minor_version):
+      if (major_version is not new_major_version) or (minor_version is not new_minor_version):
         versions.append(version)
       else:
         # Cannot change a bug fix version unless its a newer version
@@ -84,16 +88,16 @@ def update_versions(stable_version: str, new_version: str) -> typing.Tuple[typin
   if not renamed_version:
     versions.append(new_version)
 
-  with open(f'{cwd}/libs/docs/src/config/versions.txt', 'w', encoding='UTF-8') as f:
+  with open(f'{cwd}/{config["versions"]}', 'w', encoding='UTF-8') as f:
     f.write('\n'.join(versions))
 
   return versions, renamed_version
 
 def update_typescript(versions: typing.List[str], stable: str) -> None:
-  '''update version.ts'''
+  '''update the typescript file'''
   cwd = os.getcwd()
 
-  with open(f'{cwd}/libs/docs/src/config/version.ts', 'w', encoding='UTF-8') as f:
+  with open(f'{cwd}/{config["typescript"]}', 'w', encoding='UTF-8') as f:
     f.write(f'''import {{ DocVersions }} from '../types';
 
 export const docVersions = {versions} as const;
@@ -101,8 +105,8 @@ export const docVersions = {versions} as const;
 export const defaultVersion: DocVersions = '{stable}';
 ''')
 
-def create_directory(version_change: typing.Tuple[str, str], is_renamed: bool = False) -> None:
-  '''create the directory after a version change'''
+def update_doc_pages(version_change: typing.Tuple[str, str], is_renamed: bool = False) -> None:
+  '''Updates the doc pages after a version change'''
   previous_version, new_version = version_change
   cwd = os.getcwd()
 
@@ -110,23 +114,23 @@ def create_directory(version_change: typing.Tuple[str, str], is_renamed: bool = 
     if previous_version is new_version:
       return
 
-    os.rename(f'{cwd}/libs/docs/src/docs/{previous_version}', f'{cwd}/libs/docs/src/docs/{new_version}')
+    os.rename(f'{cwd}/{config["doc-pages"]}/{previous_version}', f'{cwd}/{config["doc-pages"]}/{new_version}')
   else:
-    shutil.copytree(f'{cwd}/libs/docs/src/docs/{previous_version}', f'{cwd}/libs/docs/src/docs/{new_version}')
+    shutil.copytree(f'{cwd}/{config["doc-pages"]}/{previous_version}', f'{cwd}/{config["doc-pages"]}/{new_version}')
   
-def create_devfile_schema(version_change: typing.Tuple[str, str], devfile_schema: str, is_renamed: bool = False) -> None:
-  '''create the devfile schema after a version change'''
+def update_devfile_schema(version_change: typing.Tuple[str, str], devfile_schema: str, is_renamed: bool = False) -> None:
+  '''Updates the devfile schema after a version change'''
   previous_version, new_version = version_change
   cwd = os.getcwd()
 
   if is_renamed:
-    os.remove(f'{cwd}/libs/docs/src/devfile-schemas/{previous_version}.json')
+    os.remove(f'{cwd}/{config["devfile-schemas"]}/{previous_version}.json')
 
-  with open(f'{cwd}/libs/docs/src/devfile-schemas/{new_version}.json', 'w', encoding='UTF-8') as f:
+  with open(f'{cwd}/{config["devfile-schemas"]}/{new_version}.json', 'w', encoding='UTF-8') as f:
     f.write(devfile_schema)
 
-def create_navigation(version_change: typing.Tuple[str, str], is_renamed: bool = False) -> None:
-  '''rename the navigation after a version change'''
+def update_navigation(version_change: typing.Tuple[str, str], is_renamed: bool = False) -> None:
+  '''Updates the navigation after a version change'''
   previous_version, new_version = version_change
   cwd = os.getcwd()
 
@@ -134,9 +138,9 @@ def create_navigation(version_change: typing.Tuple[str, str], is_renamed: bool =
     if previous_version is new_version:
       return None
 
-    os.rename(f'{cwd}/libs/docs/src/navigation/{previous_version}.yaml', f'{cwd}/libs/docs/src/navigation/{new_version}.yaml')
+    os.rename(f'{cwd}/{config["navigation"]}/{previous_version}.yaml', f'{cwd}/libs/docs/src/navigation/{new_version}.yaml')
   else:
-    shutil.copy2(f'{cwd}/libs/docs/src/navigation/{previous_version}.yaml', f'{cwd}/libs/docs/src/navigation/{new_version}.yaml')
+    shutil.copy2(f'{cwd}/{config["navigation"]}/{previous_version}.yaml', f'{cwd}/libs/docs/src/navigation/{new_version}.yaml')
 
 def main():
   '''main method'''
@@ -163,18 +167,15 @@ def main():
   # Update the typescript in libs/docs/src/config/version.ts
   update_typescript(versions, stable_version)
 
-  # Rename the directories; otherwise, create the new directories
+  # Change the version; otherwise, create a new version
   if renamed_version:
-    create_directory(renamed_version, is_renamed=True)
-    create_devfile_schema(renamed_version, devfile_schema, is_renamed=True)
-    create_navigation(renamed_version, is_renamed=True)
-  # Create the directory if there is a new version
+    update_doc_pages(renamed_version, is_renamed=True)
+    update_devfile_schema(renamed_version, devfile_schema, is_renamed=True)
+    update_navigation(renamed_version, is_renamed=True)
   else:
-    create_directory(tuple(versions[-2:]))
-    create_devfile_schema(tuple(versions[-2:]), devfile_schema)
-    create_navigation(tuple(versions[-2:]))
-
-  print(config)
+    update_doc_pages(tuple(versions[-2:]))
+    update_devfile_schema(tuple(versions[-2:]), devfile_schema)
+    update_navigation(tuple(versions[-2:]))
 
 if __name__ == '__main__':
   main()
