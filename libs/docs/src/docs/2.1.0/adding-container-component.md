@@ -91,6 +91,8 @@ identified by its image.
 
 3. Container Entrypoint
 
+    Use the `command` attribute of the `container` type to modify the `entrypoint` command of the container created from the image. The availability of the `sleep` command and the support for the `infinity` argument depend on the base image used in the particular images.
+
 ## Additional Resources
 
 - [API reference](./devfile-schema)
