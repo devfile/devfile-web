@@ -29,3 +29,11 @@ Run `yarn install` to download dependencies.
 ## landing-page
 
 [Landing Page README](https://github.com/devfile/devfile-web/tree/main/apps/landing-page)
+
+## Contributing
+
+Please see our [contributing.md](./CONTRIBUTING.md).
+
+## License
+
+Apache License 2.0, see [LICENSE](./LICENSE) for details.
