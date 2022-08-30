@@ -264,7 +264,8 @@ def update_navigation(
 
 
 def main(
-    config: Config | None = None, argv: typing.Union[typing.List[str], None] = None
+    config: typing.Union[Config, None] = None,
+    argv: typing.Union[typing.List[str], None] = None,
 ) -> None:
     """Main method"""
     if config is None:
