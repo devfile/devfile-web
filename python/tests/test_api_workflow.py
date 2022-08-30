@@ -11,12 +11,12 @@ class Expected:
 
     def __init__(
         self,
-        stable_version: None | str = None,
-        versions: None | typing.List[str] = None,
-        doc_pages_directories: None | typing.List[str] = None,
-        devfile_schema_files: None | typing.List[str] = None,
-        navigation_files: None | typing.List[str] = None,
-        error: None | SystemExit | AttributeError | RuntimeError = None,
+        stable_version: typing.Union[None, str] = None,
+        versions: typing.Union[None, typing.List[str]] = None,
+        doc_pages_directories: typing.Union[None, typing.List[str]] = None,
+        devfile_schema_files: typing.Union[None, typing.List[str]] = None,
+        navigation_files: typing.Union[None, typing.List[str]] = None,
+        error: typing.Union[None, SystemExit, AttributeError, RuntimeError] = None,
     ):
         if error is None:
             assert stable_version is not None
