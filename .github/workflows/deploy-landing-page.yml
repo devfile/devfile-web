@@ -1,4 +1,4 @@
-name: Build Landing Page
+name: Deploy Landing Page
 on:
   push:
     branches:
@@ -33,8 +33,13 @@ jobs:
           yarn install --frozen-lockfile
           yarn nx affected --target=postexport --project=landing-page
 
+          if [ -d ./dist/apps/landing-page/exported ]; then
+            echo "is_new_build=true" >> $GITHUB_ENV
+          fi
+
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
+        if: env.is_new_build == 'true'
         with:
           token: ${{ secrets.DEPLOY_TOKEN }}
           branch: master
