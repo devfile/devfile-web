@@ -2,6 +2,7 @@ import pytest
 import typing
 import os
 import shutil
+import re
 from api_workflow.api_workflow import Config, main
 
 
@@ -79,17 +80,19 @@ def assert_list_equality(actual: typing.List[str], expected: typing.List[str]) -
     assert not difference, f"Lists are not equal: {difference}"
 
 
+base_path = "" if re.search("python", os.getcwd()) is not None else "python/"
+
 test_config = Config(
-    "python/testing_directory/test/config/stable-version.txt",
-    "python/testing_directory/test/config/versions.txt",
-    "python/testing_directory/test/config/version.ts",
-    "python/testing_directory/test/docs",
-    "python/testing_directory/test/devfile_schemas",
-    "python/testing_directory/test/navigation",
+    f"{base_path}testing_directory/test/config/stable-version.txt",
+    f"{base_path}testing_directory/test/config/versions.txt",
+    f"{base_path}testing_directory/test/config/version.ts",
+    f"{base_path}testing_directory/test/docs",
+    f"{base_path}testing_directory/test/devfile_schemas",
+    f"{base_path}testing_directory/test/navigation",
 )
 
 test_devfile_schema = (
-    f"{os.getcwd()}/python/testing_directory/backup/devfile_schemas/2.0.0.json"
+    f"{os.getcwd()}/{base_path}testing_directory/backup/devfile_schemas/2.0.0.json"
 )
 
 
@@ -245,8 +248,8 @@ test_devfile_schema = (
 def test_main(config: Config, expected: Expected, argv: typing.List[str]) -> None:
     # Setup before each test
     cwd = os.getcwd()
-    backup_directory = f"{cwd}/python/testing_directory/backup"
-    test_directory = f"{cwd}/python/testing_directory/test"
+    backup_directory = f"{cwd}/{base_path}testing_directory/backup"
+    test_directory = f"{cwd}/{base_path}testing_directory/test"
     if os.path.exists(test_directory) and os.path.isdir(test_directory):
         shutil.rmtree(test_directory)
     shutil.copytree(backup_directory, test_directory)
