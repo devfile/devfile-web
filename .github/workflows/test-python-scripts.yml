@@ -25,10 +25,8 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          cd ./python
           python -m pip install --upgrade pip
           pip install tox tox-gh-actions
       - name: Test with tox
         run: |
-          cd ./python
-          tox
+          tox -c ./python/tox.ini
