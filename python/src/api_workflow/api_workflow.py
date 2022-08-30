@@ -1,6 +1,9 @@
 """
-The script api_workflow updates or releases the documentation version for the landing-page.
-It only runs after devfile/api updates or releases a devfile spec version.
+The script api_workflow publishes or releases the documentation version for the landing-page
+after devfile/api updates a devfile spec version.
+
+Publish - A devfile spec version that is typically in alpha or beta and is newer than the specified stable version.
+Release - A devfile spec version that is stable and is the same version or older than the specified stable version.
 """
 import argparse
 import re
@@ -10,7 +13,7 @@ import shutil
 
 
 class Config:
-    """config class for file locations"""
+    """Config class for file locations"""
 
     def __init__(
         self,
@@ -43,18 +46,36 @@ def get_version_breakdown(
     new_version: str, version_type: str
 ) -> typing.Tuple[int, int, int]:
     """Splits the semver formatted version into major, minor, and bug fix"""
-    major, minor, bug_fix = re.search(r"^(\d+)\.(\d+)\.(\d+)", new_version).groups()
-
-    if not (
-        isinstance(major, str) and isinstance(minor, str) and isinstance(bug_fix, str)
-    ):
-        raise TypeError(f"{version_type} could not be read: {new_version}")
+    try:
+        major, minor, bug_fix = re.search(r"^(\d+)\.(\d+)\.(\d+)", new_version).groups()
+    except AttributeError:
+        raise AttributeError(f"{version_type} could not be read: {new_version}")
 
     return int(major), int(minor), int(bug_fix)
 
 
+def is_newer_version(
+    major_version: int,
+    minor_version: int,
+    bug_fix_version: int,
+    new_major_version: int,
+    new_minor_version: int,
+    new_bug_fix_version: int,
+) -> bool:
+    """Returns whether a version is newer than the current version"""
+    return (
+        (major_version > new_major_version)
+        or (major_version == new_major_version and minor_version > new_minor_version)
+        or (
+            major_version == new_major_version
+            and minor_version == new_minor_version
+            and bug_fix_version >= new_bug_fix_version
+        )
+    )
+
+
 def update_stable_version(release: bool, new_version: str, path: str) -> str:
-    """update the stable version config"""
+    """Updates the stable version"""
     # Parse the version
     new_major_version, new_minor_version, new_bug_fix_version = get_version_breakdown(
         new_version, "Inputted version"
@@ -69,23 +90,23 @@ def update_stable_version(release: bool, new_version: str, path: str) -> str:
         (
             major_stable_version,
             minor_stable_version,
-            line_bug_fix_stable_version,
+            bug_fix_stable_version,
         ) = get_version_breakdown(version, "Stable version")
 
         # Only change the stable version if its a release
-        if not release:
+        if not release or (
+            release
+            and not is_newer_version(
+                new_major_version,
+                new_minor_version,
+                new_bug_fix_version,
+                major_stable_version,
+                minor_stable_version,
+                bug_fix_stable_version,
+            )
+        ):
             stable_version = version
         else:
-            # Cannot change a stable version unless its a newer release
-            if (
-                (major_stable_version > new_major_version)
-                and (minor_stable_version > new_minor_version)
-                and (line_bug_fix_stable_version >= new_bug_fix_version)
-            ):
-                raise RuntimeError(
-                    f"Version {new_version} needs to be a newer version than {version}"
-                )
-
             stable_version = new_version
 
     assert stable_version is not None, RuntimeError("Stable version could not be found")
@@ -98,9 +119,9 @@ def update_stable_version(release: bool, new_version: str, path: str) -> str:
 
 
 def update_versions(
-    stable_version: str, new_version: str, path: str
+    release: bool, stable_version: str, new_version: str, path: str
 ) -> typing.Tuple[typing.List[str], typing.Tuple[str, str] | None]:
-    """update the versions config"""
+    """Update the versions"""
     # Parse the version
     new_major_version, new_minor_version, new_bug_fix_version = get_version_breakdown(
         new_version, "Inputted version"
@@ -137,10 +158,13 @@ def update_versions(
                 ) = get_version_breakdown(stable_version, "Stable version")
 
                 # Cannot change a stable version unless its a newer release
-                if (
-                    (major_stable_version > new_major_version)
-                    and (minor_stable_version > new_minor_version)
-                    and (bug_fix_stable_version >= new_bug_fix_version)
+                if not release and is_newer_version(
+                    major_stable_version,
+                    minor_stable_version,
+                    bug_fix_stable_version,
+                    new_major_version,
+                    new_minor_version,
+                    new_bug_fix_version,
                 ):
                     raise RuntimeError(
                         f'Version {new_version} is a stable version and cannot be changed unless the argument "--release" is passed'
@@ -162,7 +186,7 @@ def update_versions(
 
 
 def update_typescript(versions: typing.List[str], stable: str, path: str) -> None:
-    """update the typescript file config"""
+    """Update the typescript file"""
     cwd = os.getcwd()
 
     with open(f"{cwd}/{path}", "w", encoding="UTF-8") as file:
@@ -215,8 +239,7 @@ def update_devfile_schema(
     if is_renamed:
         os.remove(f"{cwd}/{path}/{previous_version}.json")
 
-    with open(f"{cwd}/{path}/{new_version}.json", "w", encoding="UTF-8") as file:
-        file.write(devfile_schema)
+    shutil.copy2(devfile_schema, f"{cwd}/{path}/{new_version}.json")
 
 
 def update_navigation(
@@ -240,7 +263,7 @@ def update_navigation(
 
 
 def main(config: Config | None = None, argv: typing.List[str] | None = None) -> None:
-    """main method"""
+    """Main method"""
     if config is None:
         config = base_config
 
@@ -271,7 +294,7 @@ def main(config: Config | None = None, argv: typing.List[str] | None = None) -> 
 
     # Update libs/docs/src/config/versions.txt
     versions, renamed_version = update_versions(
-        stable_version, version, path=config.versions
+        release, stable_version, version, path=config.versions
     )
 
     # Update the typescript in libs/docs/src/config/version.ts
