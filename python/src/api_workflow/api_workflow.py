@@ -46,10 +46,11 @@ def get_version_breakdown(
     new_version: str, version_type: str
 ) -> typing.Tuple[int, int, int]:
     """Splits the semver formatted version into major, minor, and bug fix"""
-    try:
-        major, minor, bug_fix = re.search(r"^(\d+)\.(\d+)\.(\d+)", new_version).groups()
-    except AttributeError:
+    result = re.search(r"^(\d+)\.(\d+)\.(\d+)", new_version)
+    if result is None:
         raise AttributeError(f"{version_type} could not be read: {new_version}")
+
+    major, minor, bug_fix = result.groups()
 
     return int(major), int(minor), int(bug_fix)
 
@@ -120,7 +121,7 @@ def update_stable_version(release: bool, new_version: str, path: str) -> str:
 
 def update_versions(
     release: bool, stable_version: str, new_version: str, path: str
-) -> typing.Tuple[typing.List[str], typing.Tuple[str, str] | None]:
+) -> typing.Tuple[typing.List[str], typing.Union[typing.Tuple[str, str], None]]:
     """Update the versions"""
     # Parse the version
     new_major_version, new_minor_version, new_bug_fix_version = get_version_breakdown(
@@ -262,7 +263,9 @@ def update_navigation(
         shutil.copy2(previous_version_path, new_version_path)
 
 
-def main(config: Config | None = None, argv: typing.List[str] | None = None) -> None:
+def main(
+    config: Config | None = None, argv: typing.Union[typing.List[str], None] = None
+) -> None:
     """Main method"""
     if config is None:
         config = base_config
@@ -287,7 +290,7 @@ def main(config: Config | None = None, argv: typing.List[str] | None = None) -> 
     args = parser.parse_args(argv)
     version: str = args.version
     devfile_schema: str = args.devfile_schema
-    release: str = args.release
+    release = bool(args.release)
 
     # Update libs/docs/src/config/stable-version.txt
     stable_version = update_stable_version(release, version, path=config.stable_version)
@@ -308,11 +311,12 @@ def main(config: Config | None = None, argv: typing.List[str] | None = None) -> 
         )
         update_navigation(renamed_version, path=config.navigation, is_renamed=True)
     else:
-        update_doc_pages(tuple(versions[-2:]), path=config.doc_pages)
+        renamed_version = (versions[-2], versions[-1])
+        update_doc_pages(renamed_version, path=config.doc_pages)
         update_devfile_schema(
-            tuple(versions[-2:]), devfile_schema, path=config.devfile_schema
+            renamed_version, devfile_schema, path=config.devfile_schema
         )
-        update_navigation(tuple(versions[-2:]), path=config.navigation)
+        update_navigation(renamed_version, path=config.navigation)
 
 
 if __name__ == "__main__":
