@@ -6,8 +6,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 // fonts in /styles/fonts.css have hard coded urls and must be changed if NEXT_PUBLIC_BASE_PATH changes besides /devfile-web
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
+// Invalid next.config.js options detected: https://github.com/vercel/next.js/issues/39161
 /**
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  * */

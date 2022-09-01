@@ -23,5 +23,6 @@ module.exports = defineConfig({
       framework: 'next',
       bundler: 'webpack',
     },
+    supportFile: './src/support/index.ts',
   },
 });

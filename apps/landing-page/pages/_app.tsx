@@ -17,13 +17,13 @@ import type { DocsNavigation } from '@devfile-web/docs';
 import { docsNavigation, headerNavigation, footerNavigation } from '../navigation';
 
 const analyticsConfig = {
-  writeKey: process.env.NEXT_PUBLIC_ANALYTICS_WRITE_KEY,
+  writeKey: process.env.NEXT_PUBLIC_ANALYTICS_WRITE_KEY ?? '',
   client: 'landing-page',
 };
 
-function getNodeText(node: Tag): string {
+function getNodeText(node: Tag | null): string {
   let text = '';
-  for (const child of node.children ?? []) {
+  for (const child of node?.children ?? []) {
     text += typeof child === 'string' ? child : getNodeText(child);
   }
   return text;
@@ -38,7 +38,7 @@ function collectHeadings(
   if (!Array.isArray(nodes)) return sections;
 
   for (const node of nodes) {
-    if (typeof node !== 'string') {
+    if (node && typeof node !== 'string') {
       if (node.name === 'h2' || node.name === 'h3') {
         const title = getNodeText(node);
         if (title) {

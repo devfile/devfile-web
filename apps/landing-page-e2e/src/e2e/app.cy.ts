@@ -1,5 +1,5 @@
 import type { DocsNavigation } from '@devfile-web/docs';
-import docsNavigation from '../../../../libs/docs/src/scripts/build-navigation/dist/docs-navigation.json';
+import docsNavigation from '../../../../dist/libs/scripts/navigation/navigation.json';
 
 const generatedLinkQuery = '[data-testid="generated-link"]';
 
@@ -8,7 +8,7 @@ describe('Landing Page', () => {
 
   it('has valid links', () => {
     cy.get('a').each(($a) => {
-      const href = $a.attr('href');
+      const href = $a.attr('href') ?? 'undefined';
       cy.request(href).its('status').should('eq', 200);
     });
   });
@@ -26,7 +26,7 @@ describe('Docs', () => {
               it('has valid links', () => {
                 if (Cypress.$(generatedLinkQuery).length > 0) {
                   cy.get(`a${generatedLinkQuery}`).each(($a) => {
-                    const href = $a.attr('href');
+                    const href = $a.attr('href') ?? 'undefined';
                     cy.request(href).its('status').should('eq', 200);
                   });
                 }

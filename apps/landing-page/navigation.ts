@@ -10,7 +10,7 @@ import { defaultVersion } from '@devfile-web/docs';
 import { ViewGridIcon, BookOpenIcon, ViewListIcon } from '@heroicons/react/outline';
 import type { HeaderNavigation, FooterNavigation, NavigationElement } from '@devfile-web/core';
 
-export { docsNavigation } from '@devfile-web/docs';
+export { default as docsNavigation } from '../../dist/libs/scripts/navigation/navigation.json';
 
 export const headerNavigation: HeaderNavigation = [
   { name: 'Registry', href: 'https://registry.devfile.io' },
@@ -48,6 +48,7 @@ export const footerNavigation: FooterNavigation = {
 
 export interface Custom404NavigationElement extends NavigationElement {
   description: string;
+  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
 }
 
 export type Custom404Navigation = Custom404NavigationElement[];

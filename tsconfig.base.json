@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
+    "strict": true,
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -25,6 +26,12 @@
       ],
       "@devfile-web/docs": [
         "libs/docs/src/index.ts"
+      ],
+      "@devfile-web/docs1": [
+        "libs/docs1/src/index.ts"
+      ],
+      "@devfile-web/scripts": [
+        "libs/scripts/src/index.ts"
       ]
     }
   },
