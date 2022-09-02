@@ -33,12 +33,11 @@ jobs:
 
       - name: Build
         run: |
-          yarn nx affected --target=postexport --project=landing-page
-          [ -d ./dist/apps/landing-page/exported ] && echo "is_new_build=true" >> $GITHUB_ENV
+          yarn nx affected --target=postexport --project=landing-page || echo "is_new_build=false" >> $GITHUB_ENV
 
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
-        if: env.is_new_build == 'true'
+        if: env.is_new_build != 'false'
         with:
           token: ${{ secrets.DEPLOY_TOKEN }}
           branch: master
