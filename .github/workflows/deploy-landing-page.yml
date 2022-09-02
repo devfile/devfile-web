@@ -31,7 +31,7 @@ jobs:
       - name: Install and Build
         run: |
           yarn install --frozen-lockfile
-          yarn nx affected --target=postexport --project=landing-page
+          yarn nx affected --target=postexport --project=landing-page --skip-nx-cache
 
           if [ -d ./dist/apps/landing-page/exported ]; then
             echo "is_new_build=true" >> $GITHUB_ENV
