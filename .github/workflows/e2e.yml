@@ -1,0 +1,32 @@
+name: E2E
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  main:
+    name: Main Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Install
+        run: |
+          yarn install
+
+      - name: E2E tests
+        run: |
+          yarn nx affected --target=e2e --parallel=3 --skip-nx-cache

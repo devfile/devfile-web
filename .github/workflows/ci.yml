@@ -24,7 +24,6 @@ jobs:
         npx nx affected --target=test --parallel=3 --ci --code-coverage --skip-nx-cache
       final-commands: |
         npx nx affected --target=build --parallel=3 --skip-nx-cache
-        npx nx affected --target=e2e --parallel=3 --skip-nx-cache
 
   agents:
     name: Nx Cloud - Agents
