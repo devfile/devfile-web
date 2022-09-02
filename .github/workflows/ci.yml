@@ -11,25 +11,35 @@ concurrency:
 
 jobs:
   main:
-    name: Nx Cloud - Main Job
-    uses: nrwl/ci/.github/workflows/nx-cloud-main.yml@v0.6
-    secrets: inherit
-    with:
-      number-of-agents: 3
-      init-commands: |
-        npx nx affected --target=prebuild --parallel=3
-      parallel-commands: |
-        npx nx-cloud record -- npx nx workspace-lint
-        npx nx-cloud record -- npx nx format:check
-      parallel-commands-on-agents: |
-        npx nx affected --target=lint --parallel=3
-        npx nx affected --target=test --parallel=3 --ci --code-coverage
-        npx nx affected --target=build --parallel=3
-        npx nx affected --target=e2e --parallel=3
+    name: Main Job
+    runs-on: ubuntu-latest
 
-  agents:
-    name: Nx Cloud - Agents
-    uses: nrwl/ci/.github/workflows/nx-cloud-agents.yml@v0.6
-    secrets: inherit
-    with:
-      number-of-agents: 3
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Install
+        run: yarn install --frozen-lockfile
+
+      - name: Lint
+        run: |
+          yarn nx workspace-lint
+          yarn nx format:check
+          yarn nx affected --target=lint --parallel=3
+
+      - name: Test
+        run: |
+          yarn nx affected --target=test --parallel=3 --ci --code-coverage
+
+      - name: Build
+        run: |
+          yarn nx affected --target=build --parallel=3
+
+      - name: E2E
+        run: |
+          yarn nx affected --target=e2e --parallel=3
