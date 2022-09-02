@@ -29,15 +29,16 @@ jobs:
         uses: nrwl/nx-set-shas@v2
 
       - name: Install
-        run: yarn install --frozen-lockfile
+        run: |
+          yarn install --frozen-lockfile
 
       - name: Build
         run: |
-          yarn nx affected --target=postexport --project=landing-page || echo "is_new_build=false" >> $GITHUB_ENV
+          yarn nx affected --target=postexport --project=landing-page || echo "is_old_build=true" >> $GITHUB_ENV
 
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
-        if: env.is_new_build != 'false'
+        if: env.is_old_build != 'true'
         with:
           token: ${{ secrets.DEPLOY_TOKEN }}
           branch: master
