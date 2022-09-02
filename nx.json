@@ -18,7 +18,6 @@
       "runner": "@nrwl/nx-cloud",
       "options": {
         "cacheableOperations": [
-          "prebuild",
           "build",
           "export",
           "postexport",
