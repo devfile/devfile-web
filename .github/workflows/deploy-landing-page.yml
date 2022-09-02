@@ -34,11 +34,15 @@ jobs:
 
       - name: Build
         run: |
-          yarn nx affected --target=postexport --project=landing-page || echo "is_old_build=true" >> $GITHUB_ENV
+          # nx returns exit code 0 if the build remains the same
+          yarn nx affected --target=postexport --project=landing-page || true
+
+          # Only deploy if the build has changed
+          [ -d ./dist/apps/landing-page/exported ] && echo "is_new_build=true" >> $GITHUB_ENV
 
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
-        if: env.is_old_build != 'true'
+        if: env.is_new_build != 'true'
         with:
           token: ${{ secrets.DEPLOY_TOKEN }}
           branch: master
