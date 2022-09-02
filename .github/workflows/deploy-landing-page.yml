@@ -29,14 +29,13 @@ jobs:
       - name: Set SHA
         uses: nrwl/nx-set-shas@v2
 
-      - name: Install and Build
-        run: |
-          yarn install --frozen-lockfile
-          yarn nx affected --target=postexport --project=landing-page
+      - name: Install
+        run: yarn install --frozen-lockfile
 
-          if [ -d ./dist/apps/landing-page/exported ]; then
-            echo "is_new_build=true" >> $GITHUB_ENV
-          fi
+      - name: Build
+        run: |
+          yarn nx affected --target=postexport --project=landing-page
+          [ -d ./dist/apps/landing-page/exported ] && echo "is_new_build=true" >> $GITHUB_ENV
 
       - name: Deploy to Branch
         uses: JamesIves/github-pages-deploy-action@v4
