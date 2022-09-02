@@ -16,8 +16,6 @@ jobs:
     secrets: inherit
     with:
       number-of-agents: 3
-      environment-variables: |
-        NX_SKIP_NX_CACHE=true
       init-commands: |
         npx nx affected --target=prebuild --parallel=3
       parallel-commands: |
