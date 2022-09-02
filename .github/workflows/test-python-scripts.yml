@@ -11,6 +11,7 @@ concurrency:
 
 jobs:
   test:
+    name: Python Tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
