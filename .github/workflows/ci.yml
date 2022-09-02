@@ -16,14 +16,17 @@ jobs:
     secrets: inherit
     with:
       number-of-agents: 3
+      environment-variables: |
+        NX_SKIP_NX_CACHE=true
       parallel-commands: |
         npx nx-cloud record -- npx nx workspace-lint
         npx nx-cloud record -- npx nx format:check
       parallel-commands-on-agents: |
-        npx nx affected --target=lint --parallel=3 --skip-nx-cache
-        npx nx affected --target=test --parallel=3 --ci --code-coverage --skip-nx-cache
+        npx nx affected --target=lint --parallel=3
+        npx nx affected --target=test --parallel=3 --ci --code-coverage
       final-commands: |
-        npx nx affected --target=build --parallel=3 --skip-nx-cache
+        npx nx affected --target=build --parallel=3
+        npx nx affected --target=e2e --parallel=3
 
   agents:
     name: Nx Cloud - Agents

@@ -18,6 +18,7 @@ jobs:
       NEXT_PUBLIC_DOCSEARCH_APP_ID: FCRPEMIKYK
       NEXT_PUBLIC_DOCSEARCH_API_KEY: 3f20b782c93da03c6626d6cacae0ceb5
       NEXT_PUBLIC_DOCSEARCH_INDEX_NAME: devfile
+      NX_SKIP_NX_CACHE: true
 
     steps:
       - name: Checkout
@@ -31,7 +32,7 @@ jobs:
       - name: Install and Build
         run: |
           yarn install --frozen-lockfile
-          yarn nx affected --target=postexport --project=landing-page --skip-nx-cache
+          yarn nx affected --target=postexport --project=landing-page
 
           if [ -d ./dist/apps/landing-page/exported ]; then
             echo "is_new_build=true" >> $GITHUB_ENV
