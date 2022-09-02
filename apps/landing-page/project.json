@@ -7,7 +7,7 @@
       "executor": "nx:run-commands",
       "dependsOn": ["^build"],
       "options": {
-        "command": "yarn docs"
+        "command": "bash ./scripts/docs.sh"
       }
     },
     "build": {
