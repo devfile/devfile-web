@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useReducer, useMemo } from 'react';
+import React, { createContext, useContext, useReducer, useMemo, useCallback } from 'react';
+import Fuse from 'fuse.js';
 
 export interface Devfile {
   name: string;
@@ -64,7 +65,7 @@ export interface UseSearchDevfiles {
   dispatch: React.Dispatch<SearchDevfilesAction>;
 }
 
-const isSearchIn = (
+export const isSearchIn = (
   value: string | string[] | undefined,
   search: string | string[] | undefined,
 ): boolean => {
@@ -95,53 +96,73 @@ const isSearchIn = (
   return false;
 };
 
-export function searchDevfilesReducer(
-  state: SearchDevfilesState,
-  action: SearchDevfilesAction,
-): SearchDevfilesState {
-  const { type, payload } = action;
-  const { devfileRegistries } = state;
-
-  const newState: SearchDevfilesState = { ...state };
-
-  switch (type) {
-    case 'SEARCH':
-      newState.search = payload;
-      break;
-    case 'FILTER_ON_TYPES':
-      newState.selectedTypes = payload;
-      break;
-    case 'FILTER_ON_TAGS':
-      newState.selectedTags = payload;
-      break;
-    default:
-      // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      const _exhaustiveCheck: never = action;
-      return _exhaustiveCheck;
-  }
-
-  newState.searchedDevfileRegistries = devfileRegistries.map((devfileRegistry) => ({
-    ...devfileRegistry,
-    devfiles: devfileRegistry.devfiles.filter(
-      (devfile) =>
-        // Search on display name and description
-        (isSearchIn(devfile.displayName, newState.search) ||
-          isSearchIn(devfile.description, newState.search)) &&
-        // Filter on types
-        isSearchIn(devfile.type, newState.selectedTypes) &&
-        // Filter on tags
-        isSearchIn(devfile.tags, newState.selectedTags),
-    ),
-  }));
-
-  return newState;
-}
-
 const SearchDevfilesContext = createContext<UseSearchDevfiles | undefined>(undefined);
 
 export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.Element {
   const { children, devfileRegistries } = props;
+
+  // fuse must be initialized with the devfiles otherwise a match in devfiles will return the whole devfile registry instead of the devfile
+  const fuse = useMemo(
+    () =>
+      devfileRegistries.map((devfileRegistry) => ({
+        name: devfileRegistry.name,
+        link: devfileRegistry.link,
+        devfiles: new Fuse(devfileRegistry.devfiles, { keys: ['displayName', 'description'] }),
+      })),
+    [devfileRegistries],
+  );
+
+  const searchDevfilesReducer = useCallback(
+    (state: SearchDevfilesState, action: SearchDevfilesAction): SearchDevfilesState => {
+      const { type, payload } = action;
+
+      const newState: SearchDevfilesState = { ...state };
+
+      switch (type) {
+        case 'SEARCH':
+          newState.search = payload;
+          break;
+        case 'FILTER_ON_TYPES':
+          newState.selectedTypes = payload;
+          break;
+        case 'FILTER_ON_TAGS':
+          newState.selectedTags = payload;
+          break;
+        default:
+          // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          const _exhaustiveCheck: never = action;
+          return _exhaustiveCheck;
+      }
+
+      if (newState.search && newState.search !== '') {
+        newState.searchedDevfileRegistries = fuse.map((devfileRegistry) => ({
+          name: devfileRegistry.name,
+          link: devfileRegistry.link,
+          devfiles: devfileRegistry.devfiles
+            // For some reason typescript does not recognize newState.search cannot be undefined
+            .search(newState.search ?? '')
+            .map((result) => result.item),
+        }));
+      }
+
+      newState.searchedDevfileRegistries = (
+        newState.searchedDevfileRegistries ?? devfileRegistries
+      ).map((devfileRegistry) => ({
+        ...devfileRegistry,
+        devfiles: devfileRegistry.devfiles.filter(
+          (devfile) =>
+            // Filter on types
+            isSearchIn(devfile.type, newState.selectedTypes) &&
+            // Filter on tags
+            isSearchIn(devfile.tags, newState.selectedTags),
+        ),
+      }));
+
+      return newState;
+    },
+    [devfileRegistries, fuse],
+  );
 
   const [state, dispatch] = useReducer<React.Reducer<SearchDevfilesState, SearchDevfilesAction>>(
     searchDevfilesReducer,

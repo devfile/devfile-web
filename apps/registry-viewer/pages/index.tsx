@@ -11,10 +11,7 @@ export function Test(): JSX.Element {
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={(): void => dispatch({ type: 'FILTER_ON_TAGS', payload: ['go'] })}
-      >
+      <button type="button" onClick={(): void => dispatch({ type: 'SEARCH', payload: 'go' })}>
         test
       </button>
       {searchedDevfileRegistries.map((devfileRegistry) => (
