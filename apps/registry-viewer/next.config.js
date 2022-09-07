@@ -1,6 +1,5 @@
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withPlugins = require('next-compose-plugins');
-const withMarkdoc = require('@markdoc/next.js');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
@@ -30,4 +29,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withMarkdoc(), withNx], nextConfig);
+module.exports = withPlugins([withBundleAnalyzer, withNx], nextConfig);

@@ -3,8 +3,8 @@ import { Listbox } from '@headlessui/react';
 import {
   SunIcon as LightIcon,
   MoonIcon as DarkIcon,
-  DesktopComputerIcon as SystemIcon,
-} from '@heroicons/react/solid';
+  ComputerDesktopIcon as SystemIcon,
+} from '@heroicons/react/24/solid';
 import clsx from 'clsx';
 
 export interface Theme {

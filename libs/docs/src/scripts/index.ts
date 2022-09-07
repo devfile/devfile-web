@@ -4,7 +4,6 @@ import buildDirectory from './build-directory';
 import buildNavigation from './build-navigation';
 import copyDevfileSchemas from './copy-devfile-schemas';
 
-// eslint-disable-next-line unicorn/prefer-module
 const basePath = join(__dirname, '/../../../../..');
 const sourceDir = join(basePath, 'libs/docs/src');
 const outputDir = join(basePath, 'dist/libs/scripts');

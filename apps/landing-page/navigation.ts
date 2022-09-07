@@ -7,7 +7,7 @@ import {
   RedHatIcon,
 } from '@devfile-web/core';
 import { defaultVersion } from '@devfile-web/docs';
-import { ViewGridIcon, BookOpenIcon, ViewListIcon } from '@heroicons/react/outline';
+import { Squares2X2Icon, BookOpenIcon, Bars4Icon } from '@heroicons/react/24/outline';
 import type { HeaderNavigation, FooterNavigation, NavigationElement } from '@devfile-web/core';
 
 export { default as docsNavigation } from '../../dist/libs/scripts/navigation/navigation.json';
@@ -63,13 +63,13 @@ export const custom404Navigation: Custom404Navigation = [
   {
     name: 'API Reference',
     description: 'A complete API reference for devfile',
-    image: ViewListIcon,
+    image: Bars4Icon,
     href: `/docs/${defaultVersion}/devfile-schema`,
   },
   {
     name: 'Registry',
     description: 'Browse devfile stacks and samples',
-    image: ViewGridIcon,
+    image: Squares2X2Icon,
     href: 'https://registry.devfile.io',
   },
 ];

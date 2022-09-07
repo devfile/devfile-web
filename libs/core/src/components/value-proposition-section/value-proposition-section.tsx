@@ -1,22 +1,22 @@
 import {
-  ChatAlt2Icon,
-  ClipboardCheckIcon,
+  ChatBubbleLeftRightIcon,
+  ClipboardDocumentCheckIcon,
   LockClosedIcon,
-  RefreshIcon,
-} from '@heroicons/react/outline';
+  ArrowPathIcon,
+} from '@heroicons/react/24/outline';
 
 const features = [
   {
     name: 'Reproducible',
     description:
       'Development environments are now quick to create, can be thrown away at will, and can be easily re-created when needed.',
-    icon: RefreshIcon,
+    icon: ArrowPathIcon,
   },
   {
     name: 'Consistent',
     description:
       'Mechanism for teams to share configurations across projects, and provide a single source of truth throughout the application lifecycle.',
-    icon: ClipboardCheckIcon,
+    icon: ClipboardDocumentCheckIcon,
   },
   {
     name: 'Secure',
@@ -28,7 +28,7 @@ const features = [
     name: 'Community',
     description:
       "Share expertise from other developers and communities into your team's development environment.",
-    icon: ChatAlt2Icon,
+    icon: ChatBubbleLeftRightIcon,
   },
 ];
 

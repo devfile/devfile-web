@@ -95,7 +95,8 @@
         "react/require-default-props": "off",
         "unicorn/no-abusive-eslint-disable": "off",
         "eslint-comments/no-unlimited-disable": "off",
-        "unicorn/no-null": "off"
+        "unicorn/no-null": "off",
+        "unicorn/prefer-module": "off"
       }
     },
     {
@@ -147,7 +148,10 @@
         // Next.js does not require all anchor tags to have an href
         "jsx-a11y/anchor-is-valid": "off",
         "@typescript-eslint/ban-ts-comment": "off",
-        "react/no-unused-prop-types": "off"
+        "react/no-unused-prop-types": "off",
+        "no-case-declarations": "off",
+        "no-underscore-dangle": "off",
+        "@typescript-eslint/naming-convention": "warn"
       }
     },
     {
