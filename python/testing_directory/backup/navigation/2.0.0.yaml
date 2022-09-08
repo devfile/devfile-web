@@ -28,8 +28,10 @@
       href: ./adding-event-bindings
 - title: General
   links:
-    - title: Adding attributes
-      href: ./adding-attributes
+    - title: Defining variables
+      href: ./defining-variables  
+    - title: Defining attributes
+      href: ./defining-attributes
     - title: Adding projects
       href: ./adding-projects
     - title: Referring to a parent devfile
