@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
-import { XIcon } from '@heroicons/react/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 export function CncfBanner(): JSX.Element | undefined {
   const [showBanner, setShowBanner] = useState<boolean>(true);
@@ -31,7 +31,7 @@ export function CncfBanner(): JSX.Element | undefined {
               onClick={(): void => setShowBanner(false)}
             >
               <span className="sr-only">Dismiss</span>
-              <XIcon className="h-6 w-6 text-white" aria-hidden="true" />
+              <XMarkIcon className="h-6 w-6 text-white" aria-hidden="true" />
             </button>
           </div>
         </div>

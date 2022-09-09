@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import clsx from 'clsx';
-import { PencilIcon } from '@heroicons/react/solid';
+import { PencilIcon } from '@heroicons/react/20/solid';
 import { githubDocsUrl } from '@devfile-web/docs';
 import {
   Navigation,
@@ -11,7 +11,7 @@ import {
   Fence,
   LandingPageMeta,
 } from '../../components';
-import { useTableOfContents, useNavigation, useCodeblock, CodeblockProvider } from '../../hooks';
+import { useTableOfContents, useCodeblock, CodeblockProvider, useNavigation } from '../../hooks';
 import type { TableOfContents, TableOfContentsChild } from '../../hooks';
 
 export interface LandingPageLayoutProps {

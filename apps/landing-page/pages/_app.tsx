@@ -1,15 +1,16 @@
-import { AppProps } from 'next/app';
 import { slugifyWithCounter } from '@sindresorhus/slugify';
 import 'focus-visible';
 import {
   AnalyticsProvider,
   NavigationProvider,
+  LinksProvider,
   LandingPageMeta,
   Header,
   Footer,
-  LandingPageLayout as Layout,
+  LandingPageLayout,
 } from '@devfile-web/core';
 import '../styles/tailwind.css';
+import type { AppProps } from 'next/app';
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
 import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
 import type { TableOfContents } from '@devfile-web/core';
@@ -80,27 +81,25 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
 
   return (
     <AnalyticsProvider {...analyticsConfig}>
-      <NavigationProvider
-        headerNavigation={headerNavigation}
-        footerNavigation={footerNavigation}
-        docsNavigation={docsNavigation as DocsNavigation}
-      >
-        <div className="flex h-screen min-w-[300px] flex-col justify-between">
-          <div className="grow">
-            <LandingPageMeta />
-            <Header />
-            <Layout
-              title={title}
-              tableOfContents={tableOfContents}
-              pageTitle={pageTitle}
-              pageDescription={pageDescription}
-            >
-              <Component {...pageProps} />
-            </Layout>
+      <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
+        <NavigationProvider docsNavigation={docsNavigation as DocsNavigation}>
+          <div className="flex h-screen min-w-[300px] flex-col justify-between">
+            <div className="grow">
+              <LandingPageMeta />
+              <Header websiteName="Devfile.io" isLandingPage />
+              <LandingPageLayout
+                title={title}
+                tableOfContents={tableOfContents}
+                pageTitle={pageTitle}
+                pageDescription={pageDescription}
+              >
+                <Component {...pageProps} />
+              </LandingPageLayout>
+            </div>
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </NavigationProvider>
+        </NavigationProvider>
+      </LinksProvider>
     </AnalyticsProvider>
   );
 }

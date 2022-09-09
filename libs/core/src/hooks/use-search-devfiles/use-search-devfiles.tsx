@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer, useMemo, useCallback } from 'react';
 import Fuse from 'fuse.js';
 
-export interface Devfile {
+export interface DevfileJson {
   name: string;
   version?: string;
   displayName: string;
@@ -24,10 +24,16 @@ export interface Devfile {
   };
 }
 
+export interface Devfile extends DevfileJson {
+  devfileRegistry: {
+    name: string;
+    link: string;
+  };
+}
+
 export interface DevfileRegistry {
   name: string;
   link: string;
-  devfiles: Devfile[];
 }
 
 export interface SearchAction {
@@ -45,11 +51,29 @@ export interface FilterOnTagsAction {
   payload: string[];
 }
 
-export type SearchDevfilesAction = SearchAction | FilterOnTypesAction | FilterOnTagsAction;
+export interface SetPageNumberAction {
+  type: 'SET_PAGE_NUMBER';
+  payload: number;
+}
+
+export type SearchDevfilesAction =
+  | SearchAction
+  | FilterOnTypesAction
+  | FilterOnTagsAction
+  | SetPageNumberAction;
+
+export interface PageInfo {
+  pageNumber: number;
+  pageSize: number;
+  totalPages: number;
+  totalDevfiles: number;
+}
 
 export interface SearchDevfilesState {
-  devfileRegistries: DevfileRegistry[];
-  searchedDevfileRegistries?: DevfileRegistry[];
+  devfiles: Devfile[];
+  searchedDevfiles?: Devfile[];
+  limitedSearchedDevfiles?: Devfile[];
+  pageInfo: PageInfo;
   search?: string;
   selectedTypes?: string[];
   selectedTags?: string[];
@@ -57,11 +81,13 @@ export interface SearchDevfilesState {
 
 export interface SearchDevfilesProviderProps {
   children: React.ReactNode;
-  devfileRegistries: DevfileRegistry[];
+  devfiles: Devfile[];
 }
 
 export interface UseSearchDevfiles {
-  searchedDevfileRegistries: DevfileRegistry[];
+  searchedDevfiles: Devfile[];
+  limitedSearchedDevfiles: Devfile[];
+  pageInfo: PageInfo;
   dispatch: React.Dispatch<SearchDevfilesAction>;
 }
 
@@ -96,27 +122,21 @@ export const isSearchIn = (
   return false;
 };
 
-const SearchDevfilesContext = createContext<UseSearchDevfiles | undefined>(undefined);
+export const SearchDevfilesContext = createContext<UseSearchDevfiles | undefined>(undefined);
 
 export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.Element {
-  const { children, devfileRegistries } = props;
+  const { children, devfiles } = props;
 
-  // fuse must be initialized with the devfiles otherwise a match in devfiles will return the whole devfile registry instead of the devfile
   const fuse = useMemo(
-    () =>
-      devfileRegistries.map((devfileRegistry) => ({
-        name: devfileRegistry.name,
-        link: devfileRegistry.link,
-        devfiles: new Fuse(devfileRegistry.devfiles, { keys: ['displayName', 'description'] }),
-      })),
-    [devfileRegistries],
+    () => new Fuse(devfiles, { keys: ['displayName', 'description'] }),
+    [devfiles],
   );
 
   const searchDevfilesReducer = useCallback(
     (state: SearchDevfilesState, action: SearchDevfilesAction): SearchDevfilesState => {
       const { type, payload } = action;
 
-      const newState: SearchDevfilesState = { ...state };
+      const newState: SearchDevfilesState = { ...state, searchedDevfiles: undefined };
 
       switch (type) {
         case 'SEARCH':
@@ -128,6 +148,9 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
         case 'FILTER_ON_TAGS':
           newState.selectedTags = payload;
           break;
+        case 'SET_PAGE_NUMBER':
+          newState.pageInfo.pageNumber = payload;
+          break;
         default:
           // https://www.typescriptlang.org/docs/handbook/2/narrowing.html#exhaustiveness-checking
           // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -135,46 +158,64 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
           return _exhaustiveCheck;
       }
 
+      // Filter on search
       if (newState.search && newState.search !== '') {
-        newState.searchedDevfileRegistries = fuse.map((devfileRegistry) => ({
-          name: devfileRegistry.name,
-          link: devfileRegistry.link,
-          devfiles: devfileRegistry.devfiles
-            // For some reason typescript does not recognize newState.search cannot be undefined
-            .search(newState.search ?? '')
-            .map((result) => result.item),
-        }));
+        newState.searchedDevfiles = fuse.search(newState.search).map((result) => result.item);
       }
 
-      newState.searchedDevfileRegistries = (
-        newState.searchedDevfileRegistries ?? devfileRegistries
-      ).map((devfileRegistry) => ({
-        ...devfileRegistry,
-        devfiles: devfileRegistry.devfiles.filter(
-          (devfile) =>
-            // Filter on types
-            isSearchIn(devfile.type, newState.selectedTypes) &&
-            // Filter on tags
-            isSearchIn(devfile.tags, newState.selectedTags),
-        ),
-      }));
+      newState.searchedDevfiles = (newState.searchedDevfiles ?? devfiles).filter(
+        (devfile) =>
+          isSearchIn(devfile.type, newState.selectedTypes) &&
+          // Filter on tags
+          isSearchIn(devfile.tags, newState.selectedTags),
+      );
+
+      newState.pageInfo = {
+        ...newState.pageInfo,
+        pageSize: newState.searchedDevfiles.length < 15 ? newState.searchedDevfiles.length : 15,
+        totalPages: Math.ceil(newState.searchedDevfiles.length / 15),
+        totalDevfiles: newState.searchedDevfiles.length,
+      };
+
+      newState.limitedSearchedDevfiles = newState.searchedDevfiles.slice(
+        newState.pageInfo.pageSize * (newState.pageInfo.pageNumber - 1),
+        newState.pageInfo.pageSize +
+          newState.pageInfo.pageSize * (newState.pageInfo.pageNumber - 1),
+      );
 
       return newState;
     },
-    [devfileRegistries, fuse],
+    [devfiles, fuse],
   );
 
   const [state, dispatch] = useReducer<React.Reducer<SearchDevfilesState, SearchDevfilesAction>>(
     searchDevfilesReducer,
-    { devfileRegistries },
+    {
+      devfiles,
+      pageInfo: {
+        pageNumber: 1,
+        pageSize: 15,
+        totalPages: Math.ceil(devfiles.length / 15),
+        totalDevfiles: devfiles.length,
+      },
+    },
   );
 
   const value = useMemo(
     () => ({
-      searchedDevfileRegistries: state.searchedDevfileRegistries ?? state.devfileRegistries,
+      searchedDevfiles: state.searchedDevfiles ?? devfiles,
+      limitedSearchedDevfiles:
+        state.limitedSearchedDevfiles ?? state.devfiles.slice(0, state.pageInfo.pageSize),
+      pageInfo: state.pageInfo,
       dispatch,
     }),
-    [state, dispatch],
+    [
+      state.searchedDevfiles,
+      state.limitedSearchedDevfiles,
+      state.devfiles,
+      state.pageInfo,
+      devfiles,
+    ],
   );
 
   return <SearchDevfilesContext.Provider value={value}>{children}</SearchDevfilesContext.Provider>;

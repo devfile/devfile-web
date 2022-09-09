@@ -1,7 +1,7 @@
 import { Fragment, useState, useCallback, useMemo } from 'react';
 import Highlight, { defaultProps } from '@schultzp2020/prism-react-renderer';
 import clsx from 'clsx';
-import { ClipboardCopyIcon, CheckIcon } from '@heroicons/react/outline';
+import { ClipboardDocumentCheckIcon, CheckIcon } from '@heroicons/react/24/outline';
 import { useCopyToClipboard } from 'usehooks-ts';
 import type { Language } from '@schultzp2020/prism-react-renderer';
 import { useNavigation } from '../../hooks';
@@ -54,7 +54,7 @@ export function Fence(props: FenceProps): JSX.Element {
               {isCopied ? (
                 <CheckIcon className="h-8 w-auto p-1 text-green-600" />
               ) : (
-                <ClipboardCopyIcon className="h-8 w-auto p-1 text-slate-400" />
+                <ClipboardDocumentCheckIcon className="h-8 w-auto p-1 text-slate-400" />
               )}
             </button>
             {isCopied && (

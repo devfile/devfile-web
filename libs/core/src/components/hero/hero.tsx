@@ -5,7 +5,7 @@ import type { SVGProps } from 'react';
 import Highlight, { defaultProps } from '@schultzp2020/prism-react-renderer';
 import type { Language } from '@schultzp2020/prism-react-renderer';
 import { Button } from '../button/button';
-import { useNavigation } from '../../hooks';
+import { useLinks } from '../../hooks';
 import { HeroBackground } from '../hero-background/hero-background';
 import blurCyanImage from '../../images/blur-cyan.png';
 import blurIndigoImage from '../../images/blur-indigo.png';
@@ -41,7 +41,7 @@ function TrafficLightsIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
 }
 
 export function Hero(): JSX.Element {
-  const { headerNavigation } = useNavigation();
+  const { headerNavigation } = useLinks();
 
   return (
     <div className="overflow-hidden bg-slate-900 dark:-mb-16 dark:mt-[-12rem] dark:pb-32 dark:pt-[12rem] ">

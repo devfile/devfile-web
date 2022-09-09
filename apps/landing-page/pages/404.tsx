@@ -1,4 +1,4 @@
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { DevfileIcon, LandingPageMeta } from '@devfile-web/core';
 import Link from 'next/link';
 import { custom404Navigation } from '../navigation';

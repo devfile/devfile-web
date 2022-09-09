@@ -1,25 +1,25 @@
 import Link from 'next/link';
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import { DotsVerticalIcon } from '@heroicons/react/outline';
-import { ChevronRightIcon } from '@heroicons/react/solid';
+import { EllipsisVerticalIcon } from '@heroicons/react/24/outline';
 import { Popover } from '@headlessui/react';
-import { useRouter } from 'next/router';
 import { DevfileIcon } from '../../icons';
-import { MobileNavigation } from '../mobile-navigation/mobile-navigation';
-import { LandingPageSearch as Search } from '../landing-page-search/landing-page-search';
+import { LandingPageSearch } from '../landing-page-search/landing-page-search';
 import { ThemeSelector } from '../theme-selector/theme-selector';
 import { VersionSelector } from '../version-selector/version-selector';
-import { useNavigation } from '../../hooks';
+import { HeaderBreadcrumbs } from './header-breadcrumbs';
+import { useLinks } from '../../hooks';
 
-export function Header(): JSX.Element {
-  const { headerNavigation, currentSection, currentPage } = useNavigation();
+export interface HeaderProps {
+  websiteName: string;
+  isLandingPage?: boolean;
+}
 
+export function Header(props: HeaderProps): JSX.Element {
+  const { websiteName, isLandingPage } = props;
+
+  const { headerNavigation } = useLinks();
   const [isScrolled, setIsScrolled] = useState<boolean>(false);
-  const router = useRouter();
-
-  const is404Page = router.pathname === '/404';
-  const isDocsPage = router.pathname.includes('docs');
 
   useEffect(() => {
     function onScroll(): void {
@@ -46,17 +46,17 @@ export function Header(): JSX.Element {
           <Link href="/" aria-label="Home page" passHref className="my-2 flex items-center gap-4">
             <DevfileIcon className="fill-devfile h-9 w-auto" />
             <h3 className="hidden pr-2 text-xl font-semibold text-slate-700 dark:text-sky-100 sm:block">
-              Devfile.io
+              {websiteName}
             </h3>
-            {!is404Page && <VersionSelector className="relative z-10" />}
+            {isLandingPage && <VersionSelector className="relative z-10" />}
           </Link>
         </div>
 
         <div className="my-2 flex grow items-center justify-end gap-4 lg:hidden">
-          {!is404Page && <Search />}
+          {isLandingPage && <LandingPageSearch />}
           <Popover className="relative flex items-center">
             <Popover.Button>
-              <DotsVerticalIcon
+              <EllipsisVerticalIcon
                 className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400"
                 aria-hidden="true"
               />
@@ -104,20 +104,7 @@ export function Header(): JSX.Element {
           ))}
         </div>
       </div>
-      {isDocsPage && (
-        <div className="my-2 flex max-w-screen-2xl items-center gap-8 border-t border-slate-200 pt-4 dark:border-slate-800 lg:hidden">
-          <MobileNavigation />
-          <div className="flex items-center overflow-hidden">
-            <span className="whitespace-nowrap pr-2 text-slate-500 dark:text-slate-400">
-              {currentSection?.title}
-            </span>
-            <ChevronRightIcon className="h-4 w-auto flex-none fill-slate-500 pr-2 dark:fill-slate-400" />
-            <span className="whitespace-nowrap text-slate-700 dark:text-sky-100">
-              {currentPage?.title}
-            </span>
-          </div>
-        </div>
-      )}
+      {isLandingPage && <HeaderBreadcrumbs />}
     </div>
   );
 }

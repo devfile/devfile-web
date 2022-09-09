@@ -19,3 +19,6 @@ export * from './icon/icon';
 export * from './callout/callout';
 export * from './quick-links/quick-links';
 export * from './current-version/current-version';
+export * from './devfile-grid/devfile-grid';
+export * from './pagination/pagination';
+export * from './devfile-search/devfile-search';

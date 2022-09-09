@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { Disclosure } from '@headlessui/react';
 import clsx from 'clsx';
-import { MinusSmIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { MinusSmallIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import slugify from '@sindresorhus/slugify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -87,7 +87,7 @@ export function JsonSchemaViewerElement(props: JsonSchemaViewerElementProps): JS
                   )}
                 />
               ) : (
-                <MinusSmIcon className="inline h-4 w-auto pr-1 text-slate-700 dark:text-sky-100" />
+                <MinusSmallIcon className="inline h-4 w-auto pr-1 text-slate-700 dark:text-sky-100" />
               )}
               <span
                 className={clsx(

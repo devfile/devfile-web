@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dialog } from '@headlessui/react';
-import { MenuIcon, XIcon as CloseIcon } from '@heroicons/react/outline';
+import { Bars3Icon, XMarkIcon as CloseIcon } from '@heroicons/react/24/outline';
 import { DevfileIcon } from '../../icons';
 import { Navigation } from '../navigation/navigation';
 
@@ -34,7 +34,7 @@ export function MobileNavigation(): JSX.Element {
         className="relative"
         aria-label="Open navigation"
       >
-        <MenuIcon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
+        <Bars3Icon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
       </button>
       <Dialog
         open={isOpen}

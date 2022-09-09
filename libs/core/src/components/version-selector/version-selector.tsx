@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { ChevronDownIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { useNavigation } from '../../hooks';
 
 export interface VersionSelectorProps {
@@ -15,7 +15,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
   const { selectedVersion, setSelectedVersion, docVersions } = useNavigation();
   const router = useRouter();
 
-  if (!router.asPath.includes('/docs')) {
+  if (!router.asPath.includes('/docs') || router.pathname === '/404') {
     return null;
   }
 

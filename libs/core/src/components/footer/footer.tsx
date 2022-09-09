@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { DevfileIcon } from '../../icons';
-import { useNavigation } from '../../hooks';
+import { useLinks } from '../../hooks';
 
 export function Footer(): JSX.Element {
-  const { footerNavigation } = useNavigation();
+  const { footerNavigation } = useLinks();
 
   return (
     <footer
