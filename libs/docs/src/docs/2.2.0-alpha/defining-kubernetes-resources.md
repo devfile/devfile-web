@@ -16,26 +16,6 @@ lists in devfiles in order to describe complex deployments.
 
 - When running devfiles on a Kubernetes cluster, only Kubernetes lists
   are supported. When running devfiles on an OpenShift cluster, both
-  Kubernetes and OpenShift lists are supported:
-
-  - `deployments`
-
-  - `pods`
-
-  - `services`
-
-  - `persistent volume claims`
-
-  - `secrets`
-
-  - `config maps`
-
-Kubernetes Ingresses are ignored, but OpenShift routes are supported. A
-workspace created from a devfile using any other object types fails to
-start.
-
-- When running devfiles on a Kubernetes cluster, only Kubernetes lists
-  are supported. When running devfiles on an OpenShift cluster, both
   Kubernetes and OpenShift lists are supported.
 
 The following component references a file that is relative to the
@@ -52,14 +32,14 @@ projects:
       remotes:
         origin: 'https://github.com/acme/my-go-project.git'
 components:
-  - name: mydevfile
+  - name: mycomponent
     kubernetes:
       uri: ../relative/path/postgres.yaml
 ```
 
 The following is an example of the `postgres.yaml` file:
 
-```yaml {% filename="devfile.yaml" %}
+```yaml {% filename="postgres.yaml" %}
 apiVersion: v1
 kind: List
 items:
@@ -116,4 +96,4 @@ items:
 
 For a basic example of a devfile with an associated Kubernetes or
 OpenShift list, see
-[web-nodejs-with-db-sample](https://github.com/redhat-developer/devfile/tree/master/samples/web-nodejs-with-db-sample).
+[Python Devfile Sample](https://github.com/devfile-samples/devfile-sample-python-basic).

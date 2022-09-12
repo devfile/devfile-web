@@ -5,7 +5,9 @@ description: Adding a volume component
 
 You can use a `volume` component to share files among container
 components and collaborate with other teams during the development
-process.
+process. Volumes mounted in a container require a volume component
+with the same name. Volume components can be shared across
+container components.
 
 ## Prerequisites
 
@@ -25,8 +27,17 @@ process.
       name: mydevfile
     components:
       - name: mydevfile
+        container:
+          image: golang
+          memoryLimit: 512Mi
+          mountSources: true
+          command: ['sleep', 'infinity']
+          volumeMounts:
+            - name: cache
+              path: /.cache
+      - name: cache
         volume:
-          size: 200G
+          size: 2Gi
     ```
 
 2. If you do not want your `volume` component to persist across

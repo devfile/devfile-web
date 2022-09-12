@@ -4,14 +4,9 @@ description: Adding a container component
 ---
 
 To incorporate custom tools into the workspace, define an image-based
-configuration of a container in a workspace. Define this configuration
-by using the `container` component type.
+configuration of a container in a workspace using the `container` component type.
 
 ## Prerequisites
-
-A devfile can contain one or more components of the `container` type.
-The `component name` attribute identifies each component, including the
-container.
 
 - [Adding schema version](./versions)
 
@@ -60,10 +55,10 @@ container.
           command: ['sleep', 'infinity']
     ```
 
-    Specify the type of component using the `container` attribute. Use
-    the `image` attribute to specify the image for the component. When
+    Specify the type of component using the `container` property. Use
+    the `image` property to specify the image for the component. When
     defining the `image`, use container naming conventions. For example,
-    the `image` attribute in the preceding example refers to the
+    the `image` property in the preceding example refers to the
     container image, `docker.io/library/golang:latest`.
 
     Use the `container` component to augment the image with additional
@@ -98,8 +93,8 @@ container.
 
 3. Specify a volume
 
-    For the `container` component to have a shared volume. You must
-    define a volume component in the devfile, and reference the volume
+    For the `container` component to have a shared volume, you must
+    define a volume component in the devfile and reference the volume
     using `volumeMount` in container component. For more information on
     volume component, see [adding a volume component](./adding-a-volume-component).
 

@@ -24,8 +24,6 @@
       href: ./adding-an-image-component
     - title: Adding a volume component
       href: ./adding-a-volume-component
-    - title: Specifying persistent storage
-      href: ./specifying-persistent-storage
     - title: Limiting resources usage
       href: ./limiting-resources-usage
     - title: Defining environment variables
