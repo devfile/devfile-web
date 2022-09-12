@@ -1,6 +1,6 @@
 ---
-title: Adding apply commands
-description: Adding apply commands
+title: Adding an apply command
+description: Adding an apply command
 ---
 
 Use the the `apply` command to apply a given component definition,

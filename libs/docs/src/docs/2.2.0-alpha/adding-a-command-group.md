@@ -5,34 +5,16 @@ description: Adding a command group
 
 Create command groups to help automate your devfile.
 
-## Prerequisites
-
-- [Adding schema version](./versions)
-
-- [Adding a name](./metadata)
-
-- [Adding projects](./adding-projects)
-
 ## Procedure
 
 1. Assign a given command to one or more groups that represent the
     nature of the command.
 
-2. Use the following supported group kinds:
+2. Use the following supported group kinds: `build`, `run`, `test`,
+`debug` or `deploy`
 
-    - `build`
-
-    - `run`
-
-    - `test`
-
-    - `debug`
-
-    - `deploy`
-
-3. At most, there can only be one default command for each group kind.
-    Set the default command by specifying a `true` value for
-    `isDefault`.
+1. At most, there can only be one default command for each group kind.
+    Set the default command by specifying `isDefault` to `true`.
 
     ```yaml {% filename="devfile.yaml" %}
     schemaVersion: 2.2.0
@@ -66,7 +48,7 @@ Create command groups to help automate your devfile.
             isDefault: true
     ```
 
-4. Use the `deploy` kind to reference a deploy command for an outerloop
+2. Use the `deploy` kind to reference a deploy command for an outerloop
    scenario.
 
     ```yaml {% filename="devfile.yaml" %}

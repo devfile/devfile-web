@@ -1,6 +1,6 @@
 ---
-title: Adding exec commands
-description: Adding exec commands
+title: Adding an exec command
+description: Adding an exec command
 ---
 
 Use the the `exec` command to automate the container actions.

@@ -36,18 +36,14 @@
   links:
     - title: Adding commands
       href: ./adding-commands
-    - title: Commands
-      href: ./devfile-commands
-    - title: Adding a command section
-      href: ./adding-a-command-section
     - title: Adding a command group
       href: ./adding-a-command-group
-    - title: Adding exec commands
-      href: ./adding-exec-commands
-    - title: Adding apply commands
-      href: ./adding-apply-commands
-    - title: Adding composite commands
-      href: ./adding-composite-commands
+    - title: Adding an exec command
+      href: ./adding-an-exec-command
+    - title: Adding an apply command
+      href: ./adding-an-apply-command
+    - title: Adding a composite command
+      href: ./adding-a-composite-command
 - title: Events
   links:
     - title: Adding event bindings
