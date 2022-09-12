@@ -7,7 +7,7 @@ You can define variables at the top level of the devfile or in the `parent` obje
 * `schemaVersion`, `metadata`, or `parent` source
 * Element identifiers such as `command.id`, `component.name`, `endpoint.name`, and  `project.name`
 * References to identifiers, for example, when binding commands by name to events, when specifiying a command's component, or when specifying the volume mount name for a container
-* String enumerations such as command `group.kind` or endpoint exposure
+* String enumerations such as command `group.kind` or `endpoint.exposure`
 
 ## Procedure
 
@@ -16,10 +16,10 @@ You can define variables at the top level of the devfile or in the `parent` obje
     ----
     schemaVersion: 2.1.0
     metadata:
-    name: java-maven
-    version: 1.1.1
+      name: java-maven
+      version: 1.1.1
     variables:
-    javaVersion: 11
+      javaVersion: 11
     ...  
     ----
     ```
