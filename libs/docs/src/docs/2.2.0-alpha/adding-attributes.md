@@ -18,6 +18,8 @@ devfile objects can have attributes:
 
 - `starterProjects`
 
+- `endpoints`
+
 ## Prerequisites
 
 - [Adding schema version](./versions)

@@ -12,19 +12,21 @@ for teams to collaborate across shared projects.
 - Parse a devfile by running:
 
 ```go
-// ParserArgs is the struct to pass into parser functions 
+// ParserArgs is the struct to pass into parser functions
 // which contains required info for parsing devfile.
 parserArgs := parser.ParserArgs{
-  Path:             path,
-  FlattenedDevfile: &flattenedDevfile,
-  RegistryURLs:     registryURLs,
-  DefaultNamespace: defaultNamespace,
-  Context:          context,
-  K8sClient:        client,
+  Path:                             path,
+  FlattenedDevfile:                 &flattenedDevfile,
+  ConvertKubernetesContentInUri:    &convertKubernetesContentInUri
+  RegistryURLs:                     registryURLs,
+  DefaultNamespace:                 defaultNamespace,
+  Context:                          context,
+  K8sClient:                        client,
+  ExternalVariables:                externalVariables,
 }
 
 // Parses the devfile and validates the devfile data
-// if top-level variables are not substituted successfully, 
+// if top-level variables are not substituted successfully,
 // the warnings can be logged by parsing variableWarning
 devfile, variableWarning, err := devfilePkg.ParseDevfileAndValidate(parserArgs)
 ```
@@ -35,7 +37,7 @@ devfile, variableWarning, err := devfilePkg.ParseDevfileAndValidate(parserArgs)
 // To get all the components from the devfile
 components, err := devfile.Data.GetComponents(DevfileOptions{})
 
-// To get all the components from the devfile with 
+// To get all the components from the devfile with
 // attributes tagged - tool: console-import
 // & import: {strategy: Dockerfile}
 components, err := devfile.Data.GetComponents(DevfileOptions{
@@ -66,7 +68,7 @@ commands, err := devfile.Data.GetCommands(DevfileOptions{
 - Get the Kubernetes objects from the devfile by running:
 
 ```go
-// To get a slice of Kubernetes containers of type 
+// To get a slice of Kubernetes containers of type
 // corev1.Container from the devfile component containers
 containers, err := generator.GetContainers(devfile)
 
@@ -118,7 +120,7 @@ err := devfile.Data.DeleteComponent(componentName)
 - Write a devfile by running:
 
 ```go
-// If the devfile object has been created with the devfile path 
+// If the devfile object has been created with the devfile path
 // already set, can simply call WriteYamlDevfile to write the devfile
 err := devfile.WriteYamlDevfile()
 
