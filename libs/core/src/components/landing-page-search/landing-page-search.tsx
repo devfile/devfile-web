@@ -29,7 +29,7 @@ function Hit(props: HitProps): JSX.Element {
 
 export function LandingPageSearch(): JSX.Element | null {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [modifierKey, setModifierKey] = useState();
+  const [modifierKey, setModifierKey] = useState<string | undefined>();
   const router = useRouter();
   const { selectedVersion } = useNavigation();
 
@@ -44,7 +44,6 @@ export function LandingPageSearch(): JSX.Element | null {
   useDocSearchKeyboardEvents({ isOpen, onOpen, onClose });
 
   useEffect(() => {
-    // @ts-ignore copied from https://tailwindui.com/templates/syntax example
     setModifierKey(/(mac|iphone|ipod|ipad)/i.test(navigator.platform) ? '⌘' : 'Ctrl ');
   }, []);
 

@@ -22,3 +22,5 @@ export * from './current-version/current-version';
 export * from './devfile-grid/devfile-grid';
 export * from './pagination/pagination';
 export * from './devfile-search/devfile-search';
+export * from './devfile-filters/devfile-filter';
+export * from './devfile-filters/devfile-filters';

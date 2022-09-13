@@ -1,57 +1,75 @@
-import { Fragment, useState } from 'react';
-import clsx from 'clsx';
-import { Combobox, Transition } from '@headlessui/react';
+import { MagnifyingGlassIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import Link from 'next/link';
 import { useSearchDevfiles } from '../../hooks';
+import { createDevfileLink } from '../../functions';
 
 export function DevfileSearch(): JSX.Element {
-  const { searchedDevfiles, dispatch } = useSearchDevfiles();
-  const [query, setQuery] = useState<string>('');
+  const { devfiles, page, query, dispatch } = useSearchDevfiles();
+
+  const prevPage = page.number > 1 ? page.number - 1 : 1;
+  const nextPage = page.number < page.total ? page.number + 1 : page.total;
 
   return (
-    <Combobox value={query} onChange={setQuery}>
-      <div className="relative my-6">
-        <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
-          <Combobox.Input
-            className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-            displayValue={(str: string): string => str}
-            onChange={(event): void => dispatch({ type: 'SEARCH', payload: event.target.value })}
+    <div className="my-6 justify-between sm:flex">
+      <div className="group relative grow sm:max-w-[75%] sm:pr-4 lg:sm:max-w-[50%]">
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+          <MagnifyingGlassIcon
+            aria-hidden="true"
+            className="h-5 w-auto flex-none fill-slate-400 group-hover:fill-slate-500 dark:fill-slate-500 dark:group-hover:fill-slate-400"
           />
         </div>
-        <Transition
-          as={Fragment}
-          leave="transition ease-in duration-100"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-            {searchedDevfiles.length === 0 ? (
-              <div className="relative cursor-default select-none py-2 px-4 text-gray-700">
-                Nothing found.
-              </div>
-            ) : (
-              searchedDevfiles.map((devfile) => (
-                <Combobox.Option
-                  key={devfile.name}
-                  className={({ active }): string =>
-                    clsx(
-                      'relative cursor-default select-none py-2 pl-10 pr-4',
-                      active ? 'bg-teal-600 text-white' : 'text-gray-900',
-                    )
-                  }
-                  value={devfile.displayName}
-                >
-                  {({ selected }): JSX.Element => (
-                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                      {devfile.displayName}
-                    </span>
-                  )}
-                </Combobox.Option>
-              ))
-            )}
-          </Combobox.Options>
-        </Transition>
+        <div className="sr-only">Devfile search</div>
+        <input
+          type="search"
+          placeholder="Search devfiles"
+          className="h-10 w-full rounded-lg border border-slate-200 py-2.5 pl-10 pr-3.5 text-sm text-slate-400 shadow ring-1 ring-slate-200 group-hover:ring-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500 dark:ring-inset dark:ring-white/5 dark:group-hover:bg-slate-700/40 dark:group-hover:ring-slate-500"
+          value={query.search}
+          onChange={(event): void =>
+            dispatch({ type: 'FILTER_ON_SEARCH', payload: event.target.value })
+          }
+        />
       </div>
-    </Combobox>
+      <div className="mt-6 flex items-center justify-between sm:mt-0 sm:justify-start">
+        <div className="pr-8">
+          <p className="whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+            <span className="font-medium">{(page.number - 1) * devfiles.limit + 1}</span> -{' '}
+            <span className="font-medium">
+              {page.number * devfiles.limit < devfiles.searched.length
+                ? page.number * devfiles.limit
+                : devfiles.searched.length}
+            </span>{' '}
+            of <span className="font-medium">{devfiles.searched.length}</span>
+          </p>
+        </div>
+        <div className="flex w-16 items-center">
+          <Link
+            scroll={false}
+            href={createDevfileLink({ ...page, number: prevPage }, query)}
+            onClick={(): void => {
+              dispatch({
+                type: 'SET_PAGE_NUMBER',
+                payload: prevPage,
+              });
+            }}
+            className="pr-4"
+          >
+            <ChevronLeftIcon className="h-6 w-auto text-slate-500 dark:text-slate-400" />
+          </Link>
+          <Link
+            scroll={false}
+            href={createDevfileLink({ ...page, number: nextPage }, query)}
+            onClick={(): void => {
+              dispatch({
+                type: 'SET_PAGE_NUMBER',
+                payload: nextPage,
+              });
+            }}
+          >
+            <ChevronRightIcon className="h-6 w-auto text-slate-500 dark:text-slate-400" />
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 }
 

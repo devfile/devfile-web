@@ -1,26 +1,46 @@
-import { SearchDevfilesProvider, DevfileGrid, Pagination, DevfileSearch } from '@devfile-web/core';
+import {
+  SearchDevfilesProvider,
+  DevfileGrid,
+  Pagination,
+  DevfileSearch,
+  DevfileFilters,
+  fetchDevfiles,
+  getFilterElements,
+} from '@devfile-web/core';
 import type { GetStaticProps } from 'next';
-import type { DevfileJson, DevfileRegistry, Devfile } from '@devfile-web/core';
+import type { DevfileRegistry, Devfile, QueryState, FilterElement } from '@devfile-web/core';
+
+const devfilesPerPage = 15;
 
 export interface IndexProps {
   devfiles: Devfile[];
+  devfileRegistries: DevfileRegistry[];
+  query: QueryState;
 }
 
 export function Index(props: IndexProps): JSX.Element {
-  const { devfiles } = props;
+  const { devfiles, devfileRegistries, query } = props;
 
   return (
-    <div className="flex grow justify-center  bg-slate-50 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
-      <div className="flex max-w-screen-2xl grow justify-center">
-        <SearchDevfilesProvider devfiles={devfiles}>
+    <SearchDevfilesProvider
+      devfiles={devfiles}
+      devfileRegistries={devfileRegistries}
+      devfilesPerPage={devfilesPerPage}
+      query={query}
+    >
+      <div className="flex grow justify-center  bg-slate-50 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
+        <div className="flex max-w-screen-2xl grow justify-center">
           <div className="grow">
             <DevfileSearch />
-            <DevfileGrid />
+            <div className="flex">
+              <DevfileFilters className="w-96" />
+              <DevfileGrid />
+            </div>
             <Pagination />
           </div>
-        </SearchDevfilesProvider>
+        </div>
       </div>
-    </div>
+    </SearchDevfilesProvider>
   );
 }
 
@@ -36,33 +56,29 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
     // { name: 'Devfile registry7', link: 'https://registry.devfile.io' },
   ];
 
-  const res = await Promise.all(
-    devfileRegistries.map((devfileRegistry) =>
-      fetch(`${devfileRegistry.link}/index/all?icon=base64`),
-    ),
-  );
-  const devfileJsons: DevfileJson[][] = await Promise.all(
-    res.map((r) => (r.json() as Promise<DevfileJson[]>) ?? []),
-  );
-  const devfiles: Devfile[] = devfileRegistries
-    .flatMap((devfileRegistry, devfileRegistryIndex) =>
-      devfileJsons[devfileRegistryIndex].map((devfile) => ({
-        ...devfile,
-        devfileRegistry: {
-          name: devfileRegistry.name,
-          link: devfileRegistry.link,
-        },
-      })),
-    )
-    .sort((a, b) =>
-      a.displayName.localeCompare(b.displayName, 'en', {
-        sensitivity: 'accent',
-      }),
-    );
+  const devfiles = await fetchDevfiles(devfileRegistries);
+
+  const registries: FilterElement[] = devfileRegistries.map((registry) => ({
+    name: registry.name,
+    checked: false,
+  }));
+  const tags = getFilterElements(devfiles, 'tags');
+  const types = getFilterElements(devfiles, 'type');
+  const providers = getFilterElements(devfiles, 'provider');
+  const languages = getFilterElements(devfiles, 'language');
 
   return {
     props: {
-      devfiles,
+      devfiles: devfiles.slice(0, devfilesPerPage),
+      devfileRegistries,
+      query: {
+        search: '',
+        registries,
+        tags,
+        types,
+        providers,
+        languages,
+      },
     },
   };
 };

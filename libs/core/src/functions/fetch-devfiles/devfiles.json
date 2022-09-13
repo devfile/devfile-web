@@ -1,0 +1,746 @@
+[
+  {
+    "name": "dotnet50",
+    "version": "1.0.1",
+    "displayName": ".NET 5.0",
+    "description": "Stack with .NET 5.0",
+    "type": "stack",
+    "tags": [
+      "dotnet"
+    ],
+    "icon": "https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png",
+    "projectType": "dotnet",
+    "language": "dotnet",
+    "links": {
+      "self": "devfile-catalog/dotnet50:1.0.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "s2i-example"
+    ]
+  },
+  {
+    "name": "dotnet60",
+    "version": "1.0.0",
+    "displayName": ".NET 6.0",
+    "description": "Stack with .NET 6.0",
+    "type": "stack",
+    "tags": [
+      "dotnet"
+    ],
+    "icon": "https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png",
+    "projectType": "dotnet",
+    "language": "dotnet",
+    "links": {
+      "self": "devfile-catalog/dotnet60:1.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "s2i-example"
+    ]
+  },
+  {
+    "name": "dotnetcore31",
+    "version": "1.0.1",
+    "displayName": ".NET Core 3.1",
+    "description": "Stack with .NET Core 3.1",
+    "type": "stack",
+    "tags": [
+      "dotnet"
+    ],
+    "icon": "https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png",
+    "projectType": "dotnet",
+    "language": "dotnet",
+    "links": {
+      "self": "devfile-catalog/dotnetcore31:1.0.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "s2i-example"
+    ]
+  },
+  {
+    "name": "go",
+    "version": "1.0.0",
+    "displayName": "Go Runtime",
+    "description": "Stack with the latest Go version",
+    "type": "stack",
+    "tags": [
+      "Go"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/golang.svg",
+    "projectType": "go",
+    "language": "go",
+    "links": {
+      "self": "devfile-catalog/go:1.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "go-starter"
+    ]
+  },
+  {
+    "name": "java-maven",
+    "version": "1.1.0",
+    "displayName": "Maven Java",
+    "description": "Upstream Maven and OpenJDK 11",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Maven"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/java-maven.jpg",
+    "projectType": "maven",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-maven:1.1.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "springbootproject"
+    ]
+  },
+  {
+    "name": "java-openliberty",
+    "version": "0.8.1",
+    "displayName": "Open Liberty Maven",
+    "description": "Java application Maven-built stack using the Open Liberty runtime",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Maven"
+    ],
+    "architectures": [
+      "amd64",
+      "ppc64le",
+      "s390x"
+    ],
+    "icon": "https://raw.githubusercontent.com/OpenLiberty/logos/7fbb132949b9b2589e18c8d5665c1b107028a21d/logomark/svg/OL_logomark.svg",
+    "projectType": "openliberty",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-openliberty:0.8.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "rest"
+    ]
+  },
+  {
+    "name": "java-openliberty-gradle",
+    "version": "0.3.1",
+    "displayName": "Open Liberty Gradle",
+    "description": "Java application Gradle-built stack using the Open Liberty runtime",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Gradle"
+    ],
+    "architectures": [
+      "amd64",
+      "ppc64le",
+      "s390x"
+    ],
+    "icon": "https://raw.githubusercontent.com/OpenLiberty/logos/7fbb132949b9b2589e18c8d5665c1b107028a21d/logomark/svg/OL_logomark.svg",
+    "projectType": "openliberty",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-openliberty-gradle:0.3.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "rest"
+    ]
+  },
+  {
+    "name": "java-quarkus",
+    "version": "1.1.0",
+    "displayName": "Quarkus Java",
+    "description": "Quarkus with Java",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Quarkus"
+    ],
+    "icon": "https://design.jboss.org/quarkus/logo/final/SVG/quarkus_icon_rgb_default.svg",
+    "projectType": "quarkus",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-quarkus:1.1.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "community",
+      "redhat-product"
+    ]
+  },
+  {
+    "name": "java-springboot",
+    "version": "1.1.0",
+    "displayName": "Spring Boot®",
+    "description": "Spring Boot® using Java",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Spring"
+    ],
+    "icon": "https://spring.io/images/projects/spring-edf462fec682b9d48cf628eaf9e19521.svg",
+    "projectType": "spring",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-springboot:1.1.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "springbootproject"
+    ]
+  },
+  {
+    "name": "java-vertx",
+    "version": "1.1.0",
+    "displayName": "Vert.x Java",
+    "description": "Upstream Vert.x using Java",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Vert.x"
+    ],
+    "icon": "https://raw.githubusercontent.com/vertx-web-site/vertx-logo/master/vertx-logo.svg",
+    "projectType": "vertx",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-vertx:1.1.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "vertx-http-example",
+      "vertx-istio-circuit-breaker-booster",
+      "vertx-istio-routing-booster",
+      "vertx-secured-http-example-redhat",
+      "vertx-crud-example-redhat",
+      "vertx-istio-security-booster",
+      "vertx-crud-example",
+      "vertx-circuit-breaker-example",
+      "vertx-configmap-example",
+      "vertx-circuit-breaker-example-redhat",
+      "vertx-cache-example-redhat",
+      "vertx-cache-example",
+      "vertx-secured-http-example",
+      "vertx-health-checks-example-redhat",
+      "vertx-http-example-redhat",
+      "vertx-health-checks-example",
+      "vertx-configmap-example-redhat",
+      "vertx-messaging-work-queue-booster",
+      "vertx-istio-distributed-tracing-booster"
+    ]
+  },
+  {
+    "name": "java-websphereliberty",
+    "version": "0.8.1",
+    "displayName": "WebSphere Liberty Maven",
+    "description": "Java application Maven-built stack using the WebSphere Liberty runtime",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Maven"
+    ],
+    "architectures": [
+      "amd64",
+      "ppc64le",
+      "s390x"
+    ],
+    "icon": "https://raw.githubusercontent.com/OpenLiberty/logos/7fbb132949b9b2589e18c8d5665c1b107028a21d/logomark/svg/OL_logomark.svg",
+    "projectType": "websphereliberty",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-websphereliberty:0.8.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "rest"
+    ]
+  },
+  {
+    "name": "java-websphereliberty-gradle",
+    "version": "0.3.1",
+    "displayName": "WebSphere Liberty Gradle",
+    "description": "Java application Gradle-built stack using the WebSphere Liberty runtime",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "Gradle"
+    ],
+    "architectures": [
+      "amd64",
+      "ppc64le",
+      "s390x"
+    ],
+    "icon": "https://raw.githubusercontent.com/OpenLiberty/logos/7fbb132949b9b2589e18c8d5665c1b107028a21d/logomark/svg/OL_logomark.svg",
+    "projectType": "websphereliberty",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-websphereliberty-gradle:0.3.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "rest"
+    ]
+  },
+  {
+    "name": "java-wildfly",
+    "version": "1.0.5",
+    "displayName": "WildFly Java",
+    "description": "Upstream WildFly",
+    "type": "stack",
+    "tags": [
+      "Java",
+      "WildFly"
+    ],
+    "icon": "https://design.jboss.org/wildfly/logo/final/wildfly_logomark.svg",
+    "projectType": "wildfly",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-wildfly:1.0.5"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "microprofile-config",
+      "microprofile-fault-tolerance",
+      "microprofile-health",
+      "microprofile-jwt",
+      "microprofile-metrics",
+      "microprofile-openapi",
+      "microprofile-opentracing",
+      "microprofile-rest-client"
+    ]
+  },
+  {
+    "name": "java-wildfly-bootable-jar",
+    "version": "1.0.5",
+    "displayName": "WildFly Bootable Jar",
+    "description": "Java stack with WildFly in bootable Jar mode, OpenJDK 11 and Maven 3.5",
+    "type": "stack",
+    "tags": [
+      "RHEL8",
+      "Java",
+      "OpenJDK",
+      "Maven",
+      "WildFly",
+      "Microprofile",
+      "WildFly Bootable"
+    ],
+    "icon": "https://design.jboss.org/wildfly/logo/final/wildfly_logomark.svg",
+    "projectType": "WildFly",
+    "language": "java",
+    "links": {
+      "self": "devfile-catalog/java-wildfly-bootable-jar:1.0.5"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "microprofile-config",
+      "microprofile-fault-tolerance",
+      "microprofile-health",
+      "microprofile-jwt",
+      "microprofile-metrics",
+      "microprofile-openapi",
+      "microprofile-opentracing",
+      "microprofile-rest-client"
+    ]
+  },
+  {
+    "name": "nodejs",
+    "version": "2.0.0",
+    "displayName": "Node.js Runtime",
+    "description": "Stack with Node.js 16",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "Express",
+      "ubi8"
+    ],
+    "icon": "https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg",
+    "projectType": "nodejs",
+    "language": "javascript",
+    "links": {
+      "self": "devfile-catalog/nodejs:2.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-starter"
+    ]
+  },
+  {
+    "name": "nodejs-angular",
+    "version": "2.0.0",
+    "displayName": "Angular",
+    "description": "Stack with Angular 14",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "Angular"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/angular.svg",
+    "projectType": "angular",
+    "language": "typescript",
+    "links": {
+      "self": "devfile-catalog/nodejs-angular:2.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-angular-starter"
+    ]
+  },
+  {
+    "name": "nodejs-nextjs",
+    "version": "1.0.1",
+    "displayName": "Next.js",
+    "description": "Stack with Next.js 12",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "Nextjs"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/next-js.svg",
+    "projectType": "nextjs",
+    "language": "javascript",
+    "links": {
+      "self": "devfile-catalog/nodejs-nextjs:1.0.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-nextjs-starter"
+    ]
+  },
+  {
+    "name": "nodejs-nuxtjs",
+    "version": "1.0.1",
+    "displayName": "Nuxt.js",
+    "description": "Stack with Nuxt.js 2",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "Nuxtjs"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/nuxt-js.svg",
+    "projectType": "nuxtjs",
+    "language": "javascript",
+    "links": {
+      "self": "devfile-catalog/nodejs-nuxtjs:1.0.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-nuxtjs-starter"
+    ]
+  },
+  {
+    "name": "nodejs-react",
+    "version": "2.0.0",
+    "displayName": "React",
+    "description": "Stack with React 18",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "React"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/react.svg",
+    "projectType": "react",
+    "language": "javascript",
+    "links": {
+      "self": "devfile-catalog/nodejs-react:2.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-react-starter"
+    ]
+  },
+  {
+    "name": "nodejs-svelte",
+    "version": "1.0.1",
+    "displayName": "Svelte",
+    "description": "Stack with Svelte 3",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "Svelte"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/svelte.svg",
+    "projectType": "svelte",
+    "language": "javascript",
+    "links": {
+      "self": "devfile-catalog/nodejs-svelte:1.0.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-svelte-starter"
+    ]
+  },
+  {
+    "name": "nodejs-vue",
+    "version": "1.0.1",
+    "displayName": "Vue",
+    "description": "Stack with Vue 3",
+    "type": "stack",
+    "tags": [
+      "NodeJS",
+      "Vue"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/vue.svg",
+    "projectType": "vue",
+    "language": "javascript",
+    "links": {
+      "self": "devfile-catalog/nodejs-vue:1.0.1"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "nodejs-vue-starter"
+    ]
+  },
+  {
+    "name": "php-laravel",
+    "version": "1.0.0",
+    "displayName": "Laravel",
+    "description": "Stack with Laravel 8",
+    "type": "stack",
+    "tags": [
+      "PHP",
+      "Composer",
+      "Laravel"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/laravel.svg",
+    "projectType": "laravel",
+    "language": "php",
+    "links": {
+      "self": "devfile-catalog/php-laravel:1.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "php-laravel-starter"
+    ]
+  },
+  {
+    "name": "python",
+    "version": "2.0.0",
+    "displayName": "Python",
+    "description": "Python Stack with Python 3.9",
+    "type": "stack",
+    "tags": [
+      "Python",
+      "pip"
+    ],
+    "icon": "https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/python.svg",
+    "projectType": "python",
+    "language": "python",
+    "links": {
+      "self": "devfile-catalog/python:2.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "python-example"
+    ]
+  },
+  {
+    "name": "python-django",
+    "version": "2.0.0",
+    "displayName": "Django",
+    "description": "Stack with Django",
+    "type": "stack",
+    "tags": [
+      "Python",
+      "pip",
+      "Django"
+    ],
+    "icon": "https://static.djangoproject.com/img/logos/django-logo-positive.svg",
+    "projectType": "django",
+    "language": "python",
+    "links": {
+      "self": "devfile-catalog/python-django:2.0.0"
+    },
+    "resources": [
+      "archive.tar",
+      "devfile.yaml"
+    ],
+    "starterProjects": [
+      "django-example"
+    ]
+  },
+  {
+    "name": "nodejs-basic",
+    "displayName": "Basic Node.js",
+    "description": "A simple Hello World Node.js application",
+    "type": "sample",
+    "tags": [
+      "NodeJS",
+      "Express"
+    ],
+    "icon": "https://nodejs.org/static/images/logos/nodejs-new-pantone-black.svg",
+    "projectType": "nodejs",
+    "language": "nodejs",
+    "git": {
+      "remotes": {
+        "origin": "https://github.com/nodeshift-starters/devfile-sample.git"
+      }
+    },
+    "provider": "Red Hat"
+  },
+  {
+    "name": "code-with-quarkus",
+    "displayName": "Basic Quarkus",
+    "description": "A simple Hello World Java application using Quarkus",
+    "type": "sample",
+    "tags": [
+      "Java",
+      "Quarkus"
+    ],
+    "icon": "https://design.jboss.org/quarkus/logo/final/SVG/quarkus_icon_rgb_default.svg",
+    "projectType": "quarkus",
+    "language": "java",
+    "git": {
+      "remotes": {
+        "origin": "https://github.com/devfile-samples/devfile-sample-code-with-quarkus.git"
+      }
+    },
+    "provider": "Red Hat"
+  },
+  {
+    "name": "java-springboot-basic",
+    "displayName": "Basic Spring Boot",
+    "description": "A simple Hello World Java Spring Boot application using Maven",
+    "type": "sample",
+    "tags": [
+      "Java",
+      "Spring"
+    ],
+    "icon": "https://spring.io/images/projects/spring-edf462fec682b9d48cf628eaf9e19521.svg",
+    "projectType": "springboot",
+    "language": "java",
+    "git": {
+      "remotes": {
+        "origin": "https://github.com/devfile-samples/devfile-sample-java-springboot-basic.git"
+      }
+    },
+    "provider": "Red Hat"
+  },
+  {
+    "name": "python-basic",
+    "displayName": "Basic Python",
+    "description": "A simple Hello World application using Python",
+    "type": "sample",
+    "tags": [
+      "Python"
+    ],
+    "icon": "https://www.python.org/static/community_logos/python-logo-generic.svg",
+    "projectType": "python",
+    "language": "python",
+    "git": {
+      "remotes": {
+        "origin": "https://github.com/devfile-samples/devfile-sample-python-basic.git"
+      }
+    },
+    "provider": "Red Hat"
+  },
+  {
+    "name": "go-basic",
+    "displayName": "Basic Go",
+    "description": "A simple Hello World application using Go",
+    "type": "sample",
+    "tags": [
+      "Go"
+    ],
+    "icon": "https://go.dev/blog/go-brand/Go-Logo/SVG/Go-Logo_Blue.svg",
+    "projectType": "go",
+    "language": "go",
+    "git": {
+      "remotes": {
+        "origin": "https://github.com/devfile-samples/devfile-sample-go-basic.git"
+      }
+    },
+    "provider": "Red Hat"
+  },
+  {
+    "name": "dotnet60-basic",
+    "displayName": "Basic .NET 6.0",
+    "description": "A simple application using .NET 6.0",
+    "type": "sample",
+    "tags": [
+      "dotnet"
+    ],
+    "icon": "https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png",
+    "projectType": "dotnet",
+    "language": "dotnet",
+    "git": {
+      "remotes": {
+        "origin": "https://github.com/devfile-samples/devfile-sample-dotnet60-basic.git"
+      }
+    },
+    "provider": "Red Hat"
+  }
+]
