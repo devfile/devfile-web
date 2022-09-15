@@ -61,7 +61,7 @@ your cloud or cluster to form the devfile registry.
 
 ### Prerequisites
 
-- Golang 1.13.x or higher
+- Golang 1.17.x or higher
 
 - Docker 17.05 or higher
 
@@ -77,7 +77,7 @@ your cloud or cluster to form the devfile registry.
     following:
 
     ```docker {% filename="Dockerfile" %}
-    FROM quay.io/openshift-pipeline/golang:1.15-alpine AS builder
+    FROM quay.io/openshift-pipeline/golang:1.17-alpine AS builder
     # Install dependencies
     RUN apk add --no-cache git bash
     COPY . /registry
@@ -146,4 +146,7 @@ build, run, and deploy your application.
 
 ### Additional resources
 
-- For information on deploying the devfile index container image, see [deploying a devfile registry](./deploying-a-devfile-registry).
+- For information on deploying the devfile index container image, see {% docs-link section="Registry"
+    title="Deploying a devfile registry" text="deploying a devfile registry" /%}.
+- For information on deploying to air-gapped environment, see {% docs-link section="Registry"
+    title="Installation of in-cluster offline devfile registry" text="installation of in-cluster offline devfile registry" /%}.
