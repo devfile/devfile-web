@@ -20,6 +20,8 @@ development needs:
 
 - [Adding components](./adding-components)
 
-- [Adding attributes](./adding-attributes)
+- [Defining variables](./defining-variables)
+
+- [Defining attributes](./defining-attributes)
 
 - [Referring to a parent devfile in a devfile](./referring-to-a-parent-devfile)
