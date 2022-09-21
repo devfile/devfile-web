@@ -48,8 +48,8 @@ export function Header(): JSX.Element {
             <h3 className="hidden pr-2 text-xl font-semibold text-slate-700 dark:text-sky-100 sm:block">
               Devfile.io
             </h3>
-            {!is404Page && <VersionSelector className="relative z-10" />}
           </Link>
+          {!is404Page && <VersionSelector className="relative z-10" />}
         </div>
 
         <div className="my-2 flex grow items-center justify-end gap-4 lg:hidden">

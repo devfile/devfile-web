@@ -38,6 +38,7 @@ export interface UseNavigation {
   selectedVersion: DocVersions;
   setSelectedVersion: React.Dispatch<React.SetStateAction<DocVersions>>;
   docVersions: typeof docVersions;
+  docVersionLinks: Record<DocVersions, string>;
   currentSection?: Section;
   previousPage?: Page;
   currentPage?: Page;
@@ -54,40 +55,57 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
     docVersions.find((version) => router.asPath.includes(version)) ?? defaultVersion,
   );
 
-  const versionedDocsNavigation = useMemo(
-    () => docsNavigation[selectedVersion],
-    [docsNavigation, selectedVersion],
-  );
-
   const allLinks = useMemo(
-    () => versionedDocsNavigation.flatMap((section) => section.links),
-    [versionedDocsNavigation],
+    () =>
+      Object.entries(docsNavigation).reduce(
+        (prev, [version, versionedDocsNavigation]) => ({
+          ...prev,
+          [version]: versionedDocsNavigation.flatMap((section) => section.links),
+        }),
+        {} as Record<DocVersions, Page[]>,
+      ),
+
+    [docsNavigation],
   );
   const linkIndex = useMemo(
-    () => allLinks.findIndex((link) => link.href === router.pathname),
-    [allLinks, router.pathname],
+    () => allLinks[selectedVersion].findIndex((link) => link.href === router.pathname),
+    [allLinks, router.pathname, selectedVersion],
+  );
+
+  const docVersionLinks = useMemo(
+    () =>
+      docVersions.reduce((prev, version) => {
+        const href =
+          allLinks[version].find(
+            (page) => page.href.replace(version, selectedVersion) === router.pathname,
+          )?.href ?? `/docs/${version}/what-is-a-devfile`;
+        return { ...prev, [version]: href };
+      }, {} as Record<DocVersions, string>),
+    [allLinks, router.pathname, selectedVersion],
   );
 
   const value = useMemo(
     () => ({
       headerNavigation,
       footerNavigation,
-      versionedDocsNavigation,
+      versionedDocsNavigation: docsNavigation[selectedVersion],
       selectedVersion,
       setSelectedVersion,
       docVersions,
-      currentSection: versionedDocsNavigation.find((section_) =>
+      docVersionLinks,
+      currentSection: docsNavigation[selectedVersion].find((section_) =>
         section_.links.find((link) => link.href === router.pathname),
       ),
-      previousPage: allLinks[linkIndex - 1],
-      currentPage: allLinks[linkIndex],
-      nextPage: allLinks[linkIndex + 1],
+      previousPage: allLinks[selectedVersion][linkIndex - 1],
+      currentPage: allLinks[selectedVersion][linkIndex],
+      nextPage: allLinks[selectedVersion][linkIndex + 1],
     }),
     [
       headerNavigation,
       footerNavigation,
-      versionedDocsNavigation,
+      docsNavigation,
       selectedVersion,
+      docVersionLinks,
       allLinks,
       linkIndex,
       router.pathname,
