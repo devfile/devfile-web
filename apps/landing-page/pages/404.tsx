@@ -3,41 +3,26 @@ import { DevfileIcon, LandingPageMeta } from '@devfile-web/core';
 import { defaultVersion, docVersions } from '@devfile-web/docs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { custom404Navigation } from '../navigation';
-
-// /docs or /docs/
-const docsRegex = /^\/docs\/?$/;
-// /docs/devfile/{version}/user-guide/migrating-to-devfile-v2 or /docs/devfile/{version}/user-guide/migrating-to-devfile-v2/
-const migratingToDevfileV2Regex =
-  /^\/docs\/devfile\/(\d+\.\d+\.\d+)\/user-guide\/migrating-to-devfile-v2\/?$/;
+import { custom404Navigation, redirects } from '../navigation';
 
 export function Custom404(): JSX.Element {
   const router = useRouter();
 
-  const migratingMatch = router.asPath.match(migratingToDevfileV2Regex);
-  let migratingVersion: string | undefined;
-
-  if (migratingMatch) {
-    migratingVersion = docVersions.find((version) => version.includes(migratingMatch[1]));
-  }
+  const redirectLinks = redirects.map((redirect) => {
+    const match = router.asPath.match(redirect.from);
+    const version =
+      docVersions.find((_version) => match && _version.includes(match[1])) || defaultVersion;
+    return { isPage: !!match, href: redirect.to(version) };
+  });
 
   return (
     <div className="bg-slate-50 dark:bg-slate-900">
       <LandingPageMeta title="404: Page not found">
-        {docsRegex.test(router.asPath) && (
-          <meta
-            httpEquiv="refresh"
-            content={`0; url=${
-              custom404Navigation.find((el) => el.name === 'Documentation')?.href ??
-              `/docs/${defaultVersion}/what-is-a-devfile`
-            }`}
-          />
-        )}
-        {migratingMatch && (
-          <meta
-            httpEquiv="refresh"
-            content={`0; url=/docs/${migratingVersion ?? defaultVersion}/migrating-to-devfile-v2`}
-          />
+        {redirectLinks.map(
+          (link) =>
+            link.isPage && (
+              <meta key={link.href} httpEquiv="refresh" content={`0; url=${link.href}`} />
+            ),
         )}
       </LandingPageMeta>
 

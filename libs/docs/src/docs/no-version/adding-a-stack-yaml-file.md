@@ -1,6 +1,6 @@
 ---
-title: Adding a stack YAML file
-description: Adding a stack YAML file
+title: Adding a stack yaml file
+description: Adding a stack yaml file
 ---
 
 To include multiple stack versions in a particular stack, place the

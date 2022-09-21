@@ -51,7 +51,7 @@ registry.
 - Example of
   [extraDevfileEntries.yaml](https://github.com/devfile/registry/blob/main/extraDevfileEntries.yaml).
 
-- To create devfile stacks, see {% docs-link section="Registry" title="Creating a devfile stack" text="creating a devfile stack" /%}.
+- To create devfile stacks, see [creating a devfile stack](./creating-a-devfile-stack).
 
 ## Building a custom devfile registry
 
@@ -146,5 +146,4 @@ build, run, and deploy your application.
 
 ### Additional resources
 
-- For information on deploying the devfile index container image, see {% docs-link section="Registry"
-    title="Deploying a devfile registry" text="deploying a devfile registry" /%}.
+- For information on deploying the devfile index container image, see [deploying a devfile registry](./deploying-a-devfile-registry).
