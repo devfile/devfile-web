@@ -1,6 +1,0 @@
-# See the OWNERS docs: <https://git.k8s.io/community/contributors/guide/owners.md>
-
-@devfile/devfile-services-team
-
-/libs/docs/src/docs/**/*.md @devfile/documentation-team
-/libs/docs/src/docs/**/*.mdoc @devfile/documentation-team

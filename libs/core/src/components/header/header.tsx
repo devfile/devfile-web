@@ -42,9 +42,9 @@ export function Header(): JSX.Element {
       )}
     >
       <div className="flex max-w-screen-2xl grow flex-wrap items-center justify-between">
-        <div className="flex items-center">
-          <Link href="/" aria-label="Home page" passHref className="my-2 flex items-center gap-4">
-            <DevfileIcon className="fill-devfile h-9 w-auto" />
+        <div className="my-2 flex items-center">
+          <Link href="/" aria-label="Home page" passHref className="flex items-center pr-4">
+            <DevfileIcon className="fill-devfile h-9 w-auto pr-2" />
             <h3 className="hidden pr-2 text-xl font-semibold text-slate-700 dark:text-sky-100 sm:block">
               Devfile.io
             </h3>
