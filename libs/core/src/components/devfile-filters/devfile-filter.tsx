@@ -23,14 +23,17 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
 
   return (
     <fieldset className="my-5">
-      <legend className="text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-sky-100">
+      <legend className="ml-2 text-sm font-semibold uppercase tracking-wider text-slate-700 dark:text-sky-100">
         {name}
       </legend>
       <ul className={clsx(seeMore && 'h-80 overflow-x-auto')}>
         {filterElements
           .slice(0, seeMore ? filterElements.length : checkboxesToDisplay)
           .map((filterElement) => (
-            <li key={filterElement.name} className="relative flex items-center">
+            <li
+              key={filterElement.name}
+              className="relative flex w-fit items-center whitespace-nowrap"
+            >
               <div className="flex h-5 items-center">
                 <input
                   id={filterElement.name + id}
@@ -46,7 +49,7 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
                     });
                     onFilter(newFilterElements);
                   }}
-                  className="text-devfile focus:ring-devfile/80 h-4 w-4 rounded border-slate-300 dark:border-slate-700"
+                  className="text-devfile focus:ring-devfile/80 ml-2 h-4 w-4 rounded border-slate-300 dark:border-slate-700"
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -64,7 +67,7 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
           ))}
       </ul>
       {filterElements.length >= checkboxesToDisplay && (
-        <div className="text-devfile">
+        <div className="text-devfile mt-2 ml-2">
           {!seeMore && (
             <button type="button" onClick={(): void => setSeeMore(true)}>
               See more

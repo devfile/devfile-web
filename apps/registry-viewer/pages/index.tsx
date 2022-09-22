@@ -33,7 +33,7 @@ export function Index(props: IndexProps): JSX.Element {
           <div className="grow">
             <DevfileSearch />
             <div className="flex">
-              <DevfileFilters className="w-96" />
+              <DevfileFilters />
               <DevfileGrid />
             </div>
             <Pagination />
@@ -67,6 +67,8 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
   const providers = getFilterElements(devfiles, 'provider');
   const languages = getFilterElements(devfiles, 'language');
 
+  const filtersApplied = 0;
+
   return {
     props: {
       devfiles: devfiles.slice(0, devfilesPerPage),
@@ -78,6 +80,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
         types,
         providers,
         languages,
+        filtersApplied,
       },
     },
   };

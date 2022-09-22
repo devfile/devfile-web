@@ -42,14 +42,14 @@ export function Header(props: HeaderProps): JSX.Element {
       )}
     >
       <div className="flex max-w-screen-2xl grow flex-wrap items-center justify-between">
-        <div className="flex items-center">
-          <Link href="/" aria-label="Home page" passHref className="my-2 flex items-center gap-4">
-            <DevfileIcon className="fill-devfile h-9 w-auto" />
+        <div className="my-2 flex items-center">
+          <Link href="/" aria-label="Home page" passHref className="flex items-center pr-4">
+            <DevfileIcon className="fill-devfile h-9 w-auto pr-2" />
             <h3 className="hidden pr-2 text-xl font-semibold text-slate-700 dark:text-sky-100 sm:block">
               {websiteName}
             </h3>
-            {isLandingPage && <VersionSelector className="relative z-10" />}
           </Link>
+          {isLandingPage && <VersionSelector className="relative z-10" />}
         </div>
 
         <div className="my-2 flex grow items-center justify-end gap-4 lg:hidden">
@@ -62,26 +62,24 @@ export function Header(props: HeaderProps): JSX.Element {
               />
             </Popover.Button>
 
-            <Popover.Panel className="absolute right-0 top-full z-50 mt-4 w-screen max-w-[250px] rounded-lg bg-white shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
-              <div className="m-6">
-                <div className="flex flex-col gap-4">
-                  {headerNavigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      aria-label={item.name}
-                      className="whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-                <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-4 dark:border-slate-700">
-                  <span className="whitespace-nowrap text-base text-slate-500 dark:text-slate-400">
-                    Switch theme
-                  </span>
-                  <ThemeSelector className="relative z-10" isRightAligned />
-                </div>
+            <Popover.Panel className="absolute right-0 top-full z-50 mt-4 w-screen max-w-[250px] rounded-lg border border-slate-700 bg-white p-6 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
+              <div className="flex flex-col gap-4">
+                {headerNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    aria-label={item.name}
+                    className="whitespace-nowrap text-base font-medium text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-300"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-4 flex items-center justify-between border-t border-slate-200 pt-4 dark:border-slate-700">
+                <span className="whitespace-nowrap text-base text-slate-500 dark:text-slate-400">
+                  Switch theme
+                </span>
+                <ThemeSelector className="relative z-10" isRightAligned />
               </div>
             </Popover.Panel>
           </Popover>

@@ -4,12 +4,12 @@ export function DevfileGrid(): JSX.Element {
   const { devfiles } = useSearchDevfiles();
 
   return (
-    <div className="my-6">
-      <ul className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="my-4 sm:my-6 lg:mr-2">
+      <ul className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {devfiles.searchedLimited.map((devfile) => (
           <li
             key={`${devfile.name}-${devfile.devfileRegistry.name}`}
-            className="col-span-1 rounded-lg border border-slate-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800 lg:h-60"
+            className="col-span-1 rounded-lg border border-slate-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800"
           >
             <div className="flex h-full flex-col justify-between p-6">
               <div className="flex">
@@ -22,7 +22,7 @@ export function DevfileGrid(): JSX.Element {
                     />
                   )}
                 </div>
-                <div>
+                <div className="grow">
                   <div className="flex justify-between">
                     <h4 className="line-clamp-2 text-lg font-medium tracking-tight text-slate-700 dark:text-sky-100">
                       {devfile.displayName}
@@ -44,7 +44,7 @@ export function DevfileGrid(): JSX.Element {
                 </div>
               </div>
               {devfile.tags && (
-                <div className="mt-1 flex flex-wrap gap-2">
+                <div className="mt-2 flex flex-wrap gap-2">
                   {devfile.tags.slice(0, 4).map((tag) => (
                     <span
                       key={tag}

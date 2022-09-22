@@ -10,7 +10,7 @@ import { useLocalStorage } from 'usehooks-ts';
 import Fuse from 'fuse.js';
 import { useRouter } from 'next/router';
 import { useFetchDevfiles } from '../use-fetch-devfiles/use-fetch-devfiles';
-import { parseDevfileLink, createDevfileLink } from '../../functions';
+import { parseDevfileLink, createDevfileLink, getFiltersApplied } from '../../functions';
 import type { Devfile, DevfileRegistry } from '../../functions';
 
 export interface FilterElement {
@@ -18,72 +18,65 @@ export interface FilterElement {
   checked: boolean;
 }
 
-export interface BaseAction {
-  queryAction?: boolean;
+type ActionProperties = keyof Omit<QueryState, 'filtersApplied'>;
+
+interface ActionBase {
+  resetPage: boolean;
 }
 
-export interface OnLoadAction extends BaseAction {
-  type: 'ON_LOAD';
+interface SetQueryAction extends Partial<ActionBase> {
+  type: 'SET_QUERY';
+  property?: never;
   payload: {
-    pageNumber: number;
-    search: string;
-    registries?: FilterElement[];
-    tags?: FilterElement[];
-    types?: FilterElement[];
-    providers?: FilterElement[];
-    languages?: FilterElement[];
+    page?: Partial<Omit<PageState, 'total'>>
+    query?: Partial<Omit<QueryState, 'filtersApplied'>>
   };
 }
 
-export interface SetDevfilesAction extends BaseAction {
+interface SetDevfilesAction extends Partial<ActionBase> {
   type: 'SET_DEVFILES';
+  property?: never;
   payload: Devfile[];
 }
 
-export interface FilterOnSearchAction extends BaseAction {
-  type: 'FILTER_ON_SEARCH';
-  payload: string;
+// interface FilterOnFilterElement<T extends Exclude<ActionProperties, 'search'>> extends Partial<ActionBase> {
+//   type: 'FILTER_ON';
+//   property: T;
+//   payload: QueryState[T] extends FilterElement[] ? FilterElement[] : never;
+// }
+
+// interface FilterOnSearchAction<T extends Extract<ActionProperties, 'search'>> extends Partial<ActionBase> {
+//   type: 'FILTER_ON';
+//   property: T;
+//   payload: QueryState[T] extends string ? string : never;
+// }
+
+// type FilterOnAction = FilterOnFilterElement<Exclude<ActionProperties, 'search'>> | FilterOnSearchAction<Extract<ActionProperties, 'search'>>;
+
+interface FilterOnAction<T extends ActionProperties> extends Partial<ActionBase> {
+  type: 'FILTER_ON';
+  property: T;
+  payload: QueryState[T];
 }
 
-export interface FilterOnRegistriesAction extends BaseAction {
-  type: 'FILTER_ON_REGISTRIES';
-  payload: FilterElement[];
+
+interface ClearFiltersAction extends Partial<ActionBase> {
+  type: 'CLEAR_FILTERS';
+  property?: never;
+  payload?: never;
 }
 
-export interface FilterOnTagsAction extends BaseAction {
-  type: 'FILTER_ON_TAGS';
-  payload: FilterElement[];
-}
-
-export interface FilterOnTypesAction extends BaseAction {
-  type: 'FILTER_ON_TYPES';
-  payload: FilterElement[];
-}
-
-export interface FilterOnProvidersAction extends BaseAction {
-  type: 'FILTER_ON_PROVIDERS';
-  payload: FilterElement[];
-}
-
-export interface FilterOnLanguagesAction extends BaseAction {
-  type: 'FILTER_ON_LANGUAGES';
-  payload: FilterElement[];
-}
-
-export interface SetPageNumberAction extends BaseAction {
+interface SetPageNumberAction extends Partial<ActionBase> {
   type: 'SET_PAGE_NUMBER';
+  property?: never;
   payload: number;
 }
 
-export type SearchDevfilesAction =
-  | OnLoadAction
+export type SearchDevfilesAction<T extends ActionProperties> =
+  | SetQueryAction
   | SetDevfilesAction
-  | FilterOnSearchAction
-  | FilterOnRegistriesAction
-  | FilterOnTagsAction
-  | FilterOnTypesAction
-  | FilterOnProvidersAction
-  | FilterOnLanguagesAction
+  | FilterOnAction<T>
+  | ClearFiltersAction
   | SetPageNumberAction;
 
 export interface PageState {
@@ -107,6 +100,7 @@ export interface QueryState {
   types: FilterElement[];
   providers: FilterElement[];
   languages: FilterElement[];
+  filtersApplied: number;
 }
 
 export interface SearchDevfilesState {
@@ -128,7 +122,7 @@ export interface UseSearchDevfiles {
   devfiles: DevfilesState;
   page: PageState;
   query: QueryState;
-  dispatch: React.Dispatch<SearchDevfilesAction>;
+  dispatch: React.Dispatch<SearchDevfilesAction<ActionProperties>>;
 }
 
 export function isSearchIn(
@@ -190,45 +184,49 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
   const router = useRouter();
 
   const searchDevfilesReducer = useCallback(
-    (state: SearchDevfilesState, action: SearchDevfilesAction): SearchDevfilesState => {
-      const { type, payload, queryAction } = action;
+    <T extends ActionProperties>(
+      state: SearchDevfilesState,
+      action: SearchDevfilesAction<T>,
+    ): SearchDevfilesState => {
+      const { type, property, payload, resetPage } = action;
 
       const newState: SearchDevfilesState = { ...state };
 
       switch (type) {
-        case 'ON_LOAD':
-          const { pageNumber, search, registries, tags, types, providers, languages } = payload;
-          newState.page = { ...newState.page, number: pageNumber };
+        case 'SET_QUERY':
+          const { page: newPage, query: newQuery } = payload;
+          newState.page = { ...newState.page, ...newPage };
           newState.query = {
-            search,
-            registries: registries ?? newState.query.registries,
-            tags: tags ?? newState.query.tags,
-            types: types ?? newState.query.types,
-            providers: providers ?? newState.query.providers,
-            languages: languages ?? newState.query.languages,
+            ...newState.query,
+            ...newQuery,
           };
           break;
         case 'SET_DEVFILES':
           newState.devfiles.all = payload;
           newState.devfiles.total = payload.length;
           break;
-        case 'FILTER_ON_SEARCH':
-          newState.query.search = payload;
+        case 'FILTER_ON':
+          newState.query[property] = payload;
           break;
-        case 'FILTER_ON_REGISTRIES':
-          newState.query.registries = payload;
-          break;
-        case 'FILTER_ON_TAGS':
-          newState.query.tags = payload;
-          break;
-        case 'FILTER_ON_TYPES':
-          newState.query.types = payload;
-          break;
-        case 'FILTER_ON_PROVIDERS':
-          newState.query.providers = payload;
-          break;
-        case 'FILTER_ON_LANGUAGES':
-          newState.query.languages = payload;
+        case 'CLEAR_FILTERS':
+          newState.query = {
+            ...newState.query,
+            registries: newState.query.registries.map((registry) => ({
+              ...registry,
+              checked: false,
+            })),
+            tags: newState.query.tags.map((tag) => ({ ...tag, checked: false })),
+            types: newState.query.types.map((_type) => ({ ..._type, checked: false })),
+            providers: newState.query.providers.map((provider) => ({
+              ...provider,
+              checked: false,
+            })),
+            languages: newState.query.languages.map((language) => ({
+              ...language,
+              checked: false,
+            })),
+            filtersApplied: 0,
+          };
           break;
         case 'SET_PAGE_NUMBER':
           newState.page.number = payload;
@@ -240,7 +238,15 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
           return _exhaustiveCheck;
       }
 
-      if (queryAction) {
+      newState.query.filtersApplied = getFiltersApplied([
+        newState.query.registries,
+        newState.query.tags,
+        newState.query.types,
+        newState.query.providers,
+        newState.query.languages,
+      ]);
+
+      if (resetPage) {
         newState.page.number = 1;
       }
 
@@ -288,28 +294,26 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
     },
     [fuse, router],
   );
-
-  const [state, dispatch] = useReducer<React.Reducer<SearchDevfilesState, SearchDevfilesAction>>(
-    searchDevfilesReducer,
-    {
-      devfiles: {
-        searched: initialDevfiles,
-        totalSearched: initialDevfiles.length,
-        searchedLimited: limitDevfiles(initialDevfiles, devfilesPerPage, startingPageNumber),
-        limit: devfilesPerPage,
-        all: initialDevfiles,
-        total: initialDevfiles.length,
-      },
-      page: {
-        number: startingPageNumber,
-        total: Math.ceil(initialDevfiles.length / devfilesPerPage),
-      },
-      query,
+  
+  const [state, dispatch] = useReducer(searchDevfilesReducer<ActionProperties>, {
+    devfiles: {
+      searched: initialDevfiles,
+      totalSearched: initialDevfiles.length,
+      searchedLimited: limitDevfiles(initialDevfiles, devfilesPerPage, startingPageNumber),
+      limit: devfilesPerPage,
+      all: initialDevfiles,
+      total: initialDevfiles.length,
     },
-  );
+    page: {
+      number: startingPageNumber,
+      total: Math.ceil(initialDevfiles.length / devfilesPerPage),
+    },
+    query,
+  });
+
 
   useEffect(() => {
-    const { pageNumber, search, registries, tags, types, providers, languages } = parseDevfileLink(
+    const { pageNumber: newPageNumber, search, registries, tags, types, providers, languages } = parseDevfileLink(
       router.asPath,
     );
 
@@ -369,18 +373,20 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
       });
     }
 
-    dispatch({
-      type: 'ON_LOAD',
-      payload: {
-        pageNumber,
-        search,
-        registries: newRegistries,
-        tags: newTags,
-        types: newTypes,
-        providers: newProviders,
-        languages: newLanguages,
-      },
-    });
+    // dispatch({
+    //   type: 'SET_QUERY',
+    //   payload: {
+    //     page: { number: newPageNumber },
+    //     query: {
+    //       search,
+    //       registries: newRegistries,
+    //       tags: newTags,
+    //       types: newTypes,
+    //       providers: newProviders,
+    //       languages: newLanguages,
+    //     },
+    //   },
+    // });
 
     // Run only on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps

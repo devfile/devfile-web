@@ -1,6 +1,15 @@
 import createDevfileLink from './create-devfile-link';
 
 const initialPage = { number: 1, total: 1 };
+const initialQuery = {
+  search: '',
+  registries: [{ name: 'Test', checked: false }],
+  tags: [{ name: 'Test', checked: false }],
+  types: [{ name: 'Test', checked: false }],
+  providers: [{ name: 'Test', checked: false }],
+  languages: [{ name: 'Test', checked: false }],
+  filtersApplied: 0,
+};
 const options: {
   parameters: Parameters<typeof createDevfileLink>;
   expected: ReturnType<typeof createDevfileLink>;
@@ -10,6 +19,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [{ name: 'Test', checked: false }],
         tags: [{ name: 'Test', checked: false }],
@@ -25,6 +35,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: 'Test',
         registries: [{ name: 'Test', checked: false }],
         tags: [{ name: 'Test', checked: false }],
@@ -40,6 +51,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [{ name: 'Test', checked: true }],
         tags: [{ name: 'Test', checked: false }],
@@ -55,6 +67,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [{ name: 'Test', checked: false }],
         tags: [{ name: 'Test', checked: true }],
@@ -70,6 +83,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [{ name: 'Test', checked: false }],
         tags: [{ name: 'Test', checked: false }],
@@ -85,6 +99,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [{ name: 'Test', checked: false }],
         tags: [{ name: 'Test', checked: false }],
@@ -100,6 +115,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [{ name: 'Test', checked: false }],
         tags: [{ name: 'Test', checked: false }],
@@ -115,6 +131,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: 'Test',
         registries: [{ name: 'Test', checked: true }],
         tags: [{ name: 'Test', checked: true }],
@@ -131,6 +148,7 @@ const options: {
     parameters: [
       initialPage,
       {
+        ...initialQuery,
         search: '',
         registries: [
           { name: 'Test1', checked: true },

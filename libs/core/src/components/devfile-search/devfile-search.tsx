@@ -1,7 +1,14 @@
-import { MagnifyingGlassIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
+import {
+  MagnifyingGlassIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  FunnelIcon,
+} from '@heroicons/react/20/solid';
 import Link from 'next/link';
+import { Popover } from '@headlessui/react';
 import { useSearchDevfiles } from '../../hooks';
 import { createDevfileLink } from '../../functions';
+import { DevfileFilter } from '../devfile-filters/devfile-filter';
 
 export function DevfileSearch(): JSX.Element {
   const { devfiles, page, query, dispatch } = useSearchDevfiles();
@@ -10,7 +17,7 @@ export function DevfileSearch(): JSX.Element {
   const nextPage = page.number < page.total ? page.number + 1 : page.total;
 
   return (
-    <div className="my-6 justify-between sm:flex">
+    <div className="my-4 justify-between sm:my-6 sm:flex lg:mx-2">
       <div className="group relative grow sm:max-w-[75%] sm:pr-4 lg:sm:max-w-[50%]">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
           <MagnifyingGlassIcon
@@ -24,12 +31,17 @@ export function DevfileSearch(): JSX.Element {
           placeholder="Search devfiles"
           className="h-10 w-full rounded-lg border border-slate-200 py-2.5 pl-10 pr-3.5 text-sm text-slate-400 shadow ring-1 ring-slate-200 group-hover:ring-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500 dark:ring-inset dark:ring-white/5 dark:group-hover:bg-slate-700/40 dark:group-hover:ring-slate-500"
           value={query.search}
-          onChange={(event): void =>
-            dispatch({ type: 'FILTER_ON_SEARCH', payload: event.target.value })
-          }
+          onChange={(event): void => {
+            dispatch({
+              type: 'FILTER_ON',
+              property: 'search',
+              payload: event.target.value,
+              resetPage: true,
+            });
+          }}
         />
       </div>
-      <div className="mt-6 flex items-center justify-between sm:mt-0 sm:justify-start">
+      <div className="mt-4 flex items-center justify-between sm:mt-0 sm:justify-start">
         <div className="pr-8">
           <p className="whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
             <span className="font-medium">{(page.number - 1) * devfiles.limit + 1}</span> -{' '}
@@ -69,6 +81,96 @@ export function DevfileSearch(): JSX.Element {
           </Link>
         </div>
       </div>
+      <Popover className="relative mt-4 sm:hidden">
+        <div className="flex justify-between">
+          <Popover.Button className="flex items-center">
+            <FunnelIcon className="h-5 w-auto pr-1 text-slate-500 dark:text-slate-400" />
+            <span className="text-devfile text-sm font-semibold uppercase tracking-wider">
+              {query.filtersApplied !== 0
+                ? `${query.filtersApplied} filter(s) applied`
+                : 'Filter results'}
+            </span>
+          </Popover.Button>
+          {query.filtersApplied > 0 && (
+            <button
+              type="button"
+              className="text-devfile text-sm font-semibold uppercase tracking-wider"
+              onClick={(): void => {
+                dispatch({ type: 'CLEAR_FILTERS' });
+              }}
+            >
+              Clear filter(s)
+            </button>
+          )}
+        </div>
+        <Popover.Panel className="absolute -left-6 z-10 mt-2 h-screen w-screen ring-1 ring-black/5 backdrop-blur-sm dark:ring-white/5">
+          <div className="mx-6 rounded-lg border border-slate-700 bg-white p-6 shadow-md shadow-black/5 dark:bg-slate-800">
+            <ul className="grid grid-cols-3 gap-6">
+              <DevfileFilter
+                name="Registries"
+                filterElements={query.registries}
+                onFilter={(filterElement): void =>
+                  dispatch({
+                    type: 'FILTER_ON',
+                    property: 'registries',
+                    payload: filterElement,
+                    resetPage: true,
+                  })
+                }
+              />
+              <DevfileFilter
+                name="Tags"
+                filterElements={query.tags}
+                onFilter={(filterElement): void =>
+                  dispatch({
+                    type: 'FILTER_ON',
+                    property: 'tags',
+                    payload: filterElement,
+                    resetPage: true,
+                  })
+                }
+              />
+              <DevfileFilter
+                name="Types"
+                capitalize
+                filterElements={query.types}
+                onFilter={(filterElement): void =>
+                  dispatch({
+                    type: 'FILTER_ON',
+                    property: 'types',
+                    payload: filterElement,
+                    resetPage: true,
+                  })
+                }
+              />
+              <DevfileFilter
+                name="Providers"
+                filterElements={query.providers}
+                onFilter={(filterElement): void =>
+                  dispatch({
+                    type: 'FILTER_ON',
+                    property: 'providers',
+                    payload: filterElement,
+                    resetPage: true,
+                  })
+                }
+              />
+              <DevfileFilter
+                name="Languages"
+                filterElements={query.languages}
+                onFilter={(filterElement): void =>
+                  dispatch({
+                    type: 'FILTER_ON',
+                    property: 'languages',
+                    payload: filterElement,
+                    resetPage: true,
+                  })
+                }
+              />
+            </ul>
+          </div>
+        </Popover.Panel>
+      </Popover>
     </div>
   );
 }
