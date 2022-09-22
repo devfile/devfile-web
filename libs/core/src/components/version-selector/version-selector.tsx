@@ -12,7 +12,7 @@ export interface VersionSelectorProps {
 export function VersionSelector(props: VersionSelectorProps): JSX.Element | null {
   const { className } = props;
 
-  const { selectedVersion, setSelectedVersion, docVersions } = useNavigation();
+  const { selectedVersion, setSelectedVersion, docVersions, docVersionLinks } = useNavigation();
   const router = useRouter();
 
   if (!router.asPath.includes('/docs') || router.pathname === '/404') {
@@ -33,7 +33,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
           <Menu.Item
             as={Link}
             key={version}
-            href={`/docs/${version}/what-is-a-devfile`}
+            href={docVersionLinks[version]}
             onClick={(): void => setSelectedVersion(version)}
             className={({ active }): string =>
               clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {
@@ -44,7 +44,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
               })
             }
           >
-            <div className="ml-1">{version}</div>
+            <span className="ml-1">{version}</span>
           </Menu.Item>
         ))}
       </Menu.Items>

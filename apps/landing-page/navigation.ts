@@ -6,7 +6,7 @@ import {
   JetBrainsIcon,
   RedHatIcon,
 } from '@devfile-web/core';
-import { defaultVersion } from '@devfile-web/docs';
+import { defaultVersion, DocVersions } from '@devfile-web/docs';
 import { Squares2X2Icon, BookOpenIcon, Bars4Icon } from '@heroicons/react/24/outline';
 import type { HeaderNavigation, FooterNavigation, NavigationElement } from '@devfile-web/core';
 
@@ -71,5 +71,43 @@ export const custom404Navigation: Custom404Navigation = [
     description: 'Browse devfile stacks and samples',
     image: Squares2X2Icon,
     href: 'https://registry.devfile.io',
+  },
+];
+
+export interface Redirect {
+  from: RegExp;
+  to: (version: DocVersions) => string;
+}
+
+export const redirects: Redirect[] = [
+  // /docs
+  {
+    from: /^\/docs\/?$/,
+    to: (version) => `/docs/${version}/what-is-a-devfile`,
+  },
+  // /docs/{version}
+  {
+    from: /^\/docs\/(\d+\.\d+\.\d+[^/]*)\/?$/,
+    to: (version) => `/docs/${version}/what-is-a-devfile`,
+  },
+  // /docs/devfile/{version}/user-guide/migrating-to-devfile-v2
+  {
+    from: /^\/docs\/devfile\/(\d+\.\d+\.\d+[^/]*)\/user-guide\/migrating-to-devfile-v2\/?$/,
+    to: (version) => `/docs/${version}/migrating-to-devfile-v2`,
+  },
+  // /docs/devfile/{version}/user-guide/authoring-stacks
+  {
+    from: /^\/docs\/devfile\/(\d+\.\d+\.\d+[^/]*)\/user-guide\/authoring-stacks\/?$/,
+    to: (version) => `/docs/${version}/creating-a-devfile-stack`,
+  },
+  // /docs/devfile/{version}/user-guide/referring-to-a-parent-devfile-in-a-devfile
+  {
+    from: /^\/docs\/devfile\/(\d+\.\d+\.\d+[^/]*)\/user-guide\/referring-to-a-parent-devfile-in-a-devfile\/?$/,
+    to: (version) => `/docs/${version}/referring-to-a-parent-devfile`,
+  },
+  // /docs/devfile/{version}/user-guide/
+  {
+    from: /^\/docs\/devfile\/(\d+\.\d+\.\d+[^/]*)\/user-guide\/?$/,
+    to: (version) => `/docs/${version}/devfile-ecosystem`,
   },
 ];

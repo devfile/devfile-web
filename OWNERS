@@ -1,13 +1,13 @@
-# See the OWNERS docs: https://git.k8s.io/community/contributors/guide/owners.md
+# See the OWNERS docs: <https://git.k8s.io/community/contributors/guide/owners.md>
 
 approvers:
-  - maysunfaisal
-  - schultzp2020
-  - johnmcollier
-  - mike-hoang
+- maysunfaisal
+- schultzp2020
+- johnmcollier
+- mike-hoang
 
 reviewers:
-  - maysunfaisal
-  - schultzp2020
-  - johnmcollier
-  - mike-hoang
+- maysunfaisal
+- schultzp2020
+- johnmcollier
+- mike-hoang

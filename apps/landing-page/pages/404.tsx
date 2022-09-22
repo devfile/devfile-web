@@ -1,12 +1,30 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { DevfileIcon, LandingPageMeta } from '@devfile-web/core';
+import { defaultVersion, docVersions } from '@devfile-web/docs';
 import Link from 'next/link';
-import { custom404Navigation } from '../navigation';
+import { useRouter } from 'next/router';
+import { custom404Navigation, redirects } from '../navigation';
 
 export function Custom404(): JSX.Element {
+  const router = useRouter();
+
+  const redirectLinks = redirects.map((redirect) => {
+    const match = router.asPath.match(redirect.from);
+    const version =
+      docVersions.find((_version) => match && _version.includes(match[1])) || defaultVersion;
+    return { isPage: !!match, href: redirect.to(version) };
+  });
+
   return (
     <div className="bg-slate-50 dark:bg-slate-900">
-      <LandingPageMeta title="404: Page not found" />
+      <LandingPageMeta title="404: Page not found">
+        {redirectLinks.map(
+          (link) =>
+            link.isPage && (
+              <meta key={link.href} httpEquiv="refresh" content={`0; url=${link.href}`} />
+            ),
+        )}
+      </LandingPageMeta>
 
       <main className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex-shrink-0 pt-16">
