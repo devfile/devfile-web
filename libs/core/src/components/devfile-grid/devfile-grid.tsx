@@ -1,10 +1,15 @@
+import clsx from 'clsx';
 import { useSearchDevfiles } from '../../hooks';
 
-export function DevfileGrid(): JSX.Element {
+export function DevfileGrid(
+  props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+): JSX.Element {
+  const { className, ...rest } = props;
+
   const { devfiles } = useSearchDevfiles();
 
   return (
-    <div className="my-4 sm:my-6 lg:mr-2">
+    <div className={clsx(className, 'my-4 sm:my-6 lg:mr-2')} {...rest}>
       <ul className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {devfiles.searchedLimited.map((devfile) => (
           <li

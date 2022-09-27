@@ -34,7 +34,7 @@ export function Index(props: IndexProps): JSX.Element {
             <DevfileSearch />
             <div className="flex">
               <DevfileFilters />
-              <DevfileGrid />
+              <DevfileGrid className="grow" />
             </div>
             <Pagination />
           </div>

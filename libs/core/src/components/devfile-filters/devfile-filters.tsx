@@ -5,19 +5,8 @@ export function DevfileFilters(): JSX.Element {
   const { query, dispatch } = useSearchDevfiles();
 
   return (
-    <div className="my-6 mr-8 hidden lg:block">
+    <div className="my-6 mr-16 hidden lg:block">
       <h1 className="ml-2 text-xl font-semibold text-slate-700 dark:text-sky-100">Filter by</h1>
-      {query.filtersApplied > 0 && (
-        <button
-          type="button"
-          className="text-devfile mt-4 ml-2 whitespace-nowrap text-sm font-semibold uppercase tracking-wider"
-          onClick={(): void => {
-            dispatch({ type: 'CLEAR_FILTERS' });
-          }}
-        >
-          Clear filter(s)
-        </button>
-      )}
       <DevfileFilter
         name="Registries"
         filterElements={query.registries}
