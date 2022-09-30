@@ -3,12 +3,12 @@ title: Creating Devfiles With Templates
 description: Creating Devfiles With Templates
 ---
 
-With most dev tools, you can utilize the devfile registry to 
-fetch the stacks you need to begin development of your project. 
-Sometimes however you might need to create your devfile from 
-scratch or create your own template devfile for your stack. This 
-guide will run through starting from a minimum devfile and build
-into sample templates for common use cases.
+Most dev tools can utilize the devfile registry to 
+fetch the stacks needed to begin development on projects. 
+Sometimes however there might be a need to create a devfile 
+from scratch or create custom devfile template(s). 
+This guide will run through starting from a minimum devfile and 
+build into sample templates for common use cases.
 
 ## Prerequisites
 
