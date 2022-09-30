@@ -44,7 +44,7 @@ build into sample templates for common use cases.
         - Set `architectures` to specify the platforms support in 
         the template
         - For improved readability on devfile registries set `displayName` for the title to display for this template and `icon` to tie a stack icon to the template
-        ```yaml {% filename="devfile.yaml" %}
+        ```yaml
           schemaVersion: 2.2.0
           metadata:
             name: web-service
@@ -70,7 +70,7 @@ build into sample templates for common use cases.
         database using environment variables, in this case 
         environment variable names and values defined for the 
         container component under `env`
-        ```yaml {% filename="devfile.yaml" %}
+        ```yaml
         components:
           - name: web
             container:
@@ -95,7 +95,7 @@ build into sample templates for common use cases.
         stored
         - Command groups can be used to define automation useful
         for executing a web service
-        ```yaml {% filename="devfile.yaml" %}
+        ```yaml
         commands:
           - id: build
             exec:
@@ -120,7 +120,7 @@ build into sample templates for common use cases.
         `git` or `zip`
         - It is recommended to include a starter project 
         description
-          ```yaml {% filename="devfile.yaml" %}
+          ```yaml
           starterProjects:
             - name: web-starter
               description: A web service starting point.
