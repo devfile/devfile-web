@@ -181,3 +181,6 @@ build into sample templates for common use cases.
 
 
 ## Additional Resources
+
+- [API reference](./devfile-schema)
+- [Devfile resources](./resources)
