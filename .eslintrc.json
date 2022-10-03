@@ -1,7 +1,7 @@
 {
   "root": true,
   "ignorePatterns": ["**/*"],
-  "plugins": ["@nrwl/nx", "eslint-comments", "promise", "unicorn"],
+  "plugins": ["@nrwl/nx", "eslint-comments", "promise", "unicorn", "license-header"],
   "extends": [
     "airbnb",
     "airbnb/hooks",
@@ -96,7 +96,8 @@
         "unicorn/no-abusive-eslint-disable": "off",
         "eslint-comments/no-unlimited-disable": "off",
         "unicorn/no-null": "off",
-        "unicorn/prefer-module": "off"
+        "unicorn/prefer-module": "off",
+        "license-header/header": [ "error", "./license-header.js" ]
       }
     },
     {

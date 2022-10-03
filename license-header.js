@@ -13,9 +13,3 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/// <reference types="next" />
-/// <reference types="next/image-types/global" />
-
-// NOTE: This file should not be edited
-// see https://nextjs.org/docs/basic-features/typescript for more information.

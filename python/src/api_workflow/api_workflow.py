@@ -1,3 +1,18 @@
+# Copyright 2022 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+
 """
 The script api_workflow publishes or releases the documentation version for the landing-page
 after devfile/api updates a devfile spec version.
@@ -42,9 +57,7 @@ base_config = Config(
 )
 
 
-def get_version_breakdown(
-    new_version: str, version_type: str
-) -> typing.Tuple[int, int, int]:
+def get_version_breakdown(new_version: str, version_type: str) -> typing.Tuple[int, int, int]:
     """Splits the semver formatted version into major, minor, and bug fix"""
     result = re.search(r"^(\d+)\.(\d+)\.(\d+)", new_version)
     if result is None:
@@ -141,9 +154,7 @@ def update_versions(
             )
 
             # If the new major and minor versions are the same, then we need to update the bug fix version
-            if (major_version != new_major_version) or (
-                minor_version != new_minor_version
-            ):
+            if (major_version != new_major_version) or (minor_version != new_minor_version):
                 versions.append(version)
             else:
                 # Cannot change a bug fix version unless its a newer version
@@ -278,9 +289,7 @@ def main(
     parser.add_argument(
         "--version", help="devfile version in semver format", type=str, required=True
     )
-    parser.add_argument(
-        "--devfile-schema", help="devfile json schema", type=str, required=True
-    )
+    parser.add_argument("--devfile-schema", help="devfile json schema", type=str, required=True)
     parser.add_argument(
         "--release",
         help="release a new stable version",
@@ -314,9 +323,7 @@ def main(
     else:
         renamed_version = (versions[-2], versions[-1])
         update_doc_pages(renamed_version, path=config.doc_pages)
-        update_devfile_schema(
-            renamed_version, devfile_schema, path=config.devfile_schema
-        )
+        update_devfile_schema(renamed_version, devfile_schema, path=config.devfile_schema)
         update_navigation(renamed_version, path=config.navigation)
 
 
