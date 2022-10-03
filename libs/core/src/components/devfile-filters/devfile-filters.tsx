@@ -1,11 +1,18 @@
+import clsx from 'clsx';
 import { DevfileFilter } from './devfile-filter';
 import { useSearchDevfiles } from '../../hooks';
 
-export function DevfileFilters(): JSX.Element {
+export interface DevfileFiltersProps {
+  className?: string;
+}
+
+export function DevfileFilters(props: DevfileFiltersProps): JSX.Element {
+  const { className } = props;
+
   const { query, dispatch } = useSearchDevfiles();
 
   return (
-    <div className="my-6 mr-16 hidden lg:block">
+    <div className={clsx(className, 'my-6 hidden lg:block')}>
       <h1 className="ml-2 text-xl font-semibold text-slate-700 dark:text-sky-100">Filter by</h1>
       <DevfileFilter
         name="Registries"

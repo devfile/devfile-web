@@ -1,11 +1,12 @@
 import Link from 'next/link';
 import clsx from 'clsx';
+import type { ReactNode } from 'react';
 
 export interface ButtonProps {
   variant?: 'primary' | 'secondary';
   className?: string;
   href?: string;
-  children?: React.ReactNode;
+  children?: ReactNode;
 }
 
 const styles = {

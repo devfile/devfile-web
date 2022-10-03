@@ -1,6 +1,6 @@
 import clsx from 'clsx';
-import { Icon } from '../icon/icon';
-import type { IconProps } from '../icon/icon';
+import type { PropsWithChildren } from 'react';
+import { Icon, type IconProps } from '../icon/icon';
 
 const styles = {
   note: {
@@ -25,17 +25,14 @@ const icons: Record<CalloutIconsOptions, IconProps> = {
 export interface CalloutProps {
   type: CalloutIconsOptions;
   title: string;
-  children: JSX.Element;
 }
 
-export function Callout(props: CalloutProps): JSX.Element {
+export function Callout(props: PropsWithChildren<CalloutProps>): JSX.Element {
   const { type = 'note', title, children } = props;
-
-  const iconProps = icons[type];
 
   return (
     <div className={clsx('my-8 flex rounded-3xl p-6', styles[type].container)}>
-      <Icon className="h-8 w-8 flex-none" {...iconProps} />
+      <Icon className="h-8 w-8 flex-none" {...icons[type]} />
       <div className="ml-4 flex-auto">
         <p className={clsx('font-display m-0 text-xl', styles[type].title)}>{title}</p>
         <div className={clsx('prose mt-2.5', styles[type].body)}>{children}</div>

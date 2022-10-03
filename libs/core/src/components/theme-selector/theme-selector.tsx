@@ -56,35 +56,19 @@ export function ThemeSelector(props: ThemeSelectorProps): JSX.Element {
       <Listbox.Options
         className={clsx(
           isRightAligned ? 'right-0' : 'left-1/2 -translate-x-1/2',
-          'absolute top-full  mt-3 w-36  space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5',
+          'absolute top-full mt-3 w-36  space-y-1 rounded-xl bg-white p-3 text-sm font-medium shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5',
         )}
       >
         {themes.map((theme) => (
           <Listbox.Option
             key={theme.value}
             value={theme}
-            className={({ active, selected }): string =>
-              clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {
-                'text-devfile': selected,
-                'text-slate-900 dark:text-white': active && !selected,
-                'text-slate-700 dark:text-slate-400': !active && !selected,
-                'bg-slate-100 dark:bg-slate-900/40': active,
-              })
-            }
+            className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-400 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 flex cursor-pointer select-none items-center rounded-[0.625rem] p-1"
           >
-            {({ selected }): JSX.Element => (
-              <>
-                <div className="rounded-md bg-white p-1 shadow ring-1 ring-slate-900/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
-                  <theme.icon
-                    className={clsx(
-                      'h-4 w-4',
-                      selected ? 'fill-sky-400 dark:fill-sky-400' : 'fill-slate-400',
-                    )}
-                  />
-                </div>
-                <div className="ml-3">{theme.name}</div>
-              </>
-            )}
+            <div className="rounded-md bg-white p-1 shadow ring-1 ring-slate-900/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
+              <theme.icon className="ui-selected:fill-sky-400 ui-selected:dark:fill-sky-400 ui-not-selected:fill-slate-400 h-4 w-4" />
+            </div>
+            <div className="ml-3">{theme.name}</div>
           </Listbox.Option>
         ))}
       </Listbox.Options>

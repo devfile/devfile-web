@@ -35,16 +35,16 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
             key={version}
             href={docVersionLinks[version]}
             onClick={(): void => setSelectedVersion(version)}
-            className={({ active }): string =>
-              clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {
+            className={clsx(
+              'ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 flex cursor-pointer select-none items-center rounded-[0.625rem] py-1 px-2',
+              {
                 'text-devfile': version === selectedVersion,
-                'text-slate-900 dark:text-white': active && version !== selectedVersion,
-                'text-slate-700 dark:text-slate-400': !active && version !== selectedVersion,
-                'bg-slate-100 dark:bg-slate-900/40': active,
-              })
-            }
+                'ui-active:text-slate-900 ui-active:dark:text-white ui-not-active:text-slate-700 ui-not-active:dark:text-slate-400':
+                  version !== selectedVersion,
+              },
+            )}
           >
-            <span className="ml-1">{version}</span>
+            {version}
           </Menu.Item>
         ))}
       </Menu.Items>

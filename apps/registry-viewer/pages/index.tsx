@@ -6,9 +6,13 @@ import {
   DevfileFilters,
   fetchDevfiles,
   getFilterElements,
+  type DevfileRegistry,
+  type Devfile,
+  type QueryState,
+  type FilterElement,
 } from '@devfile-web/core';
 import type { GetStaticProps } from 'next';
-import type { DevfileRegistry, Devfile, QueryState, FilterElement } from '@devfile-web/core';
+import { devfileRegistries } from '../config';
 
 const devfilesPerPage = 15;
 
@@ -19,7 +23,7 @@ export interface IndexProps {
 }
 
 export function Index(props: IndexProps): JSX.Element {
-  const { devfiles, devfileRegistries, query } = props;
+  const { devfiles, query } = props;
 
   return (
     <SearchDevfilesProvider
@@ -33,7 +37,7 @@ export function Index(props: IndexProps): JSX.Element {
           <div className="grow">
             <DevfileSearch />
             <div className="flex">
-              <DevfileFilters />
+              <DevfileFilters className="pr-16" />
               <DevfileGrid className="grow" />
             </div>
             <Pagination />
@@ -45,17 +49,6 @@ export function Index(props: IndexProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
-  const devfileRegistries: DevfileRegistry[] = [
-    { name: 'Devfile registry', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry1', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry2', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry3', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry4', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry5', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry6', link: 'https://registry.devfile.io' },
-    // { name: 'Devfile registry7', link: 'https://registry.devfile.io' },
-  ];
-
   const devfiles = await fetchDevfiles(devfileRegistries);
 
   const registries: FilterElement[] = devfileRegistries.map((registry) => ({
