@@ -25,7 +25,7 @@ import { useEffect, useRef } from 'react';
 import { Popover } from '@headlessui/react';
 import { useSearchDevfiles } from '../../hooks';
 import { createDevfileLink } from '../../functions';
-import { DevfileFilter } from '../devfile-filters/devfile-filter';
+import { DevfileFilters } from '../devfile-filters/devfile-filters';
 
 export function DevfileSearch(): JSX.Element {
   const { devfiles, page, query, dispatch } = useSearchDevfiles();
@@ -53,7 +53,7 @@ export function DevfileSearch(): JSX.Element {
             ref={searchRef}
             type="search"
             placeholder="Search devfiles"
-            className="h-10 w-full rounded-lg border border-slate-200 py-2.5 pl-10 pr-3.5 text-sm text-slate-400 shadow ring-1 ring-slate-200 group-hover:ring-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500 dark:ring-inset dark:ring-white/5 dark:group-hover:bg-slate-700/40 dark:group-hover:ring-slate-500"
+            className="container h-10 rounded-lg border border-slate-200 py-2.5 pl-10 pr-3.5 text-sm text-slate-400 shadow ring-1 ring-slate-200 group-hover:ring-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500 dark:ring-inset dark:ring-white/5 dark:group-hover:bg-slate-700/40 dark:group-hover:ring-slate-500"
             value={query.search}
             onChange={(event): void => {
               dispatch({
@@ -140,70 +140,8 @@ export function DevfileSearch(): JSX.Element {
           )}
         </div>
         <Popover.Overlay className="fixed inset-0 backdrop-blur-sm" />
-        <Popover.Panel className="absolute z-10 mt-2 w-full rounded-lg border border-slate-700 bg-white p-6 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
-          <ul className="grid grid-cols-3 gap-6">
-            <DevfileFilter
-              name="Registries"
-              filterElements={query.registries}
-              onFilter={(filterElement): void =>
-                dispatch({
-                  type: 'FILTER_ON',
-                  property: 'registries',
-                  payload: filterElement,
-                  resetPage: true,
-                })
-              }
-            />
-            <DevfileFilter
-              name="Tags"
-              filterElements={query.tags}
-              onFilter={(filterElement): void =>
-                dispatch({
-                  type: 'FILTER_ON',
-                  property: 'tags',
-                  payload: filterElement,
-                  resetPage: true,
-                })
-              }
-            />
-            <DevfileFilter
-              name="Types"
-              capitalize
-              filterElements={query.types}
-              onFilter={(filterElement): void =>
-                dispatch({
-                  type: 'FILTER_ON',
-                  property: 'types',
-                  payload: filterElement,
-                  resetPage: true,
-                })
-              }
-            />
-            <DevfileFilter
-              name="Providers"
-              filterElements={query.providers}
-              onFilter={(filterElement): void =>
-                dispatch({
-                  type: 'FILTER_ON',
-                  property: 'providers',
-                  payload: filterElement,
-                  resetPage: true,
-                })
-              }
-            />
-            <DevfileFilter
-              name="Languages"
-              filterElements={query.languages}
-              onFilter={(filterElement): void =>
-                dispatch({
-                  type: 'FILTER_ON',
-                  property: 'languages',
-                  payload: filterElement,
-                  resetPage: true,
-                })
-              }
-            />
-          </ul>
+        <Popover.Panel className="container absolute z-10 mt-2 rounded-lg border border-slate-700 bg-white p-6 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
+          <DevfileFilters className="grid grid-cols-3 gap-6" />
         </Popover.Panel>
       </Popover>
     </>

@@ -48,7 +48,7 @@ export function Index(props: IndexProps): JSX.Element {
             devfileSpec={devfileSpec}
             className="lg:ml-4 lg:w-60 lg:shrink-0"
           />
-          <div className="grow overflow-auto">
+          <div className="grow lg:overflow-x-auto">
             {devfileSpec.starterProjects && (
               <DevfileStarterProjects
                 devfile={devfile}

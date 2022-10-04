@@ -126,7 +126,7 @@ export function JsonSchemaViewerElement(props: JsonSchemaViewerElementProps): JS
 
           <div className="relative grow">
             <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className="w-full border-t border-white group-hover:border-slate-200 dark:border-slate-900 dark:group-hover:border-slate-800" />
+              <div className="container border-t border-white group-hover:border-slate-200 dark:border-slate-900 dark:group-hover:border-slate-800" />
             </div>
           </div>
 

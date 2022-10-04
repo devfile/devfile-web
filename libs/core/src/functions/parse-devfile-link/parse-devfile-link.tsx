@@ -14,6 +14,11 @@
  * limitations under the License.
  */
 
+/* Parsing must be done through array indexing */
+/* eslint-disable @typescript-eslint/dot-notation */
+
+import qs from 'query-string';
+
 export function parseDevfileLink(link: string): {
   pageNumber: number;
   search: string;
@@ -23,26 +28,20 @@ export function parseDevfileLink(link: string): {
   providers: string[];
   languages: string[];
 } {
-  const pageNumberMatch = link.match(/page=(\d+)/);
-  const pageNumber = pageNumberMatch ? Number.parseInt(pageNumberMatch[1], 10) : 1;
+  const queryStringMatch = link.match(/\?(.*)$/);
+  const queryString = queryStringMatch ? queryStringMatch[1] : '';
 
-  const searchMatch = link.match(/search=([^&]+)/);
-  const search = searchMatch ? searchMatch[1] : '';
+  const results = qs.parse(queryString, { arrayFormat: 'comma' });
 
-  const registriesMatch = link.match(/registries=([^&]+)/);
-  const registries = registriesMatch ? registriesMatch[1].split(',') : [];
-
-  const tagsMatch = link.match(/tags=([^&]+)/);
-  const tags = tagsMatch ? tagsMatch[1].split(',') : [];
-
-  const typesMatch = link.match(/types=([^&]+)/);
-  const types = typesMatch ? typesMatch[1].split(',') : [];
-
-  const providersMatch = link.match(/providers=([^&]+)/);
-  const providers = providersMatch ? providersMatch[1].split(',') : [];
-
-  const languagesMatch = link.match(/languages=([^&]+)/);
-  const languages = languagesMatch ? languagesMatch[1].split(',') : [];
+  const pageNumber = typeof results['page'] === 'string' ? Number.parseInt(results['page'], 10) : 1;
+  const search = typeof results['search'] === 'string' ? results['search'] : '';
+  const registries = Array.isArray(results['registries'])
+    ? (results['registries'] as string[])
+    : [];
+  const tags = Array.isArray(results['tags']) ? (results['tags'] as string[]) : [];
+  const types = Array.isArray(results['types']) ? (results['types'] as string[]) : [];
+  const providers = Array.isArray(results['providers']) ? (results['providers'] as string[]) : [];
+  const languages = Array.isArray(results['languages']) ? (results['languages'] as string[]) : [];
 
   return { pageNumber, search, registries, tags, types, providers, languages };
 }

@@ -47,7 +47,7 @@ export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.
       <div className="my-5 flex flex-col justify-between gap-2 px-3 sm:flex-row sm:px-0">
         <div className="sm:w-1/2 sm:px-3">
           {starterProjects.length === 1 ? (
-            <div className="dark:text-devfile relative w-full cursor-default truncate rounded-lg border border-slate-600 bg-white py-2 pl-3 pr-10 text-left font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5 sm:text-sm">
+            <div className="dark:text-devfile container relative cursor-default truncate rounded-lg border border-slate-600 bg-white py-2 pl-3 pr-10 text-left font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5 sm:text-sm">
               {selectedProject.name}
             </div>
           ) : (
@@ -58,13 +58,13 @@ export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.
               className="relative"
             >
               <Listbox.Label className="sr-only">Starter projects</Listbox.Label>
-              <Listbox.Button className="dark:text-devfile relative w-full cursor-default rounded border border-slate-600 bg-white py-2 pl-3 pr-10 text-left font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5 sm:text-sm">
+              <Listbox.Button className="dark:text-devfile container relative cursor-default rounded border border-slate-600 bg-white py-2 pl-3 pr-10 text-left font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5 sm:text-sm">
                 <span className="block truncate">{selectedProject.name}</span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                 </span>
               </Listbox.Button>
-              <Listbox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md border border-slate-600 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700 sm:text-sm">
+              <Listbox.Options className="container absolute z-10 mt-1 max-h-60 overflow-x-auto rounded-md border border-slate-600 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700 sm:text-sm">
                 {starterProjects.map((project) => (
                   <Listbox.Option
                     key={project.name}

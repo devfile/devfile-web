@@ -53,8 +53,13 @@ export function Index(props: IndexProps): JSX.Element {
           <div className="grow">
             <DevfileSearch />
             <div className="flex">
-              <DevfileFilters className="pr-16" />
-              <DevfileGrid className="grow" />
+              <div className="my-6 hidden pr-16 lg:block">
+                <h1 className="ml-2 text-xl font-semibold text-slate-700 dark:text-sky-100">
+                  Filter by
+                </h1>
+                <DevfileFilters />
+              </div>
+              <DevfileGrid className="my-4 grow sm:my-6 lg:mr-2" />
             </div>
             <Pagination />
           </div>

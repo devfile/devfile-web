@@ -42,7 +42,7 @@ export function Custom404(): JSX.Element {
         )}
       </LandingPageMeta>
 
-      <main className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+      <main className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex-shrink-0 pt-16">
           <DevfileIcon className="fill-devfile mx-auto h-12 w-auto" />
         </div>

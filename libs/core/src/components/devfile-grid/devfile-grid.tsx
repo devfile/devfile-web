@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import clsx from 'clsx';
 import Link from 'next/link';
 import slugify from '@sindresorhus/slugify';
 import { useSearchDevfiles } from '../../hooks';
@@ -27,7 +26,7 @@ export function DevfileGrid(
   const { devfiles } = useSearchDevfiles();
 
   return (
-    <div className={clsx(className, 'my-4 sm:my-6 lg:mr-2')} {...rest}>
+    <div className={className} {...rest}>
       <ul className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {devfiles.searchedLimited.map((devfile) => (
           <li

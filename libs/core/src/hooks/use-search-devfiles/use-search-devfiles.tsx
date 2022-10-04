@@ -167,6 +167,18 @@ export function isSearchIn(
   return elements.some((e) => value.toLowerCase().includes(e.name.toLowerCase()));
 }
 
+export function sortFilterElements(filterElements: FilterElement[]): FilterElement[] {
+  return filterElements.sort((a, b) => {
+    if (a.checked && !b.checked) {
+      return -1;
+    }
+    if (!a.checked && b.checked) {
+      return 1;
+    }
+    return a.name.localeCompare(b.name);
+  });
+}
+
 export function limitDevfiles(devfiles: Devfile[], limit: number, page: number): Devfile[] {
   return devfiles.slice(limit * (page - 1), limit + limit * (page - 1));
 }
@@ -182,7 +194,7 @@ export function getFilterElements(devfiles: Devfile[], property: keyof Devfile):
 
   const uniqueElements = [...new Set(elements)];
 
-  return uniqueElements.map((element) => ({ name: element, checked: false }));
+  return sortFilterElements(uniqueElements.map((element) => ({ name: element, checked: false })));
 }
 
 export const SearchDevfilesContext = createContext<UseSearchDevfiles | undefined>(undefined);
@@ -222,7 +234,7 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
           if (property === 'search') {
             newState.query[property] = payload;
           } else {
-            newState.query[property] = payload;
+            newState.query[property] = sortFilterElements(payload);
           }
           break;
         case 'CLEAR_FILTERS':
