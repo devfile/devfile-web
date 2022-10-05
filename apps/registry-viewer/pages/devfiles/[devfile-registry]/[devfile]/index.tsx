@@ -81,9 +81,17 @@ export function Index(props: IndexProps): JSX.Element {
                 starterProjects={selectedDevfileSpec.starterProjects}
               />
             )}
-            <DevfileCodeblock devfileYaml={selectedDevfileYaml} className="hidden lg:block" />
+            <DevfileCodeblock
+              devfileYaml={selectedDevfileYaml}
+              devfileName={devfile.name}
+              className="hidden lg:block"
+            />
           </div>
-          <DevfileCodeblock devfileYaml={selectedDevfileYaml} className="block lg:hidden" />
+          <DevfileCodeblock
+            devfileYaml={selectedDevfileYaml}
+            devfileName={devfile.name}
+            className="block lg:hidden"
+          />
         </div>
       </div>
     </div>

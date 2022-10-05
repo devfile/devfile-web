@@ -19,15 +19,18 @@ import Highlight, { defaultProps } from '@schultzp2020/prism-react-renderer';
 import clsx from 'clsx';
 import { useCopyToClipboard } from 'usehooks-ts';
 import { ClipboardDocumentCheckIcon, CheckIcon } from '@heroicons/react/24/outline';
+import { useAnalytics } from '../../hooks';
 
 export interface DevfileCodeblockProps {
   className?: string;
+  devfileName: string;
   devfileYaml: string;
 }
 
 export function DevfileCodeblock(props: DevfileCodeblockProps): JSX.Element {
-  const { className, devfileYaml } = props;
+  const { className, devfileYaml, devfileName } = props;
 
+  const { dispatch } = useAnalytics();
   const [, copy] = useCopyToClipboard();
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
@@ -35,11 +38,13 @@ export function DevfileCodeblock(props: DevfileCodeblockProps): JSX.Element {
     setIsCopied(true);
     copy(devfileYaml.trimEnd()).catch(() => {});
 
+    dispatch('devfile-copied', { devfileName }).catch(() => {});
+
     const timer = setTimeout(() => {
       setIsCopied(false);
     }, 2000);
     return () => clearTimeout(timer);
-  }, [devfileYaml, copy]);
+  }, [copy, devfileYaml, dispatch, devfileName]);
 
   return (
     <div className={className}>

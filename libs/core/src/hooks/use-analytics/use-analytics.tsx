@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { createContext, useMemo, useContext, useEffect } from 'react';
+import { createContext, useMemo, useContext, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { AnalyticsBrowser } from '@segment/analytics-next';
 import type { ID } from '@segment/analytics-next';
@@ -27,8 +27,7 @@ export interface AnalyticsProviderProps {
 }
 
 export interface UseAnalytics {
-  analytics: AnalyticsBrowser;
-  client: string;
+  dispatch: (eventName: string, properties: Record<string, unknown>) => Promise<void>;
 }
 
 const AnalyticsContext = createContext<UseAnalytics | undefined>(undefined);
@@ -37,21 +36,29 @@ export function AnalyticsProvider(props: AnalyticsProviderProps): JSX.Element {
   const { children, writeKey, client } = props;
 
   const router = useRouter();
+  const analytics = useMemo(() => AnalyticsBrowser.load({ writeKey }), [writeKey]);
 
-  const value = useMemo(
-    () => ({
-      analytics: AnalyticsBrowser.load({ writeKey }),
-      client,
-    }),
-    [client, writeKey],
+  const dispatch = useCallback(
+    async (eventName: string, properties: Record<string, unknown>) => {
+      const region = getUserRegion();
+      const anonymousId = await getAnonymousId(analytics);
+
+      await analytics.track(eventName, properties, {
+        context: { ip: '0.0.0.0', location: { country: region } },
+        userId: anonymousId,
+      });
+    },
+    [analytics],
   );
+
+  const value = useMemo(() => ({ dispatch }), [dispatch]);
 
   useEffect(() => {
     const sendAnalytics = async (): Promise<void> => {
       const region = getUserRegion();
-      const anonymousId = await getAnonymousId(value.analytics);
+      const anonymousId = await getAnonymousId(analytics);
 
-      await value.analytics.identify(
+      await analytics.identify(
         anonymousId,
         {
           id: anonymousId,
@@ -61,9 +68,9 @@ export function AnalyticsProvider(props: AnalyticsProviderProps): JSX.Element {
         },
       );
 
-      await value.analytics.track(
+      await analytics.track(
         router.asPath,
-        { client: value.client },
+        { client },
         {
           context: { ip: '0.0.0.0', location: { country: region } },
           userId: anonymousId,
@@ -72,7 +79,7 @@ export function AnalyticsProvider(props: AnalyticsProviderProps): JSX.Element {
     };
 
     sendAnalytics().catch(() => {});
-  }, [value, router.asPath]);
+  }, [router.asPath, analytics, client]);
 
   return <AnalyticsContext.Provider value={value}>{children}</AnalyticsContext.Provider>;
 }
