@@ -28,20 +28,21 @@ export function parseDevfileLink(link: string): {
   providers: string[];
   languages: string[];
 } {
-  const queryStringMatch = link.match(/\?(.*)$/);
-  const queryString = queryStringMatch ? queryStringMatch[1] : '';
+  const { query } = qs.parseUrl(link, { arrayFormat: 'comma' });
 
-  const results = qs.parse(queryString, { arrayFormat: 'comma' });
-
-  const pageNumber = typeof results['page'] === 'string' ? Number.parseInt(results['page'], 10) : 1;
-  const search = typeof results['search'] === 'string' ? results['search'] : '';
-  const registries = Array.isArray(results['registries'])
-    ? (results['registries'] as string[])
+  const pageNumber = typeof query['page'] === 'string' ? Number.parseInt(query['page'], 10) : 1;
+  const search = typeof query['search'] === 'string' ? query['search'] : '';
+  const registries = Array.isArray(query['registries'])
+    ? (query['registries'].filter(Boolean) as string[])
     : [];
-  const tags = Array.isArray(results['tags']) ? (results['tags'] as string[]) : [];
-  const types = Array.isArray(results['types']) ? (results['types'] as string[]) : [];
-  const providers = Array.isArray(results['providers']) ? (results['providers'] as string[]) : [];
-  const languages = Array.isArray(results['languages']) ? (results['languages'] as string[]) : [];
+  const tags = Array.isArray(query['tags']) ? (query['tags'].filter(Boolean) as string[]) : [];
+  const types = Array.isArray(query['types']) ? (query['types'].filter(Boolean) as string[]) : [];
+  const providers = Array.isArray(query['providers'])
+    ? (query['providers'].filter(Boolean) as string[])
+    : [];
+  const languages = Array.isArray(query['languages'])
+    ? (query['languages'].filter(Boolean) as string[])
+    : [];
 
   return { pageNumber, search, registries, tags, types, providers, languages };
 }

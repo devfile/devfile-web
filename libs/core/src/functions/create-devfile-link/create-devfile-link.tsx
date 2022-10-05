@@ -45,19 +45,10 @@ export function createDevfileLink(page: PageState, query: QueryState): string {
 
   let queryString = '';
 
-  // Ternary operator is harder to read here
-  // eslint-disable-next-line unicorn/prefer-ternary
-  if (query.search) {
-    queryString = qs.stringify(
-      { page: page.number, search: query.search, registries, tags, types, providers, languages },
-      { arrayFormat: 'comma' },
-    );
-  } else {
-    queryString = qs.stringify(
-      { page: page.number, registries, tags, types, providers, languages },
-      { arrayFormat: 'comma' },
-    );
-  }
+  queryString = qs.stringify(
+    { page: page.number, search: query.search, registries, tags, types, providers, languages },
+    { arrayFormat: 'comma', skipEmptyString: true, skipNull: true },
+  );
 
   return `?${queryString}`;
 }
