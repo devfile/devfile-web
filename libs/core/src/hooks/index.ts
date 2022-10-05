@@ -21,3 +21,4 @@ export * from './use-codeblock/use-codeblock';
 export * from './use-search-devfiles/use-search-devfiles';
 export * from './use-links/use-links';
 export * from './use-fetch-devfiles/use-fetch-devfiles';
+export * from './use-fetch-devfile-yamls/use-fetch-devfile-yamls';

@@ -16,25 +16,36 @@
 
 export interface DevfileJson {
   name: string;
-  version?: string;
   displayName: string;
-  description?: string;
-  type: string;
-  tags?: string[];
-  icon?: string;
+  description: string;
+  type: 'sample' | 'stack';
+  tags: string[];
+  icon: string;
   projectType: string;
-  provider?: string;
   language: string;
-  links?: {
-    self: string;
-  };
-  resources?: string[];
-  starterProjects?: string[];
+  versions?: Version[];
+  provider?: string;
+  architectures?: string[];
   git?: {
     remotes: {
       [key: string]: string;
     };
   };
+}
+
+export interface Version {
+  version: string;
+  schemaVersion: string;
+  default: boolean;
+  description: string;
+  tags: string[];
+  icon: string;
+  links?: {
+    self: string;
+  };
+  resources?: string[];
+  starterProjects: string[];
+  architectures?: string[];
 }
 
 export interface DevfileRegistry {
@@ -52,7 +63,7 @@ export interface Devfile extends DevfileJson {
 export async function fetchDevfiles(devfileRegistries: DevfileRegistry[]): Promise<Devfile[]> {
   const responses = await Promise.all(
     devfileRegistries.map((devfileRegistry) =>
-      fetch(`${devfileRegistry.link}/index/all?icon=base64`),
+      fetch(`${devfileRegistry.link}/v2index/all?icon=base64`),
     ),
   );
 

@@ -187,10 +187,11 @@ export function createFuse(devfiles: Devfile[]): Fuse<Devfile> {
   return new Fuse(devfiles, { threshold: 0.25, keys: ['displayName', 'description'] });
 }
 
-export function getFilterElements(devfiles: Devfile[], property: keyof Devfile): FilterElement[] {
-  const elements = devfiles
-    .flatMap((devfile) => devfile[property])
-    .filter((element) => element !== undefined) as string[];
+export function getFilterElements(
+  devfiles: Devfile[],
+  property: keyof Pick<Devfile, 'tags' | 'type' | 'provider' | 'language'>,
+): FilterElement[] {
+  const elements = devfiles.flatMap((devfile) => devfile[property]).filter(Boolean) as string[];
 
   const uniqueElements = [...new Set(elements)];
 

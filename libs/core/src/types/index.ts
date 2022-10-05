@@ -14,4 +14,4 @@
  * limitations under the License.
  */
 
-export { Convert as ConvertDevfileSpec, DevfileSpec } from './devfile-spec';
+export { Convert as ConvertDevfileSpec, type DevfileSpec } from './devfile-spec';

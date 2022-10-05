@@ -20,9 +20,12 @@ import {
   DevfileStarterProjects,
   DevfileDatalist,
   DevfileCodeblock,
+  useFetchDevfileYamls,
   type Devfile,
   type DevfileSpec,
+  type Version,
 } from '@devfile-web/core';
+import { useState, useMemo } from 'react';
 import slugify from '@sindresorhus/slugify';
 import type { GetStaticProps, GetStaticPaths } from 'next';
 // @ts-ignore No types available
@@ -38,26 +41,49 @@ export interface IndexProps {
 export function Index(props: IndexProps): JSX.Element {
   const { devfile, devfileSpec, devfileYaml } = props;
 
+  const { data } = useFetchDevfileYamls(
+    `${devfile.devfileRegistry.link}/devfiles/${devfile.name}`,
+    devfile.versions?.map((version) => version.version),
+  );
+  const [selectedVersion, setSelectedVersion] = useState<Version | undefined>(
+    devfile.versions?.find((version) => version.default),
+  );
+  const selectedDevfileSpec = useMemo(
+    () =>
+      data.find(({ version }) => version === selectedVersion?.version)?.devfileSpec || devfileSpec,
+    [data, devfileSpec, selectedVersion?.version],
+  );
+  const selectedDevfileYaml = useMemo(
+    () =>
+      data.find(({ version }) => version === selectedVersion?.version)?.devfileYaml || devfileYaml,
+    [data, devfileYaml, selectedVersion?.version],
+  );
+
   return (
     <div className="flex grow justify-center bg-slate-50 py-10 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
       <div className="flex max-w-screen-2xl grow flex-col justify-between overflow-x-auto">
-        <DevfileHeader devfile={devfile} />
+        <DevfileHeader
+          devfile={devfile}
+          selectedVersion={selectedVersion}
+          setSelectedVersion={setSelectedVersion}
+        />
         <div className="mt-4 flex flex-col justify-between rounded-lg border border-slate-200 bg-white py-5 px-6 shadow dark:border-slate-700 dark:bg-slate-800 lg:flex-row-reverse">
           <DevfileDatalist
             devfile={devfile}
-            devfileSpec={devfileSpec}
+            selectedVersion={selectedVersion}
+            devfileSpec={selectedDevfileSpec}
             className="lg:ml-4 lg:w-60 lg:shrink-0"
           />
           <div className="grow lg:overflow-x-auto">
-            {devfileSpec.starterProjects && (
+            {selectedDevfileSpec.starterProjects && (
               <DevfileStarterProjects
                 devfile={devfile}
-                starterProjects={devfileSpec.starterProjects}
+                starterProjects={selectedDevfileSpec.starterProjects}
               />
             )}
-            <DevfileCodeblock devfileYaml={devfileYaml} className="hidden lg:block" />
+            <DevfileCodeblock devfileYaml={selectedDevfileYaml} className="hidden lg:block" />
           </div>
-          <DevfileCodeblock devfileYaml={devfileYaml} className="block lg:hidden" />
+          <DevfileCodeblock devfileYaml={selectedDevfileYaml} className="block lg:hidden" />
         </div>
       </div>
     </div>
@@ -94,8 +120,8 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const devfiles = await fetchDevfiles(devfileRegistries);
   const paths = devfiles.map((devfile) => ({
     params: {
-      'devfile-registry': devfile.devfileRegistry.name,
-      devfile: devfile.name,
+      'devfile-registry': slugify(devfile.devfileRegistry.name),
+      devfile: slugify(devfile.name),
     },
   }));
 

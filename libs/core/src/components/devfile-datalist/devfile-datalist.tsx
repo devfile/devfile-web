@@ -15,17 +15,18 @@
  */
 
 import Link from 'next/link';
-import type { Devfile } from '../../functions';
+import type { Devfile, Version } from '../../functions';
 import type { DevfileSpec } from '../../types';
 
 export interface DevfileDatalistProps {
   devfile: Devfile;
+  selectedVersion?: Version;
   devfileSpec: DevfileSpec;
   className?: string;
 }
 
 export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
-  const { devfile, devfileSpec, className } = props;
+  const { devfile, selectedVersion, devfileSpec, className } = props;
 
   return (
     <div className={className}>
@@ -33,6 +34,16 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
         Metadata
       </div>
       <dl className="divide-y border-slate-200 pl-3 dark:divide-slate-700">
+        {selectedVersion?.schemaVersion && (
+          <div className="grid grid-cols-2 py-2.5 lg:block">
+            <dt className="text-base font-medium text-slate-700 dark:text-sky-100">
+              Schema version
+            </dt>
+            <dd className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              {selectedVersion.schemaVersion}
+            </dd>
+          </div>
+        )}
         <div className="grid grid-cols-2 py-2.5 lg:block">
           <dt className="text-base font-medium text-slate-700 dark:text-sky-100">Project type</dt>
           <dd className="mt-1 text-sm text-slate-500 dark:text-slate-400">{devfile.projectType}</dd>
