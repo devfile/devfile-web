@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 
-export * from './landing-page-meta/landing-page-meta';
+export * from './meta/landing-page-meta';
+export * from './meta/registry-meta';
 export * from './header/header';
 export * from './cncf-banner/cncf-banner';
 export * from './value-proposition-section/value-proposition-section';

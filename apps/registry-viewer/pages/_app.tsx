@@ -16,7 +16,7 @@
 
 import { AppProps } from 'next/app';
 import 'focus-visible';
-import { AnalyticsProvider, LinksProvider, Header, Footer } from '@devfile-web/core';
+import { AnalyticsProvider, LinksProvider, Header, Footer, RegistryMeta } from '@devfile-web/core';
 import '../styles/tailwind.css';
 import { headerNavigation, footerNavigation } from '../navigation';
 
@@ -33,6 +33,7 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
       <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
         <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">
           <div className="grow">
+            <RegistryMeta />
             <Header websiteName={websiteName} />
             <Component {...pageProps} />
           </div>
