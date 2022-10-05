@@ -14,5 +14,15 @@
  * limitations under the License.
  */
 
-export { Convert as ConvertDevfileSpec, type DevfileSpec } from './devfile-spec';
-export * from './custom-404';
+import { Custom404 as Page404 } from '@devfile-web/core';
+import { custom404Navigation } from '../navigation';
+
+export function Custom404(): JSX.Element {
+  return (
+    <div className="bg-slate-50 dark:bg-slate-900">
+      <Page404 custom404Navigation={custom404Navigation} />
+    </div>
+  );
+}
+
+export default Custom404;

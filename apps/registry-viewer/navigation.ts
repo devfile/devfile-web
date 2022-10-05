@@ -24,12 +24,12 @@ import {
 } from '@devfile-web/core';
 import { defaultVersion } from '@devfile-web/docs';
 import { Squares2X2Icon, BookOpenIcon, Bars4Icon } from '@heroicons/react/24/outline';
-import type { HeaderNavigation, FooterNavigation, NavigationElement } from '@devfile-web/core';
+import type { HeaderNavigation, FooterNavigation, Custom404Navigation } from '@devfile-web/core';
 
 export const headerNavigation: HeaderNavigation = [
-  { name: 'Registry', href: 'https://registry.devfile.io' },
-  { name: 'Docs', href: `/docs/${defaultVersion}/what-is-a-devfile` },
-  { name: 'Get Started', href: `/docs/${defaultVersion}/devfile-ecosystem` },
+  { name: 'Registry', href: '/' },
+  { name: 'Docs', href: `https://devfile.io/docs/${defaultVersion}/what-is-a-devfile` },
+  { name: 'Get Started', href: `https://devfile.io/docs/${defaultVersion}/devfile-ecosystem` },
   { name: 'Github', href: 'https://github.com/devfile/api', image: GithubIcon },
   { name: 'Slack', href: 'https://kubernetes.slack.com/archives/C02SX9E5B55', image: SlackIcon },
 ];
@@ -43,8 +43,8 @@ export const footerNavigation: FooterNavigation = {
   ],
   links: [
     { name: 'Cloud Native Computing Foundation', href: 'https://www.cncf.io' },
-    { name: 'Registry', href: 'https://registry.devfile.io' },
-    { name: 'Documentation', href: `/docs/${defaultVersion}/what-is-a-devfile` },
+    { name: 'Registry', href: '/' },
+    { name: 'Documentation', href: `https://devfile.io/docs/${defaultVersion}/what-is-a-devfile` },
   ],
   social: [
     {
@@ -60,30 +60,23 @@ export const footerNavigation: FooterNavigation = {
   ],
 };
 
-export interface Custom404NavigationElement extends NavigationElement {
-  description: string;
-  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-}
-
-export type Custom404Navigation = Custom404NavigationElement[];
-
 export const custom404Navigation: Custom404Navigation = [
+  {
+    name: 'Registry',
+    description: 'Browse devfile stacks and samples',
+    image: Squares2X2Icon,
+    href: '/',
+  },
   {
     name: 'Documentation',
     description: 'Learn how to integrate devfile with your app',
     image: BookOpenIcon,
-    href: `/docs/${defaultVersion}/what-is-a-devfile`,
+    href: `https://devfile.io/docs/${defaultVersion}/what-is-a-devfile`,
   },
   {
     name: 'API Reference',
     description: 'A complete API reference for devfile',
     image: Bars4Icon,
-    href: `/docs/${defaultVersion}/devfile-schema`,
-  },
-  {
-    name: 'Registry',
-    description: 'Browse devfile stacks and samples',
-    image: Squares2X2Icon,
-    href: 'https://registry.devfile.io',
+    href: `https://devfile.io/docs/${defaultVersion}/devfile-schema`,
   },
 ];

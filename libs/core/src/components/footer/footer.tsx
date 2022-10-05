@@ -18,7 +18,14 @@ import Link from 'next/link';
 import { DevfileIcon } from '../../icons';
 import { useLinks } from '../../hooks';
 
-export function Footer(): JSX.Element {
+export interface FooterProps {
+  websiteName: string;
+  websiteDescription?: string;
+}
+
+export function Footer(props: FooterProps): JSX.Element {
+  const { websiteName, websiteDescription } = props;
+
   const { footerNavigation } = useLinks();
 
   return (
@@ -34,11 +41,13 @@ export function Footer(): JSX.Element {
           <div className="space-y-8 xl:col-span-1">
             <Link href="/" aria-label="Home page" passHref className="flex items-center gap-4">
               <DevfileIcon className="fill-devfile h-9 w-auto" />
-              <h3 className="text-xl font-semibold text-slate-700 dark:text-sky-100">Devfile.io</h3>
+              <h3 className="text-xl font-semibold text-slate-700 dark:text-sky-100">
+                {websiteName}
+              </h3>
             </Link>
-            <p className="text-base text-slate-500 dark:text-slate-400">
-              An open standard defining containerized development environments.
-            </p>
+            {websiteDescription && (
+              <p className="text-base text-slate-500 dark:text-slate-400">{websiteDescription}</p>
+            )}
             <div className="flex space-x-6">
               {footerNavigation.social.map((item) => (
                 <Link key={item.name} href={item.href} passHref>

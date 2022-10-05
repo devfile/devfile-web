@@ -25,16 +25,18 @@ const analyticsConfig = {
   client: 'registry-viewer',
 };
 
+const websiteName = 'Devfile Registry';
+
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <AnalyticsProvider {...analyticsConfig}>
       <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
         <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">
           <div className="grow">
-            <Header websiteName="Devfile Registry" />
+            <Header websiteName={websiteName} />
             <Component {...pageProps} />
           </div>
-          <Footer />
+          <Footer websiteName={websiteName} />
         </div>
       </LinksProvider>
     </AnalyticsProvider>

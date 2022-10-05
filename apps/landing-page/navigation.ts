@@ -24,7 +24,7 @@ import {
 } from '@devfile-web/core';
 import { defaultVersion, DocVersions } from '@devfile-web/docs';
 import { Squares2X2Icon, BookOpenIcon, Bars4Icon } from '@heroicons/react/24/outline';
-import type { HeaderNavigation, FooterNavigation, NavigationElement } from '@devfile-web/core';
+import type { HeaderNavigation, FooterNavigation, Custom404Navigation } from '@devfile-web/core';
 
 export { default as docsNavigation } from '../../dist/libs/scripts/navigation/navigation.json';
 
@@ -62,14 +62,13 @@ export const footerNavigation: FooterNavigation = {
   ],
 };
 
-export interface Custom404NavigationElement extends NavigationElement {
-  description: string;
-  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-}
-
-export type Custom404Navigation = Custom404NavigationElement[];
-
 export const custom404Navigation: Custom404Navigation = [
+  {
+    name: 'Registry',
+    description: 'Browse devfile stacks and samples',
+    image: Squares2X2Icon,
+    href: 'https://registry.devfile.io',
+  },
   {
     name: 'Documentation',
     description: 'Learn how to integrate devfile with your app',
@@ -81,12 +80,6 @@ export const custom404Navigation: Custom404Navigation = [
     description: 'A complete API reference for devfile',
     image: Bars4Icon,
     href: `/docs/${defaultVersion}/devfile-schema`,
-  },
-  {
-    name: 'Registry',
-    description: 'Browse devfile stacks and samples',
-    image: Squares2X2Icon,
-    href: 'https://registry.devfile.io',
   },
 ];
 

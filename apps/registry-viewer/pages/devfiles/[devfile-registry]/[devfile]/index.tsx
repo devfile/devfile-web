@@ -99,7 +99,13 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     (_devfile) =>
       slugify(_devfile.devfileRegistry.name) === devfileRegistryId &&
       slugify(_devfile.name) === devfileId,
-  ) as Devfile;
+  );
+
+  if (!devfile) {
+    return {
+      notFound: true,
+    };
+  }
 
   const res = await fetch(`${devfile.devfileRegistry.link}/devfiles/${devfile.name}`);
   const devfileYaml = await res.text();

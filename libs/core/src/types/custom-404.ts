@@ -14,5 +14,11 @@
  * limitations under the License.
  */
 
-export { Convert as ConvertDevfileSpec, type DevfileSpec } from './devfile-spec';
-export * from './custom-404';
+import type { NavigationElement } from '../hooks';
+
+export interface Custom404NavigationElement extends NavigationElement {
+  description: string;
+  image: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
+}
+
+export type Custom404Navigation = Custom404NavigationElement[];

@@ -82,6 +82,9 @@ function collectHeadings(
   return sections;
 }
 
+const websiteName = 'Devfile.io';
+const websiteDescription = 'An open standard defining containerized development environments.';
+
 function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
   const { markdoc } = pageProps as MarkdocNextJsPageProps;
 
@@ -102,7 +105,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
           <div className="flex h-screen min-w-[300px] flex-col justify-between">
             <div className="grow">
               <LandingPageMeta />
-              <Header websiteName="Devfile.io" isLandingPage />
+              <Header websiteName={websiteName} isLandingPage />
               <LandingPageLayout
                 title={title}
                 tableOfContents={tableOfContents}
@@ -112,7 +115,7 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
                 <Component {...pageProps} />
               </LandingPageLayout>
             </div>
-            <Footer />
+            <Footer websiteName={websiteName} websiteDescription={websiteDescription} />
           </div>
         </NavigationProvider>
       </LinksProvider>
