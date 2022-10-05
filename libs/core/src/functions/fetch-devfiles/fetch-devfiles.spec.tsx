@@ -28,7 +28,7 @@ describe('fetchDevfiles', () => {
   });
 
   it('should fetch devfiles', async () => {
-    fetchMock.mockIf('https://registry.devfile.io/index/all?icon=base64', async (req) => {
+    fetchMock.mockIf('https://registry.devfile.io/v2index/all?icon=base64', async (req) => {
       expect(req.method).toBe('GET');
       return JSON.stringify(devfiles);
     });
@@ -39,7 +39,7 @@ describe('fetchDevfiles', () => {
 
     const customDevfiles = await fetchDevfiles(devfileRegistries);
 
-    const response = await fetch('https://registry.devfile.io/index/all?icon=base64');
+    const response = await fetch('https://registry.devfile.io/v2index/all?icon=base64');
     const unsortedDevfiles = (await response.json()) as Devfile[];
     const sortedDevfiles = unsortedDevfiles
       .map((devfile) => ({
