@@ -31,7 +31,7 @@ multiple devfiles the same parent (the stack).
           name: my-project-dev
         parent:
             id: nodejs
-            registryUrl: https://devfile-registry.io/
+            registryUrl: https://registry.devfile.io/
         ```
 
     - Parent referred by uri
