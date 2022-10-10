@@ -7,8 +7,14 @@
       "executor": "@nrwl/cypress:cypress",
       "dependsOn": ["^build"],
       "options": {
-        "cypressConfig": "apps/landing-page-e2e/cypress.config.js",
-        "devServerTarget": "landing-page:serve:production"
+        "cypressConfig": "apps/landing-page-e2e/cypress.config.ts",
+        "devServerTarget": "landing-page:serve:development",
+        "testingType": "e2e"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "landing-page:serve:production"
+        }
       }
     },
     "lint": {

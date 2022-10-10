@@ -5,6 +5,7 @@
   "targets": {
     "e2e": {
       "executor": "@nrwl/cypress:cypress",
+      "dependsOn": ["^build"],
       "options": {
         "cypressConfig": "apps/registry-viewer-e2e/cypress.config.ts",
         "devServerTarget": "registry-viewer:serve:development",
