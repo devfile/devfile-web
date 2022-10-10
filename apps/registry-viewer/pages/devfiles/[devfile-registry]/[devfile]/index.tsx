@@ -62,15 +62,12 @@ export function Index(props: IndexProps): JSX.Element {
   return (
     <div className="flex grow justify-center bg-slate-50 py-10 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
       <div className="flex max-w-screen-2xl grow flex-col justify-between overflow-x-auto">
-        <DevfileHeader
-          devfile={devfile}
-          selectedVersion={selectedVersion}
-          setSelectedVersion={setSelectedVersion}
-        />
+        <DevfileHeader devfile={devfile} selectedVersion={selectedVersion} />
         <div className="mt-4 flex flex-col justify-between rounded-lg border border-slate-200 bg-white py-5 px-6 shadow dark:border-slate-700 dark:bg-slate-800 lg:flex-row-reverse">
           <DevfileDatalist
             devfile={devfile}
             selectedVersion={selectedVersion}
+            setSelectedVersion={setSelectedVersion}
             devfileSpec={selectedDevfileSpec}
             className="lg:ml-4 lg:w-60 lg:shrink-0"
           />
