@@ -18,8 +18,10 @@ import slugify from '@sindresorhus/slugify';
 import type { GetStaticPaths, GetStaticProps } from 'next';
 import { devfileRegistries } from '../../../config';
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
+
 export function Index(): JSX.Element {
-  return <meta httpEquiv="refresh" content="0; url=/" />;
+  return <meta httpEquiv="refresh" content={`0; url=${basePath || '/'}`} />;
 }
 
 export const getStaticProps: GetStaticProps = () => ({
