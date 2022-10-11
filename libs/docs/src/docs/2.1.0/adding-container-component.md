@@ -30,21 +30,21 @@ identified by its image.
         volumeMounts:
           - name: mavenrepo
             path: /root/.m2
-          env:
-            - name: ENV_VAR
-              value: value
-          endpoints:
-            - name: maven-server
-              targetPort: 3101
-              protocol: https
-              secure: 'true'
-              exposure: public
-          memoryRequest: 256M
-          memoryLimit: 1536M
-          cpuRequest: 0.1
-          cpuLimit: 0.5
-          command: ['tail']
-          args: ['-f', '/dev/null']
+        env:
+          - name: ENV_VAR
+            value: value
+        endpoints:
+          - name: maven-server
+            targetPort: 3101
+            protocol: https
+            secure: 'true'
+            exposure: public
+        memoryRequest: 256M
+        memoryLimit: 1536M
+        cpuRequest: 0.1
+        cpuLimit: 0.5
+        command: ['tail']
+        args: ['-f', '/dev/null']
     ```
 
     ```yaml {% title="A minimal container component" filename="devfile.yaml" %}
