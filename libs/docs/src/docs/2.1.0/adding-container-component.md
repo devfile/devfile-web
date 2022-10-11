@@ -26,25 +26,25 @@ identified by its image.
     components:
       - name: maven
         container:
-        image: eclipse/maven-jdk8:latest
-        volumeMounts:
-          - name: mavenrepo
-            path: /root/.m2
-        env:
-          - name: ENV_VAR
-            value: value
-        endpoints:
-          - name: maven-server
-            targetPort: 3101
-            protocol: https
-            secure: 'true'
-            exposure: public
-        memoryRequest: 256M
-        memoryLimit: 1536M
-        cpuRequest: 0.1
-        cpuLimit: 0.5
-        command: ['tail']
-        args: ['-f', '/dev/null']
+          image: eclipse/maven-jdk8:latest
+          volumeMounts:
+            - name: mavenrepo
+              path: /root/.m2
+          env:
+            - name: ENV_VAR
+              value: value
+          endpoints:
+            - name: maven-server
+              targetPort: 3101
+              protocol: https
+              secure: 'true'
+              exposure: public
+          memoryRequest: 256M
+          memoryLimit: 1536M
+          cpuRequest: 0.1
+          cpuLimit: 0.5
+          command: ['tail']
+          args: ['-f', '/dev/null']
     ```
 
     ```yaml {% title="A minimal container component" filename="devfile.yaml" %}
