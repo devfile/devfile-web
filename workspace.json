@@ -4,6 +4,8 @@
     "core": "libs/core",
     "docs": "libs/docs",
     "landing-page": "apps/landing-page",
-    "landing-page-e2e": "apps/landing-page-e2e"
+    "landing-page-e2e": "apps/landing-page-e2e",
+    "registry-viewer": "apps/registry-viewer",
+    "registry-viewer-e2e": "apps/registry-viewer-e2e"
   }
 }

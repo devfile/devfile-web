@@ -1,3 +1,19 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { Fragment } from 'react';
 import Image from 'next/image';
 import clsx from 'clsx';
@@ -5,7 +21,7 @@ import type { SVGProps } from 'react';
 import Highlight, { defaultProps } from '@schultzp2020/prism-react-renderer';
 import type { Language } from '@schultzp2020/prism-react-renderer';
 import { Button } from '../button/button';
-import { useNavigation } from '../../hooks';
+import { useLinks } from '../../hooks';
 import { HeroBackground } from '../hero-background/hero-background';
 import blurCyanImage from '../../images/blur-cyan.png';
 import blurIndigoImage from '../../images/blur-indigo.png';
@@ -41,7 +57,7 @@ function TrafficLightsIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
 }
 
 export function Hero(): JSX.Element {
-  const { headerNavigation } = useNavigation();
+  const { headerNavigation } = useLinks();
 
   return (
     <div className="overflow-hidden bg-slate-900 dark:-mb-16 dark:mt-[-12rem] dark:pb-32 dark:pt-[12rem] ">

@@ -7,7 +7,7 @@
       "executor": "nx:run-commands",
       "dependsOn": ["^build"],
       "options": {
-        "command": "bash ./scripts/docs.sh"
+        "command": "bash ./scripts/docs.sh > dist/docs.log"
       }
     },
     "build": {

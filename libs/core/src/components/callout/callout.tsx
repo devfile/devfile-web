@@ -1,6 +1,22 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import clsx from 'clsx';
-import { Icon } from '../icon/icon';
-import type { IconProps } from '../icon/icon';
+import type { PropsWithChildren } from 'react';
+import { Icon, type IconProps } from '../icon/icon';
 
 const styles = {
   note: {
@@ -25,17 +41,14 @@ const icons: Record<CalloutIconsOptions, IconProps> = {
 export interface CalloutProps {
   type: CalloutIconsOptions;
   title: string;
-  children: JSX.Element;
 }
 
-export function Callout(props: CalloutProps): JSX.Element {
+export function Callout(props: PropsWithChildren<CalloutProps>): JSX.Element {
   const { type = 'note', title, children } = props;
-
-  const iconProps = icons[type];
 
   return (
     <div className={clsx('my-8 flex rounded-3xl p-6', styles[type].container)}>
-      <Icon className="h-8 w-8 flex-none" {...iconProps} />
+      <Icon className="h-8 w-8 flex-none" {...icons[type]} />
       <div className="ml-4 flex-auto">
         <p className={clsx('font-display m-0 text-xl', styles[type].title)}>{title}</p>
         <div className={clsx('prose mt-2.5', styles[type].body)}>{children}</div>
