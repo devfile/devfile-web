@@ -41,6 +41,13 @@
         "buildTarget": "registry-viewer:build:production"
       }
     },
+    "postexport": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["export"],
+      "options": {
+        "command": "next-sitemap --config ./apps/registry-viewer/next-sitemap.config.mjs"
+      }
+    },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["coverage/apps/registry-viewer"],
