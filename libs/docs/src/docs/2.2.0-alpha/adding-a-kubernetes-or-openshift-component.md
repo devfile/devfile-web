@@ -56,5 +56,5 @@ You can add either a `kubernetes` or `openshift` component to a devfile.
     commands wth `deploy` command group kind. If the `kubernetes` or
     `openshift` component uses an image built by an `image` component
     defined in the devfile, you can create a composite `deploy` command
-    to build the image and deploy the Kubernetes or openshift component.
+    to build the image and deploy the `kubernetes` or `openshift` component.
     For more information on `deploy` commands, see [adding a command group](./adding-a-command-group).
