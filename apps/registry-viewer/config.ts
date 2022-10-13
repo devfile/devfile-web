@@ -17,5 +17,5 @@
 import type { DevfileRegistry } from '@devfile-web/core';
 
 export const devfileRegistries: DevfileRegistry[] = [
-  { name: 'Devfile registry', link: 'https://registry.devfile.io' },
+  { name: 'Community', link: 'https://registry.devfile.io' },
 ];

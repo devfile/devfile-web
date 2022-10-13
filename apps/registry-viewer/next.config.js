@@ -33,6 +33,7 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
+  trailingSlash: true,
   images: {
     loader: 'akamai',
     path: '',
