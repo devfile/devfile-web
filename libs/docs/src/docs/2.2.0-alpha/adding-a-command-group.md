@@ -13,7 +13,7 @@ Create command groups to help automate your devfile.
 2. Use the following supported group kinds: `build`, `run`, `test`,
 `debug` or `deploy`
 
-1. At most, there can only be one default command for each group kind.
+3. At most, there can only be one default command for each group kind.
     Set the default command by specifying `isDefault` to `true`.
 
     ```yaml {% filename="devfile.yaml" %}
@@ -48,7 +48,7 @@ Create command groups to help automate your devfile.
             isDefault: true
     ```
 
-2. Use the `deploy` kind to reference a deploy command for an outerloop
+4. Use the `deploy` kind to reference a deploy command for an outerloop
    scenario.
 
     ```yaml {% filename="devfile.yaml" %}
