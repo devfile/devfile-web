@@ -8,3 +8,4 @@
 **/generated/
 **/snippet.*
 **/dist
+libs/core/src/types/devfile-spec.ts

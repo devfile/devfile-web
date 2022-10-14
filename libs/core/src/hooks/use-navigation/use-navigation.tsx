@@ -1,7 +1,22 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { createContext, useState, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { docVersions, defaultVersion } from '@devfile-web/docs';
-
 import type {
   DocVersions,
   VersionedDocsNavigation,
@@ -10,30 +25,12 @@ import type {
   Section,
 } from '@devfile-web/docs';
 
-export interface NavigationElement {
-  name: string;
-  href: string;
-  image?: (props: React.SVGProps<SVGSVGElement>) => JSX.Element;
-}
-
-export type HeaderNavigation = NavigationElement[];
-
-export interface FooterNavigation {
-  contributors: NavigationElement[];
-  links: NavigationElement[];
-  social: NavigationElement[];
-}
-
 export interface NavigationProviderProps {
-  headerNavigation: HeaderNavigation;
-  footerNavigation: FooterNavigation;
   docsNavigation: DocsNavigation;
   children: React.ReactNode;
 }
 
 export interface UseNavigation {
-  headerNavigation: HeaderNavigation;
-  footerNavigation: FooterNavigation;
   versionedDocsNavigation: VersionedDocsNavigation;
   selectedVersion: DocVersions;
   setSelectedVersion: React.Dispatch<React.SetStateAction<DocVersions>>;
@@ -48,7 +45,7 @@ export interface UseNavigation {
 const NavigationContext = createContext<UseNavigation | undefined>(undefined);
 
 export function NavigationProvider(props: NavigationProviderProps): JSX.Element {
-  const { children, headerNavigation, footerNavigation, docsNavigation } = props;
+  const { children, docsNavigation } = props;
 
   const router = useRouter();
   const [selectedVersion, setSelectedVersion] = useState<DocVersions>(
@@ -86,8 +83,6 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
 
   const value = useMemo(
     () => ({
-      headerNavigation,
-      footerNavigation,
       versionedDocsNavigation: docsNavigation[selectedVersion],
       selectedVersion,
       setSelectedVersion,
@@ -100,16 +95,7 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
       currentPage: allLinks[selectedVersion][linkIndex],
       nextPage: allLinks[selectedVersion][linkIndex + 1],
     }),
-    [
-      headerNavigation,
-      footerNavigation,
-      docsNavigation,
-      selectedVersion,
-      docVersionLinks,
-      allLinks,
-      linkIndex,
-      router.pathname,
-    ],
+    [docsNavigation, selectedVersion, docVersionLinks, allLinks, linkIndex, router.pathname],
   );
 
   return <NavigationContext.Provider value={value}>{children}</NavigationContext.Provider>;

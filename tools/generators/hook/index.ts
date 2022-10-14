@@ -1,3 +1,19 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { Tree, formatFiles, installPackagesTask } from '@nrwl/devkit';
 import { names, getProjects } from '@nrwl/devkit';
 
@@ -9,6 +25,22 @@ export default async function (host: Tree, schema: any) {
   host.write(
     `${project?.root}/src/hooks/use-${fileName}/use-${fileName}.tsx`,
     `
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { useState, useCallback } from 'react';
 
 export interface Use${className} {
@@ -23,28 +55,6 @@ export function use${className}(): Use${className} {
 }
 
 export default use${className};
-  `,
-  );
-
-  host.write(
-    `${project?.root}/src/hooks/use-${fileName}/use-${fileName}.spec.tsx`,
-    `
-import { act, renderHook } from '@testing-library/react-hooks';
-import use${className} from './use-${fileName}'
-
-describe('use${className}', () => {
-  it('should render successfully', () => {
-    const { result } = renderHook(() => use${className}());
-
-    expect(result.current.count).toBe(0);
-
-    act(() => {
-      result.current.increment();
-    });
-
-    expect(result.current.count).toBe(1);
-  });
-});
   `,
   );
 
