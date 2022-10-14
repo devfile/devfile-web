@@ -1,27 +1,17 @@
 ---
-title: Adding composite commands
-description: Adding composite commands
+title: Adding a composite command
+description: Adding a composite command
 ---
 
 Connect multiple commands together by defining a composite command.
 
-## Prerequisites
-
-- [Adding schema version](./versions)
-
-- [Adding a name](./metadata)
-
-- [Adding projects](./adding-projects)
-
 ## Procedure
 
 1. Reference the individual commands that are called from a composite
-    command by using the `name` of the command.
+    command by using the `id` of the command.
 
 2. Specify whether to run the commands within a composite command in
-    sequence or parallel.
-
-3. Define the `parallel` boolean.
+    sequence or parallel by defining the `parallel` property
 
     ```yaml {% filename="devfile.yaml" %}
     schemaVersion: 2.2.0
