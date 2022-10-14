@@ -3,7 +3,7 @@ title: Defining attributes
 description: Defining attributes
 ---
 
-As a developer, you can use devfile attributes to configure various features and properties according to the needs of users and tools. Attributes are implementation-dependent and written in free-form YAML. 
+As a developer, you can use devfile attributes to configure various features and properties according to the needs of users and tools. Attributes are implementation-dependent and written in free-form YAML.
 
 Attributes can be defined at the top level of the devfile, or in the following objects:
 
@@ -29,7 +29,7 @@ Attributes can be defined at the top level of the devfile, or in the following o
     metadata:
       name: java-quarkus
     ...
-    components:  
+    components:
       - name: outerloop-deploy
         attributes:
           deployment/replicas: 1
@@ -43,7 +43,7 @@ Attributes can be defined at the top level of the devfile, or in the following o
     ----
     ```
 
-1. Define a custom attribute in the `metadata` object.
+2. Define a custom attribute in the `metadata` object.
 
     When no editor is specified, a default editor is provided. To represent this user-defined example, use the `editorFree` attribute as shown in the following example:
 
