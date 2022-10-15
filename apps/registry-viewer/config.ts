@@ -16,6 +16,33 @@
 
 import type { DevfileRegistry } from '@devfile-web/core';
 
-export const devfileRegistries: DevfileRegistry[] = [
-  { name: 'Community', link: 'https://registry.devfile.io' },
-];
+let envDevfileRegistries: DevfileRegistry[] = [];
+try {
+  const res = process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES
+    ? (JSON.parse(process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES) as unknown)
+    : undefined;
+  if (
+    Array.isArray(res) &&
+    res.every(
+      (registry) =>
+        typeof registry === 'object' &&
+        !Array.isArray(registry) &&
+        registry !== null &&
+        typeof (registry as Record<string, unknown>).name === 'string' &&
+        typeof (registry as Record<string, unknown>).link === 'string',
+    )
+  ) {
+    envDevfileRegistries = res as DevfileRegistry[];
+  }
+} catch (error) {
+  throw new SyntaxError(
+    `${(error as Error).name}: ${
+      (error as Error).message
+    }, NEXT_PUBLIC_DEVFILE_REGISTRIES is an invalid json string`,
+  );
+}
+
+export const devfileRegistries: DevfileRegistry[] =
+  envDevfileRegistries.length > 0
+    ? envDevfileRegistries
+    : [{ name: 'Community', link: 'https://registry.stage.devfile.io' }];
