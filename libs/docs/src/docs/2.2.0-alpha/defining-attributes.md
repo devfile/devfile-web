@@ -11,6 +11,7 @@ Attributes can be defined at the top level of the devfile, or in the following o
 * `commands`
 * `projects`
 * `starterProjects`
+* `endpoints`
 * `metadata`: Attributes in metadata are deprecated. Use top-level attributes instead.
 
 ## Prerequisites

@@ -39,9 +39,9 @@ schemaVersion: 2.2.0
 metadata:
   name: my-project-dev
 parent:
-  id: redhat/nodejs
-  registryUrl: https://devfile-registry.io/
-  version: 1.2.0
+  id: nodejs
+  registryUrl: https://registry.devfile.io/
+  version: 2.0.0
 ```
 
 ### Parent referred by URI
