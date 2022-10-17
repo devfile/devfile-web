@@ -10,7 +10,7 @@ This section describes how to limit resource use in devfiles.
 1. Specify container memory limit and memory request for components
 
     To specify a container memory limit for `container`, use the
-    `memoryLimit` parameter. To specify a container memory request, use
+    `memoryLimit` parameter and for the container memory request, use
     the `memoryRequest` parameter:
 
     ```yaml {% title="Specify container memory limit and memory request for components" filename="devfile.yaml" %}
@@ -22,17 +22,10 @@ This section describes how to limit resource use in devfiles.
           memoryRequest: 256M
     ```
 
-    This limit applies to every container of the given component.
-
-    When not specified, the values may or may not be inferred from the
-    application that consumes the devfile or from the underlying
-    platform (for example, Kubernetes).
-
 2. Specify container CPU limit and container CPU request for components
 
     To specify a container CPU limit for `container`, use the `cpuLimit`
-    parameter. To specify a container CPU request for `container`, use
-    the `cpuRequest` parameter:
+    parameter and for the CPU request, use the `cpuRequest` parameter:
 
     ```yaml {% title="Specify container CPU limit and CPU request for components" filename="devfile.yaml" %}
     components:
@@ -43,8 +36,7 @@ This section describes how to limit resource use in devfiles.
           cpuRequest: 450m
     ```
 
-    This limit applies to every container of the given component.
 
-    When not specified, the values may or may not be inferred from the
+3. When not specified, the values may or may not be inferred from the
     application that consumes the devfile or from the underlying platform
     (for example, Kubernetes).

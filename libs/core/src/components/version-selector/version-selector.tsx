@@ -1,8 +1,24 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import Link from 'next/link';
 import { Menu } from '@headlessui/react';
 import clsx from 'clsx';
 import { useRouter } from 'next/router';
-import { ChevronDownIcon } from '@heroicons/react/outline';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { useNavigation } from '../../hooks';
 
 export interface VersionSelectorProps {
@@ -15,7 +31,7 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
   const { selectedVersion, setSelectedVersion, docVersions, docVersionLinks } = useNavigation();
   const router = useRouter();
 
-  if (!router.asPath.includes('/docs')) {
+  if (!router.asPath.includes('/docs') || router.pathname === '/404') {
     return null;
   }
 
@@ -35,16 +51,16 @@ export function VersionSelector(props: VersionSelectorProps): JSX.Element | null
             key={version}
             href={docVersionLinks[version]}
             onClick={(): void => setSelectedVersion(version)}
-            className={({ active }): string =>
-              clsx('flex cursor-pointer select-none items-center rounded-[0.625rem] p-1', {
+            className={clsx(
+              'ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 flex cursor-pointer select-none items-center rounded-[0.625rem] py-1 px-2',
+              {
                 'text-devfile': version === selectedVersion,
-                'text-slate-900 dark:text-white': active && version !== selectedVersion,
-                'text-slate-700 dark:text-slate-400': !active && version !== selectedVersion,
-                'bg-slate-100 dark:bg-slate-900/40': active,
-              })
-            }
+                'ui-active:text-slate-900 ui-active:dark:text-white ui-not-active:text-slate-700 ui-not-active:dark:text-slate-400':
+                  version !== selectedVersion,
+              },
+            )}
           >
-            <span className="ml-1">{version}</span>
+            {version}
           </Menu.Item>
         ))}
       </Menu.Items>

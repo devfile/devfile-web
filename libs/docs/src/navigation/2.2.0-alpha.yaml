@@ -1,3 +1,17 @@
+# Copyright 2022 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 - title: Components
   links:
     - title: Adding components
@@ -10,8 +24,6 @@
       href: ./adding-an-image-component
     - title: Adding a volume component
       href: ./adding-a-volume-component
-    - title: Specifying persistent storage
-      href: ./specifying-persistent-storage
     - title: Limiting resources usage
       href: ./limiting-resources-usage
     - title: Defining environment variables
@@ -24,18 +36,14 @@
   links:
     - title: Adding commands
       href: ./adding-commands
-    - title: Commands
-      href: ./devfile-commands
-    - title: Adding a command section
-      href: ./adding-a-command-section
     - title: Adding a command group
       href: ./adding-a-command-group
-    - title: Adding exec commands
-      href: ./adding-exec-commands
-    - title: Adding apply commands
-      href: ./adding-apply-commands
-    - title: Adding composite commands
-      href: ./adding-composite-commands
+    - title: Adding an exec command
+      href: ./adding-an-exec-command
+    - title: Adding an apply command
+      href: ./adding-an-apply-command
+    - title: Adding a composite command
+      href: ./adding-a-composite-command
 - title: Events
   links:
     - title: Adding event bindings

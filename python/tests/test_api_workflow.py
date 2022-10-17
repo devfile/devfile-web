@@ -1,3 +1,17 @@
+# Copyright 2022 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 import pytest
 import typing
 import os
@@ -265,10 +279,6 @@ def test_main(config: Config, expected: Expected, argv: typing.List[str]) -> Non
         # Run tests
         assert get_stable_version(config.stable_version) == expected.stable_version
         assert_list_equality(get_versions(config.versions), expected.versions)
-        assert_list_equality(
-            get_sub_directories(config.doc_pages), expected.doc_pages_directories
-        )
-        assert_list_equality(
-            get_files(config.devfile_schema), expected.devfile_schema_files
-        )
+        assert_list_equality(get_sub_directories(config.doc_pages), expected.doc_pages_directories)
+        assert_list_equality(get_files(config.devfile_schema), expected.devfile_schema_files)
         assert_list_equality(get_files(config.navigation), expected.navigation_files)

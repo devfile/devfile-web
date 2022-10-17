@@ -1,8 +1,24 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Dialog } from '@headlessui/react';
-import { MenuIcon, XIcon as CloseIcon } from '@heroicons/react/outline';
+import { Bars3Icon, XMarkIcon as CloseIcon } from '@heroicons/react/24/outline';
 import { DevfileIcon } from '../../icons';
 import { Navigation } from '../navigation/navigation';
 
@@ -34,7 +50,7 @@ export function MobileNavigation(): JSX.Element {
         className="relative"
         aria-label="Open navigation"
       >
-        <MenuIcon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
+        <Bars3Icon className="h-6 w-auto stroke-slate-400 hover:fill-slate-500 dark:stroke-slate-500 dark:hover:stroke-slate-400" />
       </button>
       <Dialog
         open={isOpen}
@@ -42,7 +58,7 @@ export function MobileNavigation(): JSX.Element {
         className="fixed inset-0 z-50 flex items-start overflow-y-auto bg-slate-900/50 pr-10 backdrop-blur lg:hidden"
         aria-label="Navigation"
       >
-        <Dialog.Panel className="min-h-full w-full max-w-xs bg-white px-4 pt-5 pb-12 dark:bg-slate-900 sm:px-6">
+        <Dialog.Panel className="container min-h-full max-w-xs bg-white px-4 pt-5 pb-12 dark:bg-slate-900 sm:px-6">
           <div className="flex items-center">
             <button
               type="button"

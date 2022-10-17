@@ -1,7 +1,23 @@
+/**
+ * Copyright 2022 Red Hat, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 import { useState, useEffect, useMemo } from 'react';
 import { Disclosure } from '@headlessui/react';
 import clsx from 'clsx';
-import { MinusSmIcon, ChevronRightIcon } from '@heroicons/react/outline';
+import { MinusSmallIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
 import slugify from '@sindresorhus/slugify';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -87,7 +103,7 @@ export function JsonSchemaViewerElement(props: JsonSchemaViewerElementProps): JS
                   )}
                 />
               ) : (
-                <MinusSmIcon className="inline h-4 w-auto pr-1 text-slate-700 dark:text-sky-100" />
+                <MinusSmallIcon className="inline h-4 w-auto pr-1 text-slate-700 dark:text-sky-100" />
               )}
               <span
                 className={clsx(
@@ -110,7 +126,7 @@ export function JsonSchemaViewerElement(props: JsonSchemaViewerElementProps): JS
 
           <div className="relative grow">
             <div className="absolute inset-0 flex items-center" aria-hidden="true">
-              <div className="w-full border-t border-white group-hover:border-slate-200 dark:border-slate-900 dark:group-hover:border-slate-800" />
+              <div className="container border-t border-white group-hover:border-slate-200 dark:border-slate-900 dark:group-hover:border-slate-800" />
             </div>
           </div>
 
