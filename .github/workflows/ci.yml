@@ -58,6 +58,10 @@ jobs:
         run: |
           yarn nx affected --target=build --parallel=3
 
+      - name: Docker Build
+        run: |
+          yarn nx affected --target=docker-build --parallel=3
+
       - name: E2E
         run: |
           # parallelization cannot be easily used here because of port conflicts
