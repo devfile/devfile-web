@@ -21,6 +21,8 @@ RUN \
 # Rebuild the source code only when needed
 FROM node:16-alpine AS builder
 ARG PROJECT_NAME
+# Add bash to support local scripts
+RUN apk add --no-cache bash
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .

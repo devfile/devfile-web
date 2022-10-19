@@ -38,6 +38,7 @@
     },
     "export": {
       "executor": "@nrwl/next:export",
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "registry-viewer:build:production"
       }

@@ -47,6 +47,7 @@
     },
     "export": {
       "executor": "@nrwl/next:export",
+      "dependsOn": ["build"],
       "options": {
         "buildTarget": "landing-page:build:production"
       }
