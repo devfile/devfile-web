@@ -18,8 +18,8 @@
 const config = {
   siteUrl: process.env.SITE_URL || 'https://devfile.io/',
   generateRobotsTxt: true,
-  sourceDir: 'dist/apps/landing-page/.next',
-  outDir: 'dist/apps/landing-page/exported',
+  sourceDir: 'dist/.next',
+  outDir: 'dist/public',
 };
 
 export default config;

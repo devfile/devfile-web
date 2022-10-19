@@ -18,8 +18,8 @@
 const config = {
   siteUrl: process.env.SITE_URL || 'https://registry.devfile.io/viewer',
   generateRobotsTxt: true,
-  sourceDir: 'dist/apps/registry-viewer/.next',
-  outDir: 'dist/apps/registry-viewer/exported',
+  sourceDir: 'dist/.next',
+  outDir: 'dist/public',
 };
 
 export default config;

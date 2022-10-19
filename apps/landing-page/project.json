@@ -21,7 +21,9 @@
       },
       "configurations": {
         "development": {},
-        "production": {}
+        "production": {
+          "outputPath": "apps/landing-page/dist"
+        }
       }
     },
     "serve": {
@@ -45,7 +47,6 @@
     },
     "export": {
       "executor": "@nrwl/next:export",
-      "dependsOn": ["build"],
       "options": {
         "buildTarget": "landing-page:build:production"
       }
@@ -54,7 +55,13 @@
       "executor": "nx:run-commands",
       "dependsOn": ["export"],
       "options": {
-        "command": "next-sitemap --config ./apps/landing-page/next-sitemap.config.mjs"
+        "command": "cd ./apps/landing-page/ && next-sitemap --config ./next-sitemap.config.mjs && cp -a ./dist/public/. ./dist/exported"
+      }
+    },
+    "docker-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t nextjs-docker . --build-arg PROJECT_NAME=landing-page"
       }
     },
     "test": {

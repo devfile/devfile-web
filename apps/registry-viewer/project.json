@@ -13,7 +13,9 @@
       },
       "configurations": {
         "development": {},
-        "production": {}
+        "production": {
+          "outputPath": "apps/registry-viewer/dist"
+        }
       }
     },
     "serve": {
@@ -36,7 +38,6 @@
     },
     "export": {
       "executor": "@nrwl/next:export",
-      "dependsOn": ["build"],
       "options": {
         "buildTarget": "registry-viewer:build:production"
       }
@@ -45,7 +46,13 @@
       "executor": "nx:run-commands",
       "dependsOn": ["export"],
       "options": {
-        "command": "next-sitemap --config ./apps/registry-viewer/next-sitemap.config.mjs"
+        "command": "cd ./apps/registry-viewer/ && next-sitemap --config ./next-sitemap.config.mjs && cp -a ./dist/public/. ./dist/exported"
+      }
+    },
+    "docker-build": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "docker build -t nextjs-docker . --build-arg PROJECT_NAME=registry-viewer"
       }
     },
     "test": {
