@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+const path = require('path');
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withPlugins = require('next-compose-plugins');
 const withMarkdoc = require('@markdoc/next.js');
@@ -34,12 +35,14 @@ const nextConfig = {
   pageExtensions: ['js', 'jsx', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
+  output: 'standalone',
   images: {
     loader: 'akamai',
     path: '',
   },
   experimental: {
     newNextLinkBehavior: true,
+    outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   nx: {
     svgr: false,

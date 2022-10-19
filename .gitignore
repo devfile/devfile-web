@@ -1,7 +1,7 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-/dist
+dist
 /tmp
 /out-tsc
 
@@ -43,6 +43,3 @@ Thumbs.db
 **/*/.env.development.local
 **/*/.env.test.local
 **/*/.env.production.local
-
-# Next.js
-.next
