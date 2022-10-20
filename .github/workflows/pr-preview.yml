@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   deploy-preview:
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' && github.event.action != 'closed'
     runs-on: ubuntu-latest
 
     env:
@@ -51,13 +51,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn nx affected --target=postexport --parallel=3
 
-          # Copy exported contents to ./build/pr-#/<app-name>
-          regex="\.\/apps\/([^\/]*)\/dist\/exported"
-          find ./apps -type d -name "exported" |
-            while read dir; do if [[ $dir =~ $regex ]]; then
-              mkdir -p ./build/pr-${{ github.event.pull_request.number }}/${BASH_REMATCH[1]}/
-              cp -r $dir/. $_
-            fi; done
+          bash ./scripts/move-exported-apps.sh
 
           # Check if any files were copied
           if [ -d ./build ]; then
@@ -68,13 +62,15 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         if: env.is_new_build == 'true'
         with:
-          token: ${{ secrets.BOT_TOKEN }}
+          token: ${{ secrets.DEPLOY_TOKEN }}
           branch: main
           folder: ./build/
+          target-folder: ./pr-${{ github.event.pull_request.number }}
+          clean: false
           repository-name: devfile-resources/pr-preview
 
   delete-preview:
-    if: github.event_name != 'pull_request'
+    if: github.event_name != 'pull_request' || github.event.action == 'closed'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout devfile-resources/pr-preview
@@ -85,9 +81,9 @@ jobs:
 
       - name: Delete PR Preview
         run: |
-          rm -rf ./pr-${{ github.event.pull_request.number }}
+          rm -rf ./pr-${{ github.event.pull_request.number }}/
 
-                    # Don't commit if there are no changes
+          # Don't commit if there are no changes
           if [ "$(git status -s)" == "" ]; then
             echo "Nothing to commit"
             exit 0
