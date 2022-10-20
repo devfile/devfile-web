@@ -62,7 +62,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         if: env.is_new_build == 'true'
         with:
-          token: ${{ secrets.DEPLOY_TOKEN }}
+          token: ${{ secrets.BOT_TOKEN }}
           branch: main
           folder: ./build/
           target-folder: ./pr-${{ github.event.pull_request.number }}
