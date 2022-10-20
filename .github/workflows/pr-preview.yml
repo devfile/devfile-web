@@ -51,7 +51,7 @@ jobs:
           yarn install --frozen-lockfile
           yarn nx affected --target=postexport --parallel=3
 
-          // Copy exported contents to ./build/pr-#/<app-name>
+          # Copy exported contents to ./build/pr-#/<app-name>
           regex="\.\/apps\/([^\/]*)\/dist\/exported"
           find ./apps -type d -name "exported" |
             while read dir; do if [[ $dir =~ $regex ]]; then
@@ -59,7 +59,7 @@ jobs:
               cp -r $dir/. $_
             fi; done
 
-          // Check if any files were copied
+          # Check if any files were copied
           if [ -d ./build ]; then
             echo "is_new_build=true" >> $GITHUB_ENV
           fi
