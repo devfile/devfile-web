@@ -26,6 +26,7 @@ export function Index(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = () => ({
   props: {},
+  revalidate: 60,
 });
 
 export const getStaticPaths: GetStaticPaths = () => {

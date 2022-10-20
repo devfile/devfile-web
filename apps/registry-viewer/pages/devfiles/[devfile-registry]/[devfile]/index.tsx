@@ -124,6 +124,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
       devfileSpec,
       devfileYaml,
     },
+    revalidate: 60,
   };
 };
 

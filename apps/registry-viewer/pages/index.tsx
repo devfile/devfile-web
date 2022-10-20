@@ -97,6 +97,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
         filtersApplied,
       },
     },
+    revalidate: 60,
   };
 };
 

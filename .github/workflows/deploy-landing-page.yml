@@ -51,7 +51,7 @@ jobs:
           yarn nx affected --target=postexport --project=landing-page
 
           # The export directory will only exist if there are changes to the landing page
-          if [ -d ./dist/apps/landing-page/exported ]; then
+          if [ -d ./apps/landing-page/dist/exported ]; then
             echo "is_new_build=true" >> $GITHUB_ENV
           fi
 
@@ -61,5 +61,5 @@ jobs:
         with:
           token: ${{ secrets.DEPLOY_TOKEN }}
           branch: master
-          folder: dist/apps/landing-page/exported
+          folder: apps/landing-page/dist/exported
           repository-name: devfile/devfile.github.io

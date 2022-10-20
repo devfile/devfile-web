@@ -1,0 +1,96 @@
+# Copyright 2022 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+name: Deploy PR previews
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install and Build
+        run: |
+          yarn install --frozen-lockfile
+          yarn nx affected --target=postexport --parallel=3
+
+          // Copy exported contents to ./build/pr-#/<app-name>
+          regex="\.\/apps\/([^\/]*)\/dist\/exported"
+          find ./apps -type d -name "exported" |
+            while read dir; do if [[ $dir =~ $regex ]]; then
+              mkdir -p ./build/pr-${{ github.event.pull_request.number }}/${BASH_REMATCH[1]}/
+              cp -r $dir/. $_
+            fi; done
+
+          // Check if any files were copied
+          if [ -d ./build ]; then
+            echo "is_new_build=true" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy preview
+        uses: JamesIves/github-pages-deploy-action@v4
+        if: env.is_new_build == 'true'
+        with:
+          token: ${{ secrets.BOT_TOKEN }}
+          branch: main
+          folder: ./build/
+          repository-name: devfile-resources/pr-preview
+
+  delete-preview:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout devfile-resources/pr-preview
+        uses: actions/checkout@v2
+        with:
+          repository: devfile-resources/pr-preview
+          persist-credentials: false
+
+      - name: Delete PR Preview
+        run: |
+          rm -rf ./pr-${{ github.event.pull_request.number }}
+
+                    # Don't commit if there are no changes
+          if [ "$(git status -s)" == "" ]; then
+            echo "Nothing to commit"
+            exit 0
+          fi
+
+          lastCommit="$(cd ../api-repo; git log -1 --format=%H)"
+          lastCommitterName="$(cd ../api-repo; git log -1 --format=%an)"
+          lastCommitterEmail="$(cd ../api-repo; git log -1 --format=%ae)"
+
+          git config --global user.email "${lastCommitterEmail}"
+          git config --global user.name "${lastCommitterName}"
+
+          git add .
+          git commit -asm "Update devfile schema based on devfile/api@${lastCommit}"
+          git push "https://devfile-robot:${{secrets.BOT_TOKEN}}@github.com/devfile-resources/pr-preview"
