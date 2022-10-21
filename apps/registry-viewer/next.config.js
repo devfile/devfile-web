@@ -21,7 +21,8 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-// fonts in /styles/fonts.css have hard coded urls and must be changed if NEXT_PUBLIC_BASE_PATH changes besides /devfile-web
+// NEXT_PUBLIC_BASE_PATH does not update the font urls in /styles/fonts.css.
+// Besides /devfile-web, the urls must be updated if NEXT_PUBLIC_BASE_PATH is changed.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
 // Invalid next.config.js options detected: https://github.com/vercel/next.js/issues/39161
@@ -31,6 +32,10 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 const nextConfig = {
   basePath,
   assetPrefix: basePath,
+  // Must be added until https://github.com/actions/configure-pages/issues/23 is fixed
+  images: {
+    unoptimized: true,
+  },
   pageExtensions: ['js', 'jsx', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
