@@ -34,7 +34,7 @@ jobs:
       - name: Repository Dispatch
         uses: peter-evans/repository-dispatch@v2
         with:
-          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          token: ${{ secrets.BOT_TOKEN }}
           repository: schultzp2020/schultzp2020.github.io
           event-type: devfile-web-deploy-landing-page
           client-payload: '{"github": ${{ toJson(github) }}}'
