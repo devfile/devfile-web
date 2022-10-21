@@ -38,6 +38,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
+      NX_SKIP_NX_CACHE: true
       NEXT_PUBLIC_ANALYTICS_WRITE_KEY: xhG5jr3JpuaKCcA82vF4thKumqLh3XtZ
       NEXT_PUBLIC_DOCSEARCH_APP_ID: FCRPEMIKYK
       NEXT_PUBLIC_DOCSEARCH_API_KEY: 3f20b782c93da03c6626d6cacae0ceb5
