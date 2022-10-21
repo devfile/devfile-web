@@ -12,54 +12,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-name: Deploy Landing Page
+name: Deploy Landing Page to Pages
+
 on:
+  # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main
+    branches: [$default-branch]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
-  main:
-    name: Main Job
+  dispatch-event:
+    name: Dispatch Event to build the Landing Page
     runs-on: ubuntu-latest
-
-    env:
-      NEXT_PUBLIC_ANALYTICS_WRITE_KEY: xhG5jr3JpuaKCcA82vF4thKumqLh3XtZ
-      NEXT_PUBLIC_DOCSEARCH_APP_ID: FCRPEMIKYK
-      NEXT_PUBLIC_DOCSEARCH_API_KEY: 3f20b782c93da03c6626d6cacae0ceb5
-      NEXT_PUBLIC_DOCSEARCH_INDEX_NAME: devfile
-
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - name: Repository Dispatch
+        uses: peter-evans/repository-dispatch@v2
         with:
-          fetch-depth: 0
-
-      - name: Set SHA
-        uses: nrwl/nx-set-shas@v2
-
-      - name: Install
-        run: |
-          yarn install --frozen-lockfile
-
-      - name: Build
-        run: |
-          yarn nx affected --target=postexport --project=landing-page
-
-          # The export directory will only exist if there are changes to the landing page
-          if [ -d ./dist/apps/landing-page/exported ]; then
-            echo "is_new_build=true" >> $GITHUB_ENV
-          fi
-
-      - name: Deploy to Branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        if: env.is_new_build == 'true'
-        with:
-          token: ${{ secrets.DEPLOY_TOKEN }}
-          branch: master
-          folder: dist/apps/landing-page/exported
-          repository-name: devfile/devfile.github.io
+          token: ${{ secrets.BOT_TOKEN }}
+          repository: devfile-resources/devfile-resources.github.io
+          event-type: devfile-web-deploy-landing-page
+          client-payload: '{"github": ${{ toJson(github) }}}'
