@@ -1,0 +1,57 @@
+#
+#   Copyright 2020-2022 Red Hat, Inc.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+name: Next Dockerimage
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [build]
+
+jobs:
+  registryViewerBuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out devfile web source code
+        uses: actions/checkout@v3
+      - name: Login to Quay
+        uses: docker/login-action@v1
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+      - name: Build the registry viewer image
+        run: |
+          docker build -t registry-viewer . \
+            --build-arg PROJECT_NAME=registry-viewer \
+            --build-arg NEXT_PUBLIC_BASE_PATH=/viewer \
+            --build-arg NEXT_PUBLIC_ANALYTICS_WRITE_KEY=${{ secrets.NEXT_PUBLIC_ANALYTICS_WRITE_KEY }}
+      - name: Push the registry viewer image
+        run: bash ./scripts/push.sh registry-viewer:latest quay.io/devfile/registry-viewer:next
+  dispatch:
+    needs: registryViewerBuild
+    strategy:
+      matrix:
+        repo: ['devfile/registry']
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository dispatch
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.REPO_ACCESS_TOKEN }}
+          repository: ${{ matrix.repo }}
+          event-type: build
+          client-payload: '{"repo": "${{ github.event.repository.name }}", "sha": "${{ github.sha }}"}'
