@@ -84,6 +84,8 @@ jobs:
           #
           # You may remove this line if you want to manage the configuration yourself.
           static_site_generator: next
+          generator_config_file: ./apps/landing-page/next.config.js
+          token: ${{ secrets.BOT_TOKEN }}
 
       - name: Restore cache
         uses: actions/cache@v3
