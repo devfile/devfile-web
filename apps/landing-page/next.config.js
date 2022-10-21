@@ -36,10 +36,6 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   output: 'standalone',
-  images: {
-    loader: 'akamai',
-    path: '',
-  },
   experimental: {
     newNextLinkBehavior: true,
     outputFileTracingRoot: path.join(__dirname, '../../'),
