@@ -110,15 +110,6 @@ jobs:
         with:
           path: ./apps/landing-page/dist/exported
 
-      - name: Deploy to Branch
-        uses: JamesIves/github-pages-deploy-action@v4
-        if: env.is_new_build == 'true'
-        with:
-          token: ${{ secrets.DEPLOY_TOKEN }}
-          branch: master
-          folder: dist/apps/landing-page/exported
-          repository-name: devfile/devfile.github.io
-
   deploy:
     name: Deploy the Landing Page to Pages
     environment:
