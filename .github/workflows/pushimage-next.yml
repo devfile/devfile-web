@@ -24,6 +24,15 @@ on:
 jobs:
   registryViewerBuild:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_DEVFILE_REGISTRIES: |
+        [
+          {
+            "name": "Community",
+            "link": "https://registry.devfile.io/"
+          }
+        ]
+      NEXT_PUBLIC_ANALYTICS_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_ANALYTICS_WRITE_KEY }}
     steps:
       - name: Check out devfile web source code
         uses: actions/checkout@v3
@@ -34,11 +43,7 @@ jobs:
           username: ${{ secrets.QUAY_USERNAME }}
           password: ${{ secrets.QUAY_PASSWORD }}
       - name: Build the registry viewer image
-        run: |
-          docker build -t registry-viewer . \
-            --build-arg PROJECT_NAME=registry-viewer \
-            --build-arg NEXT_PUBLIC_BASE_PATH=/viewer \
-            --build-arg NEXT_PUBLIC_ANALYTICS_WRITE_KEY=${{ secrets.NEXT_PUBLIC_ANALYTICS_WRITE_KEY }}
+        run: bash ./scripts/build_viewer.sh
       - name: Push the registry viewer image
         run: bash ./scripts/push.sh registry-viewer:latest quay.io/devfile/registry-viewer:next
   dispatch:
