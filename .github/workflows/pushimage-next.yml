@@ -24,13 +24,6 @@ jobs:
   registryViewerBuild:
     runs-on: ubuntu-latest
     env:
-      NEXT_PUBLIC_DEVFILE_REGISTRIES: |
-        [
-          {
-            "name": "Community",
-            "link": "https://registry.devfile.io/"
-          }
-        ]
       NEXT_PUBLIC_ANALYTICS_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_ANALYTICS_WRITE_KEY }}
     steps:
       - name: Check out devfile web source code
