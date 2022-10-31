@@ -28,8 +28,6 @@ jobs:
   registry-viewer-build:
     name: Registry Viewer Build
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_ANALYTICS_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_ANALYTICS_WRITE_KEY }}
     steps:
       - name: Check out devfile web source code
         uses: actions/checkout@v3
