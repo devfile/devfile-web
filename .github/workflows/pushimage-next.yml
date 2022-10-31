@@ -21,7 +21,8 @@ on:
     types: [build]
 
 jobs:
-  registryViewerBuild:
+  registry-viewer-build:
+    name: Registry Viewer Build
     runs-on: ubuntu-latest
     env:
       NEXT_PUBLIC_ANALYTICS_WRITE_KEY: ${{ secrets.NEXT_PUBLIC_ANALYTICS_WRITE_KEY }}
@@ -39,7 +40,7 @@ jobs:
       - name: Push the registry viewer image
         run: bash ./scripts/push.sh registry-viewer:latest quay.io/devfile/registry-viewer:next
   dispatch:
-    needs: registryViewerBuild
+    needs: registry-viewer-build
     strategy:
       matrix:
         repo: ['devfile/registry']
