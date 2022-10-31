@@ -20,6 +20,10 @@ on:
   repository_dispatch:
     types: [build]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   registry-viewer-build:
     name: Registry Viewer Build
