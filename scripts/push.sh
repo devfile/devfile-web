@@ -14,5 +14,7 @@
 
 #!/usr/bin/env bash
 
-chmod +x ./dist/libs/docs/src/scripts/index.js
-./dist/libs/docs/src/scripts/index.js
+BASE_TAG=$1
+IMAGE_TAG=$2
+docker tag $BASE_TAG $IMAGE_TAG
+docker push $IMAGE_TAG
