@@ -8,7 +8,6 @@ Starter projects provide a starting point when bootstrapping new projects, for e
 Each starter project requires a `name`, and a definition for either a `git` or  `zip` object to set the location for the starter source code.
 
 ```yaml {% title="A devfile with git and zip starter projects" %}
-----
 schemaVersion: 2.1.0
 starterProjects:
 - name: nodejs-starter
@@ -19,7 +18,6 @@ starterProjects:
 - name: nodejs-zip-starter
   zip:
     location: https://github.com/odo-devfiles/nodejs-ex/archive/refs/tags/0.0.2.zip
-----
 ```
 
 
@@ -45,7 +43,6 @@ With the optional `subDir` field, you can specify a subdirectory in the project 
 
 
 ```yaml {% title="A starter project specifying revision and subDir" %}
-----
 schemaVersion: 2.1.0
 starterProjects:
 - name: demo-starter
@@ -56,7 +53,6 @@ starterProjects:
         revision: 1.1.0Final
     
     subDir: demo
-----
 ```
 
 A starter project may include a devfile within its contents. If so, the tool will use that devfile going forward. If no devfile is included, the tool will continue using the original devfile it used to fetch the starter project.

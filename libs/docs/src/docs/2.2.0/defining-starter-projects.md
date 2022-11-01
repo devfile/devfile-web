@@ -8,7 +8,6 @@ Starter projects provide a starting point when bootstrapping new projects, for e
 Each starter project requires a `name`, and a definition for either a `git` or  `zip` object to set the location for the starter source code.
 
 ```yaml {% title="A devfile with git and zip starter projects" %}
-----
 schemaVersion: 2.2.0
 starterProjects:
 - name: nodejs-starter
@@ -19,7 +18,6 @@ starterProjects:
 - name: nodejs-zip-starter
   zip:
     location: https://github.com/odo-devfiles/nodejs-ex/archive/refs/tags/0.0.2.zip
-----
 ```
 
 
