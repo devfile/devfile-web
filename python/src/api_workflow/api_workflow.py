@@ -78,7 +78,7 @@ def split_semver(version: typing.Tuple[str, str]) -> typing.Tuple[int, int, int,
 def compare_versions(
     version_x: typing.Tuple[str, str],
     version_y: typing.Tuple[str, str],
-) -> bool:
+) -> int:
     """
     Compares two versions
     Return -2 if version x is older than version y
