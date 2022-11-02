@@ -128,4 +128,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-testing_directory/test
+test_directory
