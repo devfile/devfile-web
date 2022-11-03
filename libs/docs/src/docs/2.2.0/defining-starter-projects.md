@@ -43,7 +43,6 @@ With the optional `subDir` field, you can specify a subdirectory in the project 
 
 
 ```yaml {% title="A starter project specifying revision and subDir" %}
-----
 schemaVersion: 2.2.0
 starterProjects:
 - name: demo-starter
@@ -54,7 +53,6 @@ starterProjects:
         revision: 1.1.0Final
     
     subDir: demo
-----
 ```
 
 A starter project may include a devfile within its contents. If so, the tool will use that devfile going forward. If no devfile is included, the tool will continue using the original devfile it used to fetch the starter project.
