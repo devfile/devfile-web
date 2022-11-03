@@ -29,6 +29,12 @@ The inner-loop and outer-loop instructions defined in the devfile allow you to t
 
 - [Eclipse Che](https://medium.com/eclipse-che-blog/devfile-v2-and-ide-plug-ins-in-eclipse-che-7a560ae724b1)
 
+- [OpenShift Dev Console](https://github.com/openshift/console)
+
+- [VSCode OpenShift Toolkit](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector)
+
+- [IntelliJ OpenShift Toolkit](https://plugins.jetbrains.com/plugin/12030-openshift-connector-by-red-hat)
+
 ## Additional resources
 
 - [API reference](./devfile-schema)
