@@ -16,8 +16,8 @@ contribution. See the [DCO](DCO) file for details.
 In order to show your agreement with the DCO you should include at the end of the commit message,
 the following line:
 
-```
-Signed-off-by: First Lastname <email@email.com>
+```console
+Signed-off-by: Firstname Lastname <email@email.com>
 ```
 
 Once you set your user.name and user.email in your git config, you can sign your commit automatically with `git commit -s`.

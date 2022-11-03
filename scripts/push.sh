@@ -12,7 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- title: Test
-  links:
-    - title: Test
-      href: ./test
+#!/usr/bin/env bash
+
+BASE_TAG=$1
+IMAGE_TAG=$2
+docker tag $BASE_TAG $IMAGE_TAG
+docker push $IMAGE_TAG
