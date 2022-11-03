@@ -21,39 +21,32 @@ from api_workflow.api_workflow import Config, main
 
 
 # Current does not test the typescript file; however, other tests should catch any related errors
-class Expected:
-    """Expected values for test_main"""
+class TestState:
+    """Directory state values (e.g. before and expected values) for test_main"""
 
     def __init__(
         self,
         stable_version: typing.Union[None, str] = None,
         versions: typing.Union[None, typing.List[str]] = None,
-        doc_pages_directories: typing.Union[None, typing.List[str]] = None,
-        devfile_schema_files: typing.Union[None, typing.List[str]] = None,
-        navigation_files: typing.Union[None, typing.List[str]] = None,
         error: typing.Union[None, SystemExit, AttributeError, RuntimeError] = None,
     ):
         if error is None:
             assert stable_version is not None
             assert versions is not None
-            assert doc_pages_directories is not None
-            assert devfile_schema_files is not None
-            assert navigation_files is not None
 
         self.stable_version = stable_version
         self.versions = versions
-        self.doc_pages_directories = doc_pages_directories
-        self.devfile_schema_files = devfile_schema_files
-        self.navigation_files = navigation_files
         self.error = error
+
+    # Do not test this class
+    __test__ = False
 
 
 def get_stable_version(path: str) -> bool:
     """Returns the actual stable version"""
-    cwd = os.getcwd()
     stable_version = None
 
-    with open(f"{cwd}/{path}", encoding="UTF-8") as file:
+    with open(path, encoding="UTF-8") as file:
         stable_version = file.read().strip()
 
     return stable_version
@@ -61,10 +54,9 @@ def get_stable_version(path: str) -> bool:
 
 def get_versions(path: str) -> bool:
     """Returns the actual versions"""
-    cwd = os.getcwd()
     versions: typing.List[str] = []
 
-    with open(f"{cwd}/{path}", encoding="UTF-8") as file:
+    with open(path, encoding="UTF-8") as file:
         for version in file.readlines():
             version = version.strip()
             versions.append(version)
@@ -74,16 +66,14 @@ def get_versions(path: str) -> bool:
 
 def get_sub_directories(path: str) -> bool:
     """Returns the actual subdirectories of a path"""
-    cwd = os.getcwd()
-    directories = [f.name for f in os.scandir(f"{cwd}/{path}") if f.is_dir()]
+    directories = [f.name for f in os.scandir(path) if f.is_dir()]
 
     return directories
 
 
 def get_files(path: str) -> bool:
     """Returns the actual files of a path"""
-    cwd = os.getcwd()
-    files = [f.name for f in os.scandir(f"{cwd}/{path}") if not f.is_dir()]
+    files = [f.name for f in os.scandir(path) if not f.is_dir()]
 
     return files
 
@@ -91,99 +81,160 @@ def get_files(path: str) -> bool:
 def assert_list_equality(actual: typing.List[str], expected: typing.List[str]) -> None:
     """Asserts that two lists are equal"""
     difference = set(actual) ^ set(expected)
-    assert not difference, f"Lists are not equal: {difference}"
+    assert not difference, f"Lists are not equal | actual: {actual} | expected: {expected} | difference: {difference}"
 
 
-base_path = "" if re.search("python", os.getcwd()) is not None else "python/"
+def create_testing_directory(config: Config, expected: TestState) -> None:
+    """Creates the test directory"""
+    # Create the test directory
+    os.makedirs(os.path.join(config.output_directory, "config"), exist_ok=True)
+
+    # Create the versions file
+    with open(config.versions, "w+") as file:
+        file.write("\n".join(expected.versions))
+
+    # Create the stable version file
+    with open(config.stable_version, "w+") as file:
+        file.write(f"{expected.stable_version}")
+
+    # Create the doc pages directories
+    for version in expected.versions:
+        directory_path = os.path.join(config.doc_pages, version)
+        os.makedirs(directory_path, exist_ok=True)
+        with open(os.path.join(directory_path, "index.md"), "w+") as file:
+            file.write("")
+
+    # Create the devfile schema files
+    for version in expected.versions:
+        os.makedirs(config.devfile_schema, exist_ok=True)
+        with open(os.path.join(config.devfile_schema, f"{version}.json"), "w+") as file:
+            file.write("")
+
+    # Create the navigation files
+    for versions in expected.versions:
+        os.makedirs(config.navigation, exist_ok=True)
+        with open(os.path.join(config.navigation, f"{versions}.yaml"), "w+") as file:
+            file.write("")
+
+    # Create the --devfile-schema argument
+    with open(os.path.join(config.output_directory, "devfile.json"), "w+") as file:
+        file.write("")
+
+
+base_path = "" if re.search("python", os.getcwd()) is not None else "python"
 
 test_config = Config(
-    f"{base_path}testing_directory/test/config/stable-version.txt",
-    f"{base_path}testing_directory/test/config/versions.txt",
-    f"{base_path}testing_directory/test/config/version.ts",
-    f"{base_path}testing_directory/test/docs",
-    f"{base_path}testing_directory/test/devfile_schemas",
-    f"{base_path}testing_directory/test/navigation",
+    os.path.join(base_path, "test_directory"),
+    os.path.join("config", "stable-version.txt"),
+    os.path.join("config", "versions.txt"),
+    os.path.join("config", "version.ts"),
+    "docs",
+    "devfile-schemas",
+    "navigation",
 )
 
-test_devfile_schema = (
-    f"{os.getcwd()}/{base_path}testing_directory/backup/devfile_schemas/2.0.0.json"
-)
+test_devfile_schema = os.path.join(test_config.output_directory, "devfile.json")
 
 
 @pytest.mark.parametrize(
-    "config, expected, argv",
+    "config, before, expected, argv",
     [
-        # No arguments provided
-        (test_config, Expected(error=SystemExit), []),
-        # --devfile-schema not provided
-        (test_config, Expected(error=SystemExit), ["--version", "2.0.0"]),
-        # --version not provided
+        # 1: No arguments provided
         (
             test_config,
-            Expected(error=SystemExit),
-            ["--devfile-schema", test_devfile_schema],
-        ),
-        # --version did not specify a semver version
-        (
-            test_config,
-            Expected(error=AttributeError),
-            ["--version", "2.0", "--devfile-schema", test_devfile_schema],
-        ),
-        # Cannot change an older released version without --release
-        (
-            test_config,
-            Expected(error=RuntimeError),
-            ["--version", "2.0.0", "--devfile-schema", test_devfile_schema],
-        ),
-        # Cannot change the stable version without --release
-        (
-            test_config,
-            Expected(error=RuntimeError),
-            ["--version", "2.1.0", "--devfile-schema", test_devfile_schema],
-        ),
-        # Renames an alpha version and publishes it
-        (
-            test_config,
-            Expected(
+            TestState(
                 stable_version="2.1.0",
                 versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
-                doc_pages_directories=["2.0.0", "2.1.0", "2.2.0-alpha"],
-                devfile_schema_files=["2.0.0.json", "2.1.0.json", "2.2.0-alpha.json"],
-                navigation_files=["2.0.0.yaml", "2.1.0.yaml", "2.2.0-alpha.yaml"],
             ),
-            ["--version", "2.2.0-alpha", "--devfile-schema", test_devfile_schema],
+            TestState(error=SystemExit),
+            [],
         ),
-        # Publishes an alpha version
+        # --devfile-schema not provided
         (
             test_config,
-            Expected(
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(error=SystemExit),
+            ["--version", "2.0.0"],
+        ),
+        # 2: --version not provided
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(error=SystemExit),
+            ["--devfile-schema", test_devfile_schema],
+        ),
+        # 3: --version did not specify a semver version
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(error=AttributeError),
+            ["--version", "2.0", "--devfile-schema", test_devfile_schema],
+        ),
+        # 4: Cannot change an older released version without --release
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(error=AssertionError),
+            ["--version", "2.0.0", "--devfile-schema", test_devfile_schema],
+        ),
+        # 5: Cannot change the stable version without --release
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(error=AssertionError),
+            ["--version", "2.1.0", "--devfile-schema", test_devfile_schema],
+        ),
+        # 6: Renames an alpha version and publishes it
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-beta"],
+            ),
+            ["--version", "2.2.0-beta", "--devfile-schema", test_devfile_schema],
+        ),
+        # 7: Publishes an alpha version
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(
                 stable_version="2.1.0",
                 versions=["2.0.0", "2.1.0", "2.2.0-alpha", "2.3.0-alpha"],
-                doc_pages_directories=["2.0.0", "2.1.0", "2.2.0-alpha", "2.3.0-alpha"],
-                devfile_schema_files=[
-                    "2.0.0.json",
-                    "2.1.0.json",
-                    "2.2.0-alpha.json",
-                    "2.3.0-alpha.json",
-                ],
-                navigation_files=[
-                    "2.0.0.yaml",
-                    "2.1.0.yaml",
-                    "2.2.0-alpha.yaml",
-                    "2.3.0-alpha.yaml",
-                ],
             ),
             ["--version", "2.3.0-alpha", "--devfile-schema", test_devfile_schema],
         ),
-        # Re-releases an older released version
+        # 8: Re-releases an older released version
         (
             test_config,
-            Expected(
+            TestState(
                 stable_version="2.1.0",
                 versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
-                doc_pages_directories=["2.0.0", "2.1.0", "2.2.0-alpha"],
-                devfile_schema_files=["2.0.0.json", "2.1.0.json", "2.2.0-alpha.json"],
-                navigation_files=["2.0.0.yaml", "2.1.0.yaml", "2.2.0-alpha.yaml"],
+            ),
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
             ),
             [
                 "--version",
@@ -193,15 +244,16 @@ test_devfile_schema = (
                 "--release",
             ],
         ),
-        # Re-releases the stable version
+        # 9: Re-releases the stable version
         (
             test_config,
-            Expected(
+            TestState(
                 stable_version="2.1.0",
                 versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
-                doc_pages_directories=["2.0.0", "2.1.0", "2.2.0-alpha"],
-                devfile_schema_files=["2.0.0.json", "2.1.0.json", "2.2.0-alpha.json"],
-                navigation_files=["2.0.0.yaml", "2.1.0.yaml", "2.2.0-alpha.yaml"],
+            ),
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
             ),
             [
                 "--version",
@@ -211,15 +263,16 @@ test_devfile_schema = (
                 "--release",
             ],
         ),
-        # Releases a newer already created version
+        # 10: Releases a newer already created version
         (
             test_config,
-            Expected(
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha"],
+            ),
+            TestState(
                 stable_version="2.2.0",
                 versions=["2.0.0", "2.1.0", "2.2.0"],
-                doc_pages_directories=["2.0.0", "2.1.0", "2.2.0"],
-                devfile_schema_files=["2.0.0.json", "2.1.0.json", "2.2.0.json"],
-                navigation_files=["2.0.0.yaml", "2.1.0.yaml", "2.2.0.yaml"],
             ),
             [
                 "--version",
@@ -229,25 +282,16 @@ test_devfile_schema = (
                 "--release",
             ],
         ),
-        # Releases a newer version
+        # 11: Releases a newer version
         (
             test_config,
-            Expected(
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0"],
+            ),
+            TestState(
                 stable_version="2.3.0",
-                versions=["2.0.0", "2.1.0", "2.2.0-alpha", "2.3.0"],
-                doc_pages_directories=["2.0.0", "2.1.0", "2.2.0-alpha", "2.3.0"],
-                devfile_schema_files=[
-                    "2.0.0.json",
-                    "2.1.0.json",
-                    "2.2.0-alpha.json",
-                    "2.3.0.json",
-                ],
-                navigation_files=[
-                    "2.0.0.yaml",
-                    "2.1.0.yaml",
-                    "2.2.0-alpha.yaml",
-                    "2.3.0.yaml",
-                ],
+                versions=["2.0.0", "2.1.0", "2.2.0", "2.3.0"],
             ),
             [
                 "--version",
@@ -257,16 +301,50 @@ test_devfile_schema = (
                 "--release",
             ],
         ),
+        # 12: Publishes a new bug fix alpha version
+        (
+            test_config,
+            TestState(
+                stable_version="2.3.0",
+                versions=["2.0.0", "2.1.0", "2.2.0", "2.3.0"],
+            ),
+            TestState(
+                stable_version="2.3.0",
+                versions=["2.0.0", "2.1.0", "2.2.0", "2.3.0", "2.3.1-alpha"],
+            ),
+            [
+                "--version",
+                "2.3.1-alpha",
+                "--devfile-schema",
+                test_devfile_schema,
+            ],
+        ),
+        # 13: Releases a new version when there are two alpha versions
+        (
+            test_config,
+            TestState(
+                stable_version="2.1.0",
+                versions=["2.0.0", "2.1.0", "2.2.0-alpha", "2.3.0-alpha"],
+            ),
+            TestState(
+                stable_version="2.2.0",
+                versions=["2.0.0", "2.1.0", "2.2.0", "2.3.0-alpha"],
+            ),
+            [
+                "--version",
+                "2.2.0",
+                "--release",
+                "--devfile-schema",
+                test_devfile_schema,
+            ],
+        ),
     ],
 )
-def test_main(config: Config, expected: Expected, argv: typing.List[str]) -> None:
+def test_main(config: Config, before: TestState, expected: TestState, argv: typing.List[str]) -> None:
     # Setup before each test
-    cwd = os.getcwd()
-    backup_directory = f"{cwd}/{base_path}testing_directory/backup"
-    test_directory = f"{cwd}/{base_path}testing_directory/test"
-    if os.path.exists(test_directory) and os.path.isdir(test_directory):
-        shutil.rmtree(test_directory)
-    shutil.copytree(backup_directory, test_directory)
+    if os.path.exists(config.output_directory) and os.path.isdir(config.output_directory):
+        shutil.rmtree(config.output_directory)
+    create_testing_directory(config, before)
 
     # Expect error if Expected.error is not None
     if expected.error is not None:
@@ -279,6 +357,6 @@ def test_main(config: Config, expected: Expected, argv: typing.List[str]) -> Non
         # Run tests
         assert get_stable_version(config.stable_version) == expected.stable_version
         assert_list_equality(get_versions(config.versions), expected.versions)
-        assert_list_equality(get_sub_directories(config.doc_pages), expected.doc_pages_directories)
-        assert_list_equality(get_files(config.devfile_schema), expected.devfile_schema_files)
-        assert_list_equality(get_files(config.navigation), expected.navigation_files)
+        assert_list_equality(get_sub_directories(config.doc_pages), expected.versions)
+        assert_list_equality(get_files(config.devfile_schema), [f"{file}.json" for file in expected.versions])
+        assert_list_equality(get_files(config.navigation), [f"{file}.yaml" for file in expected.versions])
