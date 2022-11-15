@@ -3,7 +3,7 @@ title: Integrate with editors
 description: Integrate with editors
 ---
 
-The [YAML Language Server](https://github.com/redhat-developer/yaml-language-server) provides validation, document outlining, auto completion, hover support, and formatting for YAML files. To provide intellisense for YAML files, or more specifically devfiles, the YAML Language Server pulls all available schemas from the [JSON Schema Store](https://www.schemastore.org/json/). The JSON Schema Store contains the devfile JSON Schema, which is maintained by the devfile team.
+The [YAML Language Server](https://github.com/redhat-developer/yaml-language-server) provides validation, document outlining, auto-completion, hover support, and formatting for YAML files. To provide IntelliSense for devfiles, the YAML Language Server pulls all available schemas from the [JSON Schema Store](https://www.schemastore.org/json/). The devfile team maintains the devfile JSON Schema stored within the JSON Schema Store.
 
 ## Download
 
