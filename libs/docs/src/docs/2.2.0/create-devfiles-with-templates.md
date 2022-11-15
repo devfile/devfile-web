@@ -5,10 +5,10 @@ description: Creating Devfiles With Templates
 
 Most dev tools can utilize the devfile registry to 
 fetch the stacks needed to begin development on projects. 
-Sometimes however there might be a need to create a devfile 
-from scratch or create custom devfile template(s). 
-This guide will run through starting from a minimum devfile and 
-build into sample templates for common use cases.
+Sometimes, however, you might need to create a devfile 
+from scratch or to create your own devfile template(s). 
+This guide runs through the process, starting from a minimum devfile and 
+building sample templates for common use cases.
 
 ## Prerequisites
 
@@ -21,7 +21,7 @@ build into sample templates for common use cases.
 
 1. Creating a minimal devfile
     - `schemaVersion` is the only required root element
-    - `metadata` is optional but recommend to have in your 
+    - `metadata` is optional but it is recommended to have in your 
     templates
     ```yaml {% title="Minimal Devfile" filename="devfile.yaml" %}
     schemaVersion: 2.2.0
@@ -43,7 +43,7 @@ build into sample templates for common use cases.
         of the stack
         - Set `architectures` to specify the platforms support in 
         the template
-        - For improved readability on devfile registries set `displayName` for the title to display for this template and `icon` to tie a stack icon to the template
+        - For improved readability on devfile registries, set `displayName` to the title that will be the display text for this template and `icon` to tie a stack icon to the template:
         ```yaml
           schemaVersion: 2.2.0
           metadata:
@@ -59,17 +59,17 @@ build into sample templates for common use cases.
             icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/golang.svg
           ```
     2. Setup `components`
-        - A `name` is required for a component
-        - If a `container` entity is defined, a `image` must be 
-        specified
-        - Though `endpoints` is optional it is needed to expose 
-        the port for web connections, this requires an endpoint `name`
-        and `targetPort` to expose (e.g. `8080` if that is your http 
-        port)
+        - A `name` is required for a component.
+        - If a `container` entity is defined, an `image` property must be 
+        specified.
+        - Though `endpoints` is optional, it is needed to expose 
+        the port for web connections. This requires an endpoint `name`
+        and `targetPort` to expose, for example `8080` if that is your http 
+        port.
         - The web service might need to connect to a external 
-        database using environment variables, in this case 
-        environment variable names and values defined for the 
-        container component under `env`
+        database using environment variables. In this case, define 
+        environment variable names and values for the 
+        container component under `env`:
         ```yaml
         components:
           - name: web
@@ -91,9 +91,9 @@ build into sample templates for common use cases.
         and a reference to a `component`. This implies that at least 
         one component entity is defined under the root `components`
         element.
-        - Set the `workingDir` to where the project source is 
+        - The `workingDir` is set to where the project source is 
         stored
-        - Command groups can be used to define automation useful
+        - Command groups can be used to define automation that is useful
         for executing a web service
         ```yaml
         commands:
@@ -115,8 +115,8 @@ build into sample templates for common use cases.
                 isDefault: true
         ```
     4. Define starter projects
-        - Add a starter project under `starterProjects` which
-        includes at least a `name` and remote location, either
+        - Add a starter project under `starterProjects`
+        including at least a `name` and remote location, either
         `git` or `zip`
         - It is recommended to include a starter project 
         description
