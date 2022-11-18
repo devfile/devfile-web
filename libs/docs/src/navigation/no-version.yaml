@@ -37,6 +37,8 @@ top:
         href: ./library
       - title: Resources
         href: ./resources
+      - title: Integrate with editors
+        href: ./integrate-with-editors
   - title: Get started
     links:
       - title: Devfile ecosystem

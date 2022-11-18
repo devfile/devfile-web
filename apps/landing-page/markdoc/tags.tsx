@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { Callout, QuickLink, QuickLinks, CurrentVersion } from '@devfile-web/core';
+import { Callout, QuickLink, QuickLinks, CurrentVersion, Video } from '@devfile-web/core';
 import clsx from 'clsx';
 
 const tags = {
@@ -82,6 +82,14 @@ const tags = {
       beforeVersion: { type: String },
       afterVersion: { type: String },
       isCodeblock: { type: Boolean },
+    },
+  },
+  video: {
+    selfClosing: true,
+    render: Video,
+    attributes: {
+      title: { type: String },
+      src: { type: String },
     },
   },
 };
