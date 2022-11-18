@@ -21,7 +21,7 @@ Other editor plugins can be found in the YAML Language Server [GitHub Repository
 
 ## Access the latest version
 
-Press `Ctrl + Shift + P` and type `Preferences: Open User Settings (JSON)`. This should open up your user settings. Inside the user settings add the following snippet.
+Press `Ctrl + Shift + P` and type `Preferences: Open User Settings (JSON)`. This opens your user settings. Inside the user settings, add the following snippet:
 
 ```json {% filename="settings.json" %}
 {
@@ -31,5 +31,4 @@ Press `Ctrl + Shift + P` and type `Preferences: Open User Settings (JSON)`. This
   },
   ...
 }
-
 ```
