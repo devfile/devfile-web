@@ -1,6 +1,6 @@
 ---
-title: Creating Devfiles With Templates
-description: Creating Devfiles With Templates
+title: Creating devfiles with templates
+description: Creating devfiles with templates
 ---
 
 Most dev tools can utilize the devfile registry to 
@@ -19,7 +19,7 @@ building sample templates for common use cases.
 
 ## Procedure
 
-1. Creating a minimal devfile
+1. Creating a minimal devfile:
     - `schemaVersion` is the only required root element
     - `metadata` is optional but it is recommended to have in your 
     templates
@@ -32,7 +32,7 @@ building sample templates for common use cases.
       name: devfile-sample
       version: 2.0.0
     ```
-2. Creating a web service template
+2. Creating a web service template:
     1. Template `metadata`
         - Set the template `name` and `version`
         - Set a `description` for the template
@@ -59,14 +59,14 @@ building sample templates for common use cases.
             icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/golang.svg
           ```
     2. Setup `components`
-        - A `name` is required for a component.
+        - A `name` is required for a component
         - If a `container` entity is defined, an `image` property must be 
-        specified.
+        specified
         - Though `endpoints` is optional, it is needed to expose 
-        the port for web connections. This requires an endpoint `name`
-        and `targetPort` to expose, for example `8080` if that is your http 
-        port.
-        - The web service might need to connect to a external 
+        the port for web connections and requires: 
+          - An endpoint `name`
+          - A `targetPort` to expose, for example, `8080` if that is your http port
+        - The web service might need to connect to an external 
         database using environment variables. In this case, define 
         environment variable names and values for the 
         container component under `env`:
@@ -88,13 +88,13 @@ building sample templates for common use cases.
     3. Adding `commands`
         - An `id` to identify the command
         - An `exec` entity must be defined with a `commandLine` string
-        and a reference to a `component`. This implies that at least 
-        one component entity is defined under the root `components`
-        element.
+        and a reference to a `component` 
+          - *This implies that at least one component entity is defined 
+          under the root `components` element*
         - The `workingDir` is set to where the project source is 
         stored
         - Command groups can be used to define automation that is useful
-        for executing a web service
+        for executing a web service:
         ```yaml
         commands:
           - id: build
@@ -119,7 +119,7 @@ building sample templates for common use cases.
         including at least a `name` and remote location, either
         `git` or `zip`
         - It is recommended to include a starter project 
-        description
+        description:
           ```yaml
           starterProjects:
             - name: web-starter
