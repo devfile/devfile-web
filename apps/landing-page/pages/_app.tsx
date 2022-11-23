@@ -28,7 +28,7 @@ import {
 import '../styles/tailwind.css';
 import type { AppProps } from 'next/app';
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js';
-import type { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
+import { RenderableTreeNodes, Tag } from '@markdoc/markdoc';
 import type { TableOfContents } from '@devfile-web/core';
 import type { DocsNavigation } from '@devfile-web/docs';
 import { docsNavigation, headerNavigation, footerNavigation } from '../navigation';
@@ -38,10 +38,10 @@ const analyticsConfig = {
   client: 'landing-page',
 };
 
-function getNodeText(node: Tag | null): string {
+function getNodeText(node: Tag): string {
   let text = '';
   for (const child of node?.children ?? []) {
-    text += typeof child === 'string' ? child : getNodeText(child);
+    text += Tag.isTag(child) ? getNodeText(child) : child;
   }
   return text;
 }
@@ -55,23 +55,21 @@ function collectHeadings(
   if (!Array.isArray(nodes)) return sections;
 
   for (const node of nodes) {
-    if (node && typeof node !== 'string') {
-      if (node.name === 'h2' || node.name === 'h3') {
-        const title = getNodeText(node);
-        if (title) {
-          const id = slugify(title);
-          node.attributes.id = id;
-          if (node.name === 'h3') {
-            if (!sections[sections.length - 1]) {
-              throw new Error('Cannot add `h3` to table of contents without a preceding `h2`');
-            }
-            sections[sections.length - 1].children.push({
-              ...node.attributes,
-              title,
-            });
-          } else {
-            sections.push({ ...node.attributes, title, children: [] });
+    if (Tag.isTag(node) && (node.name === 'h2' || node.name === 'h3')) {
+      const title = getNodeText(node);
+      if (title) {
+        const id = slugify(title);
+        node.attributes.id = id;
+        if (node.name === 'h3') {
+          if (!sections[sections.length - 1]) {
+            throw new Error('Cannot add `h3` to table of contents without a preceding `h2`');
           }
+          sections[sections.length - 1].children.push({
+            ...node.attributes,
+            title,
+          });
+        } else {
+          sections.push({ ...node.attributes, title, children: [] });
         }
       }
 
