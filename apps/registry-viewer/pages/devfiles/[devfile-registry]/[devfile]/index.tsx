@@ -42,7 +42,7 @@ export function Index(props: IndexProps): JSX.Element {
   const { devfile, devfileSpec, devfileYaml } = props;
 
   const { data } = useFetchDevfileYamls(
-    `${devfile.devfileRegistry.link}/devfiles/${devfile.name}`,
+    `${devfile.devfileRegistry.url}/devfiles/${devfile.name}`,
     devfile.versions?.map((version) => version.version),
   );
   const [selectedVersion, setSelectedVersion] = useState<Version | undefined>(
@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     };
   }
 
-  const res = await fetch(`${devfile.devfileRegistry.link}/devfiles/${devfile.name}`);
+  const res = await fetch(`${devfile.devfileRegistry.url}/devfiles/${devfile.name}`);
   const devfileYaml = await res.text();
   // No types available for js-yaml
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call

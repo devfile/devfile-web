@@ -90,7 +90,9 @@ export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.
         </div>
         <Link
           className="bg-devfile/5 border-devfile/50 text-devfile hover:bg-devfile/10 active:bg-devfile/20 h-fit rounded border py-2 px-4 text-sm font-semibold sm:mr-3"
-          href={`${devfile.devfileRegistry.link}/devfiles/${devfile.name}/starter-projects/${selectedProject.name}`}
+          href={`${devfile.devfileRegistry.fqdn || devfile.devfileRegistry.url}/devfiles/${
+            devfile.name
+          }/starter-projects/${selectedProject.name}`}
           target="_blank"
           rel="noopener noreferrer"
         >

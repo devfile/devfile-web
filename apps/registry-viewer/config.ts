@@ -16,23 +16,45 @@
 
 import type { DevfileRegistry } from '@devfile-web/core';
 
+function isRegistry(registry: unknown): DevfileRegistry {
+  // Check if the registry is an object
+  if (typeof registry !== 'object' || registry === null) {
+    throw new SyntaxError('Registry is not an object');
+  }
+
+  // Check if the properties are present
+  if (!('name' in registry)) {
+    throw new SyntaxError('Registry name is not defined');
+  }
+
+  if (!('url' in registry)) {
+    throw new SyntaxError('Registry URL is not defined');
+  }
+
+  // Check if the properties are strings
+  if (typeof registry.name !== 'string') {
+    throw new SyntaxError('Registry name is not a string');
+  }
+
+  if (typeof registry.url !== 'string') {
+    throw new SyntaxError('Registry URL is not a string');
+  }
+
+  // the fqdn is optional
+  if ('fqdn' in registry && typeof registry.fqdn !== 'string') {
+    throw new SyntaxError('Registry fqdn is not a string');
+  }
+
+  return registry as DevfileRegistry;
+}
+
 let envDevfileRegistries: DevfileRegistry[] = [];
 try {
   const res = process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES
     ? (JSON.parse(process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES) as unknown)
     : undefined;
-  if (
-    Array.isArray(res) &&
-    res.every(
-      (registry) =>
-        typeof registry === 'object' &&
-        !Array.isArray(registry) &&
-        registry !== null &&
-        typeof (registry as Record<string, unknown>).name === 'string' &&
-        typeof (registry as Record<string, unknown>).link === 'string',
-    )
-  ) {
-    envDevfileRegistries = res as DevfileRegistry[];
+  if (Array.isArray(res)) {
+    envDevfileRegistries = res.map((registry) => isRegistry(registry));
   }
 } catch (error) {
   throw new SyntaxError(
@@ -45,4 +67,4 @@ try {
 export const devfileRegistries: DevfileRegistry[] =
   envDevfileRegistries.length > 0
     ? envDevfileRegistries
-    : [{ name: 'Community', link: 'https://registry.stage.devfile.io' }];
+    : [{ name: 'Community', url: 'https://registry.stage.devfile.io' }];
