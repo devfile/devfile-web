@@ -16,6 +16,7 @@ building sample templates for common use cases.
 - [Metadata](./metadata)
 - [Adding components](./adding-components)
 - [Adding commands](./adding-commands)
+- [Defining starter projects](./defining-starter-projects)
 
 ## Procedure
 
@@ -128,6 +129,7 @@ building sample templates for common use cases.
                 remotes:
                   origin: https://github.com/devfile-samples/devfile-stack-go.git
           ```
+    5. Completing the content, the complete devfile should look like the following:
     ```yaml {% title="Complete Web Service Template" filename="devfile.yaml" %}
     schemaVersion: 2.2.0
     metadata:
