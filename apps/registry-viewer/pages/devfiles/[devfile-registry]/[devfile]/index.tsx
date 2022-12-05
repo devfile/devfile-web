@@ -30,7 +30,7 @@ import slugify from '@sindresorhus/slugify';
 import type { GetStaticProps, GetStaticPaths } from 'next';
 // @ts-ignore No types available
 import { load } from 'js-yaml';
-import { devfileRegistries } from '../../../../config';
+import { getDevfileRegistries } from '../../../../config';
 
 export interface IndexProps {
   devfile: Devfile;
@@ -96,6 +96,7 @@ export function Index(props: IndexProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
+  const devfileRegistries = getDevfileRegistries();
   const devfiles = await fetchDevfiles(devfileRegistries);
   const devfileRegistryId = context.params?.['devfile-registry'] as string;
   const devfileId = context.params?.devfile as string;
@@ -124,10 +125,12 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
       devfileSpec,
       devfileYaml,
     },
+    revalidate: 15,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const devfileRegistries = getDevfileRegistries();
   const devfiles = await fetchDevfiles(devfileRegistries);
   const paths = devfiles.map((devfile) => ({
     params: {

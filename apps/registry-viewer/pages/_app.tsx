@@ -14,14 +14,16 @@
  * limitations under the License.
  */
 
+import Script from 'next/script';
 import { AppProps } from 'next/app';
 import 'focus-visible';
+import env from '@beam-australia/react-env';
 import { AnalyticsProvider, LinksProvider, Header, Footer, RegistryMeta } from '@devfile-web/core';
 import '../styles/tailwind.css';
 import { headerNavigation, footerNavigation } from '../navigation';
 
 const analyticsConfig = {
-  writeKey: process.env.NEXT_PUBLIC_ANALYTICS_WRITE_KEY ?? '',
+  writeKey: env('ANALYTICS_WRITE_KEY'),
   client: 'registry-viewer',
 };
 
@@ -29,18 +31,21 @@ const websiteName = 'Devfile Registry';
 
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <AnalyticsProvider {...analyticsConfig}>
-      <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
-        <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">
-          <div className="grow">
-            <RegistryMeta />
-            <Header websiteName={websiteName} />
-            <Component {...pageProps} />
+    <>
+      <Script src="/__ENV.js" strategy="beforeInteractive" />
+      <AnalyticsProvider {...analyticsConfig}>
+        <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
+          <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">
+            <div className="grow">
+              <RegistryMeta />
+              <Header websiteName={websiteName} />
+              <Component {...pageProps} />
+            </div>
+            <Footer websiteName={websiteName} />
           </div>
-          <Footer websiteName={websiteName} />
-        </div>
-      </LinksProvider>
-    </AnalyticsProvider>
+        </LinksProvider>
+      </AnalyticsProvider>
+    </>
   );
 }
 

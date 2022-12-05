@@ -48,23 +48,26 @@ function isRegistry(registry: unknown): DevfileRegistry {
   return registry as DevfileRegistry;
 }
 
-let envDevfileRegistries: DevfileRegistry[] = [];
-try {
-  const res = process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES
-    ? (JSON.parse(process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES) as unknown)
-    : undefined;
-  if (Array.isArray(res)) {
-    envDevfileRegistries = res.map((registry) => isRegistry(registry));
-  }
-} catch (error) {
-  throw new SyntaxError(
-    `${(error as Error).name}: ${
-      (error as Error).message
-    }, NEXT_PUBLIC_DEVFILE_REGISTRIES is an invalid json string`,
-  );
-}
+export function getDevfileRegistries(): DevfileRegistry[] {
+  let devfileRegistries: DevfileRegistry[] = [];
 
-export const devfileRegistries: DevfileRegistry[] =
-  envDevfileRegistries.length > 0
-    ? envDevfileRegistries
+  try {
+    const res = process.env.DEVFILE_REGISTRIES
+      ? (JSON.parse(process.env.DEVFILE_REGISTRIES) as unknown)
+      : undefined;
+
+    if (Array.isArray(res)) {
+      devfileRegistries = res.map((registry) => isRegistry(registry));
+    }
+  } catch (error) {
+    throw new SyntaxError(
+      `${(error as Error).name}: ${
+        (error as Error).message
+      }, DEVFILE_REGISTRIES is an invalid json string`,
+    );
+  }
+
+  return devfileRegistries.length > 0
+    ? devfileRegistries
     : [{ name: 'Community', url: 'https://registry.stage.devfile.io' }];
+}

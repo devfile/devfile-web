@@ -16,7 +16,7 @@
 
 import slugify from '@sindresorhus/slugify';
 import type { GetStaticPaths, GetStaticProps } from 'next';
-import { devfileRegistries } from '../../../config';
+import { getDevfileRegistries } from '../../../config';
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
@@ -26,9 +26,11 @@ export function Index(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = () => ({
   props: {},
+  revalidate: 15,
 });
 
 export const getStaticPaths: GetStaticPaths = () => {
+  const devfileRegistries = getDevfileRegistries();
   const paths = Object.keys(devfileRegistries).map((devfileRegistry) => ({
     params: { 'devfile-registry': slugify(devfileRegistry) },
   }));
