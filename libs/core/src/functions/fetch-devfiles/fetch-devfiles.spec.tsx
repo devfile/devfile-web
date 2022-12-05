@@ -34,7 +34,7 @@ describe('fetchDevfiles', () => {
     });
 
     const devfileRegistries: DevfileRegistry[] = [
-      { name: 'Devfile registry', link: 'https://registry.devfile.io' },
+      { name: 'Devfile registry', url: 'https://registry.devfile.io' },
     ];
 
     const customDevfiles = await fetchDevfiles(devfileRegistries);
