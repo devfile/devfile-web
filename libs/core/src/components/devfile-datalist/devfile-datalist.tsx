@@ -167,7 +167,9 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
               )}
               <li>
                 <Link
-                  href={`${devfile.devfileRegistry.link}/devfiles/${devfile.name}`}
+                  href={`${devfile.devfileRegistry.fqdn || devfile.devfileRegistry.url}/devfiles/${
+                    devfile.name
+                  }`}
                   className="text-devfile"
                   target="_blank"
                   rel="noopener noreferrer"

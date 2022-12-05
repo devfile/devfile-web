@@ -16,7 +16,6 @@
 
 const path = require('path');
 const withNx = require('@nrwl/next/plugins/with-nx');
-const withPlugins = require('next-compose-plugins');
 const withMarkdoc = require('@markdoc/next.js');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -26,14 +25,12 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // Besides /devfile-web, the urls must be updated if NEXT_PUBLIC_BASE_PATH is changed.
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
-// Invalid next.config.js options detected: https://github.com/vercel/next.js/issues/39161
 /**
  * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
  * */
 const nextConfig = {
   basePath,
   assetPrefix: basePath,
-  // Must be added until https://github.com/actions/configure-pages/issues/23 is fixed
   images: {
     unoptimized: true,
   },
@@ -42,7 +39,6 @@ const nextConfig = {
   swcMinify: true,
   output: 'standalone',
   experimental: {
-    newNextLinkBehavior: true,
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
   nx: {
@@ -50,4 +46,6 @@ const nextConfig = {
   },
 };
 
-module.exports = withPlugins([withBundleAnalyzer, withMarkdoc(), withNx], nextConfig);
+const plugins = [withBundleAnalyzer, withMarkdoc(), withNx];
+
+module.exports = plugins.reduce((config, plugin) => plugin(config), nextConfig);

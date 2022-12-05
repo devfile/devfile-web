@@ -30,7 +30,7 @@ import slugify from '@sindresorhus/slugify';
 import type { GetStaticProps, GetStaticPaths } from 'next';
 // @ts-ignore No types available
 import { load } from 'js-yaml';
-import { devfileRegistries } from '../../../../config';
+import { getDevfileRegistries } from '../../../../config';
 
 export interface IndexProps {
   devfile: Devfile;
@@ -42,7 +42,7 @@ export function Index(props: IndexProps): JSX.Element {
   const { devfile, devfileSpec, devfileYaml } = props;
 
   const { data } = useFetchDevfileYamls(
-    `${devfile.devfileRegistry.link}/devfiles/${devfile.name}`,
+    `${devfile.devfileRegistry.url}/devfiles/${devfile.name}`,
     devfile.versions?.map((version) => version.version),
   );
   const [selectedVersion, setSelectedVersion] = useState<Version | undefined>(
@@ -96,6 +96,7 @@ export function Index(props: IndexProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
+  const devfileRegistries = getDevfileRegistries();
   const devfiles = await fetchDevfiles(devfileRegistries);
   const devfileRegistryId = context.params?.['devfile-registry'] as string;
   const devfileId = context.params?.devfile as string;
@@ -112,7 +113,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     };
   }
 
-  const res = await fetch(`${devfile.devfileRegistry.link}/devfiles/${devfile.name}`);
+  const res = await fetch(`${devfile.devfileRegistry.url}/devfiles/${devfile.name}`);
   const devfileYaml = await res.text();
   // No types available for js-yaml
   // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -124,10 +125,12 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
       devfileSpec,
       devfileYaml,
     },
+    revalidate: 15,
   };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const devfileRegistries = getDevfileRegistries();
   const devfiles = await fetchDevfiles(devfileRegistries);
   const paths = devfiles.map((devfile) => ({
     params: {

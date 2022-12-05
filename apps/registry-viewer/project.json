@@ -3,10 +3,17 @@
   "sourceRoot": "apps/registry-viewer",
   "projectType": "application",
   "targets": {
+    "prebuild": {
+      "executor": "nx:run-commands",
+      "options": {
+        "command": "yarn react-env --prefix NEXT_PUBLIC --dest ./apps/registry-viewer/public"
+      }
+    },
     "build": {
       "executor": "@nrwl/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
+      "dependsOn": ["prebuild"],
       "options": {
         "root": "apps/registry-viewer",
         "outputPath": "dist/apps/registry-viewer"
@@ -21,6 +28,7 @@
     "serve": {
       "executor": "@nrwl/next:server",
       "defaultConfiguration": "development",
+      "dependsOn": ["prebuild"],
       "options": {
         "buildTarget": "registry-viewer:build",
         "dev": true

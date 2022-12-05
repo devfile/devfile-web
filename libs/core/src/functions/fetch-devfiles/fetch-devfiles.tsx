@@ -50,20 +50,18 @@ export interface Version {
 
 export interface DevfileRegistry {
   name: string;
-  link: string;
+  url: string;
+  fqdn?: string;
 }
 
 export interface Devfile extends DevfileJson {
-  devfileRegistry: {
-    name: string;
-    link: string;
-  };
+  devfileRegistry: DevfileRegistry;
 }
 
 export async function fetchDevfiles(devfileRegistries: DevfileRegistry[]): Promise<Devfile[]> {
   const responses = await Promise.all(
     devfileRegistries.map((devfileRegistry) =>
-      fetch(`${devfileRegistry.link}/v2index/all?icon=base64`),
+      fetch(`${devfileRegistry.url}/v2index/all?icon=base64`),
     ),
   );
 
@@ -81,10 +79,7 @@ export async function fetchDevfiles(devfileRegistries: DevfileRegistry[]): Promi
     .flatMap((devfileRegistry, devfileRegistryIndex) =>
       devfileJsons[devfileRegistryIndex].map((devfile) => ({
         ...devfile,
-        devfileRegistry: {
-          name: devfileRegistry.name,
-          link: devfileRegistry.link,
-        },
+        devfileRegistry,
       })),
     )
     .sort((a, b) =>

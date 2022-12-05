@@ -7,7 +7,7 @@
       "executor": "nx:run-commands",
       "dependsOn": ["^build"],
       "options": {
-        "command": "bash ./scripts/docs.sh > dist/docs.log"
+        "command": "bash ./scripts/docs.sh > dist/docs.log && yarn react-env --prefix NEXT_PUBLIC --dest ./apps/landing-page/public"
       }
     },
     "build": {

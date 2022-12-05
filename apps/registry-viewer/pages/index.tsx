@@ -28,7 +28,7 @@ import {
   type FilterElement,
 } from '@devfile-web/core';
 import type { GetStaticProps } from 'next';
-import { devfileRegistries } from '../config';
+import { getDevfileRegistries } from '../config';
 
 const devfilesPerPage = 15;
 
@@ -39,7 +39,7 @@ export interface IndexProps {
 }
 
 export function Index(props: IndexProps): JSX.Element {
-  const { devfiles, query } = props;
+  const { devfiles, devfileRegistries, query } = props;
 
   return (
     <SearchDevfilesProvider
@@ -70,6 +70,7 @@ export function Index(props: IndexProps): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps<IndexProps> = async () => {
+  const devfileRegistries = getDevfileRegistries();
   const devfiles = await fetchDevfiles(devfileRegistries);
 
   const registries: FilterElement[] = devfileRegistries.map((registry) => ({
@@ -97,6 +98,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
         filtersApplied,
       },
     },
+    revalidate: 15,
   };
 };
 
