@@ -60,6 +60,8 @@
       href: ./defining-starter-projects      
     - title: Referring to a parent devfile
       href: ./referring-to-a-parent-devfile
+    - title: Creating devfiles with templates
+      href: ./create-devfiles-with-templates
 - title: API reference
   links:
     - title: Devfile schema
