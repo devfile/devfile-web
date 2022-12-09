@@ -30,12 +30,12 @@ export function DevfileGrid(
       <ul className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
         {devfiles.searchedLimited.map((devfile) => (
           <li
-            key={`${devfile.name}-${devfile.devfileRegistry.name}`}
+            key={`${devfile.name}-${devfile._registry.name}`}
             className="col-span-1 rounded-lg border border-slate-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800"
           >
             <Link
               className="flex h-full flex-col justify-between p-6"
-              href={`/devfiles/${slugify(devfile.devfileRegistry.name)}/${slugify(devfile.name)}`}
+              href={`/devfiles/${slugify(devfile._registry.name)}/${slugify(devfile.name)}`}
             >
               <div className="flex items-center">
                 <div className="mr-4 flex h-24 w-24 flex-shrink-0 items-center justify-center p-2 dark:rounded-md dark:bg-slate-200 md:h-36 md:w-36">

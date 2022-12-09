@@ -22,7 +22,7 @@ import {
   DevfileFilters,
   fetchDevfiles,
   getFilterElements,
-  type DevfileRegistry,
+  type Registry,
   type Devfile,
   type QueryState,
   type FilterElement,
@@ -34,7 +34,7 @@ const devfilesPerPage = 15;
 
 export interface IndexProps {
   devfiles: Devfile[];
-  devfileRegistries: DevfileRegistry[];
+  devfileRegistries: Registry[];
   query: QueryState;
 }
 
@@ -98,7 +98,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async () => {
         filtersApplied,
       },
     },
-    revalidate: 15,
+    revalidate: process.env.REVALIDATE_TIME ? Number.parseInt(process.env.REVALIDATE_TIME, 10) : 15,
   };
 };
 
