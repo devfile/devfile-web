@@ -28,11 +28,12 @@ const analyticsConfig = {
 };
 
 const websiteName = 'Devfile Registry';
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
     <>
-      <Script src="/__ENV.js" strategy="beforeInteractive" />
+      <Script src={`${basePath}/__ENV.js`} strategy="beforeInteractive" />
       <AnalyticsProvider {...analyticsConfig}>
         <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
           <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">

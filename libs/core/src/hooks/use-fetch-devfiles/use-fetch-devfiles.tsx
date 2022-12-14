@@ -16,7 +16,7 @@
 
 import { useEffect, useReducer, useRef } from 'react';
 import { fetchDevfiles } from '../../functions';
-import type { Devfile, DevfileRegistry } from '../../functions';
+import type { Devfile, Registry } from '../../functions';
 
 interface State {
   devfiles?: Devfile[];
@@ -33,7 +33,7 @@ type Action =
   | { type: 'fetched'; payload: Devfile[] }
   | { type: 'error'; payload: Error };
 
-export function useFetchDevfiles(devfileRegistries: DevfileRegistry[]): State {
+export function useFetchDevfiles(devfileRegistries: Registry[]): State {
   const cache = useRef<Cache>({});
 
   // Used to prevent state update if the component is unmounted

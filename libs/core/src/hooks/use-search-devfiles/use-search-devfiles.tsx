@@ -32,7 +32,7 @@ import {
   getFiltersApplied,
   mergeObjectsOnDefinedProperties,
 } from '../../functions';
-import type { Devfile, DevfileRegistry } from '../../functions';
+import type { Devfile, Registry } from '../../functions';
 
 export interface FilterElement {
   name: string;
@@ -130,7 +130,7 @@ export interface SearchDevfilesState {
 export interface SearchDevfilesProviderProps {
   children: React.ReactNode;
   devfiles: Devfile[];
-  devfileRegistries: DevfileRegistry[];
+  devfileRegistries: Registry[];
   query: QueryState;
   devfilesPerPage?: number;
   startingPageNumber?: number;
@@ -289,7 +289,7 @@ export function SearchDevfilesProvider(props: SearchDevfilesProviderProps): JSX.
       newState.devfiles.searched = newState.devfiles.searched.filter(
         (devfile) =>
           // Filter on registries
-          isSearchIn(devfile.devfileRegistry.name, newState.query.registries) &&
+          isSearchIn(devfile._registry.name, newState.query.registries) &&
           // Filter on types
           isSearchIn(devfile.type, newState.query.types) &&
           // Filter on tags

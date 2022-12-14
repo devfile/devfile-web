@@ -20,7 +20,6 @@ import {
   DevfileStarterProjects,
   DevfileDatalist,
   DevfileCodeblock,
-  useFetchDevfileYamls,
   type Devfile,
   type DevfileSpec,
   type Version,
@@ -34,29 +33,34 @@ import { getDevfileRegistries } from '../../../../config';
 
 export interface IndexProps {
   devfile: Devfile;
-  devfileSpec: DevfileSpec;
-  devfileYaml: string;
+  devfileYamls: {
+    version: string;
+    devfileYaml: string;
+  }[];
 }
 
 export function Index(props: IndexProps): JSX.Element {
-  const { devfile, devfileSpec, devfileYaml } = props;
+  const { devfile, devfileYamls } = props;
 
-  const { data } = useFetchDevfileYamls(
-    `${devfile.devfileRegistry.url}/devfiles/${devfile.name}`,
-    devfile.versions?.map((version) => version.version),
-  );
   const [selectedVersion, setSelectedVersion] = useState<Version | undefined>(
     devfile.versions?.find((version) => version.default),
   );
-  const selectedDevfileSpec = useMemo(
-    () =>
-      data.find(({ version }) => version === selectedVersion?.version)?.devfileSpec || devfileSpec,
-    [data, devfileSpec, selectedVersion?.version],
-  );
+
   const selectedDevfileYaml = useMemo(
     () =>
-      data.find(({ version }) => version === selectedVersion?.version)?.devfileYaml || devfileYaml,
-    [data, devfileYaml, selectedVersion?.version],
+      (
+        devfileYamls.find((devfileYaml) => devfileYaml.version === selectedVersion?.version) ||
+        devfileYamls[0]
+      ).devfileYaml,
+    [devfileYamls, selectedVersion?.version],
+  );
+
+  const selectedDevfileSpec = useMemo(
+    () =>
+      // No types available for js-yaml
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      load(selectedDevfileYaml) as DevfileSpec,
+    [selectedDevfileYaml],
   );
 
   return (
@@ -103,7 +107,7 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
 
   const devfile = devfiles.find(
     (_devfile) =>
-      slugify(_devfile.devfileRegistry.name) === devfileRegistryId &&
+      slugify(_devfile._registry.name) === devfileRegistryId &&
       slugify(_devfile.name) === devfileId,
   );
 
@@ -113,36 +117,50 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     };
   }
 
-  const res = await fetch(`${devfile.devfileRegistry.url}/devfiles/${devfile.name}`);
-  const devfileYaml = await res.text();
-  // No types available for js-yaml
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  const devfileSpec = load(devfileYaml) as DevfileSpec;
+  let responses: Response[] = [];
+
+  if (devfile.type === 'stack') {
+    responses = await Promise.all(
+      devfile.versions.map((v) =>
+        fetch(`${devfile._registry.url}/devfiles/${devfile.name}/${v.version}`),
+      ),
+    );
+  }
+
+  if (devfile.type === 'sample') {
+    responses = [await fetch(`${devfile._registry.url}/devfiles/${devfile.name}`)];
+  }
+
+  const results = await Promise.all(
+    responses.map((response) => {
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      return response.text();
+    }),
+  );
+
+  const devfileYamls = results.map((result, index) => ({
+    version: devfile.versions ? devfile.versions[index].version : '',
+    devfileYaml: result,
+  }));
 
   return {
     props: {
       devfile,
-      devfileSpec,
-      devfileYaml,
+      devfileYamls,
     },
-    revalidate: 15,
+    revalidate: process.env.REVALIDATE_TIME ? Number.parseInt(process.env.REVALIDATE_TIME, 10) : 15,
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const devfileRegistries = getDevfileRegistries();
-  const devfiles = await fetchDevfiles(devfileRegistries);
-  const paths = devfiles.map((devfile) => ({
-    params: {
-      'devfile-registry': slugify(devfile.devfileRegistry.name),
-      devfile: slugify(devfile.name),
-    },
-  }));
-
-  return {
-    paths,
+export const getStaticPaths: GetStaticPaths = () =>
+  // Return empty paths because we don't want to generate anything on build
+  // { fallback: blocking } will server-render pages
+  // on-demand if the path doesn't exist.
+  ({
+    paths: [],
     fallback: 'blocking',
-  };
-};
+  });
 
 export default Index;

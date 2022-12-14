@@ -53,7 +53,7 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
                   onChange={setSelectedVersion}
                   className="relative"
                 >
-                  <Listbox.Label className="sr-only">Starter projects</Listbox.Label>
+                  <Listbox.Label className="sr-only">Versions</Listbox.Label>
                   <Listbox.Button className="container rounded py-0.5 pr-10 pl-2.5 text-left shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
                     <span className="block truncate">
                       {selectedVersion?.version} {selectedVersion?.default && '(default)'}
@@ -63,11 +63,11 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
                     </span>
                   </Listbox.Button>
                   <Listbox.Options className="container absolute z-10 mt-1 max-h-60 overflow-x-auto rounded-md border border-slate-600 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700 sm:text-sm">
-                    {devfile.versions?.map((version) => (
+                    {devfile.versions?.reverse().map((version) => (
                       <Listbox.Option
                         key={version.version}
                         value={version}
-                        className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-default select-none py-2 px-4"
+                        className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-pointer select-none py-2 px-4"
                       >
                         <span className="ui-selected:font-medium block truncate font-normal">
                           {version.version} {version.default && '(default)'}
@@ -167,7 +167,7 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
               )}
               <li>
                 <Link
-                  href={`${devfile.devfileRegistry.fqdn || devfile.devfileRegistry.url}/devfiles/${
+                  href={`${devfile._registry.fqdn || devfile._registry.url}/devfiles/${
                     devfile.name
                   }`}
                   className="text-devfile"
