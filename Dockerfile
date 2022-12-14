@@ -104,17 +104,18 @@ ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN groupadd -g 1001 nodejs
 RUN useradd nextjs -u 1001
 
-COPY --from=builder --chown=nextjs:nodejs /app/apps/${PROJECT_NAME}/dist/public ./apps/${PROJECT_NAME}/public
+COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/public ./apps/${PROJECT_NAME}/public
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/apps/${PROJECT_NAME}/dist/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/${PROJECT_NAME}/dist/.next/static ./apps/${PROJECT_NAME}/dist/.next/static
+COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/.next/standalone ./
+COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/.next/static ./apps/${PROJECT_NAME}/dist/.next/static
 
-USER nextjs
+RUN chown -R 1001:0 ./apps/${PROJECT_NAME} && chmod -R g=u ./apps/${PROJECT_NAME}
+
+USER 1001
 
 EXPOSE 3000
 
