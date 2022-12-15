@@ -9,14 +9,14 @@ various projects.
 
 ## Procedure
 
-1. Create a stack folder with a name that matches the stack name. For
+1. Within the stacks directory `registry/stacks/`, create a stack folder with a name that matches the stack name. For
     example, `java-wildfly/`.
 
 2. Create version directories for storing different stack versions.
     Each directory under the stack must correspond to a specific
     version, for example, `java-wildfly/1.0.0`.
 
-3. Create a `stack.yaml` file to store the stack information.
+3. Create a `stack.yaml` file within the stack folder to store the stack information.
 
 4. Verify every devfile stack version contains at least one
     `devfile.yaml` file. Add other required files to the stack version.
