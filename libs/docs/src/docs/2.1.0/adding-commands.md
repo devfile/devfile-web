@@ -30,9 +30,9 @@ related to a specific component in whose container it will be executed.
     commands:
       - id: build
         exec:
-        component: mysql
-        commandLine: mvn clean
-        workingDir: /projects/spring-petclinic
+          component: mysql
+          commandLine: mvn clean
+          workingDir: /projects/spring-petclinic
     ```
 
 4. Define attributes for the `exec` command to run using the default
