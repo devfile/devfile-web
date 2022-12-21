@@ -35,6 +35,8 @@ The inner-loop and outer-loop instructions defined in the devfile allow you to t
 
 - [IntelliJ OpenShift Toolkit](https://plugins.jetbrains.com/plugin/12030-openshift-connector-by-red-hat)
 
+- [Amazon CodeCatalyst Dev Environments](https://docs.aws.amazon.com/codecatalyst/latest/userguide/devenvironment.html)
+
 ## Additional resources
 
 - [API reference](./devfile-schema)
