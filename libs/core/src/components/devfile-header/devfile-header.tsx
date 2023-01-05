@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import Image from 'next/image';
 import type { Devfile, Version } from '../../functions';
 
 export interface DevfileHeaderProps {
@@ -28,7 +29,9 @@ export function DevfileHeader(props: DevfileHeaderProps): JSX.Element {
     <div className="flex justify-between">
       <div className="mr-4 flex max-h-36 space-x-5 lg:min-w-[66%] lg:max-w-[66%]">
         <div className="flex h-36 w-36 flex-shrink-0 items-center justify-center p-2 dark:rounded-md dark:bg-slate-200">
-          <img
+          <Image
+            width={128}
+            height={128}
             src={selectedVersion?.icon || devfile.icon}
             alt={`${devfile.displayName} icon`}
             className="h-auto max-h-32 w-32"

@@ -16,13 +16,14 @@
 
 import { createContext, useState, useContext, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import { docVersions, defaultVersion } from '@devfile-web/docs';
-import type {
+import {
+  docVersions,
+  defaultVersion,
   DocVersions,
-  VersionedDocsNavigation,
-  DocsNavigation,
-  Page,
-  Section,
+  type VersionedDocsNavigation,
+  type DocsNavigation,
+  type Page,
+  type Section,
 } from '@devfile-web/docs';
 
 export interface NavigationProviderProps {
@@ -44,6 +45,10 @@ export interface UseNavigation {
 
 const NavigationContext = createContext<UseNavigation | undefined>(undefined);
 
+export type Entries<T> = {
+  [K in keyof T]: [K, T[K]];
+}[keyof T][];
+
 export function NavigationProvider(props: NavigationProviderProps): JSX.Element {
   const { children, docsNavigation } = props;
 
@@ -54,11 +59,12 @@ export function NavigationProvider(props: NavigationProviderProps): JSX.Element 
 
   const allLinks = useMemo(
     () =>
-      Object.entries(docsNavigation).reduce(
-        (prev, [version, versionedDocsNavigation]) => ({
-          ...prev,
-          [version]: versionedDocsNavigation.flatMap((section) => section.links),
-        }),
+      (Object.entries(docsNavigation) as Entries<DocsNavigation>).reduce(
+        (prev, [version, versionedDocsNavigation]) => {
+          const updated = prev;
+          updated[version] = versionedDocsNavigation.flatMap((section) => section.links);
+          return updated;
+        },
         {} as Record<DocVersions, Page[]>,
       ),
 

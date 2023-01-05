@@ -70,6 +70,11 @@ export type Devfile = DevfileJson & {
   _registry: Registry;
 };
 
+export interface DevfileParams {
+  devfiles: Devfile[];
+  total: number;
+}
+
 export async function fetchDevfiles(registries: Registry[]): Promise<Devfile[]> {
   const responses = await Promise.all(
     registries.map((devfileRegistry) => fetch(`${devfileRegistry.url}/v2index/all?icon=base64`)),
