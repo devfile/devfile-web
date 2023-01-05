@@ -15,15 +15,21 @@
  */
 
 import Image from 'next/image';
-import type { Devfile, Version } from '../../functions';
+import { useMemo } from 'react';
+import type { Devfile } from '../../functions';
 
 export interface DevfileHeaderProps {
   devfile: Devfile;
-  selectedVersion?: Version;
+  devfileVersion?: string;
 }
 
 export function DevfileHeader(props: DevfileHeaderProps): JSX.Element {
-  const { devfile, selectedVersion } = props;
+  const { devfile, devfileVersion } = props;
+
+  const versionDevfile = useMemo(
+    () => devfile.versions?.find((vD) => vD.version === devfileVersion),
+    [devfile.versions, devfileVersion],
+  );
 
   return (
     <div className="flex justify-between">
@@ -32,7 +38,7 @@ export function DevfileHeader(props: DevfileHeaderProps): JSX.Element {
           <Image
             width={128}
             height={128}
-            src={selectedVersion?.icon || devfile.icon}
+            src={versionDevfile?.icon || devfile.icon}
             alt={`${devfile.displayName} icon`}
             className="h-auto max-h-32 w-32"
           />
@@ -58,7 +64,7 @@ export function DevfileHeader(props: DevfileHeaderProps): JSX.Element {
             </div>
           )}
           <p className="mt-1 text-sm font-medium leading-6 text-slate-500 dark:text-slate-400">
-            {selectedVersion?.description || devfile.description}
+            {versionDevfile?.description || devfile.description}
           </p>
         </div>
       </div>

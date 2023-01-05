@@ -23,7 +23,7 @@ interface DevfileJsonBase {
   icon: string;
   projectType: string;
   language: string;
-  versions?: Version[];
+  versions?: VersionDevfile[];
   provider?: string;
   architectures?: string[];
   git?: {
@@ -40,12 +40,12 @@ interface DevfileJsonSample extends DevfileJsonBase {
 
 interface DevfileJsonStack extends DevfileJsonBase {
   type: 'stack';
-  versions: Version[];
+  versions: VersionDevfile[];
 }
 
 export type DevfileJson = DevfileJsonSample | DevfileJsonStack;
 
-export interface Version {
+export interface VersionDevfile {
   version: string;
   schemaVersion: string;
   default: boolean;

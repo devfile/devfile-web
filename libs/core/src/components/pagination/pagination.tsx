@@ -97,7 +97,7 @@ export function Pagination(props: PaginationProps): JSX.Element | null {
               // Fix indexing
               const pageNumberIter = i + 1;
 
-              if (pageNumber - 1 <= pageNumberIter && pageNumberIter <= pageNumber) {
+              if (pageNumber - 1 <= pageNumberIter && pageNumberIter <= pageNumber + 1) {
                 // Display one page around the current page
                 return (
                   <button
@@ -133,6 +133,7 @@ export function Pagination(props: PaginationProps): JSX.Element | null {
                   </button>
                 );
               }
+
               if (pageNumberIter === pageNumber - 2 || pageNumberIter === pageNumber + 2) {
                 // Displays an addition page around the current page when the screen is smaller than a large screen
                 // Displays ellipses when the screen is larger than a large screen
