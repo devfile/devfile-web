@@ -182,7 +182,7 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
                 <Link
                   href={`${devfile._registry.fqdn || devfile._registry.url}/devfiles/${
                     devfile.name
-                  }`}
+                  }${devfileVersion ? `/${devfileVersion}` : ''}`}
                   className="text-devfile"
                   target="_blank"
                   rel="noopener noreferrer"
