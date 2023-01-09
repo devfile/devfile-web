@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import 'focus-visible';
 import env from '@beam-australia/react-env';
 import { AnalyticsProvider, LinksProvider, Header, Footer, RegistryMeta } from '@devfile-web/core';
