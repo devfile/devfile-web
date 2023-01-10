@@ -75,7 +75,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn nx run ${PROJECT_NAME}:postexport --skip-nx-cache
+RUN yarn nx build ${PROJECT_NAME} --skip-nx-cache
 
 # Production image, copy all the files and run next
 FROM registry.access.redhat.com/ubi8/nodejs-16-minimal AS runner
