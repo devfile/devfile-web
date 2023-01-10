@@ -15,22 +15,35 @@
  */
 
 import Link from 'next/link';
-import type { Dispatch, SetStateAction } from 'react';
 import { Listbox } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
-import type { Devfile, Version } from '../../functions';
+import { useMemo } from 'react';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import type { Devfile } from '../../functions';
 import type { DevfileSpec } from '../../types';
 
 export interface DevfileDatalistProps {
   devfile: Devfile;
-  selectedVersion?: Version;
-  setSelectedVersion: Dispatch<SetStateAction<Version | undefined>>;
+  devfileVersion?: string;
   devfileSpec: DevfileSpec;
   className?: string;
 }
 
 export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
-  const { devfile, selectedVersion, setSelectedVersion, devfileSpec, className } = props;
+  const { devfile, devfileVersion, devfileSpec, className } = props;
+
+  const [, setDevfileVersion] = useQueryParam(
+    'devfile-version',
+    withDefault(
+      StringParam,
+      devfileVersion || devfile.versions?.find((versionDevfile) => versionDevfile.default)?.version,
+    ),
+  );
+
+  const versionDevfile = useMemo(
+    () => devfile.versions?.find((vD) => vD.version === devfileVersion),
+    [devfile.versions, devfileVersion],
+  );
 
   return (
     <div className={className}>
@@ -38,39 +51,39 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
         Details
       </div>
       <dl className="divide-y border-slate-200 pl-3 dark:divide-slate-700">
-        {selectedVersion?.version && (
+        {versionDevfile?.version && (
           <div className="grid grid-cols-2 py-2.5 lg:block">
             <dt className="text-base font-medium text-slate-700 dark:text-sky-100">Version</dt>
             <dd className="mt-0.5 text-sm text-slate-500 dark:text-slate-400">
               {devfile.versions?.length === 1 ? (
                 <div className="rounded py-0.5 pr-10 pl-2.5 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
-                  {selectedVersion.version} {selectedVersion?.default && '(default)'}
+                  {versionDevfile.version} {versionDevfile?.default && '(default)'}
                 </div>
               ) : (
                 <Listbox
                   as="div"
-                  value={selectedVersion}
-                  onChange={setSelectedVersion}
+                  value={devfileVersion}
+                  onChange={setDevfileVersion}
                   className="relative"
                 >
                   <Listbox.Label className="sr-only">Versions</Listbox.Label>
                   <Listbox.Button className="container rounded py-0.5 pr-10 pl-2.5 text-left shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5">
                     <span className="block truncate">
-                      {selectedVersion?.version} {selectedVersion?.default && '(default)'}
+                      {versionDevfile?.version} {versionDevfile?.default && '(default)'}
                     </span>
                     <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                       <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
                     </span>
                   </Listbox.Button>
                   <Listbox.Options className="container absolute z-10 mt-1 max-h-60 overflow-x-auto rounded-md border border-slate-600 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700 sm:text-sm">
-                    {devfile.versions?.reverse().map((version) => (
+                    {devfile.versions?.reverse().map((vD) => (
                       <Listbox.Option
-                        key={version.version}
-                        value={version}
+                        key={vD.version}
+                        value={vD.version}
                         className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-pointer select-none py-2 px-4"
                       >
                         <span className="ui-selected:font-medium block truncate font-normal">
-                          {version.version} {version.default && '(default)'}
+                          {vD.version} {vD.default && '(default)'}
                         </span>
                       </Listbox.Option>
                     ))}
@@ -80,13 +93,13 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
             </dd>
           </div>
         )}
-        {selectedVersion?.schemaVersion && (
+        {versionDevfile?.schemaVersion && (
           <div className="grid grid-cols-2 py-2.5 lg:block">
             <dt className="text-base font-medium text-slate-700 dark:text-sky-100">
               Schema version
             </dt>
             <dd className="mt-1 text-sm text-slate-500 dark:text-slate-400 lg:ml-2.5">
-              {selectedVersion.schemaVersion}
+              {versionDevfile.schemaVersion}
             </dd>
           </div>
         )}
@@ -110,7 +123,7 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
                 {devfile.tags.map((tag) => (
                   <li key={tag}>
                     <Link
-                      href={`/?page=1&tags=${tag}`}
+                      href={`/?tags=${tag}`}
                       className="bg-devfile/5 hover:bg-devfile/10 active:bg-devfile/20 border-devfile/50 text-devfile inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium"
                     >
                       {tag}
@@ -169,7 +182,7 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
                 <Link
                   href={`${devfile._registry.fqdn || devfile._registry.url}/devfiles/${
                     devfile.name
-                  }`}
+                  }${devfileVersion ? `/${devfileVersion}` : ''}`}
                   className="text-devfile"
                   target="_blank"
                   rel="noopener noreferrer"

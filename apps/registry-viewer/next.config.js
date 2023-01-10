@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const path = require('path');
+const path = require('node:path');
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -33,7 +33,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  pageExtensions: ['js', 'jsx', 'tsx', 'md'],
+  pageExtensions: ['ts', 'tsx', 'md'],
   reactStrictMode: true,
   swcMinify: true,
   output: 'standalone',
