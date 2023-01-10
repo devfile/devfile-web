@@ -46,3 +46,4 @@ export * from './devfile-starter-projects/devfile-starter-projects';
 export * from './devfile-datalist/devfile-datalist';
 export * from './devfile-codeblock/devfile-codeblock';
 export * from './custom-404/custom-404';
+export * from './video/video';

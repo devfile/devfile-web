@@ -50,7 +50,7 @@ To include multiple stack versions in a particular stack, place the
 - The default stack version.
 {% /table %}
 
-```yaml {% title="extraDevfileEntries.yaml sample" filename="devfile.yaml" %}
+```yaml {% title="stack.yaml sample" filename="stack.yaml" %}
 name: go
 description: Stack with the latest Go version
 displayName: Go Runtime

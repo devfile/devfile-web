@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import 'focus-visible';
+import env from '@beam-australia/react-env';
 import { AnalyticsProvider, LinksProvider, Header, Footer, RegistryMeta } from '@devfile-web/core';
 import '../styles/tailwind.css';
 import { headerNavigation, footerNavigation } from '../navigation';
 
 const analyticsConfig = {
-  writeKey: process.env.NEXT_PUBLIC_ANALYTICS_WRITE_KEY ?? '',
+  writeKey: env('ANALYTICS_WRITE_KEY'),
   client: 'registry-viewer',
 };
 

@@ -7,6 +7,22 @@ Landing Page project for [devfile.io](https://devfile.io/).
 - `yarn nx prebuild landing-page`: builds the docs directory and navigation sidebar
 - `yarn nx postexport landing-page`: exports the website's sitemap
 
+## Environment Variables
+
+For more information regarding `NEXT_PUBLIC_*` environment variables click [here](https://nextjs.org/docs/basic-features/environment-variables#exposing-environment-variables-to-the-browser).
+
+A few notes:
+
+- `NEXT_PUBLIC_*` environment variables are dynamic client side only
+- Non `NEXT_PUBLIC_*` environment variables are dynamic server side only
+- If you need a dynamic environment variable server side and client side, you will need to pass the environment variable as a prop through `getStaticProps()`.
+
+- `NEXT_PUBLIC_ANALYTICS_WRITE_KEY`: The Segment analytics write key
+- `NEXT_PUBLIC_DOCSEARCH_APP_ID`: The Docsearch App ID
+- `NEXT_PUBLIC_DOCSEARCH_API_KEY`: The Docsearch API key
+- `NEXT_PUBLIC_DOCSEARCH_INDEX_NAME`: The Docsearch index name
+- `SITE_URL`: The production url the site is hosted on (used to generate the sitemap)
+
 ## Configuring navigation
 
 - Header
@@ -23,8 +39,8 @@ Landing Page project for [devfile.io](https://devfile.io/).
 
   ```ts
   [
-    { 
-      name: 'Example', // the name of the link 
+    {
+      name: 'Example', // the name of the link
       href: 'https://example.com', // the URI of the link
       image: ExampleIcon, // Optional: the image of the link
     }
@@ -57,8 +73,8 @@ Landing Page project for [devfile.io](https://devfile.io/).
 
   ```ts
   [
-    { 
-      name: 'Example', // the name of the link 
+    {
+      name: 'Example', // the name of the link
       href: 'https://example.com', // the URI of the link
       image: ExampleIcon, // Optional: the image of the link
     },
@@ -75,7 +91,7 @@ Landing Page project for [devfile.io](https://devfile.io/).
   *Whenever you update the sidebar navigation you **MUST** restart the server or run `yarn nx prebuild landing-page`.*
 
   Each sidebar section requires a `title` and `links`. Each element in `links` requires a `title` and `href`. Currently, the sidebar only supports navigation one layer deep.
-  
+
   *`no-version.yaml` has an additional top level `top` or `bottom` attribute which corresponds whether the section is on the top or bottom of the sidebar.*
 
   ```yaml

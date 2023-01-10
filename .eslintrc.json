@@ -3,6 +3,7 @@
   "ignorePatterns": ["**/*"],
   "plugins": ["@nrwl/nx", "eslint-comments", "promise", "unicorn", "license-header"],
   "extends": [
+    "plugin:@next/next/recommended",
     "airbnb",
     "airbnb/hooks",
     "plugin:eslint-comments/recommended",
@@ -34,6 +35,7 @@
             ]
           }
         ],
+        "@next/next/no-html-link-for-pages": "off",
         // React is already in-scope for all files compiled with Next.js
         "react/react-in-jsx-scope": "off",
         // SSR does not support useLayoutEffect
@@ -97,17 +99,20 @@
         "eslint-comments/no-unlimited-disable": "off",
         "unicorn/no-null": "off",
         "unicorn/prefer-module": "off",
-        "license-header/header": [ "error", "./license-header.js" ]
+        "license-header/header": [ "error", "./license-header.js" ],
+        "unicorn/prefer-top-level-await": "off"
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "plugins": ["@typescript-eslint"],
+      "plugins": ["@typescript-eslint", "typescript-enum"],
       "extends": [
         "plugin:@nrwl/nx/typescript",
         "airbnb-typescript",
         "plugin:@typescript-eslint/recommended",
-        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        "plugin:@typescript-eslint/recommended-requiring-type-checking",
+        // enums are bad https://www.youtube.com/watch?v=jjMbPt_H3RQ
+        "plugin:typescript-enum/recommended"
       ],
       "parser": "@typescript-eslint/parser",
       "parserOptions": {

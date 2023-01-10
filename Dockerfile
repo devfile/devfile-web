@@ -75,7 +75,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn nx run ${PROJECT_NAME}:postexport --skip-nx-cache
+RUN yarn nx build ${PROJECT_NAME} --skip-nx-cache
 
 # Production image, copy all the files and run next
 FROM registry.access.redhat.com/ubi8/nodejs-16-minimal AS runner
@@ -83,6 +83,9 @@ USER root
 
 # Install shadow-utils to use groupadd and useradd
 RUN microdnf install shadow-utils -y
+
+# Install react-env to update environment variables during runtime
+RUN npm install -g @beam-australia/react-env
 
 # Project non-specific args
 ARG PROJECT_NAME
@@ -101,17 +104,18 @@ ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN groupadd -g 1001 nodejs
 RUN useradd nextjs -u 1001
 
-COPY --from=builder /app/apps/${PROJECT_NAME}/dist/public ./apps/${PROJECT_NAME}/public
+COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/public ./apps/${PROJECT_NAME}/public
 
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/apps/${PROJECT_NAME}/dist/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/apps/${PROJECT_NAME}/dist/.next/static ./apps/${PROJECT_NAME}/dist/.next/static
+COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/.next/standalone ./
+COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/.next/static ./apps/${PROJECT_NAME}/dist/.next/static
 
-USER nextjs
+RUN chown -R 1001:0 ./apps/${PROJECT_NAME} && chmod -R g=u ./apps/${PROJECT_NAME}
+
+USER 1001
 
 EXPOSE 3000
 
@@ -126,4 +130,5 @@ ENV NEXT_PUBLIC_DOCSEARCH_APP_ID=$NEXT_PUBLIC_DOCSEARCH_APP_ID
 ENV NEXT_PUBLIC_DOCSEARCH_API_KEY=$NEXT_PUBLIC_DOCSEARCH_API_KEY
 ENV NEXT_PUBLIC_DOCSEARCH_INDEX_NAME=$NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
 
-CMD node apps/${PROJECT_NAME}/server.js
+ENTRYPOINT react-env --prefix NEXT_PUBLIC --dest apps/${PROJECT_NAME}/public --path .env.production && \
+  node apps/${PROJECT_NAME}/server.js

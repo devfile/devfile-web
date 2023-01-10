@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-export interface DevfileJson {
+interface DevfileJsonBase {
   name: string;
   displayName: string;
   description: string;
@@ -23,7 +23,7 @@ export interface DevfileJson {
   icon: string;
   projectType: string;
   language: string;
-  versions?: Version[];
+  versions?: VersionDevfile[];
   provider?: string;
   architectures?: string[];
   git?: {
@@ -33,7 +33,19 @@ export interface DevfileJson {
   };
 }
 
-export interface Version {
+interface DevfileJsonSample extends DevfileJsonBase {
+  type: 'sample';
+  versions?: never;
+}
+
+interface DevfileJsonStack extends DevfileJsonBase {
+  type: 'stack';
+  versions: VersionDevfile[];
+}
+
+export type DevfileJson = DevfileJsonSample | DevfileJsonStack;
+
+export interface VersionDevfile {
   version: string;
   schemaVersion: string;
   default: boolean;
@@ -48,23 +60,24 @@ export interface Version {
   architectures?: string[];
 }
 
-export interface DevfileRegistry {
+export interface Registry {
   name: string;
-  link: string;
+  url: string;
+  fqdn?: string;
 }
 
-export interface Devfile extends DevfileJson {
-  devfileRegistry: {
-    name: string;
-    link: string;
-  };
+export type Devfile = DevfileJson & {
+  _registry: Registry;
+};
+
+export interface DevfileParams {
+  devfiles: Devfile[];
+  total: number;
 }
 
-export async function fetchDevfiles(devfileRegistries: DevfileRegistry[]): Promise<Devfile[]> {
+export async function fetchDevfiles(registries: Registry[]): Promise<Devfile[]> {
   const responses = await Promise.all(
-    devfileRegistries.map((devfileRegistry) =>
-      fetch(`${devfileRegistry.link}/v2index/all?icon=base64`),
-    ),
+    registries.map((devfileRegistry) => fetch(`${devfileRegistry.url}/v2index/all?icon=base64`)),
   );
 
   responses.forEach((response) => {
@@ -77,14 +90,11 @@ export async function fetchDevfiles(devfileRegistries: DevfileRegistry[]): Promi
     responses.map((r) => (r.json() as Promise<DevfileJson[]>) ?? []),
   );
 
-  const devfiles: Devfile[] = devfileRegistries
-    .flatMap((devfileRegistry, devfileRegistryIndex) =>
+  const devfiles: Devfile[] = registries
+    .flatMap((registry, devfileRegistryIndex) =>
       devfileJsons[devfileRegistryIndex].map((devfile) => ({
         ...devfile,
-        devfileRegistry: {
-          name: devfileRegistry.name,
-          link: devfileRegistry.link,
-        },
+        _registry: registry,
       })),
     )
     .sort((a, b) =>

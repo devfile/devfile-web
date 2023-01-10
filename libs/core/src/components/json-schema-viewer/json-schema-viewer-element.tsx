@@ -335,8 +335,9 @@ export function addCode(
       newCode[title] = [];
       break;
     }
-    default:
+    default: {
       newCode[title] = isEnum ? 'enum' : type;
+    }
   }
 
   return newCode;

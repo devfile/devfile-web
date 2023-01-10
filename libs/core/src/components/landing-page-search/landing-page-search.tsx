@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import env from '@beam-australia/react-env';
 import { useCallback, useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Link from 'next/link';
@@ -28,13 +29,10 @@ interface HitProps {
   children: React.ReactNode;
 }
 
-const docSearchConfig: { appId: string; apiKey: string; indexName: string } = {
-  // @ts-ignore
-  appId: process.env.NEXT_PUBLIC_DOCSEARCH_APP_ID,
-  // @ts-ignore
-  apiKey: process.env.NEXT_PUBLIC_DOCSEARCH_API_KEY,
-  // @ts-ignore
-  indexName: process.env.NEXT_PUBLIC_DOCSEARCH_INDEX_NAME,
+const docSearchConfig = {
+  appId: env('DOCSEARCH_APP_ID'),
+  apiKey: env('DOCSEARCH_API_KEY'),
+  indexName: env('DOCSEARCH_INDEX_NAME'),
 };
 
 function Hit(props: HitProps): JSX.Element {

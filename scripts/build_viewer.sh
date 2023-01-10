@@ -14,8 +14,9 @@
 
 #!/usr/bin/env bash
 
-docker build -t registry-viewer . \
+ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+BUILD_DIR=$ABSOLUTE_PATH/..
+
+docker build --no-cache -t registry-viewer $BUILD_DIR \
     --build-arg PROJECT_NAME=registry-viewer \
-    --build-arg SITE_URL=${SITE_URL:-"https://registry.stage.devfile.io/viewer"} \
-    --build-arg NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH:-"/viewer"} \
-    --build-arg NEXT_PUBLIC_ANALYTICS_WRITE_KEY=${NEXT_PUBLIC_ANALYTICS_WRITE_KEY:-""}
+    --build-arg NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH:-"/viewer"}

@@ -14,35 +14,63 @@
  * limitations under the License.
  */
 
-import type { DevfileRegistry } from '@devfile-web/core';
+import type { Registry } from '@devfile-web/core';
 
-let envDevfileRegistries: DevfileRegistry[] = [];
-try {
-  const res = process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES
-    ? (JSON.parse(process.env.NEXT_PUBLIC_DEVFILE_REGISTRIES) as unknown)
-    : undefined;
-  if (
-    Array.isArray(res) &&
-    res.every(
-      (registry) =>
-        typeof registry === 'object' &&
-        !Array.isArray(registry) &&
-        registry !== null &&
-        typeof (registry as Record<string, unknown>).name === 'string' &&
-        typeof (registry as Record<string, unknown>).link === 'string',
-    )
-  ) {
-    envDevfileRegistries = res as DevfileRegistry[];
+function isRegistry(registry: unknown): Registry {
+  // Check if the registry is an object
+  if (typeof registry !== 'object' || registry === null) {
+    throw new SyntaxError('Registry is not an object');
   }
-} catch (error) {
-  throw new SyntaxError(
-    `${(error as Error).name}: ${
-      (error as Error).message
-    }, NEXT_PUBLIC_DEVFILE_REGISTRIES is an invalid json string`,
-  );
+
+  // Check if the properties are present
+  if (!('name' in registry)) {
+    throw new SyntaxError('Registry name is not defined');
+  }
+
+  if (!('url' in registry)) {
+    throw new SyntaxError('Registry URL is not defined');
+  }
+
+  // Check if the properties are strings
+  if (typeof registry.name !== 'string') {
+    throw new SyntaxError('Registry name is not a string');
+  }
+
+  if (typeof registry.url !== 'string') {
+    throw new SyntaxError('Registry URL is not a string');
+  }
+
+  // the fqdn is optional
+  if ('fqdn' in registry && typeof registry.fqdn !== 'string') {
+    throw new SyntaxError('Registry fqdn is not a string');
+  }
+
+  return registry as Registry;
 }
 
-export const devfileRegistries: DevfileRegistry[] =
-  envDevfileRegistries.length > 0
-    ? envDevfileRegistries
-    : [{ name: 'Community', link: 'https://registry.stage.devfile.io' }];
+export const defaultRegistry = {
+  name: 'Community',
+  url: 'https://registry.stage.devfile.io',
+};
+
+export function getDevfileRegistries(): Registry[] {
+  let devfileRegistries: Registry[] = [];
+
+  try {
+    const res = process.env.DEVFILE_REGISTRIES
+      ? (JSON.parse(process.env.DEVFILE_REGISTRIES) as unknown)
+      : undefined;
+
+    if (Array.isArray(res)) {
+      devfileRegistries = res.map((registry) => isRegistry(registry));
+    }
+  } catch (error) {
+    throw new SyntaxError(
+      `${(error as Error).name}: ${
+        (error as Error).message
+      }, DEVFILE_REGISTRIES is an invalid json string`,
+    );
+  }
+
+  return devfileRegistries.length > 0 ? devfileRegistries : [defaultRegistry];
+}
