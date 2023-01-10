@@ -20,23 +20,53 @@ import {
   ChevronRightIcon,
   FunnelIcon,
 } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 import { useEffect, useRef } from 'react';
 import { Popover } from '@headlessui/react';
-import { useSearchDevfiles } from '../../hooks';
-import { createDevfileLink } from '../../functions';
+import { StringParam, useQueryParam, withDefault } from 'use-query-params';
+import { DebounceInput } from 'react-debounce-input';
 import { DevfileFilters } from '../devfile-filters/devfile-filters';
+import type { PageParams } from '../pagination/pagination';
+import type { DevfileParams } from '../../functions';
+import type { FilterParams, UseFilters } from '../devfile-filters/devfile-filters';
 
-export function DevfileSearch(): JSX.Element {
-  const { devfiles, page, query, dispatch } = useSearchDevfiles();
+export interface SearchParams {
+  search: string;
+}
+
+export interface DevfileSearchProps {
+  searchParams: SearchParams;
+  pageParams: PageParams;
+  devfileParams: DevfileParams;
+  filterParams: FilterParams;
+  setPage: (page: number) => void;
+  useFilters: UseFilters;
+}
+
+export function DevfileSearch(props: DevfileSearchProps): JSX.Element {
+  const { searchParams, pageParams, devfileParams, filterParams, setPage, useFilters } = props;
+  const { search } = searchParams;
+  const { pageNumber, totalPages } = pageParams;
+
+  const [, setSearch] = useQueryParam('search', withDefault(StringParam, search));
   const searchRef = useRef<HTMLInputElement | null>(null);
+  const [filters, setFilters] = useFilters;
 
   useEffect(() => {
+    if (searchRef.current && search) {
+      searchRef.current.value = search;
+    }
     searchRef.current?.focus();
+    // run on mount only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const prevPage = page.number > 1 ? page.number - 1 : 1;
-  const nextPage = page.number < page.total ? page.number + 1 : page.total;
+  const prevPage = pageNumber > 1 ? pageNumber - 1 : 1;
+  const nextPage = pageNumber < totalPages ? pageNumber + 1 : totalPages;
+
+  const devfilesPerPage = devfileParams.devfiles.length;
+  const totalDevfiles = devfileParams.total;
+
+  const filtersApplied = getFiltersApplied(filters);
 
   return (
     <>
@@ -49,71 +79,66 @@ export function DevfileSearch(): JSX.Element {
             />
           </div>
           <div className="sr-only">Devfile search</div>
-          <input
-            ref={searchRef}
+          <DebounceInput
+            inputRef={searchRef}
             type="search"
             placeholder="Search devfiles"
             className="container h-10 rounded-lg border border-slate-200 py-2.5 pl-10 pr-3.5 text-sm text-slate-400 shadow ring-1 ring-slate-200 group-hover:ring-slate-300 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-500 dark:ring-inset dark:ring-white/5 dark:group-hover:bg-slate-700/40 dark:group-hover:ring-slate-500"
-            value={query.search}
             onChange={(event): void => {
-              dispatch({
-                type: 'FILTER_ON',
-                property: 'search',
-                payload: event.target.value,
-                resetPage: true,
-              });
+              setSearch(event.target.value);
             }}
+            debounceTimeout={250}
           />
         </div>
         <div className="mt-4 flex items-center justify-between sm:mt-0 sm:justify-start">
-          {query.filtersApplied > 0 && (
+          {filtersApplied > 0 && (
             <button
               type="button"
               className="text-devfile whitespace-nowrap pr-8 text-sm font-semibold uppercase tracking-wider sm:hidden"
-              onClick={(): void => {
-                dispatch({ type: 'CLEAR_FILTERS' });
-              }}
+              onClick={(): void =>
+                setFilters(
+                  (Object.keys(filters) as (keyof FilterParams)[]).reduce((acc, key) => {
+                    acc[key] = [];
+                    return acc;
+                  }, {} as UseFilters[0]),
+                )
+              }
             >
               Clear filter(s)
             </button>
           )}
           <div className="pr-8">
             <p className="whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
-              <span className="font-medium">{(page.number - 1) * devfiles.limit + 1}</span> -{' '}
               <span className="font-medium">
-                {page.number * devfiles.limit < devfiles.searched.length
-                  ? page.number * devfiles.limit
-                  : devfiles.searched.length}
+                {totalDevfiles > 0 ? (pageNumber - 1) * devfilesPerPage + 1 : 0}
               </span>{' '}
-              of <span className="font-medium">{devfiles.searched.length}</span>
+              -{' '}
+              <span className="font-medium">
+                {pageNumber * devfilesPerPage < totalDevfiles
+                  ? pageNumber * devfilesPerPage
+                  : totalDevfiles}
+              </span>{' '}
+              of <span className="font-medium">{totalDevfiles}</span>
             </p>
           </div>
           <div className="flex w-16 items-center">
-            <Link
-              scroll={false}
-              href={createDevfileLink({ ...page, number: prevPage }, query)}
+            <button
+              type="button"
               onClick={(): void => {
-                dispatch({
-                  type: 'SET_PAGE_NUMBER',
-                  payload: prevPage,
-                });
+                setPage(prevPage);
               }}
               className="pr-4"
             >
               <ChevronLeftIcon className="h-6 w-auto text-slate-500 dark:text-slate-400" />
-            </Link>
-            <Link
-              scroll={false}
-              href={createDevfileLink({ ...page, number: nextPage }, query)}
+            </button>
+            <button
+              type="button"
               onClick={(): void => {
-                dispatch({
-                  type: 'SET_PAGE_NUMBER',
-                  payload: nextPage,
-                });
+                setPage(nextPage);
               }}
             >
               <ChevronRightIcon className="h-6 w-auto text-slate-500 dark:text-slate-400" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>
@@ -122,18 +147,21 @@ export function DevfileSearch(): JSX.Element {
           <Popover.Button className="flex items-center">
             <FunnelIcon className="h-5 w-auto pr-1 text-slate-500 dark:text-slate-400" />
             <span className="text-devfile text-sm font-semibold uppercase tracking-wider">
-              {query.filtersApplied !== 0
-                ? `${query.filtersApplied} filter(s) applied`
-                : 'Filter results'}
+              {filtersApplied > 0 ? `${filtersApplied} filter(s) applied` : 'Filter results'}
             </span>
           </Popover.Button>
-          {query.filtersApplied > 0 && (
+          {filtersApplied > 0 && (
             <button
               type="button"
               className="text-devfile text-sm font-semibold uppercase tracking-wider"
-              onClick={(): void => {
-                dispatch({ type: 'CLEAR_FILTERS' });
-              }}
+              onClick={(): void =>
+                setFilters(
+                  (Object.keys(filters) as (keyof FilterParams)[]).reduce((acc, key) => {
+                    acc[key] = [];
+                    return acc;
+                  }, {} as UseFilters[0]),
+                )
+              }
             >
               Clear filter(s)
             </button>
@@ -141,11 +169,19 @@ export function DevfileSearch(): JSX.Element {
         </div>
         <Popover.Overlay className="fixed inset-0 backdrop-blur-sm" />
         <Popover.Panel className="container absolute z-10 mt-2 rounded-lg border border-slate-700 bg-white p-6 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-800 dark:ring-white/5">
-          <DevfileFilters className="grid grid-cols-3 gap-6" />
+          <DevfileFilters
+            filterParams={filterParams}
+            setFilters={setFilters}
+            className="grid grid-cols-3 gap-6"
+          />
         </Popover.Panel>
       </Popover>
     </>
   );
+}
+
+function getFiltersApplied(filter: UseFilters[0]): number {
+  return (Object.values(filter) as string[][]).reduce((acc, curr) => acc + curr.length, 0);
 }
 
 export default DevfileSearch;

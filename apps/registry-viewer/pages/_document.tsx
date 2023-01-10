@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import Script from 'next/script';
 import { Head, Html, Main, NextScript } from 'next/document';
 
 const themeScript = `
@@ -67,10 +68,13 @@ const themeScript = `
   window.addEventListener('storage', updateThemeWithoutTransitions)
 `;
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+
 export default function Document(): JSX.Element {
   return (
     <Html className="antialiased [font-feature-settings:'ss01']" lang="en">
       <Head>
+        <Script src={`${basePath}/__ENV.js`} strategy="beforeInteractive" />
         {/* eslint-disable-next-line react/no-danger */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </Head>

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const path = require('path');
+const path = require('node:path');
 const withNx = require('@nrwl/next/plugins/with-nx');
 const withMarkdoc = require('@markdoc/next.js');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
