@@ -19,61 +19,41 @@ the following:
   [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)
   to access your namespace.
 
-- Enable [ingress on
-  minikube](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
-  to access your devfile project.
-
 - Install the [odo command line interface (CLI)
-  tool](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html/cli_tools/developer-cli-odo#installing-odo)
+  tool](https://odo.dev/docs/overview/installation)
   to execute the devfile specification.
 
 ## Procedure
 
-1. View the available devfiles:
+1. Create a Kubernetes namespace:
 
     ```shell-session
-    $ odo catalog list components
+    $ odo create namespace <namespace>
     ```
 
-2. Create a devfile project.
+2. Initialize the application:
 
     ```shell-session
-    $ odo create nodejs _<name of your project>_ --starter
+    $ odo init --name <component name> --devfile nodejs --devfile-registry DefaultDevfileRegistry --starter nodejs-starter
     ```
 
     {% callout title="Note!" %}
-    Add the `--starter` parameter to include the starter project
-    currently inside the Node.js devfile specification, which makes
-    it easier for you to develop an application.
+    An interactive mode is available, which makes it easier to browse options.
+    To enable, run the command without flags: `$ odo init`.
+    For more information about initialization, see the [odo docs](https://odo.dev/docs/command-reference/init).
     {% /callout %}
 
-3. Find your cluster IP address.
+3. Start the application:
 
     ```shell-session
-    $ minikube IP
-    ```
-
-4. Create an ingress inside your cluster that you can use to access your application using the cluster IP address.
-
-    ```shell-session
-    $ odo url create _<name you give the url>_ --ingress --host _<IP address>_.nip.io
-    ```
-
-    ```shell-session {% title="Example" %}
-    $ odo url create myfirstproject --ingress --host 192.168.64.2.nip.io
-    ```
-
-5. Build the URL.
-
-    ```shell-session
-    $ odo push
+    $ odo dev
     ```
 
 ## Verification
 
 - To verify that you built your Node.js "Hello World" application
   successfully, view the application in a web browser by copying and
-  pasting the URL that was produced by running the `odo push` command.
+  pasting the URL that was produced by running the `odo dev` command.
   Go to the URL and view your "Hello World" application.
 
 ## Additional resources
