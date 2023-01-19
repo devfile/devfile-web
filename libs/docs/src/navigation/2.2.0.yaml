@@ -1,4 +1,4 @@
-# Copyright 2022 Red Hat, Inc.
+# Copyright 2023 Red Hat, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,13 +51,13 @@
 - title: General
   links:
     - title: Defining variables
-      href: ./defining-variables  
+      href: ./defining-variables
     - title: Defining attributes
       href: ./defining-attributes
     - title: Adding projects
       href: ./adding-projects
     - title: Defining starter projects
-      href: ./defining-starter-projects      
+      href: ./defining-starter-projects
     - title: Referring to a parent devfile
       href: ./referring-to-a-parent-devfile
     - title: Creating devfiles with templates

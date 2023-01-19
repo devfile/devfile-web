@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -67,7 +67,7 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
                       }, [] as string[]),
                     )
                   }
-                  className="text-devfile focus:ring-devfile/80 ml-2 h-4 w-4 rounded border-slate-300 dark:border-slate-700"
+                  className="text-devfile focus:ring-devfile/80 ml-2 h-4 w-4 cursor-pointer rounded border-slate-300 dark:border-slate-700"
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -75,7 +75,7 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
                   htmlFor={filterElement.name + id}
                   className={clsx(
                     capitalize && 'capitalize',
-                    'text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300',
+                    'cursor-pointer text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300',
                   )}
                 >
                   {filterElement.name}
