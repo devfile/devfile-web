@@ -20,6 +20,7 @@ import {
   DevfileStarterProjects,
   DevfileDatalist,
   DevfileCodeblock,
+  RegistryMeta,
   type Devfile,
   type DevfileSpec,
 } from '@devfile-web/core';
@@ -71,53 +72,56 @@ export function Index(props: IndexProps): JSX.Element {
   );
 
   return (
-    <div className="flex grow justify-center bg-slate-50 py-10 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
-      <div className="flex max-w-screen-2xl grow flex-col justify-between overflow-x-auto">
-        <DevfileHeader devfile={devfile} devfileVersion={devfileVersion} />
-        <div className="mt-4 flex flex-col justify-between rounded-lg border border-slate-200 bg-white py-5 px-6 shadow dark:border-slate-700 dark:bg-slate-800 lg:flex-row-reverse">
-          <DevfileDatalist
-            devfile={devfile}
-            devfileVersion={devfileVersion}
-            devfileSpec={devfileSpec}
-            className="lg:ml-4 lg:w-60 lg:shrink-0"
-          />
-          <div className="grow lg:overflow-x-auto">
-            {devfileSpec.starterProjects && (
-              <DevfileStarterProjects
-                devfile={devfile}
-                starterProjects={devfileSpec.starterProjects}
+    <>
+      <RegistryMeta title={`Devfile Registry - ${devfile.displayName}`} />
+      <div className="flex grow justify-center bg-slate-50 py-10 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
+        <div className="flex max-w-screen-2xl grow flex-col justify-between overflow-x-auto">
+          <DevfileHeader devfile={devfile} devfileVersion={devfileVersion} />
+          <div className="mt-4 flex flex-col justify-between rounded-lg border border-slate-200 bg-white py-5 px-6 shadow dark:border-slate-700 dark:bg-slate-800 lg:flex-row-reverse">
+            <DevfileDatalist
+              devfile={devfile}
+              devfileVersion={devfileVersion}
+              devfileSpec={devfileSpec}
+              className="lg:ml-4 lg:w-60 lg:shrink-0"
+            />
+            <div className="grow lg:overflow-x-auto">
+              {devfileSpec.starterProjects && (
+                <DevfileStarterProjects
+                  devfile={devfile}
+                  starterProjects={devfileSpec.starterProjects}
+                />
+              )}
+              <DevfileCodeblock
+                devfileYaml={devfileYaml}
+                devfileName={devfile.name}
+                className="hidden lg:block"
               />
-            )}
+            </div>
             <DevfileCodeblock
               devfileYaml={devfileYaml}
               devfileName={devfile.name}
-              className="hidden lg:block"
+              className="block lg:hidden"
             />
           </div>
-          <DevfileCodeblock
-            devfileYaml={devfileYaml}
-            devfileName={devfile.name}
-            className="block lg:hidden"
-          />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
 export const getServerSideProps: GetServerSideProps<IndexProps> = async (context) => {
   const devfileVersionParam = (context.query['devfile-version'] as string) || '';
-
-  const devfileRegistries = getDevfileRegistries();
-  const devfiles = await fetchDevfiles(devfileRegistries);
   const devfileRegistryId = context.params?.['devfile-registry'] as string;
   const devfileId = context.params?.devfile as string;
 
-  const devfile = devfiles.find(
-    (_devfile) =>
-      slugify(_devfile._registry.name) === devfileRegistryId &&
-      slugify(_devfile.name) === devfileId,
+  const devfileRegistries = getDevfileRegistries();
+
+  const devfileRegistry = devfileRegistries.filter(
+    (_devfileRegistry) => slugify(_devfileRegistry.name) === devfileRegistryId,
   );
+
+  const devfiles = await fetchDevfiles(devfileRegistry);
+  const devfile = devfiles.find((_devfile) => slugify(_devfile.name) === devfileId);
 
   if (!devfile) {
     return {
@@ -125,60 +129,48 @@ export const getServerSideProps: GetServerSideProps<IndexProps> = async (context
     };
   }
 
-  if (devfile.type === 'sample' && !devfileVersionParam) {
-    const response = await fetch(`${devfile._registry.url}/devfiles/${devfile.name}`);
+  const response = await fetch(
+    `${devfile._registry.url}/devfiles/${devfileId}/${devfileVersionParam}`,
+  );
 
-    if (!response.ok) {
-      return {
-        notFound: true,
-      };
-    }
-
-    const devfileYaml = await response.text();
-
+  if (!response.ok) {
     return {
-      props: {
-        devfile,
-        devfileYaml,
-      },
+      notFound: true,
     };
   }
 
-  if (devfile.type === 'stack') {
-    const devfileVersion =
-      devfileVersionParam ||
-      devfile.versions?.find((versionDevfile) => versionDevfile.default)?.version;
-
-    if (!devfileVersion) {
-      return {
-        notFound: true,
-      };
-    }
-
-    const response = await fetch(
-      `${devfile._registry.url}/devfiles/${devfile.name}/${devfileVersion}`,
-    );
-
-    if (!response.ok) {
-      return {
-        notFound: true,
-      };
-    }
-
+  try {
     const devfileYaml = await response.text();
 
+    const props: IndexProps = { devfile, devfileYaml };
+
+    if (devfile.type === 'stack') {
+      // find the version of the devfile
+      let devfileVersion = devfile.versions.find(
+        (versionDevfile) => versionDevfile.version === devfileVersionParam,
+      )?.version;
+
+      // if the version is not found, use the default version
+      devfileVersion ||= devfile.versions.find((versionDevfile) => versionDevfile.default)?.version;
+
+      // Version should always be defined for stacks
+      if (!devfileVersion) {
+        return {
+          notFound: true,
+        };
+      }
+
+      props.devfileVersion = devfileVersion;
+    }
+
     return {
-      props: {
-        devfile,
-        devfileYaml,
-        devfileVersion,
-      },
+      props,
+    };
+  } catch {
+    return {
+      notFound: true,
     };
   }
-
-  return {
-    notFound: true,
-  };
 };
 
 export default IndexWrapper;

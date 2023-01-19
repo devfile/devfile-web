@@ -16,3 +16,4 @@
 
 export * from './get-user-region/get-user-region';
 export * from './fetch-devfiles/fetch-devfiles';
+export * from './compare-semantic-versions/compare-semantic-versions';
