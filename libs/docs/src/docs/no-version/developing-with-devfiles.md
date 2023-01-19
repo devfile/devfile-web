@@ -3,78 +3,44 @@ title: Developing with devfiles
 description: Developing with devfiles
 ---
 
-Use the devfile specification to develop a Node.js “Hello World”
-application. Developing this application introduces you to how a devfile
+To get a better understanding of what devfiles can help build, take a look at a few tools that currently support devfile.
+
+## Quick start guides
+
+- Use the devfile specification to develop a Node.js “Hello World”
+application using `odo`. Developing this application introduces you to how a devfile
 automates and simplifies your development process.
 
-## Prerequisites
+Get started with [odo](https://odo.dev/docs/user-guides/quickstart/nodejs).
 
-To make developing with the devfile specification easier, consider doing
-the following:
+- Create a workspace in `Eclipse Che` with a community sample backed by the devfile specification to start building your application in the language of your choice.
 
-- Install [minikube](https://minikube.sigs.k8s.io/docs/start/) to
-  create a Kubernetes cluster on your local machine.
+Get started with [Eclipse Che](https://www.eclipse.org/che/).
 
-- Download
-  [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/)
-  to access your namespace.
+- Use blueprints in `Amazon CodeCatalyst` to quickly build a "Modern three-tier web application". Start working on the source code with a Dev Environment that uses a devfile to pre-determine and install the required project tools and application libraries.
 
-- Enable [ingress on
-  minikube](https://kubernetes.io/docs/tasks/access-application-cluster/ingress-minikube/)
-  to access your devfile project.
+Get started with [Amazon CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/getting-started-template-project.html).
 
-- Install the [odo command line interface (CLI)
-  tool](https://access.redhat.com/documentation/en-us/openshift_container_platform/4.6/html/cli_tools/developer-cli-odo#installing-odo)
-  to execute the devfile specification.
+- Set up a remote development environment that links to your Git repository using `JetBrains Space Cloud Dev` and the devfile specification.
 
-## Procedure
+Get started with [JetBrains Space Cloud Dev Environments](https://blog.jetbrains.com/space/2022/10/26/get-started-with-space-dev-environments/).
 
-1. View the available devfiles:
 
-    ```shell-session
-    $ odo catalog list components
-    ```
+## Tools that provide devfile support
 
-2. Create a devfile project.
+- [odo](https://odo.dev/)
 
-    ```shell-session
-    $ odo create nodejs _<name of your project>_ --starter
-    ```
+- [Eclipse Che](https://medium.com/eclipse-che-blog/devfile-v2-and-ide-plug-ins-in-eclipse-che-7a560ae724b1)
 
-    {% callout title="Note!" %}
-    Add the `--starter` parameter to include the starter project
-    currently inside the Node.js devfile specification, which makes
-    it easier for you to develop an application.
-    {% /callout %}
+- [OpenShift Dev Console](https://github.com/openshift/console)
 
-3. Find your cluster IP address.
+- [VSCode OpenShift Toolkit](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector)
 
-    ```shell-session
-    $ minikube IP
-    ```
+- [IntelliJ OpenShift Toolkit](https://plugins.jetbrains.com/plugin/12030-openshift-connector-by-red-hat)
 
-4. Create an ingress inside your cluster that you can use to access your application using the cluster IP address.
+- [Amazon CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/devenvironment.html)
 
-    ```shell-session
-    $ odo url create _<name you give the url>_ --ingress --host _<IP address>_.nip.io
-    ```
-
-    ```shell-session {% title="Example" %}
-    $ odo url create myfirstproject --ingress --host 192.168.64.2.nip.io
-    ```
-
-5. Build the URL.
-
-    ```shell-session
-    $ odo push
-    ```
-
-## Verification
-
-- To verify that you built your Node.js "Hello World" application
-  successfully, view the application in a web browser by copying and
-  pasting the URL that was produced by running the `odo push` command.
-  Go to the URL and view your "Hello World" application.
+- [JetBrains Space](https://blog.jetbrains.com/space/2022/05/04/space-dev-environments-support-for-rider-devfile-configuration-and-more/#devfiles)
 
 ## Additional resources
 
