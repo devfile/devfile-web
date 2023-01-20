@@ -24,13 +24,18 @@ export interface RegistryMetaProps {
 }
 
 export function RegistryMeta(props: PropsWithChildren<RegistryMetaProps>): JSX.Element {
-  return <Meta {...props} />;
-}
+  const {
+    title = 'Devfile Registry',
+    keywords = 'Devfile, OpenShift, Kubernetes',
+    description = 'Devfile Registry',
+    children,
+  } = props;
 
-RegistryMeta.defaultProps = {
-  title: 'Devfile Registry',
-  keywords: 'Devfile, Registry, OpenShift, Kubernetes',
-  description: 'UI for the Devfile Registry',
-};
+  return (
+    <Meta title={title} keywords={keywords} description={description}>
+      {children}
+    </Meta>
+  );
+}
 
 export default RegistryMeta;

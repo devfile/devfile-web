@@ -19,7 +19,7 @@ import { Listbox } from '@headlessui/react';
 import { ChevronUpDownIcon } from '@heroicons/react/20/solid';
 import { useMemo } from 'react';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
-import type { Devfile } from '../../functions';
+import { compareSemanticVersions, type Devfile } from '../../functions';
 import type { DevfileSpec } from '../../types';
 
 export interface DevfileDatalistProps {
@@ -76,17 +76,20 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
                     </span>
                   </Listbox.Button>
                   <Listbox.Options className="container absolute z-10 mt-1 max-h-60 overflow-x-auto rounded-md border border-slate-600 bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-slate-700 sm:text-sm">
-                    {devfile.versions?.reverse().map((vD) => (
-                      <Listbox.Option
-                        key={vD.version}
-                        value={vD.version}
-                        className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-pointer select-none py-2 px-4"
-                      >
-                        <span className="ui-selected:font-medium block truncate font-normal">
-                          {vD.version} {vD.default && '(default)'}
-                        </span>
-                      </Listbox.Option>
-                    ))}
+                    {devfile.versions
+                      ?.sort(compareSemanticVersions('version'))
+                      .reverse()
+                      .map((vD) => (
+                        <Listbox.Option
+                          key={vD.version}
+                          value={vD.version}
+                          className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-pointer select-none py-2 px-4"
+                        >
+                          <span className="ui-selected:font-medium block truncate font-normal">
+                            {vD.version} {vD.default && '(default)'}
+                          </span>
+                        </Listbox.Option>
+                      ))}
                   </Listbox.Options>
                 </Listbox>
               )}
