@@ -156,28 +156,6 @@ following tables for project properties in a devfile:
               revision: develop
     ```
 
-5. For each project, define the optional `sparseCheckoutDir` attribute
-    to populate the project sparsely with selected directories.
-
-    {% callout title="Note!" %}
-    - Set the project to `/my-module/` to create only the root
-      `my-module` directory along with its content.
-
-    - Omit the leading slash (`my-module/`) to create all `my-module`
-      directories that exist in the project. Including, for example,
-      `/addons/my-module/`.
-
-      - Add a trailing slash to create only directories with the
-        given name (and its content).
-
-    - Use wildcards to specify more than one directory name. For
-      example, setting `module-*` checks out all directories of the
-      given project that start with `module-`.
-
-    For more information, see [Sparse checkout in Git
-    documentation](https://git-scm.com/docs/git-read-tree#_sparse_checkout).
-    {% /callout %}
-
 ## Additional Resources
 
 - [Api reference](./devfile-schema)
