@@ -1,19 +1,19 @@
 ---
-title: Extend Kubernetes resources for container components
-description: Extend Kubernetes resources for container components through attributes
+title: Extending kubernetes resources
+description: Extending kubernetes resources
 ---
 
-This section describes how you can extend kubernetes resources for container components through `pod-overrides` and `container-overrides` attributes.
+This section describes how you can extend Kubernetes resources for container components through `pod-overrides` and `container-overrides` attributes.
 
-These attributes can be defined at Devfile level and component level. [Strategic Merge Patch](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md#basic-patch-format) strategy is used to merge the attributes defined at both level.
+These attributes can be defined at the devfile level and component level. [Strategic Merge Patch](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md#basic-patch-format) strategy is used to merge the attributes defined at both levels.
 
 
 ## container-overrides
 
-`container-overrides` attributes allows you to override properties of a container in a pod spec such as `securityContext` and `resources`. However, it restricts from overriding properties such as `image`, `name`, `ports`, `env`, `volumesMounts`, `command`, and `args`.
+`container-overrides` attributes allow you to override properties of a container in a pod spec such as `securityContext` and `resources`. However, it restricts from overriding properties such as `image`, `name`, `ports`, `env`, `volumesMounts`, `command`, and `args`.
 
 ### Procedure
-1. Specify "container-overrides" at component level.
+1. Specify "container-overrides" at the component level.
     ```yaml {% title="Specify container-overrides to override security context for container at component level" filename="devfile.yaml" %}
     ----
     metadata:
@@ -30,7 +30,7 @@ These attributes can be defined at Devfile level and component level. [Strategic
           image: eclipse/maven-jdk8:latest
     ----
     ```
-2. Specify "container-overrides" at Devfile level in `metadata` object.
+2. Specify "container-overrides" at the devfile level in `metadata` object.
     ```yaml {% title="Specify container-overrides to override resources for container at Devfile level" filename="devfile.yaml" %}
     ----
     metadata:
@@ -53,12 +53,12 @@ These attributes can be defined at Devfile level and component level. [Strategic
 
 ## pod-overrides
 
-`pod-overrides` attributes allows you to override properties of a pod spec such as `securityContext`, `serviceAccountName`, `schedulerName`, etc. However, it restricts from overriding properties such as `containers`, `initContainers`, and `volumes`.
+`pod-overrides` attributes allow you to override properties of a pod spec such as `securityContext`, `serviceAccountName`, `schedulerName`, etc. However, it restricts overriding properties such as `containers`, `initContainers`, and `volumes`.
 
-If the attributes are defined at both Devfile and component level, the attribute at Devfile level will be parsed first and then the component level.
+If the attributes are defined at both devfile and component levels, the attribute at the devfile level will be parsed first and then the component level.
 
 ### Procedure
-1. Specify "pod-overrides" at component level.
+1. Specify "pod-overrides" at the component level.
     ```yaml {% title="Specify container-overrides to override security context for container at component level" filename="devfile.yaml" %}
     ----
     metadata:
@@ -74,7 +74,7 @@ If the attributes are defined at both Devfile and component level, the attribute
     ----
     ```
 
-2. Specify "pod-overrides" at Devfile level in `metadata` object.
+2. Specify "pod-overrides" at the devfile level in the `metadata` object.
     ```yaml {% title="Specify container-overrides to override resources for container at Devfile level" filename="devfile.yaml" %}
     ----
     metadata:
