@@ -26,6 +26,12 @@ This attribute can be defined at the component level.
           image: eclipse/maven-jdk8:latest
     ```
 
+The data inside `container-overrides` can also be specified as a JSON.
+```yaml
+  container-overrides:
+    securityContext: {"runAsUser": "1001", "runAsGroup":"1001"}
+```
+
 ## pod-overrides
 
 `pod-overrides` attribute allow you to override properties of a pod spec such as `securityContext`, `serviceAccountName`, `schedulerName`, etc. However, it restricts overriding properties such as `containers`, `initContainers`, and `volumes`.
@@ -42,7 +48,8 @@ This attribute can be defined at the component and devfile attributes levels. If
       - name: maven
         attributes:
           pod-overrides:
-            serviceAccountName: new-service-account
+            spec:
+              serviceAccountName: new-service-account
         container:
           image: eclipse/maven-jdk8:latest
     ```
@@ -52,12 +59,19 @@ This attribute can be defined at the component and devfile attributes levels. If
     schemaVersion: 2.2.0
     attributes:
       pod-overrides:
-        schedulerName: new-scheduler
+        spec:
+          serviceAccountName: new-service-account
     components:
       - name: maven
         container:
           image: eclipse/maven-jdk8:latest
     ```
+
+The data inside `pod-overrides` can also be specified as a JSON.
+```yaml
+  pod-overrides:
+    spec: {"serviceAccountName": "new-service-account"}
+```
 
 ## Additional resources
 - [Defining Attributes](./defining-attributes.md)
