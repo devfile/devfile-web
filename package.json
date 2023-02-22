@@ -117,5 +117,13 @@
     "typescript": "^4.9.3",
     "url-loader": "^3.0.0",
     "webpack": "^5.75.0"
+  },
+  "resolutions": {
+    "loader-utils": "^3.2.1",
+    "json5": "^2.2.2",
+    "terser": "^5.14.2",
+    "node-fetch": "^2.6.7",
+    "nth-check": "^2.0.1",
+    "decode-uri-component": "^0.2.1"
   }
 }
