@@ -28,7 +28,7 @@ import { useMemo } from 'react';
 import slugify from '@sindresorhus/slugify';
 import type { GetServerSideProps } from 'next';
 import { NextAdapter } from 'next-query-params';
-import { parse, stringify } from 'query-string';
+import queryString from 'query-string';
 import { QueryParamProvider } from 'use-query-params';
 // @ts-ignore No types available
 import { load } from 'js-yaml';
@@ -50,9 +50,9 @@ export function IndexWrapper(props: IndexProps): JSX.Element {
     <QueryParamProvider
       adapter={QueryParamAdapter}
       options={{
-        searchStringToObject: (searchString) => parse(searchString),
+        searchStringToObject: (searchString) => queryString.parse(searchString),
         objectToSearchString: (object) =>
-          stringify(object, { skipEmptyString: true, skipNull: true }),
+          queryString.stringify(object, { skipEmptyString: true, skipNull: true }),
       }}
     >
       <Index {...props} />
