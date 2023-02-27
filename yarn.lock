@@ -1279,10 +1279,10 @@
   resolved "https://registry.yarnpkg.com/@headlessui/tailwindcss/-/tailwindcss-0.1.2.tgz#f49a88f00b235fe812583ece8bdb1038b096646d"
   integrity sha512-AQNESz+f1grCxifrocOE6hDMDFqhqY0g3xrSGOS0ocGkmVkssaBzXaAPAPNSs/nHmr4ZUhfl5THQpYrvaouWlQ==
 
-"@heroicons/react@^2.0.10":
-  version "2.0.16"
-  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.16.tgz#562883c19ba2690c83380b42a9a5cce39dcbdb4a"
-  integrity sha512-x89rFxH3SRdYaA+JCXwfe+RkE1SFTo9GcOkZettHer71Y3T7V+ogKmfw5CjTazgS3d0ClJ7p1NA+SP7VQLQcLw==
+"@heroicons/react@^2.0.13":
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/@heroicons/react/-/react-2.0.13.tgz#9b1cc54ff77d6625c9565efdce0054a4bcd9074c"
+  integrity sha512-iSN5XwmagrnirWlYEWNPdCDj9aRYVD/lnK3JlsC9/+fqGF80k8C7rl+1HCvBX0dBoagKqOFBs6fMhJJ1hOg1EQ==
 
 "@humanwhocodes/config-array@^0.11.8":
   version "0.11.8"
@@ -11144,9 +11144,9 @@ quick-lru@^5.1.1:
   integrity sha512-WuyALRjWPDGtt/wzJiadO5AXY+8hZ80hVpe6MyivgraREW751X3SbhRvG3eLKOYN+8VEvqLcf3wdnt44Z4S4SA==
 
 quicktype-core@^23.0.5:
-  version "23.0.5"
-  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-23.0.5.tgz#1e657a911640e450fe27c1df21aa9371340ecfc0"
-  integrity sha512-OAekHX3DmhW6aYc6w4UqCznHXS7NX7DKq9ZsSKAnZVmBVvnMXVPclqF7qBGQFRtw1dWXB++fLo+S5VIxp/SdmQ==
+  version "23.0.9"
+  resolved "https://registry.yarnpkg.com/quicktype-core/-/quicktype-core-23.0.9.tgz#b7ed343195dae5248da5a14cda5fbaf782c6844a"
+  integrity sha512-RDbv+V3iC8gDwBiROTbpT0s1cHNkG+NYa9+r2gKjROHTkApd4UjT/eUiw5LDdDjbDyYeYIKIKTALG7qLS8tYuQ==
   dependencies:
     "@glideapps/ts-necessities" "2.1.2"
     "@types/urijs" "^1.19.19"
