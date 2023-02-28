@@ -39,7 +39,7 @@ import {
   withDefault,
 } from 'use-query-params';
 import type { GetServerSideProps } from 'next';
-import { parse, stringify } from 'query-string';
+import queryString from 'query-string';
 import Fuse from 'fuse.js';
 import { getDevfileRegistries } from '../config';
 
@@ -60,9 +60,9 @@ export function IndexWrapper(props: IndexProps): JSX.Element {
     <QueryParamProvider
       adapter={QueryParamAdapter}
       options={{
-        searchStringToObject: (searchString) => parse(searchString),
+        searchStringToObject: (searchString) => queryString.parse(searchString),
         objectToSearchString: (object) =>
-          stringify(object, { skipEmptyString: true, skipNull: true }),
+          queryString.stringify(object, { skipEmptyString: true, skipNull: true }),
       }}
     >
       <Index {...props} />

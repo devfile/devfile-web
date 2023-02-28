@@ -45,7 +45,7 @@ export function AnalyticsProvider(props: AnalyticsProviderProps): JSX.Element {
 
       await analytics.track(eventName, properties, {
         context: { ip: '0.0.0.0', location: { country: region } },
-        userId: anonymousId,
+        userId: anonymousId ?? '',
       });
     },
     [analytics],
@@ -73,7 +73,7 @@ export function AnalyticsProvider(props: AnalyticsProviderProps): JSX.Element {
         { client },
         {
           context: { ip: '0.0.0.0', location: { country: region } },
-          userId: anonymousId,
+          userId: anonymousId ?? '',
         },
       );
     };
