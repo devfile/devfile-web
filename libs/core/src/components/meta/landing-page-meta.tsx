@@ -33,7 +33,7 @@ export function LandingPageMeta(props: PropsWithChildren<LandingPageMetaProps>):
 
   return (
     <Meta title={title} keywords={keywords} description={description}>
-      <link rel="preconnect" href="https://FCRPEMIKYK-dsn.algolia.net" crossOrigin="true" />
+      <link rel="preconnect" href="https://FCRPEMIKYK-dsn.algolia.net" crossOrigin="anonymous" />
       {children}
     </Meta>
   );
