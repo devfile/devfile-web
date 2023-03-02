@@ -74,5 +74,5 @@ The data inside `pod-overrides` can also be specified as a JSON.
 ```
 
 ## Additional resources
-- [Defining Attributes](./defining-attributes.md)
+- [Defining Attributes](./defining-attributes)
 - [Strategic Merge Patch](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-api-machinery/strategic-merge-patch.md#basic-patch-format)
