@@ -44,6 +44,8 @@
       href: ./defining-variables
     - title: Defining attributes
       href: ./defining-attributes
+    - title: Extending kubernetes resources
+      href: ./overriding-pod-and-container-attributes
     - title: Adding projects
       href: ./adding-projects
     - title: Defining starter projects
