@@ -1,4 +1,4 @@
-# Copyright 2022 Red Hat, Inc.
+# Copyright 2023 Red Hat, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,6 +19,4 @@ BUILD_DIR=$ABSOLUTE_PATH/..
 
 docker build --no-cache -t registry-viewer $BUILD_DIR \
     --build-arg PROJECT_NAME=registry-viewer \
-    --build-arg SITE_URL=${SITE_URL:-"https://registry.stage.devfile.io/viewer"} \
-    --build-arg NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH:-"/viewer"} \
-    --build-arg NEXT_PUBLIC_ANALYTICS_WRITE_KEY=${NEXT_PUBLIC_ANALYTICS_WRITE_KEY:-""}
+    --build-arg NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH:-"/viewer"}

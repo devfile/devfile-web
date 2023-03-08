@@ -30,11 +30,11 @@ related to a specific component.
 
     ```yaml {% title="sample command" filename="devfile.yaml" %}
     commands:
-    - id: build
+      - id: build
         exec:
-            component: mysql
-            commandLine: mvn clean
-            workingDir: /projects/spring-petclinic
+          component: mysql
+          commandLine: mvn clean
+          workingDir: /projects/spring-petclinic
     ```
 
 4. [Adding a command group](./adding-a-command-group)

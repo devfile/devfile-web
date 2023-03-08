@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 
-import Script from 'next/script';
-import { AppProps } from 'next/app';
+import type { AppProps } from 'next/app';
 import 'focus-visible';
 import env from '@beam-australia/react-env';
 import { AnalyticsProvider, LinksProvider, Header, Footer, RegistryMeta } from '@devfile-web/core';
@@ -31,21 +30,18 @@ const websiteName = 'Devfile Registry';
 
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
-    <>
-      <Script src="/__ENV.js" strategy="beforeInteractive" />
-      <AnalyticsProvider {...analyticsConfig}>
-        <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
-          <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">
-            <div className="grow">
-              <RegistryMeta />
-              <Header websiteName={websiteName} />
-              <Component {...pageProps} />
-            </div>
-            <Footer websiteName={websiteName} />
+    <AnalyticsProvider {...analyticsConfig}>
+      <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
+        <div className="flex h-screen min-w-[300px] flex-col justify-between bg-slate-50 dark:bg-slate-900">
+          <div className="grow">
+            <RegistryMeta />
+            <Header websiteName={websiteName} />
+            <Component {...pageProps} />
           </div>
-        </LinksProvider>
-      </AnalyticsProvider>
-    </>
+          <Footer websiteName={websiteName} />
+        </div>
+      </LinksProvider>
+    </AnalyticsProvider>
   );
 }
 

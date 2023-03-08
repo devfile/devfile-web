@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,12 +15,25 @@
  */
 
 import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import { SetQuery, withDefault, DecodedValueMap } from 'use-query-params';
 import { DevfileFilter } from './devfile-filter';
-import { useSearchDevfiles, type SearchDevfilesAction } from '../../hooks';
+
+export interface FilterElement {
+  name: string;
+  checked: boolean;
+}
+
+export interface FilterParams {
+  registries: FilterElement[];
+  tags: FilterElement[];
+  types: FilterElement[];
+  providers: FilterElement[];
+  languages: FilterElement[];
+}
 
 const filters: {
   name: string;
-  property: Exclude<SearchDevfilesAction['property'], 'search' | undefined>;
+  property: keyof FilterParams;
   capitalize: boolean;
 }[] = [
   { name: 'Registries', property: 'registries', capitalize: false },
@@ -30,29 +43,37 @@ const filters: {
   { name: 'Languages', property: 'languages', capitalize: false },
 ];
 
-export function DevfileFilters(
-  props: DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement>,
-): JSX.Element {
-  const { className, ...rest } = props;
+export type QueryDefault = ReturnType<typeof withDefault>;
 
-  const { query, dispatch } = useSearchDevfiles();
+export type UseFilters = [
+  DecodedValueMap<Record<keyof FilterParams, QueryDefault>>,
+  SetQuery<Record<keyof FilterParams, QueryDefault>>,
+];
+
+export interface DevfileFiltersProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLUListElement>, HTMLUListElement> {
+  filterParams: FilterParams;
+  setFilters: UseFilters[1];
+}
+
+export function DevfileFilters(props: DevfileFiltersProps): JSX.Element {
+  const { filterParams, setFilters, className, ...rest } = props;
 
   return (
     <ul className={className} {...rest}>
       {filters.map(
         (filter) =>
-          query[filter.property].length > 1 && (
+          // Only show filter if there are multiple options or at least one option is checked
+          (filterParams[filter.property].length > 1 ||
+            filterParams[filter.property].some((filterElement) => filterElement.checked)) && (
             <li key={filter.name}>
               <DevfileFilter
                 name={filter.name}
-                filterElements={query[filter.property]}
+                filterElements={filterParams[filter.property]}
                 capitalize={filter.capitalize}
                 onFilter={(filterElements): void =>
-                  dispatch({
-                    type: 'FILTER_ON',
-                    property: filter.property,
-                    payload: filterElements,
-                    resetPage: true,
+                  setFilters({
+                    [filter.property]: filterElements,
                   })
                 }
               />

@@ -44,17 +44,17 @@ Attributes can be defined at the top level of the devfile, or in the following o
     ----
     ```
 
-2. Define a custom attribute in the `metadata` object.
+2. Define a custom attribute at the devfile level.
 
     When no editor is specified, a default editor is provided. To represent this user-defined example, use the `editorFree` attribute as shown in the following example:
 
     ```yaml {% title="A devfile without an editor" %}
     ----
     schemaVersion: 2.2.0
+    attributes:
+        editorFree: true
     metadata:
       name: petclinic-dev-environment
-      attributes:
-        editorFree: true
     components:
       - name: myapp
         kubernetes:

@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,4 @@
 
 export * from './get-user-region/get-user-region';
 export * from './fetch-devfiles/fetch-devfiles';
-export * from './create-devfile-link/create-devfile-link';
-export * from './parse-devfile-link/parse-devfile-link';
-export * from './get-filters-applied/get-filters-applied';
-export * from './merge-objects-on-defined-properties/merge-objects-on-defined-properties';
+export * from './compare-semantic-versions/compare-semantic-versions';

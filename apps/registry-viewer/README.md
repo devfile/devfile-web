@@ -18,6 +18,8 @@ A few notes:
 
 - `NEXT_PUBLIC_ANALYTICS_WRITE_KEY`: The Segment analytics write key
 - `SITE_URL`: The production url the site is hosted on (used to generate the sitemap)
+- `REVALIDATE_TOKEN`: A secret token to allow only authorized users to revalidate pages on demand
+- `REVALIDATE_TIME`: Amount in seconds after which a page re-generation can occur (this should be set to 86400, or 1 day in seconds, in production)
 - `DEVFILE_REGISTRIES`: A JSON string array of the devfile registries to point the registry viewer at
   - `name`: The name of the devfile registry
   - `url`: The url of the devfile registry

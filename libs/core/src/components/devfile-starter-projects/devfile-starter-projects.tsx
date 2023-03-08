@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,7 +58,7 @@ export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.
               className="relative"
             >
               <Listbox.Label className="sr-only">Starter projects</Listbox.Label>
-              <Listbox.Button className="dark:text-devfile container relative cursor-default rounded border border-slate-600 bg-white py-2 pl-3 pr-10 text-left font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5 sm:text-sm">
+              <Listbox.Button className="dark:text-devfile container relative rounded border border-slate-600 bg-white py-2 pl-3 pr-10 text-left font-medium text-slate-700 shadow-md shadow-black/5 ring-1 ring-black/5 dark:bg-slate-700 dark:ring-inset dark:ring-white/5 sm:text-sm">
                 <span className="block truncate">{selectedProject.name}</span>
                 <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                   <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -69,7 +69,7 @@ export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.
                   <Listbox.Option
                     key={project.name}
                     value={project}
-                    className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-default select-none py-2 pl-10 pr-4"
+                    className="ui-selected:text-devfile ui-active:ui-not-selected:text-slate-900 ui-active:ui-not-selected:dark:text-white ui-not-active:ui-not-selected:text-slate-700 ui-not-active:ui-not-selected:dark:text-slate-100 ui-active:bg-slate-100 ui-active:dark:bg-slate-900/40 relative cursor-pointer select-none py-2 pl-10 pr-4"
                   >
                     <span className="ui-selected:font-medium block truncate font-normal">
                       {project.name}
@@ -90,7 +90,7 @@ export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.
         </div>
         <Link
           className="bg-devfile/5 border-devfile/50 text-devfile hover:bg-devfile/10 active:bg-devfile/20 h-fit rounded border py-2 px-4 text-sm font-semibold sm:mr-3"
-          href={`${devfile.devfileRegistry.fqdn || devfile.devfileRegistry.url}/devfiles/${
+          href={`${devfile._registry.fqdn || devfile._registry.url}/devfiles/${
             devfile.name
           }/starter-projects/${selectedProject.name}`}
           target="_blank"

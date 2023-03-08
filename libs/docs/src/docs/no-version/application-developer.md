@@ -23,18 +23,6 @@ Using the devfiles provided by the stack providers will minimize the environment
 
 The inner-loop and outer-loop instructions defined in the devfile allow you to test out your code changes quickly in the tools. You will use the workflow recommended by the stack provider that is the expert on the specific runtime.
 
-## Tools that provide devfile support
-
-- [odo](https://odo.dev/)
-
-- [Eclipse Che](https://medium.com/eclipse-che-blog/devfile-v2-and-ide-plug-ins-in-eclipse-che-7a560ae724b1)
-
-- [OpenShift Dev Console](https://github.com/openshift/console)
-
-- [VSCode OpenShift Toolkit](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector)
-
-- [IntelliJ OpenShift Toolkit](https://plugins.jetbrains.com/plugin/12030-openshift-connector-by-red-hat)
-
 ## Additional resources
 
 - [API reference](./devfile-schema)

@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import Script from 'next/script';
 import { Head, Html, Main, NextScript } from 'next/document';
 
 const themeScript = `
@@ -71,6 +72,7 @@ export default function Document(): JSX.Element {
   return (
     <Html className="antialiased [font-feature-settings:'ss01']" lang="en">
       <Head>
+        <Script src="/__ENV.js" strategy="beforeInteractive" />
         {/* eslint-disable-next-line react/no-danger */}
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </Head>

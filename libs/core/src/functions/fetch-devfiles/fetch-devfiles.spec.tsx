@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@
 import fetchMock, { enableFetchMocks } from 'jest-fetch-mock';
 import fetchDevfiles from './fetch-devfiles';
 import devfiles from './devfiles.json';
-import type { DevfileRegistry, Devfile } from './fetch-devfiles';
+import type { Registry, Devfile } from './fetch-devfiles';
 
 enableFetchMocks();
 
@@ -33,7 +33,7 @@ describe('fetchDevfiles', () => {
       return JSON.stringify(devfiles);
     });
 
-    const devfileRegistries: DevfileRegistry[] = [
+    const devfileRegistries: Registry[] = [
       { name: 'Devfile registry', url: 'https://registry.devfile.io' },
     ];
 
@@ -41,10 +41,10 @@ describe('fetchDevfiles', () => {
 
     const response = await fetch('https://registry.devfile.io/v2index/all?icon=base64');
     const unsortedDevfiles = (await response.json()) as Devfile[];
-    const sortedDevfiles = unsortedDevfiles
+    const sortedDevfiles: Devfile[] = unsortedDevfiles
       .map((devfile) => ({
         ...devfile,
-        devfileRegistry: devfileRegistries[0],
+        _registry: devfileRegistries[0],
       }))
       .sort((a, b) =>
         a.displayName.localeCompare(b.displayName, 'en', {

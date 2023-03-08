@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import Script from 'next/script';
 import { slugifyWithCounter } from '@sindresorhus/slugify';
 import 'focus-visible';
 import env from '@beam-australia/react-env';
@@ -99,30 +98,27 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
   const tableOfContents = markdoc?.content ? collectHeadings(markdoc.content) : [];
 
   return (
-    <>
-      <Script src="/__ENV.js" strategy="beforeInteractive" />
-      <AnalyticsProvider {...analyticsConfig}>
-        <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
-          <NavigationProvider docsNavigation={docsNavigation as DocsNavigation}>
-            <div className="flex h-screen min-w-[300px] flex-col justify-between">
-              <div className="grow">
-                <LandingPageMeta />
-                <Header websiteName={websiteName} isLandingPage />
-                <LandingPageLayout
-                  title={title}
-                  tableOfContents={tableOfContents}
-                  pageTitle={pageTitle}
-                  pageDescription={pageDescription}
-                >
-                  <Component {...pageProps} />
-                </LandingPageLayout>
-              </div>
-              <Footer websiteName={websiteName} websiteDescription={websiteDescription} />
+    <AnalyticsProvider {...analyticsConfig}>
+      <LinksProvider headerNavigation={headerNavigation} footerNavigation={footerNavigation}>
+        <NavigationProvider docsNavigation={docsNavigation as DocsNavigation}>
+          <div className="flex h-screen min-w-[300px] flex-col justify-between">
+            <div className="grow">
+              <LandingPageMeta />
+              <Header websiteName={websiteName} isLandingPage />
+              <LandingPageLayout
+                title={title}
+                tableOfContents={tableOfContents}
+                pageTitle={pageTitle}
+                pageDescription={pageDescription}
+              >
+                <Component {...pageProps} />
+              </LandingPageLayout>
             </div>
-          </NavigationProvider>
-        </LinksProvider>
-      </AnalyticsProvider>
-    </>
+            <Footer websiteName={websiteName} websiteDescription={websiteDescription} />
+          </div>
+        </NavigationProvider>
+      </LinksProvider>
+    </AnalyticsProvider>
   );
 }
 

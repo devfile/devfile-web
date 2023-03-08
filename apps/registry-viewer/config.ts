@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import type { DevfileRegistry } from '@devfile-web/core';
+import type { Registry } from '@devfile-web/core';
 
-function isRegistry(registry: unknown): DevfileRegistry {
+function isRegistry(registry: unknown): Registry {
   // Check if the registry is an object
   if (typeof registry !== 'object' || registry === null) {
     throw new SyntaxError('Registry is not an object');
@@ -45,11 +45,16 @@ function isRegistry(registry: unknown): DevfileRegistry {
     throw new SyntaxError('Registry fqdn is not a string');
   }
 
-  return registry as DevfileRegistry;
+  return registry as Registry;
 }
 
-export function getDevfileRegistries(): DevfileRegistry[] {
-  let devfileRegistries: DevfileRegistry[] = [];
+export const defaultRegistry = {
+  name: 'Community',
+  url: 'https://registry.stage.devfile.io',
+};
+
+export function getDevfileRegistries(): Registry[] {
+  let devfileRegistries: Registry[] = [];
 
   try {
     const res = process.env.DEVFILE_REGISTRIES
@@ -67,7 +72,5 @@ export function getDevfileRegistries(): DevfileRegistry[] {
     );
   }
 
-  return devfileRegistries.length > 0
-    ? devfileRegistries
-    : [{ name: 'Community', url: 'https://registry.stage.devfile.io' }];
+  return devfileRegistries.length > 0 ? devfileRegistries : [defaultRegistry];
 }

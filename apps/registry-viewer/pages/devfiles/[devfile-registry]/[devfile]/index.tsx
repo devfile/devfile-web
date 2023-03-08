@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,92 +20,108 @@ import {
   DevfileStarterProjects,
   DevfileDatalist,
   DevfileCodeblock,
-  useFetchDevfileYamls,
+  RegistryMeta,
   type Devfile,
   type DevfileSpec,
-  type Version,
 } from '@devfile-web/core';
-import { useState, useMemo } from 'react';
+import { useMemo } from 'react';
 import slugify from '@sindresorhus/slugify';
-import type { GetStaticProps, GetStaticPaths } from 'next';
+import type { GetServerSideProps } from 'next';
+import { NextAdapter } from 'next-query-params';
+import queryString from 'query-string';
+import { QueryParamProvider } from 'use-query-params';
 // @ts-ignore No types available
 import { load } from 'js-yaml';
 import { getDevfileRegistries } from '../../../../config';
 
 export interface IndexProps {
   devfile: Devfile;
-  devfileSpec: DevfileSpec;
   devfileYaml: string;
+  devfileVersion?: string;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function QueryParamAdapter(props: any): JSX.Element {
+  return <NextAdapter {...props} shallow={false} />;
+}
+
+export function IndexWrapper(props: IndexProps): JSX.Element {
+  return (
+    <QueryParamProvider
+      adapter={QueryParamAdapter}
+      options={{
+        searchStringToObject: (searchString) => queryString.parse(searchString),
+        objectToSearchString: (object) =>
+          queryString.stringify(object, { skipEmptyString: true, skipNull: true }),
+      }}
+    >
+      <Index {...props} />
+    </QueryParamProvider>
+  );
 }
 
 export function Index(props: IndexProps): JSX.Element {
-  const { devfile, devfileSpec, devfileYaml } = props;
+  const { devfile, devfileYaml, devfileVersion } = props;
 
-  const { data } = useFetchDevfileYamls(
-    `${devfile.devfileRegistry.url}/devfiles/${devfile.name}`,
-    devfile.versions?.map((version) => version.version),
-  );
-  const [selectedVersion, setSelectedVersion] = useState<Version | undefined>(
-    devfile.versions?.find((version) => version.default),
-  );
-  const selectedDevfileSpec = useMemo(
+  const devfileSpec = useMemo(
     () =>
-      data.find(({ version }) => version === selectedVersion?.version)?.devfileSpec || devfileSpec,
-    [data, devfileSpec, selectedVersion?.version],
-  );
-  const selectedDevfileYaml = useMemo(
-    () =>
-      data.find(({ version }) => version === selectedVersion?.version)?.devfileYaml || devfileYaml,
-    [data, devfileYaml, selectedVersion?.version],
+      // No types available for js-yaml
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+      load(devfileYaml) as DevfileSpec,
+    [devfileYaml],
   );
 
   return (
-    <div className="flex grow justify-center bg-slate-50 py-10 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
-      <div className="flex max-w-screen-2xl grow flex-col justify-between overflow-x-auto">
-        <DevfileHeader devfile={devfile} selectedVersion={selectedVersion} />
-        <div className="mt-4 flex flex-col justify-between rounded-lg border border-slate-200 bg-white py-5 px-6 shadow dark:border-slate-700 dark:bg-slate-800 lg:flex-row-reverse">
-          <DevfileDatalist
-            devfile={devfile}
-            selectedVersion={selectedVersion}
-            setSelectedVersion={setSelectedVersion}
-            devfileSpec={selectedDevfileSpec}
-            className="lg:ml-4 lg:w-60 lg:shrink-0"
-          />
-          <div className="grow lg:overflow-x-auto">
-            {selectedDevfileSpec.starterProjects && (
-              <DevfileStarterProjects
-                devfile={devfile}
-                starterProjects={selectedDevfileSpec.starterProjects}
+    <>
+      <RegistryMeta title={`Devfile Registry - ${devfile.displayName}`} />
+      <div className="flex grow justify-center bg-slate-50 py-10 px-4 dark:bg-slate-900 sm:px-6 lg:px-8">
+        <div className="flex max-w-screen-2xl grow flex-col justify-between overflow-x-auto">
+          <DevfileHeader devfile={devfile} devfileVersion={devfileVersion} />
+          <div className="mt-4 flex flex-col justify-between rounded-lg border border-slate-200 bg-white py-5 px-6 shadow dark:border-slate-700 dark:bg-slate-800 lg:flex-row-reverse">
+            <DevfileDatalist
+              devfile={devfile}
+              devfileVersion={devfileVersion}
+              devfileSpec={devfileSpec}
+              className="lg:ml-4 lg:w-60 lg:shrink-0"
+            />
+            <div className="grow lg:overflow-x-auto">
+              {devfileSpec.starterProjects && (
+                <DevfileStarterProjects
+                  devfile={devfile}
+                  starterProjects={devfileSpec.starterProjects}
+                />
+              )}
+              <DevfileCodeblock
+                devfileYaml={devfileYaml}
+                devfileName={devfile.name}
+                className="hidden lg:block"
               />
-            )}
+            </div>
             <DevfileCodeblock
-              devfileYaml={selectedDevfileYaml}
+              devfileYaml={devfileYaml}
               devfileName={devfile.name}
-              className="hidden lg:block"
+              className="block lg:hidden"
             />
           </div>
-          <DevfileCodeblock
-            devfileYaml={selectedDevfileYaml}
-            devfileName={devfile.name}
-            className="block lg:hidden"
-          />
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
-export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
-  const devfileRegistries = getDevfileRegistries();
-  const devfiles = await fetchDevfiles(devfileRegistries);
+export const getServerSideProps: GetServerSideProps<IndexProps> = async (context) => {
+  const devfileVersionParam = (context.query['devfile-version'] as string) || '';
   const devfileRegistryId = context.params?.['devfile-registry'] as string;
   const devfileId = context.params?.devfile as string;
 
-  const devfile = devfiles.find(
-    (_devfile) =>
-      slugify(_devfile.devfileRegistry.name) === devfileRegistryId &&
-      slugify(_devfile.name) === devfileId,
+  const devfileRegistries = getDevfileRegistries();
+
+  const devfileRegistry = devfileRegistries.filter(
+    (_devfileRegistry) => slugify(_devfileRegistry.name) === devfileRegistryId,
   );
+
+  const devfiles = await fetchDevfiles(devfileRegistry);
+  const devfile = devfiles.find((_devfile) => slugify(_devfile.name) === devfileId);
 
   if (!devfile) {
     return {
@@ -113,36 +129,48 @@ export const getStaticProps: GetStaticProps<IndexProps> = async (context) => {
     };
   }
 
-  const res = await fetch(`${devfile.devfileRegistry.url}/devfiles/${devfile.name}`);
-  const devfileYaml = await res.text();
-  // No types available for js-yaml
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-  const devfileSpec = load(devfileYaml) as DevfileSpec;
+  const response = await fetch(
+    `${devfile._registry.url}/devfiles/${devfileId}/${devfileVersionParam}`,
+  );
 
-  return {
-    props: {
-      devfile,
-      devfileSpec,
-      devfileYaml,
-    },
-    revalidate: 15,
-  };
+  if (!response.ok) {
+    return {
+      notFound: true,
+    };
+  }
+
+  try {
+    const devfileYaml = await response.text();
+
+    const props: IndexProps = { devfile, devfileYaml };
+
+    if (devfile.type === 'stack') {
+      // find the version of the devfile
+      let devfileVersion = devfile.versions.find(
+        (versionDevfile) => versionDevfile.version === devfileVersionParam,
+      )?.version;
+
+      // if the version is not found, use the default version
+      devfileVersion ||= devfile.versions.find((versionDevfile) => versionDevfile.default)?.version;
+
+      // Version should always be defined for stacks
+      if (!devfileVersion) {
+        return {
+          notFound: true,
+        };
+      }
+
+      props.devfileVersion = devfileVersion;
+    }
+
+    return {
+      props,
+    };
+  } catch {
+    return {
+      notFound: true,
+    };
+  }
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const devfileRegistries = getDevfileRegistries();
-  const devfiles = await fetchDevfiles(devfileRegistries);
-  const paths = devfiles.map((devfile) => ({
-    params: {
-      'devfile-registry': slugify(devfile.devfileRegistry.name),
-      devfile: slugify(devfile.name),
-    },
-  }));
-
-  return {
-    paths,
-    fallback: 'blocking',
-  };
-};
-
-export default Index;
+export default IndexWrapper;
