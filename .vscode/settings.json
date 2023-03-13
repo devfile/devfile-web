@@ -1,7 +1,6 @@
 {
   "yaml.schemas": {
-    "https://raw.githubusercontent.com/devfile/api/main/schemas/latest/devfile.json": "devfile.yaml",
-    "https://json.schemastore.org/github-workflow.json": "file:///c%3A/Programming/Work/devfile-web/.github/workflows/deploy.yml"
+    "https://raw.githubusercontent.com/devfile/api/v2.2.0/schemas/latest/devfile.json": "devfile.yaml"
   },
   "python.linting.pylintEnabled": false,
   "python.linting.flake8Enabled": true,
