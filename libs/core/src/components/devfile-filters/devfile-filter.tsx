@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,13 @@
 
 import clsx from 'clsx';
 import { useState, useId } from 'react';
-import type { FilterElement } from '../../hooks';
+import type { FilterElement } from './devfile-filters';
 
 export interface DevfileFilterProps {
   name: string;
   capitalize?: boolean;
   filterElements: FilterElement[];
-  onFilter: (filterElements: FilterElement[]) => void;
+  onFilter: (filterElements: string[]) => void;
 }
 
 const checkboxesToDisplay = 5;
@@ -32,10 +32,6 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
 
   const [seeMore, setSeeMore] = useState<boolean>(false);
   const id = useId();
-
-  if (filterElements.length <= 1) {
-    return null;
-  }
 
   return (
     <fieldset className="my-5">
@@ -56,16 +52,22 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
                   name={filterElement.name}
                   type="checkbox"
                   checked={filterElement.checked}
-                  onChange={(event): void => {
-                    const newFilterElements = filterElements.map((_filterElement) => {
-                      if (_filterElement.name === event.target.name) {
-                        return { ...filterElement, checked: event.target.checked };
-                      }
-                      return _filterElement;
-                    });
-                    onFilter(newFilterElements);
-                  }}
-                  className="text-devfile focus:ring-devfile/80 ml-2 h-4 w-4 rounded border-slate-300 dark:border-slate-700"
+                  onChange={(event): void =>
+                    onFilter(
+                      filterElements.reduce((acc, element) => {
+                        // if the checkbox is checked and it's not the one that was clicked, add it to the array
+                        if (element.name !== event.target.name && element.checked) {
+                          acc.push(element.name);
+                        }
+                        // if the checkbox is not checked and it's the one that was clicked, add it to the array
+                        if (element.name === event.target.name && !element.checked) {
+                          acc.push(element.name);
+                        }
+                        return acc;
+                      }, [] as string[]),
+                    )
+                  }
+                  className="text-devfile focus:ring-devfile/80 ml-2 h-4 w-4 cursor-pointer rounded border-slate-300 dark:border-slate-700"
                 />
               </div>
               <div className="ml-3 text-sm">
@@ -73,7 +75,7 @@ export function DevfileFilter(props: DevfileFilterProps): JSX.Element | null {
                   htmlFor={filterElement.name + id}
                   className={clsx(
                     capitalize && 'capitalize',
-                    'text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300',
+                    'cursor-pointer text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300',
                   )}
                 >
                   {filterElement.name}

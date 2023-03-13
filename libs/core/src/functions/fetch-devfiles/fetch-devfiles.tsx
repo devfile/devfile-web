@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ interface DevfileJsonBase {
   icon: string;
   projectType: string;
   language: string;
-  versions?: Version[];
+  versions?: VersionDevfile[];
   provider?: string;
   architectures?: string[];
   git?: {
@@ -40,12 +40,12 @@ interface DevfileJsonSample extends DevfileJsonBase {
 
 interface DevfileJsonStack extends DevfileJsonBase {
   type: 'stack';
-  versions: Version[];
+  versions: VersionDevfile[];
 }
 
 export type DevfileJson = DevfileJsonSample | DevfileJsonStack;
 
-export interface Version {
+export interface VersionDevfile {
   version: string;
   schemaVersion: string;
   default: boolean;
@@ -69,6 +69,11 @@ export interface Registry {
 export type Devfile = DevfileJson & {
   _registry: Registry;
 };
+
+export interface DevfileParams {
+  devfiles: Devfile[];
+  total: number;
+}
 
 export async function fetchDevfiles(registries: Registry[]): Promise<Devfile[]> {
   const responses = await Promise.all(

@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,13 +24,18 @@ export interface RegistryMetaProps {
 }
 
 export function RegistryMeta(props: PropsWithChildren<RegistryMetaProps>): JSX.Element {
-  return <Meta {...props} />;
-}
+  const {
+    title = 'Devfile Registry',
+    keywords = 'Devfile, OpenShift, Kubernetes',
+    description = 'Devfile Registry',
+    children,
+  } = props;
 
-RegistryMeta.defaultProps = {
-  title: 'Devfile Registry',
-  keywords: 'Devfile, Registry, OpenShift, Kubernetes',
-  description: 'UI for the Devfile Registry',
-};
+  return (
+    <Meta title={title} keywords={keywords} description={description}>
+      {children}
+    </Meta>
+  );
+}
 
 export default RegistryMeta;

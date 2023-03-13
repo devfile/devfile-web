@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 import type { PropsWithChildren } from 'react';
-import Head from 'next/head';
+import Meta from './meta';
 
 export interface LandingPageMetaProps {
   title?: string;
@@ -24,20 +24,19 @@ export interface LandingPageMetaProps {
 }
 
 export function LandingPageMeta(props: PropsWithChildren<LandingPageMetaProps>): JSX.Element {
-  const { children, ...rest } = props;
+  const {
+    title = 'Devfile',
+    keywords = 'Devfile, OpenShift, Kubernetes',
+    description = 'Devfile Landing Page',
+    children,
+  } = props;
 
   return (
-    <Head {...rest}>
-      <link rel="preconnect" href="https://FCRPEMIKYK-dsn.algolia.net" crossOrigin="true" />
+    <Meta title={title} keywords={keywords} description={description}>
+      <link rel="preconnect" href="https://FCRPEMIKYK-dsn.algolia.net" crossOrigin="anonymous" />
       {children}
-    </Head>
+    </Meta>
   );
 }
-
-LandingPageMeta.defaultProps = {
-  title: 'Devfile',
-  keywords: 'Devfile, OpenShift, Kubernetes',
-  description: 'Devfile Landing Page',
-};
 
 export default LandingPageMeta;

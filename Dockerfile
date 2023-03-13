@@ -1,4 +1,4 @@
-# Copyright 2022 Red Hat, Inc.
+# Copyright 2023 Red Hat, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -75,7 +75,7 @@ COPY . .
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
-RUN yarn nx run ${PROJECT_NAME}:postexport --skip-nx-cache
+RUN yarn nx build ${PROJECT_NAME} --skip-nx-cache
 
 # Production image, copy all the files and run next
 FROM registry.access.redhat.com/ubi8/nodejs-16-minimal AS runner

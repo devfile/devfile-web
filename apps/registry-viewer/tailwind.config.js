@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,7 @@
 /* eslint-disable global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
 const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
-const { join } = require('path');
+const { join } = require('node:path');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {

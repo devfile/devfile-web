@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,22 +14,31 @@
  * limitations under the License.
  */
 
-import type { Devfile, Version } from '../../functions';
+import Image from 'next/image';
+import { useMemo } from 'react';
+import type { Devfile } from '../../functions';
 
 export interface DevfileHeaderProps {
   devfile: Devfile;
-  selectedVersion?: Version;
+  devfileVersion?: string;
 }
 
 export function DevfileHeader(props: DevfileHeaderProps): JSX.Element {
-  const { devfile, selectedVersion } = props;
+  const { devfile, devfileVersion } = props;
+
+  const versionDevfile = useMemo(
+    () => devfile.versions?.find((vD) => vD.version === devfileVersion),
+    [devfile.versions, devfileVersion],
+  );
 
   return (
     <div className="flex justify-between">
       <div className="mr-4 flex max-h-36 space-x-5 lg:min-w-[66%] lg:max-w-[66%]">
         <div className="flex h-36 w-36 flex-shrink-0 items-center justify-center p-2 dark:rounded-md dark:bg-slate-200">
-          <img
-            src={selectedVersion?.icon || devfile.icon}
+          <Image
+            width={128}
+            height={128}
+            src={versionDevfile?.icon || devfile.icon}
             alt={`${devfile.displayName} icon`}
             className="h-auto max-h-32 w-32"
           />
@@ -55,7 +64,7 @@ export function DevfileHeader(props: DevfileHeaderProps): JSX.Element {
             </div>
           )}
           <p className="mt-1 text-sm font-medium leading-6 text-slate-500 dark:text-slate-400">
-            {selectedVersion?.description || devfile.description}
+            {versionDevfile?.description || devfile.description}
           </p>
         </div>
       </div>

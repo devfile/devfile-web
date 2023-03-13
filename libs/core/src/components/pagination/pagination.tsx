@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,63 +15,66 @@
  */
 
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/20/solid';
-import Link from 'next/link';
 import clsx from 'clsx';
-import { useSearchDevfiles } from '../../hooks';
-import { createDevfileLink } from '../../functions';
+import type { DevfileParams } from '../../functions';
 
-export function Pagination(): JSX.Element | null {
-  const { devfiles, page, dispatch, query } = useSearchDevfiles();
+export interface PageParams {
+  pageNumber: number;
+  totalPages: number;
+}
 
-  const prevPage = page.number > 1 ? page.number - 1 : 1;
-  const nextPage = page.number < page.total ? page.number + 1 : page.total;
+export interface PaginationProps {
+  pageParams: PageParams;
+  devfileParams: DevfileParams;
+  setPage: (page: number) => void;
+}
 
-  if (page.total <= 1) {
-    return null;
-  }
+export function Pagination(props: PaginationProps): JSX.Element | null {
+  const { pageParams, devfileParams, setPage } = props;
+  const { pageNumber, totalPages } = pageParams;
+
+  const prevPage = pageNumber > 1 ? pageNumber - 1 : 1;
+  const nextPage = pageNumber < totalPages ? pageNumber + 1 : totalPages;
+
+  const devfilesPerPage = devfileParams.devfiles.length;
+  const totalDevfiles = devfileParams.total;
 
   return (
     <div className="flex items-center justify-between border-t border-slate-200 px-4 py-6 dark:border-slate-800 sm:px-6">
       <div className="flex flex-1 justify-between sm:hidden">
-        <Link
-          scroll={false}
-          shallow
-          href={createDevfileLink({ ...page, number: prevPage }, query)}
+        <button
+          type="button"
           onClick={(): void => {
-            dispatch({
-              type: 'SET_PAGE_NUMBER',
-              payload: prevPage,
-            });
+            setPage(prevPage);
           }}
           className="hover:bg-devfile/10 dark:hover:bg-devfile/10 relative inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-sky-100"
         >
           Previous
-        </Link>
-        <Link
-          scroll={false}
-          shallow
-          href={createDevfileLink({ ...page, number: nextPage }, query)}
+        </button>
+        <button
+          type="button"
           onClick={(): void => {
-            dispatch({
-              type: 'SET_PAGE_NUMBER',
-              payload: nextPage,
-            });
+            setPage(nextPage);
           }}
           className="hover:bg-devfile/10 dark:hover:bg-devfile/10 relative inline-flex items-center rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-sky-100"
         >
           Next
-        </Link>
+        </button>
       </div>
       <div className="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
         <div>
           <p className="text-sm text-slate-500 dark:text-slate-400">
-            Showing <span className="font-medium">{(page.number - 1) * devfiles.limit + 1}</span> to{' '}
+            Showing{' '}
             <span className="font-medium">
-              {page.number * devfiles.limit < devfiles.searched.length
-                ? page.number * devfiles.limit
-                : devfiles.searched.length}
+              {totalDevfiles > 0 ? (pageNumber - 1) * devfilesPerPage + 1 : 0}
             </span>{' '}
-            of <span className="font-medium">{devfiles.searched.length}</span> results
+            to{' '}
+            <span className="font-medium">
+              {pageNumber * devfilesPerPage < totalDevfiles
+                ? pageNumber * devfilesPerPage
+                : totalDevfiles}
+            </span>{' '}
+            of <span className="font-medium">{totalDevfiles}</span> results
           </p>
         </div>
         <div>
@@ -79,79 +82,70 @@ export function Pagination(): JSX.Element | null {
             className="isolate inline-flex -space-x-px rounded-md shadow-sm"
             aria-label="Pagination"
           >
-            <Link
-              scroll={false}
-              shallow
-              href={createDevfileLink({ ...page, number: prevPage }, query)}
+            <button
+              type="button"
               onClick={(): void => {
-                dispatch({
-                  type: 'SET_PAGE_NUMBER',
-                  payload: prevPage,
-                });
+                setPage(prevPage);
               }}
               className="hover:bg-devfile/10 dark:hover:bg-devfile/10 relative inline-flex items-center rounded-l-md border border-slate-300 bg-white px-2 py-2 text-sm font-medium text-slate-500 focus:z-20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400"
             >
               <span className="sr-only">Previous</span>
               <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-            </Link>
+            </button>
             {/* eslint-disable-next-line unicorn/new-for-builtins */}
-            {[...Array(page.total).keys()].map((i) => {
+            {[...Array(totalPages).keys()].map((i) => {
               // Fix indexing
-              const pageNumber = i + 1;
-              const href = createDevfileLink({ ...page, number: pageNumber }, query);
+              const pageNumberIter = i + 1;
 
-              if (page.number - 1 <= pageNumber && pageNumber <= page.number + 1) {
+              if (pageNumber - 1 <= pageNumberIter && pageNumberIter <= pageNumber + 1) {
                 // Display one page around the current page
                 return (
-                  <Link
-                    scroll={false}
-                    shallow
-                    href={href}
-                    onClick={(): void => dispatch({ type: 'SET_PAGE_NUMBER', payload: pageNumber })}
-                    key={pageNumber}
+                  <button
+                    type="button"
+                    onClick={(): void => {
+                      setPage(pageNumberIter);
+                    }}
+                    key={pageNumberIter}
                     className={clsx(
-                      page.number === pageNumber
+                      pageNumber === pageNumberIter
                         ? 'border-devfile/50 text-devfile bg-devfile/10 relative z-10 inline-flex cursor-pointer items-center border px-4 py-2 text-sm font-medium focus:z-20'
                         : 'hover:bg-devfile/10 dark:hover:bg-devfile/10 relative inline-flex items-center border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 focus:z-20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400',
                     )}
                   >
-                    {i + 1}
-                  </Link>
+                    {pageNumberIter}
+                  </button>
                 );
               }
 
-              if (pageNumber <= 2 || pageNumber > page.total - 2) {
+              if (pageNumberIter <= 2 || pageNumberIter > totalPages - 2) {
                 // Display the first two pages and the last two pages
                 // Link only displays when the screen is larger than a large screen
                 return (
-                  <Link
-                    scroll={false}
-                    shallow
-                    href={href}
-                    onClick={(): void => dispatch({ type: 'SET_PAGE_NUMBER', payload: pageNumber })}
-                    key={pageNumber}
+                  <button
+                    type="button"
+                    onClick={(): void => {
+                      setPage(pageNumberIter);
+                    }}
+                    key={pageNumberIter}
                     className="hover:bg-devfile/10 dark:hover:bg-devfile/10 relative hidden items-center border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 focus:z-20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 lg:inline-flex"
                   >
-                    {i + 1}
-                  </Link>
+                    {pageNumberIter}
+                  </button>
                 );
               }
-              if (pageNumber === page.number - 2 || pageNumber === page.number + 2) {
+
+              if (pageNumberIter === pageNumber - 2 || pageNumberIter === pageNumber + 2) {
                 // Displays an addition page around the current page when the screen is smaller than a large screen
                 // Displays ellipses when the screen is larger than a large screen
                 return (
-                  <div key={pageNumber}>
-                    <Link
-                      scroll={false}
-                      shallow
-                      href={href}
-                      onClick={(): void =>
-                        dispatch({ type: 'SET_PAGE_NUMBER', payload: pageNumber })
-                      }
+                  <div key={pageNumberIter}>
+                    <button
+                      type="button"
+                      onClick={(): void => setPage(pageNumberIter)}
                       className="hover:bg-devfile/10 dark:hover:bg-devfile/10 relative inline-flex items-center border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 focus:z-20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 lg:hidden"
                     >
-                      {i + 1}
-                    </Link>
+                      {pageNumberIter}
+                    </button>
 
                     <span className="relative hidden items-center border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 lg:inline-flex">
                       ...
@@ -162,21 +156,16 @@ export function Pagination(): JSX.Element | null {
 
               return null;
             })}
-            <Link
-              scroll={false}
-              shallow
-              href={createDevfileLink({ ...page, number: nextPage }, query)}
+            <button
+              type="button"
               onClick={(): void => {
-                dispatch({
-                  type: 'SET_PAGE_NUMBER',
-                  payload: nextPage,
-                });
+                setPage(nextPage);
               }}
               className="hover:bg-devfile/10 dark:hover:bg-devfile/10 relative inline-flex items-center rounded-r-md border border-slate-300 bg-white px-2 py-2 text-sm font-medium text-slate-500 focus:z-20 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400"
             >
               <span className="sr-only">Next</span>
               <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />
-            </Link>
+            </button>
           </nav>
         </div>
       </div>

@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 Red Hat, Inc.
+ * Copyright 2023 Red Hat, Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,21 +14,22 @@
  * limitations under the License.
  */
 
+import Image from 'next/image';
 import Link from 'next/link';
 import slugify from '@sindresorhus/slugify';
-import { useSearchDevfiles } from '../../hooks';
+import { Devfile } from '../../functions';
 
-export function DevfileGrid(
-  props: React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-): JSX.Element {
-  const { className, ...rest } = props;
+export interface DevfileGridProps {
+  devfiles: Devfile[];
+}
 
-  const { devfiles } = useSearchDevfiles();
+export function DevfileGrid(props: DevfileGridProps): JSX.Element {
+  const { devfiles } = props;
 
   return (
-    <div className={className} {...rest}>
+    <div className="my-4 grow sm:my-6 lg:mr-2">
       <ul className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {devfiles.searchedLimited.map((devfile) => (
+        {devfiles.map((devfile) => (
           <li
             key={`${devfile.name}-${devfile._registry.name}`}
             className="col-span-1 rounded-lg border border-slate-200 bg-white shadow dark:border-slate-700 dark:bg-slate-800"
@@ -40,9 +41,11 @@ export function DevfileGrid(
               <div className="flex items-center">
                 <div className="mr-4 flex h-24 w-24 flex-shrink-0 items-center justify-center p-2 dark:rounded-md dark:bg-slate-200 md:h-36 md:w-36">
                   {devfile.icon && (
-                    <img
+                    <Image
                       src={devfile.icon}
                       alt={`${devfile.displayName} icon`}
+                      width={128}
+                      height={128}
                       className="h-auto max-h-20 w-20 md:max-h-32 md:w-32"
                     />
                   )}

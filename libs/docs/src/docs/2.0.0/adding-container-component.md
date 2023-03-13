@@ -25,10 +25,10 @@ identified by its image.
     components:
       - name: maven
         container:
-        image: eclipse/maven-jdk8:latest
-        volumeMounts:
-          - name: mavenrepo
-            path: /root/.m2
+          image: eclipse/maven-jdk8:latest
+          volumeMounts:
+            - name: mavenrepo
+              path: /root/.m2
           env:
             - name: ENV_VAR
               value: value
