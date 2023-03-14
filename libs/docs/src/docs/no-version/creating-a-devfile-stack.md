@@ -28,3 +28,5 @@ various projects.
 - To create `stack.yaml`, see [adding a stack yaml file](./adding-a-stack-yaml-file).
 
 - To create devfiles, see [overview](./overview).
+
+- Checkout our tutorial for [creating a devfile registry stack](./tutorial-create-a-new-devfile-stack.md)
