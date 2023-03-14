@@ -32,7 +32,7 @@ Get started with [JetBrains Space Cloud Dev Environments](https://blog.jetbrains
 
 - [Eclipse Che](https://medium.com/eclipse-che-blog/devfile-v2-and-ide-plug-ins-in-eclipse-che-7a560ae724b1)
 
-- [OpenShift Dev Console](https://github.com/openshift/console)
+- [OpenShift Dev Console](https://github.com/openshift/console#openshift-console)
 
 - [VSCode OpenShift Toolkit](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-openshift-connector)
 
