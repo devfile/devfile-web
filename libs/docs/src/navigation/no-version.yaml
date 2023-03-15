@@ -70,6 +70,8 @@ bottom:
         href: ./creating-a-devfile-stack
       - title: Adding a stack yaml file
         href: ./adding-a-stack-yaml-file
+      - title: "Tutorial: Create a devfile registry stack"
+        href: ./tutorial-create-a-new-devfile-stack
   - title: Migrating
     links:
       - title: Migrating to devfile v2

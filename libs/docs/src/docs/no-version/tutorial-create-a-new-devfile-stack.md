@@ -12,23 +12,23 @@ stack for the devfile registry.
 
 ## Tutorial
 
-1. Create a fork of the [devfile-registry repo](https://github.com/devfile/registry) and clone
+* Create a fork of the [devfile-registry repo](https://github.com/devfile/registry) and clone
 your fork locally.
 
-2. Create a new directory inside the `stacks/` folder called `tutorial-stack`.
+* Create a new directory inside the `stacks/` folder called `tutorial-stack`.
 
-3. Inside the `stacks/tutorial-stack` directory create a file called OWNERS.
+* Inside the `stacks/tutorial-stack` directory create a file called OWNERS.
 There you can include yourself as a reviewer (For more information check the [owners guide](https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md)):
 ```yaml {% filename="OWNERS" %}
 reviewers:
 - your-github-username
 ```
 
-4. Inside the `stacks/tutorial-stack` directory create your devfile (`stacks/tutorial-stack/devfile.yaml`).
+* Inside the `stacks/tutorial-stack` directory create your devfile (`stacks/tutorial-stack/devfile.yaml`).
 
-5. In your `devfile` you will have to add the `schemaVersion` and your `metadata` sections:
+* In your `devfile` you will have to add the `schemaVersion` and your `metadata` sections:
 ```yaml {% filename="devfile.yaml" %}
-schemaVersion: 2.1.0
+schemaVersion: 2.2.0
 metadata:
   name: tutorial-stack
   displayName: Tutorial Stack
@@ -41,7 +41,7 @@ metadata:
   version: 1.0.3
 ```
 
-6. Add your `starterProjects`:
+* Add your `starterProjects`:
 ```yaml {% filename="devfile.yaml" %}
 starterProjects:
   - name: tutorial-example
@@ -54,7 +54,7 @@ starterProjects:
     subDir: app
 ```
 
-7. Add your `Components`:
+* Add your `Components`:
 ```yaml {% filename="devfile.yaml" %}
 components:
   - name: dotnet
@@ -76,7 +76,7 @@ components:
           targetPort: 8080
 ```
 
-8. Finally, add the `Commands` inside your `devfile.yaml`:
+* Finally, add the `Commands` inside your `devfile.yaml`:
 ```yaml {% filename="devfile.yaml" %}
 commands:
   - id: build
@@ -97,7 +97,7 @@ commands:
         kind: run
 ```
 
-9. The full `devfile.yaml` will be:
+* The full `devfile.yaml` will be:
 ```yaml {% filename="devfile.yaml" %}
 schemaVersion: 2.1.0
 metadata:
@@ -157,4 +157,4 @@ commands:
 
 ```
 
-10. Create an Pull Request from your fork to the [devfile-registry](https://github.com/devfile/registry).
+* Create an Pull Request from your fork to the [devfile-registry](https://github.com/devfile/registry).
