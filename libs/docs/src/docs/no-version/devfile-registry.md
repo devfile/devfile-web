@@ -19,5 +19,7 @@ Get started with devfile registries:
 
 - [Adding a stack YAML file](./adding-a-stack-yaml-file)
 
+- [Follow the create a devfile stack tutorial](./tutorial-create-a-new-devfile-stack)
+
 For more information about the devfile registry, see the [Registry REST
 API](https://github.com/devfile/registry-support/blob/main/index/server/registry-REST-API.adoc).
