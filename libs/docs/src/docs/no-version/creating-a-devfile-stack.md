@@ -29,4 +29,4 @@ various projects.
 
 - To create devfiles, see [overview](./overview).
 
-- Checkout our tutorial for [creating a devfile registry stack](./tutorial-create-a-new-devfile-stack.md)
+- Checkout our tutorial for [creating a devfile registry stack](./tutorial-create-a-new-devfile-stack).
