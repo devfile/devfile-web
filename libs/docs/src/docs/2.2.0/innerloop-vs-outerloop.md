@@ -32,7 +32,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
     ```
 
 2. If your project needs ports to forwarded like in this example, define the endpoints required for your project
-    - ***Note**: If you are using odov3, you need to create an additional endpoint for the debugging port. See [Odo Spec Support](#odo-spec-support) for more information*
+    - ***Note**: If you are using odo v3, you need to create an additional endpoint for the debugging port. See [Odo Spec Support](#odo-spec-support) for more information*
     - The environment variable definition `DEBUG_PORT` is to set the debug port of the node application
 
     ```yaml
@@ -310,11 +310,11 @@ Though the devfile spec does support both [innerloop](#what-is-innerloop) and [o
 
 Odo covers the features supported by the devfile 2.2.0 spec with minor requirements for version 3: 
 1. In order to debug your project it is required to define a debug port: [https://odo.dev/docs/user-guides/v3-migration-guide#changes-to-the-way-component-debugging-works](https://odo.dev/docs/user-guides/v3-migration-guide#changes-to-the-way-component-debugging-works)
-2. By default, odov3 sets up an underlying persistent volumes rather than setting up ephemeral volumes, this can toggled back: [https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage](https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage)
+2. By default, odo v3 sets up an underlying persistent volumes rather than setting up ephemeral volumes, this can toggled back: [https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage](https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage)
 
-More information on how `odo` treats lifecycle events can be found on the [odov2](https://odo.dev/docs/2.5.0/tutorials/using-devfile-lifecycle-events) page or on the [odov3](https://odo.dev/docs/user-guides/advanced/using-devfile-lifecycle-events) page.
+More information on how `odo` treats lifecycle events can be found on the [odo v2](https://odo.dev/docs/2.5.0/tutorials/using-devfile-lifecycle-events) page or on the [odo v3](https://odo.dev/docs/user-guides/advanced/using-devfile-lifecycle-events) page.
 
-**OpenShift Toolkit** for both VSCode and IntelliJ IDE use odov3 to power the core commands, therefore the devfile support should be the same as odov3.
+**OpenShift Toolkit** for both VSCode and IntelliJ IDE use odo v3 to power the core commands, therefore the devfile support should be the same as odo v3.
 
 ## Eclipse Che Spec Support
 
