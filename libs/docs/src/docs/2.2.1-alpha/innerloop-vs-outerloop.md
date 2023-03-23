@@ -16,7 +16,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
 ### Procedure
 
 1. Add the runtime container component for running your project with the `schemaVersion` and `metadata` definitions
-    - This example will use `nodejs-16` UBI image
+    - This example will use `nodejs-18` UBI image
 
     ```yaml
     schemaVersion: 2.2.1-alpha
@@ -25,7 +25,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
     components:
       - name: runtime
         container:
-          image: registry.access.redhat.com/ubi8/nodejs-16:latest
+          image: registry.access.redhat.com/ubi8/nodejs-18:latest
           args: ['tail', '-f', '/dev/null']
           memoryLimit: 1024Mi
           mountSources: true
@@ -39,7 +39,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
     components:
       - name: runtime
         container:
-          image: registry.access.redhat.com/ubi8/nodejs-16:latest
+          image: registry.access.redhat.com/ubi8/nodejs-18:latest
           args: ['tail', '-f', '/dev/null']
           memoryLimit: 1024Mi
           mountSources: true
@@ -125,7 +125,7 @@ metadata:
 components:
   - name: runtime
     container:
-      image: registry.access.redhat.com/ubi8/nodejs-16:latest
+      image: registry.access.redhat.com/ubi8/nodejs-18:latest
       args: ['tail', '-f', '/dev/null']
       memoryLimit: 1024Mi
       mountSources: true
