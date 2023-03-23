@@ -31,7 +31,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
           mountSources: true
     ```
 
-2. If your project needs ports to forwarded like in this example, define the endpoints required for your project
+2. If your project needs ports to be forwarded like in this example, define the endpoints required for your project
     - ***Note**: If you are using odo v3, you need to create an additional endpoint for the debugging port. See [Odo Spec Support](#odo-spec-support) for more information*
     - The environment variable definition `DEBUG_PORT` is to set the debug port of the node application
 
@@ -57,7 +57,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
 3. Now the runtime component has been defined, we need a way of running our project
     1. Add a command to `npm install` our project packages and mark it as our projects build command
     2. Add another command to run the main process or the server process `npm start` in this example and mark it as our projects run command
-    3. With these command you should now be able to run a development deployment of your project, for example `odo dev`
+    3. With these commands you should now be able to run a development deployment of your project, for example `odo dev`
 
     ```yaml
     commands:
@@ -173,7 +173,7 @@ commands:
         isDefault: true
 ```
 
-The component and commands here allows the developer to build, run, debug, and test their project within a local cluster using a devfile supported development tool (e.g. `odo`).
+The component and commands here allow the developer to build, run, debug, and test their project within a local cluster using a devfile supported development tool (e.g. `odo`).
 
 ## What is outerloop?
 
@@ -205,8 +205,8 @@ The component and commands here allows the developer to build, run, debug, and t
           component: outerloop-build
     ```
 
-3. Add a deployment component which best suits your cluster’s runtime environment (`kubernetes`/`openshift`), in this case openshift
-    1. Provide the file path to your openshift template file with `uri`
+3. Add a deployment component that best suits your cluster’s runtime environment (`kubernetes`/`openshift`), in this case openshift
+    - Provide the file path to your openshift template file with `uri`
 
     ```yaml
     components:
@@ -310,7 +310,7 @@ Though the devfile spec does support both [innerloop](#what-is-innerloop) and [o
 
 Odo covers the features supported by the devfile 2.2.0 spec with minor requirements for version 3: 
 1. In order to debug your project it is required to define a debug port: [https://odo.dev/docs/user-guides/v3-migration-guide#changes-to-the-way-component-debugging-works](https://odo.dev/docs/user-guides/v3-migration-guide#changes-to-the-way-component-debugging-works)
-2. By default, odo v3 sets up an underlying persistent volumes rather than setting up ephemeral volumes, this can toggled back: [https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage](https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage)
+2. By default, odo v3 sets up an underlying persistent volumes rather than setting up ephemeral volumes, this can be toggled back: [https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage](https://odo.dev/docs/user-guides/v3-migration-guide#ephemeral-storage)
 
 More information on how `odo` treats lifecycle events can be found on the [odo v2](https://odo.dev/docs/2.5.0/tutorials/using-devfile-lifecycle-events) page or on the [odo v3](https://odo.dev/docs/user-guides/advanced/using-devfile-lifecycle-events) page.
 
