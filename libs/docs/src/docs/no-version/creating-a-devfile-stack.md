@@ -175,7 +175,7 @@ There you can include yourself as a reviewer (For more information check the [ow
     These files can include VSX plug-ins, Dockerfiles, or Kubernetes
     manifests.
 
-13. Create an Pull Request from your fork to the [devfile-registry](https://github.com/devfile/registry).
+13. Create a Pull Request from your fork to the [devfile-registry](https://github.com/devfile/registry).
 
 ## Additional resources
 
