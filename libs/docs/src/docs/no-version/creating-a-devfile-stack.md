@@ -101,7 +101,7 @@ There you can include yourself as a reviewer (For more information check the [ow
 
 10. The full `devfile.yaml` will be:
     ```yaml {% filename="devfile.yaml" %}
-    schemaVersion: 2.1.0
+    schemaVersion: 2.2.0
     metadata:
     name: tutorial-stack
     displayName: Tutorial Stack
@@ -156,17 +156,26 @@ There you can include yourself as a reviewer (For more information check the [ow
         group:
             isDefault: true
             kind: run
-
     ```
 
-11. Create an Pull Request from your fork to the [devfile-registry](https://github.com/devfile/registry).
+11. Create a `stacks/tutorial-stack/stack.yaml` file to store the stack information.
+    ```yaml {% filename="stack.yaml" %}
+    name: tutorial-stack
+    displayName: Tutorial Stack
+    description: Test stack based on .Net 6.0
+    icon: https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png
+    versions:
+    - version: 2.2.0
+        default: true # should have one and only one default version
+    - version: <-another-version->
+    ```
 
-12. Create a `stack.yaml` file to store the stack information.
-
-13. Verify every devfile stack version contains at least one
+12. Verify every devfile stack version contains at least one
     `devfile.yaml` file. Add other required files to the stack version.
     These files can include VSX plug-ins, Dockerfiles, or Kubernetes
     manifests.
+
+13. Create an Pull Request from your fork to the [devfile-registry](https://github.com/devfile/registry).
 
 ## Additional resources
 
