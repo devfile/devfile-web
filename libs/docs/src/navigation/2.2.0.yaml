@@ -64,6 +64,8 @@
       href: ./referring-to-a-parent-devfile
     - title: Creating devfiles with templates
       href: ./create-devfiles-with-templates
+    - title: Innerloop versus outerloop
+      href: ./innerloop-vs-outerloop
 - title: API reference
   links:
     - title: Devfile schema
