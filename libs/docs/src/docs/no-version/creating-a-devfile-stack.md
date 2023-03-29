@@ -17,7 +17,7 @@ your fork locally and go to its directory.
 
 3. Create version directories for storing different stack versions.
     Each directory under the stack must correspond to a specific
-    version, for example, `tutorial-stack/2.2.0`.
+    version, for example, `tutorial-stack/1.0.3`.
 
 4. Inside the `stacks/tutorial-stack` directory create a file called OWNERS.
 There you can include yourself as a reviewer (For more information check the [owners guide](https://github.com/kubernetes/community/blob/master/contributors/guide/owners.md)):
@@ -26,7 +26,7 @@ There you can include yourself as a reviewer (For more information check the [ow
     - your-github-username
     ```
 
-5. Inside the `stacks/tutorial-stack/2.2.0` directory create your devfile (`stacks/tutorial-stack/2.2.0/devfile.yaml`).
+5. Inside the `stacks/tutorial-stack/1.0.3` directory create your devfile (`stacks/tutorial-stack/1.0.3/devfile.yaml`).
 
 6. In your `devfile` you will have to add the `schemaVersion` and your `metadata` sections:
     ```yaml {% filename="devfile.yaml" %}
