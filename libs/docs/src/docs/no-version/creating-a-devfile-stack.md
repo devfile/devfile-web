@@ -32,15 +32,15 @@ There you can include yourself as a reviewer (For more information check the [ow
     ```yaml {% filename="devfile.yaml" %}
     schemaVersion: 2.2.0
     metadata:
-    name: tutorial-stack
-    displayName: Tutorial Stack
-    description: Test stack based on .Net 6.0
-    icon: https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png
-    tags:
+      name: tutorial-stack
+      displayName: Tutorial Stack
+      description: Test stack based on .Net 6.0
+      icon: https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png
+      tags:
         - .NET
-    projectType: dotnet
-    language: .NET
-    version: 1.0.3
+      projectType: dotnet
+      language: .NET
+      version: 1.0.3
     ```
 
 7. Add your `starterProjects`:
