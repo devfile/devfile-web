@@ -38,6 +38,6 @@ Check out the [devfile schema](./devfile-schema) for supported components.
 
 ## Additional resources
 
-For more information about working with devfiles, go to [How to work with devfiles](./how-to-work-with-devfiles).
+- For more information about working with devfiles, go to [How to work with devfiles](./how-to-work-with-devfiles).
 
-For more information about outerloop, go to [Innerloop versus outerloop](./innerloop-vs-outerloop).
+- For more information about outerloop, go to [Innerloop versus outerloop](./innerloop-vs-outerloop).
