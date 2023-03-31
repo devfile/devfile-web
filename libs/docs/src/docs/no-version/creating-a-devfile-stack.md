@@ -12,7 +12,7 @@ various projects.
 1. Create a fork of the [devfile-registry repo](https://github.com/devfile/registry), clone
 your fork locally and go to its directory.
 
-2. Create a stack folder with a name that matches the stack name. For
+2. Within the stacks directory `registry/stacks/`, create a stack folder with a name that matches the stack name. For
     example, `tutorial-stack/`.
 
 3. Create version directories for storing different stack versions.

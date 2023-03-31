@@ -69,10 +69,10 @@ devfile registry.
             name: devfile-registry
         spec:
             devfileIndexImage: quay.io/devfile/devfile-index:next
-                tls:
-            enabled: false
+            tls:
+                enabled: false
             k8s:
-            ingressDomain: $INGRESS_DOMAIN
+                ingressDomain: $INGRESS_DOMAIN
         EOF
         ```
 

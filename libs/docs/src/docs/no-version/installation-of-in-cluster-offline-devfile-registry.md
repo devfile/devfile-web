@@ -29,7 +29,7 @@ The main goal of this stage is:
 
 ### Prerequisites
 
-- Golang 1.17.x or higher
+- Golang 1.18.x or higher
 
 - Docker 17.05 or higher or Podman 4.0.x or higher
 
@@ -126,7 +126,7 @@ suffix `-offline` to be pulled into the registry.
 Change the devfile so you can update references to those offline
 resources as part of the registry build. For all the items pulled into
 the registry, update the corresponding devfile entries to reference the
-resources within the offline version in the registry:
+resources within the offline version in the registry.
 
 {% callout title="Note!" %}
 - All location references to `starterProjects` will change to local
@@ -162,7 +162,7 @@ resources within the offline version in the registry:
       under the stack root directory
       (`<registry_root>/stacks/<stack>/`).
 
-### Verification step
+#### Verification step
 
 To confirm you modified your devfile, verify your altered starter
 project definition is similar to the following example:
