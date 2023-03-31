@@ -151,7 +151,5 @@ build, run, and deploy your application.
 
 ### Additional resources
 
-- For information on deploying the devfile index container image, see {% docs-link section="Registry"
-    title="Deploying a devfile registry" text="deploying a devfile registry" /%}.
-- For information on deploying to air-gapped environment, see {% docs-link section="Registry"
-    title="Installation of in-cluster offline devfile registry" text="installation of in-cluster offline devfile registry" /%}.
+- For information on deploying the devfile index container image, see [deploying a devfile registry](./deploying-a-devfile-registry).
+- For information on deploying to air-gapped environment, see [installation of in-cluster offline devfile registry](./installation-of-in-cluster-offline-devfile-registry).
