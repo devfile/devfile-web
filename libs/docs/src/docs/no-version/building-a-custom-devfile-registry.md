@@ -61,7 +61,7 @@ your cloud or cluster to form the devfile registry.
 
 ### Prerequisites
 
-- Golang 1.17.x or higher
+- Golang 1.18.x or higher
 
 - Docker 17.05 or higher
 

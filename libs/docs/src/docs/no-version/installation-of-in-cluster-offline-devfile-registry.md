@@ -29,7 +29,7 @@ The main goal of this stage is:
 
 ### Prerequisites
 
-- Golang 1.17.x or higher
+- Golang 1.18.x or higher
 
 - Docker 17.05 or higher or Podman 4.0.x or higher
 
