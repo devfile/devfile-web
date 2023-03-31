@@ -27,7 +27,7 @@ import blurCyanImage from '../../images/blur-cyan.png';
 import blurIndigoImage from '../../images/blur-indigo.png';
 
 const codeLanguage: Language = 'yaml';
-const code = `schemaVersion: 2.1.0
+const code = `schemaVersion: 2.2.0
 metadata:
   name: go
   language: go
