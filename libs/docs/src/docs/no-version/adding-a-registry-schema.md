@@ -94,7 +94,7 @@ To add samples and stacks from other repositories, place the
 - The architectures associated to the stack version.
 {% /table %}
 
-```yaml {% title="extraDevfileEntries.yaml sample" filename="devfile.yaml" %}
+```yaml {% title="extraDevfileEntries.yaml sample" filename="extraDevfileEntries.yaml" %}
 schemaVersion: <version>
 samples:
   - name: nodejs-basic
@@ -261,7 +261,7 @@ information such as name, language, and resources.
 - The project templates that can be used in a devfile.
 {% /table %}
 
-```json {% title="Index.json sample" %}
+```json {% title="Index.json sample" filename="index.json" %}
 [
   {
     "name": "go",

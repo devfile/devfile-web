@@ -61,7 +61,7 @@ your cloud or cluster to form the devfile registry.
 
 ### Prerequisites
 
-- Golang 1.13.x or higher
+- Golang 1.18.x or higher
 
 - Docker 17.05 or higher
 
@@ -77,14 +77,19 @@ your cloud or cluster to form the devfile registry.
     following:
 
     ```docker {% filename="Dockerfile" %}
-    FROM quay.io/openshift-pipeline/golang:1.15-alpine AS builder
-    # Install dependencies
-    RUN apk add --no-cache git bash
+    FROM registry.access.redhat.com/ubi8/go-toolset:1.18 AS builder
+    # Run tasks as root
+    USER root
+    # Install yq
+    RUN curl -sL -O https://github.com/mikefarah/yq/releases/download/v4.9.5/yq_linux_amd64 -o /usr/local/bin/yq && mv ./yq_linux_amd64 /usr/local/bin/yq && chmod +x /usr/local/bin/yq
+    # Copy registry contents
     COPY . /registry
     # Download the registry build tools
     RUN git clone https://github.com/devfile/registry-support.git /registry-support
     # Run the registry build tools
     RUN /registry-support/build-tools/build.sh /registry /build
+    # Reset user as non-root
+    USER 1001
     FROM quay.io/devfile/devfile-index-base:next
     COPY --from=builder /build/index.json /index.json
     COPY --from=builder /build/stacks /stacks
@@ -147,3 +152,4 @@ build, run, and deploy your application.
 ### Additional resources
 
 - For information on deploying the devfile index container image, see [deploying a devfile registry](./deploying-a-devfile-registry).
+- For information on deploying to air-gapped environment, see [installation of in-cluster offline devfile registry](./installation-of-in-cluster-offline-devfile-registry).
