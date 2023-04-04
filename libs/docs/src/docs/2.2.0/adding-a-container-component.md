@@ -121,12 +121,12 @@ configuration of a container in a workspace using the `container` component type
     `infinity` argument depend on the base image used in the particular
     images.
 
-    All tools will respect the specified `command`. When `command` 
-    is not defined, the container will use the default from the 
-    image specified. When `command` is defined, it will override 
-    the one present in the image as intended. Either the 
-    `command` defined by the image or by the container component 
-    within the devfile must be non-terminating, such as the case 
+    All tools will respect the specified `command`. When `command`
+    is not defined, the container will use the default from the
+    image specified. When `command` is defined, it will override
+    the one present in the image as intended. Either the
+    `command` defined by the image or by the container component
+    within the devfile must be non-terminating, such as the case
     of setting `command` to `sleep` with the `infinity` argument.
 
     ```yaml {% filename="devfile.yaml" %}

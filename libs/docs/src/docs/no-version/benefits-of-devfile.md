@@ -3,6 +3,8 @@ title: Benefits of devfile
 description: Benefits of devfile
 ---
 
+## Why devfiles?
+
 With devfiles, you can make workspaces composed of multiple containers.
 In these containers, you can create any number of identical workspaces
 from the same devfile. If you create multiple workspaces, you can share
@@ -27,6 +29,13 @@ Devfiles have the following benefits:
 - Find available devfile stacks or samples in a devfile registry
 
 - Produce consistent build and run behaviors
+
+## Who is devfile for?
+
+- [Application developers](./application-developer)
+- [Enterprise architects and runtime providers](./enterprise-architect-and-runtime-provider)
+- [Registry administrators](./registry-administrator)
+- [Technology and tool builders](./technology-and-tool-builders)
 
 ## Additional resources
 

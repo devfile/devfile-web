@@ -12,7 +12,37 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- title: Components
+- title: General
+  links:
+    - title: Innerloop versus outerloop
+      href: ./innerloop-vs-outerloop
+    - title: Referring to a parent devfile
+      href: ./referring-to-a-parent-devfile
+    - title: Extending kubernetes resources
+      href: ./overriding-pod-and-container-attributes
+- title: API reference
+  links:
+    - title: Devfile schema
+      href: ./devfile-schema
+- title: Authoring devfiles
+  links:
+    - title: Overview
+      href: ./authoring-overview
+    - title: Creating a devfile
+      href: ./create-devfiles
+    - title: Defining variables
+      href: ./defining-variables
+    - title: Defining attributes
+      href: ./defining-attributes
+    - title: Packaging devfile
+      href: ./packaging-devfile
+- title: Authoring devfiles - Projects
+  links:
+    - title: Adding projects
+      href: ./adding-projects
+    - title: Defining starter projects
+      href: ./defining-starter-projects
+- title: Authoring devfiles - Components
   links:
     - title: Adding components
       href: ./adding-components
@@ -32,7 +62,7 @@
       href: ./defining-endpoints
     - title: Defining kubernetes resources
       href: ./defining-kubernetes-resources
-- title: Commands
+- title: Authoring devfiles - Commands
   links:
     - title: Adding commands
       href: ./adding-commands
@@ -44,31 +74,7 @@
       href: ./adding-an-apply-command
     - title: Adding a composite command
       href: ./adding-a-composite-command
-- title: Events
+- title: Authoring devfiles - Events
   links:
     - title: Adding event bindings
       href: ./adding-event-bindings
-- title: General
-  links:
-    - title: Defining variables
-      href: ./defining-variables
-    - title: Defining attributes
-      href: ./defining-attributes
-    - title: Extending kubernetes resources
-      href: ./overriding-pod-and-container-attributes
-    - title: Adding projects
-      href: ./adding-projects
-    - title: Defining starter projects
-      href: ./defining-starter-projects
-    - title: Referring to a parent devfile
-      href: ./referring-to-a-parent-devfile
-    - title: Creating devfiles with templates
-      href: ./create-devfiles-with-templates
-    - title: Innerloop versus outerloop
-      href: ./innerloop-vs-outerloop
-    - title: Packaging devfile
-      href: ./packaging-devfile
-- title: API reference
-  links:
-    - title: Devfile schema
-      href: ./devfile-schema
