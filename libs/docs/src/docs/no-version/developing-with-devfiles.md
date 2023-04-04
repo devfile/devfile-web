@@ -3,6 +3,11 @@ title: Developing with devfiles
 description: Developing with devfiles
 ---
 
+A devfile is a `yaml` file. After you include it in your local
+environment, the devfile provides ways to automate your processes. Tools
+like `odo` run the devfile and apply its guidelines to your environment.
+You can configure the devfile based on your unique development needs.
+
 To get a better understanding of what devfiles can help build, take a look at a few tools that currently support devfile.
 
 ## Quick start guides

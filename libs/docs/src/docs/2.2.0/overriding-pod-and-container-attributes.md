@@ -14,7 +14,7 @@ This attribute can be defined at the component level.
 ### Procedure
 1. Specify "container-overrides" at the component level.
     ```yaml {% title="Specify container-overrides to override security context for container at component level" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     components:
       - name: maven
         attributes:
@@ -43,7 +43,7 @@ This attribute can be defined at the component and devfile attributes levels. If
 ### Procedure
 1. Specify "pod-overrides" at the component level.
     ```yaml {% title="Specify pod-overrides to override security context for container at component level" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     components:
       - name: maven
         attributes:
@@ -56,7 +56,7 @@ This attribute can be defined at the component and devfile attributes levels. If
 
 2. Specify "pod-overrides" at the devfile attributes level. It will be defined as a top-level attribute.
     ```yaml {% title="Specify pod-overrides to override resources for container at the devfile level" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     attributes:
       pod-overrides:
         spec:

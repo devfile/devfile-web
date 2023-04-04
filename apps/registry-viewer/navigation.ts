@@ -45,6 +45,7 @@ export const footerNavigation: FooterNavigation = {
     { name: 'Cloud Native Computing Foundation', href: 'https://www.cncf.io' },
     { name: 'Registry', href: '/' },
     { name: 'Documentation', href: `https://devfile.io/docs/${defaultVersion}/what-is-a-devfile` },
+    { name: 'Community', href: `https://devfile.io/docs/${defaultVersion}/community` },
   ],
   social: [
     {

@@ -19,38 +19,16 @@ top:
         href: ./what-is-a-devfile
       - title: Benefits of devfile
         href: ./benefits-of-devfile
-      - title: Users of devfile
-        href: ./users-of-devfile
-      - title: How to work with devfiles
-        href: ./how-to-work-with-devfiles
-      - title: Developing with devfiles
-        href: ./developing-with-devfiles
-  - title: Quick start
-    links:
-      - title: Overview
-        href: ./overview
-      - title: Versions
-        href: ./versions
-      - title: Metadata
-        href: ./metadata
-      - title: Library
-        href: ./library
-      - title: Resources
-        href: ./resources
-      - title: Integrate with editors
-        href: ./integrate-with-editors
-  - title: Get started
-    links:
       - title: Devfile ecosystem
         href: ./devfile-ecosystem
-      - title: Application developer
-        href: ./application-developer
-      - title: Enterprise architect and runtime provider
-        href: ./enterprise-architect-and-runtime-provider
-      - title: Registry administrator
-        href: ./registry-administrator
-      - title: Technology and tool builders
-        href: ./technology-and-tool-builders
+  - title: Get started
+    links:
+      - title: Developing with devfiles
+        href: ./developing-with-devfiles
+      - title: Integrate with editors
+        href: ./integrate-with-editors
+      - title: Library
+        href: ./library
 bottom:
   - title: Registry
     links:

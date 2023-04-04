@@ -19,7 +19,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
     - This example will use `nodejs-18` UBI image
 
     ```yaml
-    schemaVersion: 2.2.1-alpha
+    schemaVersion: <version>
     metadata:
       name: nodejs
     components:
@@ -119,7 +119,7 @@ In a devfile spec, there are two scopes of deployment: innerloop and outerloop. 
     ```
 
 ```yaml {% title="Final innerloop devfile" filename="devfile.yaml" %}
-schemaVersion: 2.2.1-alpha
+schemaVersion: <version>
 metadata:
   name: nodejs
 components:
@@ -255,7 +255,7 @@ The component and commands here allow the developer to build, run, debug, and te
     ```
 
 ```yaml {% title="Final outerloop devfile" filename="devfile.yaml" %}
-schemaVersion: 2.2.1-alpha
+schemaVersion: <version>
 metadata:
   name: nodejs
 components:

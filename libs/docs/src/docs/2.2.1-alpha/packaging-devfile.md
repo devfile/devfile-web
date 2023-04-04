@@ -5,7 +5,7 @@ description: Packaging devfile
 
 ## Creating a devfile
 
-To create a devfile, you can [start from scratch](./create-devfiles-with-templates) or use the [public community devfile registry](https://registry.devfile.io/viewer) to find predefined stacks for popular languages and frameworks. Once you have a devfile, save it as `.devfile.yaml` to your application’s root directory.
+To create a devfile, you can [start from scratch](./create-devfiles) or use the [public community devfile registry](https://registry.devfile.io/viewer) to find predefined stacks for popular languages and frameworks. Once you have a devfile, save it as `.devfile.yaml` to your application’s root directory.
 
 ## Resources to include with your devfile
 

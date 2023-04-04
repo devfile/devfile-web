@@ -1,6 +1,6 @@
 ---
-title: Creating devfiles with templates
-description: Creating devfiles with templates
+title: Creating devfiles
+description: Creating devfiles
 ---
 
 Most dev tools can utilize the devfile registry to 
@@ -25,10 +25,10 @@ building sample templates for common use cases.
     - `metadata` is optional but it is recommended to have in your 
     templates
     ```yaml {% title="Minimal Devfile" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     ```
     ```yaml {% title="Minimal Devfile with Metadata" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     metadata:
       name: devfile-sample
       version: 2.0.0
@@ -46,7 +46,7 @@ building sample templates for common use cases.
         the template
         - For improved readability on devfile registries, set `displayName` to the title that will be the display text for this template and `icon` to tie a stack icon to the template:
         ```yaml
-          schemaVersion: 2.2.0
+          schemaVersion: <version>
           metadata:
             name: web-service
             version: 1.0.0
@@ -131,7 +131,7 @@ building sample templates for common use cases.
           ```
     5. Completing the content, the complete devfile should look like the following:
     ```yaml {% title="Complete Web Service Template" filename="devfile.yaml" %}
-    schemaVersion: 2.2.0
+    schemaVersion: <version>
     metadata:
       name: web-service
       version: 1.0.0
