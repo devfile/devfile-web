@@ -1,0 +1,80 @@
+# Copyright 2023 Red Hat, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- title: General
+  links:
+    - title: Innerloop versus outerloop
+      href: ./innerloop-vs-outerloop
+    - title: Referring to a parent devfile
+      href: ./referring-to-a-parent-devfile
+    - title: Extending kubernetes resources
+      href: ./overriding-pod-and-container-attributes
+- title: API reference
+  links:
+    - title: Devfile schema
+      href: ./devfile-schema
+- title: Authoring devfiles
+  links:
+    - title: Overview
+      href: ./authoring-overview
+    - title: Creating a devfile
+      href: ./create-devfiles
+    - title: Defining variables
+      href: ./defining-variables
+    - title: Defining attributes
+      href: ./defining-attributes
+    - title: Packaging devfile
+      href: ./packaging-devfile
+- title: Authoring devfiles - Projects
+  links:
+    - title: Adding projects
+      href: ./adding-projects
+    - title: Defining starter projects
+      href: ./defining-starter-projects
+- title: Authoring devfiles - Components
+  links:
+    - title: Adding components
+      href: ./adding-components
+    - title: Adding a kubernetes or openshift component
+      href: ./adding-a-kubernetes-or-openshift-component
+    - title: Adding a container component
+      href: ./adding-a-container-component
+    - title: Adding an image component
+      href: ./adding-an-image-component
+    - title: Adding a volume component
+      href: ./adding-a-volume-component
+    - title: Limiting resources usage
+      href: ./limiting-resources-usage
+    - title: Defining environment variables
+      href: ./defining-environment-variables
+    - title: Defining endpoints
+      href: ./defining-endpoints
+    - title: Defining kubernetes resources
+      href: ./defining-kubernetes-resources
+- title: Authoring devfiles - Commands
+  links:
+    - title: Adding commands
+      href: ./adding-commands
+    - title: Adding a command group
+      href: ./adding-a-command-group
+    - title: Adding an exec command
+      href: ./adding-an-exec-command
+    - title: Adding an apply command
+      href: ./adding-an-apply-command
+    - title: Adding a composite command
+      href: ./adding-a-composite-command
+- title: Authoring devfiles - Events
+  links:
+    - title: Adding event bindings
+      href: ./adding-event-bindings
