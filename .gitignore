@@ -45,3 +45,7 @@ Thumbs.db
 **/*/.env.test.local
 **/*/.env.production.local
 **/*/__ENV.js
+
+.odo/env
+.odo/odo-file-index.json
+.odo
