@@ -179,7 +179,6 @@ This guide will run through creating a simple hello world devfile project using 
 ## Additional Resources
 
 - [Devfile Schema](./devfile-schema)
-- [Authoring devfiles](./authoring-overview)
 - [Adding components](./adding-components)
 - [Adding commands](./adding-commands)
 - [odo docs](https://odo.dev/docs/introduction)

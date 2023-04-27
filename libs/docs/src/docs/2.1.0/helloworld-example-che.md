@@ -367,7 +367,6 @@ start your project, a similar devfile project workspace can be created using the
 ## Additional Resources
 
 - [Devfile Schema](./devfile-schema)
-- [Authoring devfiles](./authoring-overview)
 - [Adding components](./adding-components)
 - [Adding commands](./adding-commands)
 - [Eclipse Che docs](https://www.eclipse.org/che/docs/stable/overview/introduction-to-eclipse-che/)
