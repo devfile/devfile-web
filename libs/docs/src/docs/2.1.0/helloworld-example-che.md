@@ -153,7 +153,7 @@ This guide will run through creating a simple hello world devfile project using 
     - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
     - `commandLine` defines the shell command(s) to execute as part of that devfile command
     - The `group` specifies what `kind` of command it is or if it is the default of its kind, `isDefault`
-        - `build` commands runs before `run` commands, for more information see [Adding a command group](./adding-a-command-group)
+        - `build` commands runs before `run` commands
 
             ```yaml {% title="Install command" %}
             commands:
