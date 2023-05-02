@@ -5,7 +5,7 @@ description: "Hello world example: Eclipse Che"
 
 This guide will run through creating a simple hello world devfile project using Eclipse Che. The purpose of this guide is to provide a practical introduction to those just starting out with devfiles.
 
-## Perquisites
+## Prerequisites
 
 - Eclipse Che 7.62.x
 - `kubectl` or `oc`
