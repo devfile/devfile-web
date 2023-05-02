@@ -57,26 +57,26 @@ This guide will run through creating a simple hello world devfile project using 
     - `name` is the identifier used to refer to the component
     - `image` is the container image to use for the component
 
-        ```yaml {% filename=".devfile.yaml" %}
-        schemaVersion: <version>
-        components:
-          - name: runtime
-            container:
-              image: node:18-alpine
+        ```diff {% filename=".devfile.yaml" %}
+         schemaVersion: <version>
+        +components:
+        +  - name: runtime
+        +    container:
+        +      image: node:18-alpine
         ```
 
 5. The `runtime` container hosts the expressjs app created which listens on port `3000`, define this port in the component by specifying an entry under [`endpoints`](./devfile-schema#components-container-endpoints)
     - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
 
-        ```yaml {% filename=".devfile.yaml" %}
-        schemaVersion: <version>
-        components:
-          - name: runtime
-            container:
-              image: node:18-alpine
-              endpoints:
-                - name: http-3000
-                  targetPort: 3000
+        ```diff {% filename=".devfile.yaml" %}
+         schemaVersion: <version>
+         components:
+           - name: runtime
+             container:
+               image: node:18-alpine
+        +      endpoints:
+        +        - name: http-3000
+        +          targetPort: 3000
         ```
 
 6. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell `odo` what to do during the step of the [development runtime](https://odo.dev/docs/overview/dev_and_deploy#when-should-i-use-odo-dev) (`odo dev`). Define the command to install the dependencies needed to run the application (`npm install`)
@@ -87,29 +87,59 @@ This guide will run through creating a simple hello world devfile project using 
     - The `group` specifies what `kind` of command it is or if it is the default of its kind, `isDefault`
         - `build` commands runs before `run` commands
 
-            ```yaml {% filename=".devfile.yaml" %}
-            schemaVersion: <version>
-            components:
-              - name: runtime
-                container:
-                  image: node:18-alpine
-                  endpoints:
-                    - name: http-3000
-                      targetPort: 3000
-            commands:
-              - id: install
-                exec:
-                  commandLine: npm install
-                  component: runtime
-                  workingDir: ${PROJECT_SOURCE}
-                  group:
-                    isDefault: true
-                    kind: build
+            ```diff {% filename=".devfile.yaml" %}
+             schemaVersion: <version>
+             components:
+               - name: runtime
+                 container:
+                   image: node:18-alpine
+                   endpoints:
+                     - name: http-3000
+                       targetPort: 3000
+            +commands:
+            +  - id: install
+            +    exec:
+            +      commandLine: npm install
+            +      component: runtime
+            +      workingDir: ${PROJECT_SOURCE}
+            +      group:
+            +        isDefault: true
+            +        kind: build
             ```
 
 7. Next, define the command to run the application (`node app.js`)
 
-    ```yaml {% filename=".devfile.yaml" %}
+    ```diff {% filename=".devfile.yaml" %}
+     schemaVersion: <version>
+     components:
+       - name: runtime
+         container:
+           image: node:18-alpine
+           endpoints:
+             - name: http-3000
+               targetPort: 3000
+     commands:
+       - id: install
+         exec:
+           commandLine: npm install
+           component: runtime
+           workingDir: ${PROJECT_SOURCE}
+           group:
+             isDefault: true
+             kind: build
+    +  - id: run
+    +    exec:
+    +      commandLine: node app.js
+    +      component: runtime
+    +      workingDir: ${PROJECT_SOURCE}
+    +      group:
+    +        isDefault: true
+    +        kind: run
+    ```
+
+8. Now the devfile is ready to be used to run the application 
+
+    ```yaml {% title="Devfile for Hello World application" filename=".devfile.yaml" %}
     schemaVersion: <version>
     components:
       - name: runtime
@@ -137,7 +167,7 @@ This guide will run through creating a simple hello world devfile project using 
             kind: run
     ```
 
-8. Now the devfile is ready to be used to run the application with `odo`, with a configured `kubectl` or `oc` installed run `odo dev` and you should see the following output
+9. With `odo`, with a configured `kubectl` or `oc` installed run `odo dev` and you should see the following output
     
     ``` {% title="odo dev output" %}
      __
@@ -168,15 +198,15 @@ This guide will run through creating a simple hello world devfile project using 
         [p] - Manually apply local changes to the application on the cluster
     ```
 
-9. The application port `3000` served in the cluster gets routed to your host on a different port (in this case `20001`). Run `curl http://localhost:20001` and you should see the following output
+10. The application port `3000` served in the cluster gets routed to your host on a different port (in this case `20001`). Run `curl http://localhost:20001` and you should see the following output
 
     ``` {% title="Response content returned by curl" %}
     Hello world!%
     ```
 
-10. (Optional) Normally it is recommended to use `odo init` to start your project from a devfile registry stack, see [Developing with Node.JS](https://odo.dev/docs/user-guides/quickstart/nodejs#step-2-initializing-your-application-odo-init) and [Command Reference: odo init](https://odo.dev/docs/command-reference/init) for details
+11. (Optional) Normally it is recommended to use `odo init` to start your project from a devfile registry stack, see [Developing with Node.JS](https://odo.dev/docs/user-guides/quickstart/nodejs#step-2-initializing-your-application-odo-init) and [Command Reference: odo init](https://odo.dev/docs/command-reference/init) for details
 
-11. Congratulations! You have written your first devfile project with `odo`!
+12. Congratulations! You have written your first devfile project with `odo`!
 
 ## Additional Resources
 

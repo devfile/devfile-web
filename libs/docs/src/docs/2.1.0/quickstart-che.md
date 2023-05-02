@@ -125,13 +125,15 @@ This guide will run through creating a simple hello world devfile project using 
     - `che-code.eclipse.org/contributed-container` is a Eclipse Che specific field for referring to the contributed container component
     by the `name`
 
-        ```yaml {% title="Field changes for changing the component name" %}
-        components:
-          - attributes:
-              ...
-              che-code.eclipse.org/contributed-container: runtime
-            ...
-            name: runtime
+        ```diff {% title="Field changes for changing the component name" %}
+         components:
+           - attributes:
+               ...
+        -      che-code.eclipse.org/contributed-container: universal-developer-image
+        +      che-code.eclipse.org/contributed-container: runtime
+             ...
+        -    name: universal-developer-image
+        +    name: runtime
         ```
 
 7. Change the `sourceMapping` to `/projects/helloworld-example` in the `runtime` component to set the project directory
@@ -140,16 +142,16 @@ This guide will run through creating a simple hello world devfile project using 
 [`endpoints`](./devfile-schema#components-container-endpoints)
     - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
 
-        ```yaml {% title="Endpoints" %}
-        components:
-          - ...
-            container:
-              ...
-              endpoints:
-                - name: http-3000
-                  targetPort: 3000
-                ...
-            name: runtime
+        ```diff {% title="Endpoints" %}
+         components:
+           - ...
+             container:
+               ...
+        +      endpoints:
+        +        - name: http-3000
+        +          targetPort: 3000
+                 ...
+             name: runtime
         ```
 
 9. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell Che what to do during the step of the [development runtime](). Define the command to install the dependencies needed to run the application (`npm install`)
@@ -175,14 +177,6 @@ This guide will run through creating a simple hello world devfile project using 
 
     ```yaml {% title="Run command" %}
     commands:
-      - id: install
-        exec:
-          commandLine: npm install
-          component: runtime
-          workingDir: ${PROJECT_SOURCE}
-          group:
-            isDefault: true
-            kind: build
       - id: run
         exec:
           commandLine: node app.js
