@@ -359,7 +359,7 @@ a terminal with the following
     Listening on port 3000..
     ```
 
-15. Under the 'EXLPORER', expand the 'ENDPOINTS' panel and copy the `http-3000` endpoint URL
+15. Under the 'EXPLORER', expand the 'ENDPOINTS' panel and copy the `http-3000` endpoint URL
 
 16. Paste the endpoint URL in a new tab and the response should just show "Hello World!"
 
