@@ -5,7 +5,7 @@ description: "Hello world example: odo v3"
 
 This guide will run through creating a simple hello world devfile project using `odo` version 3. The purpose of this guide is to provide a practical introduction to those just starting out with devfiles.
 
-## Perquisites
+## Prerequisites
 
 - `odo` v3
 - `kubectl` or `oc`
