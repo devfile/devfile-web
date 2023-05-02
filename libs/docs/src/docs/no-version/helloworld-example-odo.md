@@ -16,7 +16,7 @@ This guide will run through creating a simple hello world devfile project using 
 
 1. Install `odo` version 3 if you do not already have it by following the [Installation guide](https://odo.dev/docs/overview/installation)
 
-2. Create a directory to store a simple [hello world expressjs](https://expressjs.com/en/starter/hello-world.html) application
+2. Create a directory to store a simple [hello world Express.js](https://expressjs.com/en/starter/hello-world.html) application
     
     ```json {% title="package.json file" filename="package.json" %}
     {

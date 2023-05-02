@@ -18,7 +18,7 @@ This guide will run through creating a simple hello world devfile project using 
     1. Sign in / Sign up with a free Red Hat account and use [Che Developer Sandbox](https://developers.redhat.com/developer-sandbox/ide)
     2. Setup a [local instance of Eclipse Che](https://www.eclipse.org/che/docs/stable/administration-guide/installing-che-locally/)
 
-2. For the hello world example, we will create a simple [hello world expressjs](https://expressjs.com/en/starter/hello-world.html) application
+2. For the hello world example, we will create a simple [hello world Express.js](https://expressjs.com/en/starter/hello-world.html) application
 
 3. In Eclipse Che, create an empty workspace
 
