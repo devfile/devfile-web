@@ -14,7 +14,9 @@ This guide will run through creating a simple hello world devfile project using 
 
 ## Procedure
 
-1. Start by creating a directory to store a simple [hello world expressjs](https://expressjs.com/en/starter/hello-world.html) application
+1. Install `odo` version 3 if you do not already have it by following the [Installation guide](https://odo.dev/docs/overview/installation)
+
+2. Create a directory to store a simple [hello world expressjs](https://expressjs.com/en/starter/hello-world.html) application
     
     ```json {% title="package.json file" filename="package.json" %}
     {
@@ -45,13 +47,13 @@ This guide will run through creating a simple hello world devfile project using 
     })
     ```
 
-2. Create a devfile with the filename `.devfile.yaml`. Add the [`schemaVersion`](./devfile-schema#schema-version) field with the desired devfile specification version to use
+3. Create a devfile with the filename `.devfile.yaml`. Add the [`schemaVersion`](./devfile-schema#schema-version) field with the desired devfile specification version to use
 
     ```yaml {% filename=".devfile.yaml" %}
     schemaVersion: <version>
     ```
 
-3. Next, create the first component to serve as the runtime for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `runtime` and the `node:18-alpine` image
+4. Next, create the first component to serve as the runtime for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `runtime` and the `node:18-alpine` image
     - `name` is the identifier used to refer to the component
     - `image` is the container image to use for the component
 
@@ -63,7 +65,7 @@ This guide will run through creating a simple hello world devfile project using 
               image: node:18-alpine
         ```
 
-4. The `runtime` container hosts the expressjs app created which listens on port `3000`, define this port in the component by specifying an entry under [`endpoints`](./devfile-schema#components-container-endpoints)
+5. The `runtime` container hosts the expressjs app created which listens on port `3000`, define this port in the component by specifying an entry under [`endpoints`](./devfile-schema#components-container-endpoints)
     - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
 
         ```yaml {% filename=".devfile.yaml" %}
@@ -77,7 +79,7 @@ This guide will run through creating a simple hello world devfile project using 
                   targetPort: 3000
         ```
 
-5. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell `odo` what to do during the step of the [development runtime](https://odo.dev/docs/overview/dev_and_deploy#when-should-i-use-odo-dev) (`odo dev`). Define the command to install the dependencies needed to run the application (`npm install`)
+6. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell `odo` what to do during the step of the [development runtime](https://odo.dev/docs/overview/dev_and_deploy#when-should-i-use-odo-dev) (`odo dev`). Define the command to install the dependencies needed to run the application (`npm install`)
     - The `id` field identifies the command by a label which can be used to specify which command to run by the dev tool
         - Example: `odo dev --build-command install`
     - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
@@ -105,7 +107,7 @@ This guide will run through creating a simple hello world devfile project using 
                     kind: build
             ```
 
-6. Next, define the command to run the application (`node app.js`)
+7. Next, define the command to run the application (`node app.js`)
 
     ```yaml {% filename=".devfile.yaml" %}
     schemaVersion: <version>
@@ -135,7 +137,7 @@ This guide will run through creating a simple hello world devfile project using 
             kind: run
     ```
 
-7. Now the devfile is ready to be used to run the application with `odo`, with a configured `kubectl` or `oc` installed run `odo dev` and you should see the following output
+8. Now the devfile is ready to be used to run the application with `odo`, with a configured `kubectl` or `oc` installed run `odo dev` and you should see the following output
     
     ``` {% title="odo dev output" %}
      __
@@ -166,15 +168,15 @@ This guide will run through creating a simple hello world devfile project using 
         [p] - Manually apply local changes to the application on the cluster
     ```
 
-8. The application port `3000` served in the cluster gets routed to your host on a different port (in this case `20001`). Run `curl http://localhost:20001` and you should see the following output
+9. The application port `3000` served in the cluster gets routed to your host on a different port (in this case `20001`). Run `curl http://localhost:20001` and you should see the following output
 
     ``` {% title="Response content returned by curl" %}
     Hello world!%
     ```
 
-9. (Optional) Normally it is recommended to use `odo init` to start your project from a devfile registry stack, see [Developing with Node.JS](https://odo.dev/docs/user-guides/quickstart/nodejs#step-2-initializing-your-application-odo-init) and [Command Reference: odo init](https://odo.dev/docs/command-reference/init) for details
+10. (Optional) Normally it is recommended to use `odo init` to start your project from a devfile registry stack, see [Developing with Node.JS](https://odo.dev/docs/user-guides/quickstart/nodejs#step-2-initializing-your-application-odo-init) and [Command Reference: odo init](https://odo.dev/docs/command-reference/init) for details
 
-10. Congratulations! You have written your first devfile project with `odo`!
+11. Congratulations! You have written your first devfile project with `odo`!
 
 ## Additional Resources
 
