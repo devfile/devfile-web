@@ -8,7 +8,6 @@ This guide will run through creating a simple hello world devfile project using 
 ## Prerequisites
 
 - `odo` v3
-- Docker 17.05 or higher
 - Access to a Kubernetes or OpenShift cluster
 
 ## Procedure

@@ -9,7 +9,6 @@ This guide will run through creating a simple hello world devfile project using 
 
 - Eclipse Che 7.62.x
 - `kubectl` or `oc`
-- Docker 17.05 or higher
 - Access to a Kubernetes or OpenShift cluster
 
 ## Procedure
