@@ -24,7 +24,7 @@ This guide will run through creating a simple hello world devfile project using 
     
     ```json {% title="package.json file" filename="package.json" %}
     {
-        "name": "helloworld-devfile",
+        "name": "helloworld-example",
         "version": "1.0.0",
         "description": "",
         "main": "app.js",
@@ -32,6 +32,9 @@ This guide will run through creating a simple hello world devfile project using 
         "dependencies": {
             "@types/express": "^4.17.17",
             "express": "^4.18.2"
+        },
+        "scripts": {
+            "start": "node app.js"
         }
     }
     ```
@@ -51,13 +54,16 @@ This guide will run through creating a simple hello world devfile project using 
     })
     ```
 
-5. Create a devfile with the filename `.devfile.yaml`. Add the [`schemaVersion`](./devfile-schema#schema-version) field with the desired devfile specification version to use
+5. (Optional) Normally it is recommended to use `odo init` to start your project from a devfile registry stack, see [Developing with Node.JS](https://odo.dev/docs/user-guides/quickstart/nodejs#step-2-initializing-your-application-odo-init) and [Command Reference: odo init](https://odo.dev/docs/command-reference/init) for details, steps 6-11 will go through the process of making the devfile from scratch
+    - For this project, run `odo init --name helloworld-example --devfile nodejs`, to test this devfile in action, skip to step 12
+
+6. Create a devfile with the filename `.devfile.yaml`. Add the [`schemaVersion`](./devfile-schema#schema-version) field with the desired devfile specification version to use
 
     ```yaml {% filename=".devfile.yaml" %}
     schemaVersion: <version>
     ```
 
-6. Next, create the first component to serve as the runtime for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `runtime` and the `node:18-alpine` image
+7. Next, create the first component to serve as the runtime for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `runtime` and the `node:18-alpine` image
     - `name` is the identifier used to refer to the component
     - `image` is the container image to use for the component
 
@@ -69,7 +75,7 @@ This guide will run through creating a simple hello world devfile project using 
         +      image: node:18-alpine
         ```
 
-7. The `runtime` container hosts the expressjs app created which listens on port `3000`, define this port in the component by specifying an entry under [`endpoints`](./devfile-schema#components-container-endpoints)
+8. The `runtime` container hosts the expressjs app created which listens on port `3000`, define this port in the component by specifying an entry under [`endpoints`](./devfile-schema#components-container-endpoints)
     - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
 
         ```diff {% filename=".devfile.yaml" %}
@@ -83,7 +89,7 @@ This guide will run through creating a simple hello world devfile project using 
         +          targetPort: 3000
         ```
 
-8. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell `odo` what to do during the step of the [development runtime](https://odo.dev/docs/overview/dev_and_deploy#when-should-i-use-odo-dev) (`odo dev`). Define the command to install the dependencies needed to run the application (`npm install`)
+9. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell `odo` what to do during the step of the [development runtime](https://odo.dev/docs/overview/dev_and_deploy#when-should-i-use-odo-dev) (`odo dev`). Define the command to install the dependencies needed to run the application (`npm install`)
     - The `id` field identifies the command by a label which can be used to specify which command to run by the dev tool
         - Example: `odo dev --build-command install`
     - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
@@ -111,7 +117,7 @@ This guide will run through creating a simple hello world devfile project using 
             +        kind: build
             ```
 
-9. Next, define the command to run the application (`node app.js`)
+10. Next, define the command to run the application (`node app.js`)
 
     ```diff {% filename=".devfile.yaml" %}
      schemaVersion: <version>
@@ -141,7 +147,7 @@ This guide will run through creating a simple hello world devfile project using 
     +        kind: run
     ```
 
-10. Now the devfile is ready to be used to run the application 
+11. Now the devfile is ready to be used to run the application 
 
     ```yaml {% title="Devfile for Hello World application" filename=".devfile.yaml" %}
     schemaVersion: <version>
@@ -171,7 +177,7 @@ This guide will run through creating a simple hello world devfile project using 
             kind: run
     ```
 
-11. Run `odo dev` and you should see the following output
+12. Run `odo dev` and you should see the following output
     
     ``` {% title="odo dev output" %}
      __
@@ -202,13 +208,11 @@ This guide will run through creating a simple hello world devfile project using 
         [p] - Manually apply local changes to the application on the cluster
     ```
 
-12. The application port `3000` served in the cluster gets routed to your host on a different port (in this case `20001`). Run `curl http://localhost:20001` and you should see the following output
+13. The application port `3000` served in the cluster gets routed to your host on a different port (in this case `20001`). Run `curl http://localhost:20001` and you should see the following output
 
     ``` {% title="Response content returned by curl" %}
     Hello world!%
     ```
-
-13. (Optional) Normally it is recommended to use `odo init` to start your project from a devfile registry stack, see [Developing with Node.JS](https://odo.dev/docs/user-guides/quickstart/nodejs#step-2-initializing-your-application-odo-init) and [Command Reference: odo init](https://odo.dev/docs/command-reference/init) for details
 
 14. Congratulations! You have written your first devfile project with `odo`!
 
