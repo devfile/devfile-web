@@ -25,7 +25,7 @@ This guide will run through creating a simple hello world devfile project using 
 4. Close and stop the workspace
 
 5. Go to 'Edit the workspace' and view the devfile. The devfile should be populated with content similar to the following
-    - The `schemaVersion` of the devfile should be left to what Eclipse Che supports, currently `2.1.0`
+    - The `schemaVersion` of the devfile should be left to what Eclipse Che supports
     - The `metadata.namespace` field is the target namespace your project will be deployed in, for our current intent and purposes this can be left alone
 
         ```yaml {% title="Empty workspace devfile" %}
