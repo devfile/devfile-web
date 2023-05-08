@@ -7,7 +7,7 @@ This guide will run through creating a simple hello world devfile project using 
 
 ## Prerequisites
 
-- Eclipse Che 7.62.x
+- Eclipse Che 7.60.x
 - `kubectl` or `oc`
 - Access to a Kubernetes or OpenShift cluster
 
