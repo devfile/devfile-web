@@ -14,8 +14,8 @@
 
 - title: Get started
   links:
-    - title: "Hello world example: odo v3"
-      href: ./helloworld-example-odo
+    - title: "Quick start with odo v3"
+      href: ./quickstart-odo
     - title: Developing with devfiles
       href: ./developing-with-devfiles
     - title: Integrate with editors

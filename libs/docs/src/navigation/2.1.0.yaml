@@ -14,10 +14,10 @@
 
 - title: Get started
   links:
-    - title: "Hello world example: odo v3"
-      href: ./helloworld-example-odo
-    - title: "Hello world example: Eclipse Che"
-      href: ./helloworld-example-che
+    - title: "Quick start with odo v3"
+      href: ./quickstart-odo
+    - title: "Quick start with Eclipse Che"
+      href: ./quickstart-che
     - title: Developing with devfiles
       href: ./developing-with-devfiles
     - title: Integrate with editors

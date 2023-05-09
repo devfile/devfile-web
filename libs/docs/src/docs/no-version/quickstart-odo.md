@@ -1,6 +1,6 @@
 ---
-title: "Hello world example: odo v3"
-description: "Hello world example: odo v3"
+title: "Quick start with odo v3"
+description: "Quick start with odo v3"
 ---
 
 This guide will run through creating a simple hello world devfile project using `odo` version 3. The purpose of this guide is to provide a practical introduction to those just starting out with devfiles.
