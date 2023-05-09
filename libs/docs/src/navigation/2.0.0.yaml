@@ -12,6 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- title: Get started
+  links:
+    - title: "Hello world example: odo v3"
+      href: ./helloworld-example-odo
+    - title: Developing with devfiles
+      href: ./developing-with-devfiles
+    - title: Integrate with editors
+      href: ./integrate-with-editors
+    - title: Library
+      href: ./library
 - title: Components
   links:
     - title: Adding components
