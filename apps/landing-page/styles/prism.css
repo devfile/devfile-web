@@ -66,3 +66,17 @@ pre[class*='language-'] {
 .token.combinator {
   color: theme('colors.slate.400');
 }
+
+/* deleted diff styling */
+.token.deleted-sign {
+  font-weight: bold;
+  color: theme('colors.rose.200');
+  background-color: theme('colors.rose.900');
+}
+
+/* inserted diff styling */
+.token.inserted {
+  font-weight: bold;
+  color: theme('colors.green.200');
+  background-color: theme('colors.green.900');
+}
