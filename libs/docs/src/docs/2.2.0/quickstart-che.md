@@ -22,205 +22,7 @@ This guide will run through creating a simple hello world devfile project using 
 
 3. In Eclipse Che, create an empty workspace
 
-4. Close and stop the workspace
-
-5. Go to 'Edit the workspace' and view the devfile. The devfile should be populated with content similar to the following
-    - The `schemaVersion` of the devfile should be left to what Eclipse Che supports
-    - The `metadata.name` field is the name of the workspace for the project
-    - The `metadata.namespace` field is the target namespace your project will be deployed in, for our current intent and purposes this can be left alone
-
-        ```yaml {% title="Empty workspace devfile" %}
-        schemaVersion: <version>
-        metadata:
-          name: empty-arh4
-          namespace: <user>-che
-        attributes:
-          controller.devfile.io/devworkspace-config:
-            name: devworkspace-config
-            namespace: eclipse-che
-          controller.devfile.io/storage-type: per-user
-        components:
-          - attributes:
-              controller.devfile.io/merge-contribution: true
-            container:
-              env:
-                - name: CHE_DASHBOARD_URL
-                  value: '...'
-                - name: CHE_PLUGIN_REGISTRY_URL
-                  value: '...'
-                - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-                  value: '...'
-                - name: OPENVSX_REGISTRY_URL
-                  value: '...'
-              image: 'quay.io/devfile/universal-developer-image:ubi8-latest'
-              sourceMapping: /projects
-            name: universal-developer-image
-        ```
-
-        {% callout title="Note!" %}
-        Your devfile many differ depending on the version of Che being used.
-
-        Careful when editing and removing fields from the devfile for your workspace,
-        a portion of these initial fields are used to configure the workspace itself.
-        The following steps will show what changes can be made to meet our goal.
-        {% /callout %}
-
-6. Change the value of the `name` field to set the component name to `runtime`
-
-    ```diff {% title="Field change for component name" %}
-     components:
-       - attributes:
-           controller.devfile.io/merge-contribution: true
-         container:
-           env:
-             - name: CHE_DASHBOARD_URL
-               value: '...'
-             - name: CHE_PLUGIN_REGISTRY_URL
-               value: '...'
-             - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-               value: '...'
-             - name: OPENVSX_REGISTRY_URL
-               value: '...'
-           image: 'quay.io/devfile/universal-developer-image:ubi8-latest'
-           sourceMapping: /projects
-    -    name: universal-developer-image
-    +    name: runtime
-    ```
-
-7. Change the `sourceMapping` to `/projects/helloworld-example` in the `runtime` component to set the project directory
-
-    ```diff {% title="Field change for project directory" %}
-     components:
-       - attributes:
-           controller.devfile.io/merge-contribution: true
-         container:
-           env:
-             - name: CHE_DASHBOARD_URL
-               value: '...'
-             - name: CHE_PLUGIN_REGISTRY_URL
-               value: '...'
-             - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-               value: '...'
-             - name: OPENVSX_REGISTRY_URL
-               value: '...'
-           image: 'quay.io/devfile/universal-developer-image:ubi8-latest'
-    -      sourceMapping: /projects
-    +      sourceMapping: /projects/helloworld-example
-         name: runtime
-    ```
-
-8. The `runtime` container will host the expressjs app which listens on port `3000`, define this port in the component by specifying an entry under 
-[`endpoints`](./devfile-schema#components-container-endpoints)
-    - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
-
-        ```diff {% title="Endpoints" %}
-         components:
-           - attributes:
-               controller.devfile.io/merge-contribution: true
-             container:
-               env:
-                 - name: CHE_DASHBOARD_URL
-                   value: '...'
-                 - name: CHE_PLUGIN_REGISTRY_URL
-                   value: '...'
-                 - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-                   value: '...'
-                 - name: OPENVSX_REGISTRY_URL
-                   value: '...'
-               image: 'quay.io/devfile/universal-developer-image:ubi8-latest'
-               sourceMapping: /projects/helloword-example
-        +      endpoints:
-        +        - name: http-3000
-        +          targetPort: 3000
-             name: runtime
-        ```
-
-9. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell Che what to do during the step of the development runtime. Define the command to install the dependencies needed to run the application (`npm install`)
-    - The `id` field identifies the command by a label which can be used to specify which command to run by the dev tool
-    - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
-    - `commandLine` defines the shell command(s) to execute as part of that devfile command
-    - The `group` specifies what `kind` of command it is or if it is the default of its kind, `isDefault`
-        - `build` commands runs before `run` commands
-
-            ```yaml {% title="Install command" %}
-            commands:
-              - id: install
-                exec:
-                  commandLine: npm install
-                  component: runtime
-                  workingDir: ${PROJECT_SOURCE}
-                  group:
-                    isDefault: true
-                    kind: build
-            ```
-
-10. Next, define the command to run the application (`node app.js`)
-
-    ```yaml {% title="Run command" %}
-    commands:
-      - id: run
-        exec:
-          commandLine: node app.js
-          component: runtime
-          workingDir: ${PROJECT_SOURCE}
-          group:
-            isDefault: true
-            kind: run
-    ```
-
-11. Now the devfile is ready to be used to run the application with Eclipse Che
-
-    ```yaml {% title="Complete Workspace Devfile" %}
-    schemaVersion: <version>
-    metadata:
-      name: empty-arh4
-      namespace: <user>-che
-    attributes:
-      controller.devfile.io/devworkspace-config:
-        name: devworkspace-config
-        namespace: eclipse-che
-      controller.devfile.io/storage-type: per-user
-    components:
-      - attributes:
-          controller.devfile.io/merge-contribution: true
-        container:
-          env:
-            - name: CHE_DASHBOARD_URL
-              value: '...'
-            - name: CHE_PLUGIN_REGISTRY_URL
-              value: '...'
-            - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
-              value: '...'
-            - name: OPENVSX_REGISTRY_URL
-              value: '...'
-          image: 'quay.io/devfile/universal-developer-image:ubi8-latest'
-          sourceMapping: /projects/helloworld-example
-          endpoints:
-            - name: http-3000
-              targetPort: 3000
-        name: runtime
-    commands:
-      - id: install
-        exec:
-          commandLine: npm install
-          component: runtime
-          workingDir: ${PROJECT_SOURCE}
-          group:
-            isDefault: true
-            kind: build
-      - id: run
-        exec:
-          commandLine: node app.js
-          component: runtime
-          workingDir: ${PROJECT_SOURCE}
-          group:
-            isDefault: true
-            kind: run
-    ```
-
-12. Start and open the workspace
-
-13. Before we can run the devfile, create the files which make up the simple [hello world Express.js](https://expressjs.com/en/starter/hello-world.html) application
+4. Create the files which make up the simple [hello world Express.js](https://expressjs.com/en/starter/hello-world.html) application
     
     ```json {% title="package.json file" filename="package.json" %}
     {
@@ -251,7 +53,117 @@ This guide will run through creating a simple hello world devfile project using 
     })
     ```
 
-14. Run the `install` command by opening the menu, open 'Terminal/Run Task', under the 'Run Task' menu open 'devfile/devfile: install', the task should open
+5. Create a devfile with the filename `.devfile.yaml`. The devfile should be populated with content similar to the following
+    - The `schemaVersion` of the devfile should be left to what Eclipse Che supports
+    - The `metadata.name` field is the name of the workspace for the project
+
+        ```yaml {% filename=".devfile.yaml" %}
+        schemaVersion: <version>
+        metadata:
+          name: helloworld-example
+        ```
+
+6. Next, create the first component to serve as the runtime for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `runtime` and the `quay.io/devfile/universal-developer-image:ubi8-latest` image
+    - `name` is the identifier used to refer to the component
+    - `image` is the container image to use for the component, the `quay.io/devfile/universal-developer-image` image is required for
+    Che to work
+
+        ```diff {% filename=".devfile.yaml" %}
+         schemaVersion: <version>
+         metadata:
+           name: helloworld-example
+        +components:
+        +  - name: runtime
+        +    container:
+        +      image: quay.io/devfile/universal-developer-image:ubi8-latest
+        ```
+
+7. The `runtime` container will host the expressjs app which listens on port `3000`, define this port in the component by specifying an entry 
+under [`endpoints`](./devfile-schema#components-container-endpoints)
+    - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
+
+        ```diff {% filename=".devfile.yaml" %}
+         schemaVersion: <version>
+         metadata:
+           name: helloworld-example
+         components:
+           - name: runtime
+             container:
+               image: quay.io/devfile/universal-developer-image:ubi8-latest
+        +      endpoints:
+        +        - name: http-3000
+        +          targetPort: 3000
+        ```
+
+8. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell Che what to do during the step of the development runtime. Define the command to install the dependencies needed to run the application (`npm install`)
+    - The `id` field identifies the command by a label which can be used to specify which command to run by the dev tool
+    - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
+    - `commandLine` defines the shell command(s) to execute as part of that devfile command
+    - The `group` specifies what `kind` of command it is or if it is the default of its kind, `isDefault`
+        - `build` commands runs before `run` commands
+
+            ```yaml {% title="Install command" %}
+            commands:
+              - id: install
+                exec:
+                  commandLine: npm install
+                  component: runtime
+                  workingDir: ${PROJECT_SOURCE}
+                  group:
+                    isDefault: true
+                    kind: build
+            ```
+
+9. Next, define the command to run the application (`node app.js`)
+
+    ```yaml {% title="Run command" %}
+    commands:
+      - id: run
+        exec:
+          commandLine: node app.js
+          component: runtime
+          workingDir: ${PROJECT_SOURCE}
+          group:
+            isDefault: true
+            kind: run
+    ```
+
+10. Now the devfile is ready to be used to run the application with Eclipse Che
+
+    ```yaml {% title="Complete Workspace Devfile" filename=".devfile.yaml"  %}
+    schemaVersion: <version>
+    metadata:
+      name: helloworld-example
+    components:
+      - name: runtime
+        container:
+          image: quay.io/devfile/universal-developer-image:ubi8-latest
+          endpoints:
+            - name: http-3000
+              targetPort: 3000
+    commands:
+      - id: install
+        exec:
+          commandLine: npm install
+          component: runtime
+          workingDir: ${PROJECT_SOURCE}
+          group:
+            isDefault: true
+            kind: build
+      - id: run
+        exec:
+          commandLine: node app.js
+          component: runtime
+          workingDir: ${PROJECT_SOURCE}
+          group:
+            isDefault: true
+            kind: run
+    ```
+
+11. Click 'Eclipse Che' in the bottom left corner, then select 'Eclipse Che: Restart Workspace from Local Devfile' to reload the workspace
+with the new devfile
+
+12. Once the workspace has finished restarting, run the `install` command by opening the menu, open 'Terminal/Run Task', under the 'Run Task' menu open 'devfile/devfile: install', the task should open
 a terminal with the following
 
     ``` {% title="Output of running the 'install' command in Che" %}
@@ -272,7 +184,7 @@ a terminal with the following
      *  Terminal will be reused by tasks, press any key to close it. 
     ```
 
-15. Run the application with the `run` command by going through the same steps as `install` but under the 'Run Task' menu open 'devfile/devfile: run', the task should open
+13. Run the application with the `run` command by going through the same steps as `install` but under the 'Run Task' menu open 'devfile/devfile: run', the task should open
     - The `run` command will execute until the user interrupts it, such as killing it with *Ctrl-C*
 
     ``` {% title="Output of running the 'run' command in Che" %}
@@ -281,14 +193,14 @@ a terminal with the following
     Listening on port 3000..
     ```
 
-16. Under the 'EXPLORER', expand the 'ENDPOINTS' panel and copy the `http-3000` endpoint URL
+14. Under the 'EXPLORER', expand the 'ENDPOINTS' panel and copy the `http-3000` endpoint URL
 
-17. Paste the endpoint URL in a new tab and the response should just show "Hello World!"
+15. Paste the endpoint URL in a new tab and the response should just show "Hello World!"
 
-18. (Optional) Normally when creating a workspace it is recommended to use a sample under 'Select a Sample' from the embedded devfile registry to 
+16. (Optional) Normally when creating a workspace it is recommended to use a sample under 'Select a Sample' from the embedded devfile registry to 
 start your project, a similar devfile project workspace can be created using the 'Node.js Express Web Application' sample
 
-19. Congratulations! You have written your first devfile project with Eclipse Che!
+17. Congratulations! You have written your first devfile project with Eclipse Che!
 
 ## Additional Resources
 
