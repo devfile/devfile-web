@@ -21,6 +21,18 @@ top:
         href: ./benefits-of-devfile
       - title: Devfile ecosystem
         href: ./devfile-ecosystem
+  - title: Get started
+    links:
+      - title: "Quick start with odo v3"
+        href: ./quickstart-odo
+      - title: "Quick start with Eclipse Che"
+        href: ./quickstart-che
+      - title: Developing with devfiles
+        href: ./developing-with-devfiles
+      - title: Integrate with editors
+        href: ./integrate-with-editors
+      - title: Library
+        href: ./library
 bottom:
   - title: Registry
     links:
