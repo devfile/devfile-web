@@ -63,7 +63,7 @@ This guide will run through creating a simple hello world devfile project using 
           name: helloworld-example
         ```
 
-6. Next, create the first component to serve as the runtime for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `runtime` and the `quay.io/devfile/universal-developer-image:ubi8-latest` image
+6. Next, create the first component to serve as the dev environment for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `dev-tooling` and the `quay.io/devfile/universal-developer-image:latest` image
     - `name` is the identifier used to refer to the component
     - `image` is the container image to use for the component, the `quay.io/devfile/universal-developer-image` image is required for
     Che to work
@@ -73,12 +73,12 @@ This guide will run through creating a simple hello world devfile project using 
          metadata:
            name: helloworld-example
         +components:
-        +  - name: runtime
+        +  - name: dev-tooling
         +    container:
         +      image: quay.io/devfile/universal-developer-image:ubi8-latest
         ```
 
-7. The `runtime` container will host the expressjs app which listens on port `3000`, define this port in the component by specifying an entry 
+7. The `dev-tooling` container will host the expressjs app which listens on port `3000`, define this port in the component by specifying an entry 
 under [`endpoints`](./devfile-schema#components-container-endpoints)
     - Each endpoint has at least a `name` to identify them and the `targetPort` to specify the port number to forward
 
@@ -87,7 +87,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
          metadata:
            name: helloworld-example
          components:
-           - name: runtime
+           - name: dev-tooling
              container:
                image: quay.io/devfile/universal-developer-image:ubi8-latest
         +      endpoints:
@@ -107,7 +107,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
               - id: install
                 exec:
                   commandLine: npm install
-                  component: runtime
+                  component: dev-tooling
                   workingDir: ${PROJECT_SOURCE}
                   group:
                     isDefault: true
@@ -121,7 +121,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
       - id: run
         exec:
           commandLine: node app.js
-          component: runtime
+          component: dev-tooling
           workingDir: ${PROJECT_SOURCE}
           group:
             isDefault: true
@@ -135,7 +135,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
     metadata:
       name: helloworld-example
     components:
-      - name: runtime
+      - name: dev-tooling
         container:
           image: quay.io/devfile/universal-developer-image:ubi8-latest
           endpoints:
@@ -145,7 +145,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
       - id: install
         exec:
           commandLine: npm install
-          component: runtime
+          component: dev-tooling
           workingDir: ${PROJECT_SOURCE}
           group:
             isDefault: true
@@ -153,7 +153,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
       - id: run
         exec:
           commandLine: node app.js
-          component: runtime
+          component: dev-tooling
           workingDir: ${PROJECT_SOURCE}
           group:
             isDefault: true
