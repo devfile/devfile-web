@@ -54,7 +54,8 @@ This guide will run through creating a simple hello world devfile project using 
     ```
 
 5. Create a devfile with the filename `.devfile.yaml`. The devfile should be populated with content similar to the following
-    - The `schemaVersion` of the devfile should be left to what Eclipse Che supports
+    - The `schemaVersion` of the devfile can to set to the desired devfile specification version to use
+        - It is recommended to use the latest release, currently `2.2.0`
     - The `metadata.name` field is the name of the workspace for the project
 
         ```yaml {% filename=".devfile.yaml" %}
