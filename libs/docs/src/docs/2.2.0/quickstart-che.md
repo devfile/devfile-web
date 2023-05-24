@@ -65,8 +65,7 @@ This guide will run through creating a simple hello world devfile project using 
 
 6. Next, create the first component to serve as the dev environment for the project, for this use the [`container`](./devfile-schema#components-container) component with the name `dev-tooling` and the `quay.io/devfile/universal-developer-image:latest` image
     - `name` is the identifier used to refer to the component
-    - `image` is the container image to use for the component, the `quay.io/devfile/universal-developer-image` image is required for
-    Che to work
+    - `image` is the container image to use for the component, `quay.io/devfile/universal-developer-image` is the default development tooling image used by Eclipse Che with multiple programming languages supports (including Node.js).
 
         ```diff {% filename=".devfile.yaml" %}
          schemaVersion: <version>
