@@ -99,19 +99,18 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
     - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
     - `commandLine` defines the shell command(s) to execute as part of that devfile command
     - The `group` specifies what `kind` of command it is or if it is the default of its kind, `isDefault`
-        - `build` commands runs before `run` commands
 
-            ```yaml {% title="Install command" %}
-            commands:
-              - id: install
-                exec:
-                  commandLine: npm install
-                  component: dev-tooling
-                  workingDir: ${PROJECT_SOURCE}
-                  group:
-                    isDefault: true
-                    kind: build
-            ```
+        ```yaml {% title="Install command" %}
+        commands:
+          - id: install
+            exec:
+              commandLine: npm install
+              component: dev-tooling
+              workingDir: ${PROJECT_SOURCE}
+              group:
+                isDefault: true
+                kind: build
+        ```
 
 9. Next, define the command to run the application (`node app.js`)
 
