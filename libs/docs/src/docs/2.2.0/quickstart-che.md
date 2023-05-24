@@ -15,8 +15,8 @@ This guide will run through creating a simple hello world devfile project using 
 
 1. Obtain access to Eclipse Che if you do not already have it, as an individual this can be done by setting up a [local instance of Eclipse Che](https://www.eclipse.org/che/docs/stable/administration-guide/installing-che-locally/)
     - You can use `minikube` to run your cluster locally, follow [these](https://minikube.sigs.k8s.io/docs/start/) steps to get started
-    - An alternative is to use the [Red Hat Developer Sandbox](https://developers.redhat.com/developer-sandbox/ide), see 
-    [Quick start with OpenShift Dev Spaces](../2.1.0/quickstart-sandbox) guide if this method is used
+    - An alternative is to use the [Eclipse Che hosted by Red Hat](https://developers.redhat.com/developer-sandbox/ide), see 
+    [the corresponding guide](https://www.eclipse.org/che/docs/stable/hosted-che/hosted-che/) in Eclipse Che documentation if this method is used
 
 2. For this quick start guide, we will create a simple [hello world Express.js](https://expressjs.com/en/starter/hello-world.html) application
 
