@@ -94,7 +94,7 @@ under [`endpoints`](./devfile-schema#components-container-endpoints)
         +          targetPort: 3000
         ```
 
-8. Now that the `runtime` container is defined, [`commands`](./devfile-schema#commands) are needed to tell Che what to do during the step of the development runtime. Define the command to install the dependencies needed to run the application (`npm install`)
+8. Now that the `dev-tooling` container is defined, [`commands`](./devfile-schema#commands) are useful to add in the IDE (the default is VS Code) some UI elements to guide developers during the development cycle. Define the command to install the dependencies needed to run the application (`npm install`)
     - The `id` field identifies the command by a label which can be used to specify which command to run by the dev tool
     - An [`exec`](./devfile-schema#commands-exec) command specifies explicit shell command(s) to run on a given `component`
     - `commandLine` defines the shell command(s) to execute as part of that devfile command
