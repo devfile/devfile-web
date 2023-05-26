@@ -25,6 +25,10 @@ Add the necessary policy settings and compliance policies as part of the devfile
 
 - [Overview](./overview)
 
+- [Quick start with odo v3](./quickstart-odo)
+
+- [Quick start with Eclipse Che](./quickstart-che)
+
 - [Onboarding process and requirements of the community registry](https://github.com/devfile/registry/blob/main/CONTRIBUTING.md)
 
 - [Community registry viewer](https://registry.devfile.io/viewer)
