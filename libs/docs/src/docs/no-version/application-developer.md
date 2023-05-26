@@ -28,3 +28,7 @@ The inner-loop and outer-loop instructions defined in the devfile allow you to t
 - [API reference](./devfile-schema)
 
 - [Community registry viewer](https://registry.devfile.io/viewer)
+
+- [Quick start with odo v3](./quickstart-odo)
+
+- [Quick start with Eclipse Che](./quickstart-che)

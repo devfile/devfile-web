@@ -23,6 +23,10 @@ top:
         href: ./devfile-ecosystem
   - title: Get started
     links:
+      - title: "Quick start with odo v3"
+        href: ./quickstart-odo
+      - title: "Quick start with Eclipse Che"
+        href: ./quickstart-che
       - title: Developing with devfiles
         href: ./developing-with-devfiles
       - title: Integrate with editors
