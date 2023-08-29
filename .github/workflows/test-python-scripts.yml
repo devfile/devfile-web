@@ -33,7 +33,7 @@ jobs:
         python-version: ['3.9']
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
