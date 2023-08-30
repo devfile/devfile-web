@@ -35,10 +35,6 @@ The main goal of this stage is:
 
 - Git
 
-- Curl
-
-- Archive Tools (such as `unzip`)
-
 ### Create Offline Registry
 
 Download / clone the
@@ -90,37 +86,6 @@ devfile**.
     $ podman push <registry_host>:<port>/<project>/nodejs-16:latest
     ```
 
-### Packaging Starter Projects
-
-To package starter projects you will need to download them manually then
-place them under `/stacks/<stack>/<zip>-offline.zip`. Procedure here
-will require you to **change the devfile**.
-
-{% callout title="Note!" %}
-Starter projects must be packaged under an archive with the
-suffix `-offline` to be pulled into the registry.
-{% /callout %}
-
-#### Procedure
-
-1. `zip` - Download archive
-
-    ```shell-session {% title="Example" %}
-    $ cd /path/to/registry
-    $ curl -L https://code.quarkus.io/d?e=io.quarkus%3Aquarkus-resteasy&e=io.quarkus%3Aquarkus-micrometer&e=io.quarkus%3Aquarkus-smallrye-health&e=io.quarkus%3Aquarkus-openshift&cn=devfile \
-        -o stacks/java-quarkus/community-offline.zip
-    ```
-
-2. `git` - Package cloned contents into a directory then archive
-
-    ```shell-session {% title="Example" %}
-    $ cd /path/to/registry
-    $ git clone https://github.com/odo-devfiles/nodejs-ex.git \
-        stacks/nodejs/nodejs-starter-offline
-    $ cd stacks/nodejs
-    $ zip -r nodejs-starter-offline.zip nodejs-starter-offline
-    ```
-
 ### Modify Devfile
 
 Change the devfile so you can update references to those offline
@@ -129,50 +94,9 @@ the registry, update the corresponding devfile entries to reference the
 resources within the offline version in the registry.
 
 {% callout title="Note!" %}
-- All location references to `starterProjects` will change to local
-    paths relative to the stacks directory.
-
 - Stack component image references will change to use the offline
     accessible image repository.
 {% /callout %}
-
-#### Procedure
-
-1. Under `starterProjects`, find the starter project definition you
-    want to make offline.
-
-2. Under the definition for the starter project find either `git` or
-    `zip`:
-
-    ```yaml {% title="Before: Starter Project" filename="devfile.yaml" %}
-    starterProjects:
-     - name: nodejs-starter
-    git:
-      remotes:
-      origin: https://github.com/odo-devfiles/nodejs-ex.git
-    ```
-
-3. Do one of the following depending on the block type:
-
-    - If `git`, replace all of the `git` block with a `zip` block and
-      add the `location` to be the path to the local file under the
-      stack root directory (`<registry_root>/stacks/<stack>/`).
-
-    - If `zip`, replace the value of `location` to the local file
-      under the stack root directory
-      (`<registry_root>/stacks/<stack>/`).
-
-#### Verification step
-
-To confirm you modified your devfile, verify your altered starter
-project definition is similar to the following example:
-
-```yaml {% title="After: Starter Project" filename="devfile.yaml" %}
-starterProjects:
-  - name: nodejs-starter
-  zip:
-    location: nodejs-starter-offline.zip
-```
 
 ### Build Registry
 
@@ -185,10 +109,10 @@ starterProjects:
     $ cd /path/to/registry
     ```
 
-2. Build the registry image.
+2. Build the offline registry image.
 
     ```shell-session
-    $ bash .ci/build.sh
+    $ bash .ci/build.sh offline
     ```
 
 ### Additional resources
