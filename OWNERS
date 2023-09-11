@@ -1,11 +1,23 @@
 # See the OWNERS docs: <https://git.k8s.io/community/contributors/guide/owners.md>
 
 approvers:
-- maysunfaisal
+- elsony
 - johnmcollier
-- mike-hoang
+- kim-tsao
+- maysunfaisal
+- michael-valdron
+- thepetk
+- yangcao77
+- feloy
+- rm3l
 
 reviewers:
-- maysunfaisal
+- elsony
 - johnmcollier
-- mike-hoang
+- kim-tsao
+- maysunfaisal
+- michael-valdron
+- thepetk
+- yangcao77
+- feloy
+- rm3l
