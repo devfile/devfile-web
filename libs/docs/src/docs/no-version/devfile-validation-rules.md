@@ -69,5 +69,5 @@ Common rules for all components types:
 - If `checkoutFrom.remote` is mentioned, validate it against the starter project remote configured map
 
 ## Projects
-- If more than one remote is configured, a checkout remote is mandatory
+- `checkoutFrom.remote` is mandatory if more than one remote is configured
 - If checkout remote is mentioned, validate it against the starter project remote configured map
