@@ -1,4 +1,4 @@
-# Copyright 2023 Red Hat, Inc.
+# Copyright Red Hat
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -179,7 +179,7 @@ def update_typescript(versions: typing.List[str], stable: str, path: str) -> Non
     with open(path, "w", encoding="UTF-8") as file:
         file.write(
             f"""/**
- * Copyright 2023 Red Hat, Inc.
+ * Copyright Red Hat
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
