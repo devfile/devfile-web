@@ -46,7 +46,6 @@ jobs:
 
       - name: Lint
         run: |
-          yarn nx workspace-lint
           yarn nx format:check
           yarn nx affected --target=lint --parallel=3
 
