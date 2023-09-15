@@ -31,7 +31,7 @@ export interface DevfileStarterProjectsProps {
 export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.Element | null {
   const { devfile, starterProjects, className } = props;
 
-  const [selectedProject, setSelectedProject] = useState<typeof starterProjects[number]>(
+  const [selectedProject, setSelectedProject] = useState<(typeof starterProjects)[number]>(
     starterProjects[0],
   );
 

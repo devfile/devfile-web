@@ -16,7 +16,7 @@
 
 import { docVersions } from '../config';
 
-export type DocVersions = typeof docVersions[number];
+export type DocVersions = (typeof docVersions)[number];
 export interface Page {
   title: string;
   href: string;
