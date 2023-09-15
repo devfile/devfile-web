@@ -1,5 +1,5 @@
 /**
- * Copyright 2023 Red Hat, Inc.
+ * Copyright Red Hat
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ export interface DevfileStarterProjectsProps {
 export function DevfileStarterProjects(props: DevfileStarterProjectsProps): JSX.Element | null {
   const { devfile, starterProjects, className } = props;
 
-  const [selectedProject, setSelectedProject] = useState<typeof starterProjects[number]>(
+  const [selectedProject, setSelectedProject] = useState<(typeof starterProjects)[number]>(
     starterProjects[0],
   );
 
