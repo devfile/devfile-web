@@ -33,6 +33,8 @@ top:
         href: ./integrate-with-editors
       - title: Library
         href: ./library
+      - title: Devfile validation rules
+        href: ./devfile-validation-rules
 bottom:
   - title: Registry
     links:
