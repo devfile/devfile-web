@@ -10,3 +10,4 @@
 **/dist
 **/*/__ENV.js
 libs/core/src/types/devfile-spec.ts
+.yarn/
