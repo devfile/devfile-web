@@ -37,6 +37,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+
       - name: Set SHA
         uses: nrwl/nx-set-shas@v2
 

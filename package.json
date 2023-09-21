@@ -2,6 +2,9 @@
   "name": "devfile-web",
   "version": "1.0.0",
   "license": "Apache-2.0",
+  "engines": {
+    "node": "18"
+  },
   "scripts": {
     "start": "nx serve",
     "build": "nx build",
