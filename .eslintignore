@@ -3,3 +3,4 @@ apps/landing-page/pages/docs
 **/next-env.d.ts
 **/dist
 **/*/__ENV.js
+.yarn/

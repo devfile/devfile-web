@@ -65,15 +65,7 @@ export function Hero(): JSX.Element {
         <div className="lg:max-w-8xl mx-auto grid max-w-2xl grid-cols-1 items-center gap-y-16 gap-x-8 px-4 lg:grid-cols-2 lg:px-8 xl:gap-x-16 xl:px-12">
           <div className="relative z-10 md:text-center lg:text-left">
             <div className="absolute bottom-full right-full -mr-72 -mb-56 opacity-50">
-              <Image
-                src={blurCyanImage}
-                alt=""
-                layout="fixed"
-                width={530}
-                height={530}
-                unoptimized
-                priority
-              />
+              <Image src={blurCyanImage} alt="" width={530} height={530} unoptimized priority />
             </div>
             <div className="relative">
               <p className="font-display via-devfile inline bg-gradient-to-r from-indigo-200 to-indigo-200 bg-clip-text text-5xl tracking-tight text-transparent">
@@ -106,26 +98,10 @@ export function Hero(): JSX.Element {
             </div>
             <div className="relative">
               <div className="absolute -top-64 -right-64">
-                <Image
-                  src={blurCyanImage}
-                  alt=""
-                  layout="fixed"
-                  width={530}
-                  height={530}
-                  unoptimized
-                  priority
-                />
+                <Image src={blurCyanImage} alt="" width={530} height={530} unoptimized priority />
               </div>
               <div className="absolute -bottom-40 -right-44">
-                <Image
-                  src={blurIndigoImage}
-                  alt=""
-                  layout="fixed"
-                  width={567}
-                  height={567}
-                  unoptimized
-                  priority
-                />
+                <Image src={blurIndigoImage} alt="" width={567} height={567} unoptimized priority />
               </div>
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10 blur-lg" />
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-tr from-sky-300 via-sky-300/70 to-blue-300 opacity-10" />
