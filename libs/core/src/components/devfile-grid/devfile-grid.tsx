@@ -76,10 +76,7 @@ export function DevfileGrid(props: DevfileGridProps): JSX.Element {
               {devfile.tags && (
                 <div className="mt-2 flex flex-wrap gap-2 md:mt-4">
                   {devfile.tags.slice(0, 4).map((tag) => (
-                    <span
-                      key={tag}
-                      className={getDevfileTagClasses(tag)}
-                    >
+                    <span key={tag} className={getDevfileTagClasses(tag)}>
                       {tag}
                     </span>
                   ))}

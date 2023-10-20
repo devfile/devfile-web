@@ -21,7 +21,10 @@ import { useMemo } from 'react';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { compareSemanticVersions, type Devfile } from '../../functions';
 import type { DevfileSpec } from '../../types';
-import { getDevfileTags, getDevfileTagClasses } from '../../functions/get-devfile-tags/get-devfile-tags';
+import {
+  getDevfileTags,
+  getDevfileTagClasses,
+} from '../../functions/get-devfile-tags/get-devfile-tags';
 
 export interface DevfileDatalistProps {
   devfile: Devfile;
@@ -128,10 +131,7 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
               <ul className="flex flex-wrap gap-2">
                 {devfileTags.map((tag) => (
                   <li key={tag}>
-                    <Link
-                      href={`/?tags=${tag}`}
-                      className={getDevfileTagClasses(tag)}
-                    >
+                    <Link href={`/?tags=${tag}`} className={getDevfileTagClasses(tag)}>
                       {tag}
                     </Link>
                   </li>

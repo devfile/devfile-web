@@ -23,7 +23,10 @@ export const deprecatedTag = 'Deprecated';
  *
  * @returns a list of tags
  */
-export function getDevfileTags(versionDevfile: VersionDevfile | undefined, devfile: Devfile): string[] {
+export function getDevfileTags(
+  versionDevfile: VersionDevfile | undefined,
+  devfile: Devfile,
+): string[] {
   if (versionDevfile !== undefined) {
     return versionDevfile.tags;
   }
@@ -36,7 +39,6 @@ export function getDevfileTags(versionDevfile: VersionDevfile | undefined, devfi
  * @returns the class names according to the given tag
  */
 export function getDevfileTagClasses(tag: string): string {
-  
   let colorTag = 'devfile';
   if (tag === deprecatedTag) {
     colorTag = deprecatedTag.toLowerCase();
