@@ -19,6 +19,8 @@ import Link from 'next/link';
 import slugify from '@sindresorhus/slugify';
 import { Devfile } from '../../functions';
 
+import { getDevfileTagClasses } from '../../functions/get-devfile-tags/get-devfile-tags';
+
 export interface DevfileGridProps {
   devfiles: Devfile[];
 }
@@ -76,7 +78,7 @@ export function DevfileGrid(props: DevfileGridProps): JSX.Element {
                   {devfile.tags.slice(0, 4).map((tag) => (
                     <span
                       key={tag}
-                      className="bg-devfile/5 border-devfile/50 text-devfile inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium md:text-sm"
+                      className={getDevfileTagClasses(tag)}
                     >
                       {tag}
                     </span>
