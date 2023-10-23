@@ -45,6 +45,7 @@ module.exports = {
     extend: {
       colors: {
         devfile: 'rgb(47, 154, 242, <alpha-value>)',
+        deprecated: 'rgb(243, 46, 66, <alpha-value>)',
       },
       fontFamily: {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
