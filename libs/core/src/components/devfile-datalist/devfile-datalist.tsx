@@ -21,6 +21,10 @@ import { useMemo } from 'react';
 import { StringParam, useQueryParam, withDefault } from 'use-query-params';
 import { compareSemanticVersions, type Devfile } from '../../functions';
 import type { DevfileSpec } from '../../types';
+import {
+  getDevfileTags,
+  getDevfileTagClasses,
+} from '../../functions/get-devfile-tags/get-devfile-tags';
 
 export interface DevfileDatalistProps {
   devfile: Devfile;
@@ -44,6 +48,8 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
     () => devfile.versions?.find((vD) => vD.version === devfileVersion),
     [devfile.versions, devfileVersion],
   );
+
+  const devfileTags = getDevfileTags(versionDevfile, devfile);
 
   return (
     <div className={className}>
@@ -118,17 +124,14 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
             {devfile.language}
           </dd>
         </div>
-        {devfile.tags && (
+        {devfileTags && (
           <div className="grid grid-cols-2 py-2.5 lg:block">
             <dt className="text-base font-medium text-slate-700 dark:text-sky-100">Tags</dt>
             <dd className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               <ul className="flex flex-wrap gap-2">
-                {devfile.tags.map((tag) => (
+                {devfileTags.map((tag) => (
                   <li key={tag}>
-                    <Link
-                      href={`/?tags=${tag}`}
-                      className="bg-devfile/5 hover:bg-devfile/10 active:bg-devfile/20 border-devfile/50 text-devfile inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium"
-                    >
+                    <Link href={`/?tags=${tag}`} className={getDevfileTagClasses(tag)}>
                       {tag}
                     </Link>
                   </li>
