@@ -9,7 +9,10 @@ for teams to collaborate across shared projects.
 
 ## Procedure
 
-- Parse a devfile by running:
+- Parse a devfile with the code below.
+  Note that the `Path` field in the `parser.ParserArgs` struct can be a relative or absolute path to any file or directory on the filesystem.
+  If it is a directory containing several files, the parser will try to discover a devfile based on the following file name priority order:
+  `devfile.yaml` > `.devfile.yaml` > `devfile.yml` > `.devfile.yml`.
 
 ```go
 // ParserArgs is the struct to pass into parser functions
