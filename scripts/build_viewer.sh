@@ -13,9 +13,14 @@
 # limitations under the License.
 
 #!/usr/bin/env bash
+shopt -s expand_aliases
+set -eux
 
 ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR=$ABSOLUTE_PATH/..
+
+# Set Docker/Podman alias if necessary
+. ${ABSOLUTE_PATH}/setenv.sh
 
 docker build --no-cache -t registry-viewer $BUILD_DIR \
     --build-arg PROJECT_NAME=registry-viewer \
