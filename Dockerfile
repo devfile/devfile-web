@@ -19,7 +19,7 @@ USER root
 # Install yarn & node-gyp dependency
 RUN \
   curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-  microdnf install -y yarn python3 gcc-c++ && \
+  microdnf install -y yarn python3 gcc-c++ make && \
   npm install --build-from-resource node-gyp
 
 # Project non-specific args
