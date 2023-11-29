@@ -124,10 +124,10 @@
   },
   "overrides": {
     "@nrwl/workspace": {
-      "@parcel/watcher": "2.3.0"
+      "@parcel/watcher": "2.1.0"
     },
     "@nx": {
-      "@parcel/watcher": "2.3.0"
+      "@parcel/watcher": "2.1.0"
     }
   }
 }
