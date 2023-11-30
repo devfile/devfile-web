@@ -121,13 +121,5 @@
     "typescript": "^4.9.3",
     "url-loader": "^4.1.1",
     "webpack": "^5.76.0"
-  },
-  "overrides": {
-    "@nrwl/workspace": {
-      "@parcel/watcher": "2.1.0"
-    },
-    "@nx": {
-      "@parcel/watcher": "2.1.0"
-    }
   }
 }

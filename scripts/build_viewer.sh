@@ -18,10 +18,11 @@ set -eux
 
 ABSOLUTE_PATH="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BUILD_DIR=$ABSOLUTE_PATH/..
+PLATFORM_EV=${PLATFORM_EV:-"linux/amd64"}
 
 # Set Docker/Podman alias if necessary
 . ${ABSOLUTE_PATH}/setenv.sh
 
-docker build --no-cache -t registry-viewer $BUILD_DIR \
+docker build --platform ${PLATFORM_EV} --no-cache -t registry-viewer $BUILD_DIR \
     --build-arg PROJECT_NAME=registry-viewer \
     --build-arg NEXT_PUBLIC_BASE_PATH=${NEXT_PUBLIC_BASE_PATH:-"/viewer"}
