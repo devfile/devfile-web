@@ -16,10 +16,11 @@
 FROM registry.access.redhat.com/ubi9/nodejs-18-minimal AS deps
 USER root
 
-# Install yarn
+# Install yarn & node-gyp dependency
 RUN \
   curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-  microdnf install -y yarn
+  microdnf install -y yarn python3 gcc-c++ make && \
+  npm install --build-from-resource node-gyp
 
 # Project non-specific args
 ARG PROJECT_NAME

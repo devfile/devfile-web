@@ -39,3 +39,7 @@ Owners of the repository will watch out for and review new PRs.
 If comments have been given in a review, they have to be addressed before merging.
 
 After addressing review comments, don’t forget to add a comment in the PR afterward, so everyone gets notified by Github and knows to re-review.
+
+## Troubleshooting
+
+- There is a known issue with Apple Silicon (arm64) architectures that may cause the `build_viewer.sh` script to fail. If this issue occurs first run `export PLATFORM_EV=linux/arm64`.
