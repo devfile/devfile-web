@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions are welcome!
+Thank you for your interest in contributing to the Devfile Web! We welcome your additions to this project.
 
 ## Code of Conduct
 
@@ -22,24 +22,30 @@ Signed-off-by: Firstname Lastname <email@email.com>
 
 Once you set your user.name and user.email in your git config, you can sign your commit automatically with `git commit -s`.
 
-## Getting Started
+## How to Contribute:
 
 ### Issues
 
-- Issues are tracked via the the [devfile/api](https://github.com/devfile/api) repo. Open or search for [issues](https://github.com/devfile/api/issues) with the label `area/landing-page`.
+- If you spot a problem with the **landing page**, [search if an issue already exists](https://github.com/devfile/api/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Flanding-page).
 
-- If a related issue doesn't exist, you can open a new issue using a relevant [issue form](https://github.com/devfile/api/issues/new/choose). You can tag issues with `/area landing-page`.
+- If you spot a problem with the **registry viewer**, [search if an issue already exists](https://github.com/devfile/api/issues?q=is%3Aissue+is%3Aopen+label%3Aarea%2Fregistry-viewer).
 
-### Pull Requests
+If a related issue doesn't exist, you can open a new issue using the [issue form](https://github.com/devfile/api/issues/new/choose). You can tag `landing page` related issues with the `/area landing-page` and `registry viewer` with the `area/registry-viewer` text in your issue.
+
+### Submitting Pull Request
 
 When you think the code is ready for review, create a pull request and link the issue associated with it.
 
-Owners of the repository will watch out for and review new PRs.
+Owners of the repository will watch out for new PRs and provide reviews to them.
 
 If comments have been given in a review, they have to be addressed before merging.
 
-After addressing review comments, don’t forget to add a comment in the PR afterward, so everyone gets notified by Github and knows to re-review.
+After addressing review comments, don't forget to add a comment in the PR with the reviewer mentioned afterward, so they get notified by Github to provide a re-review.
 
 ## Troubleshooting
 
 - There is a known issue with Apple Silicon (arm64) architectures that may cause the `build_viewer.sh` script to fail. If this issue occurs first run `export PLATFORM_EV=linux/arm64`.
+
+# Contact us
+
+If you have any questions, please visit us the `#devfile` channel under the [Kubernetes Slack](https://slack.k8s.io) workspace.
