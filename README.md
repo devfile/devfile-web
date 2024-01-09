@@ -1,4 +1,6 @@
 # devfile-web
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/8255/badge)](https://www.bestpractices.dev/projects/8255)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/devfile/devfile-web/badge)](https://securityscorecards.dev/viewer/?uri=github.com/devfile/devfile-web)
 
 Monorepo for web related devfile projects
 
