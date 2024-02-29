@@ -5,6 +5,8 @@ description: Defining endpoints
 
 Components of any type can specify the endpoints that the container exposes. These endpoints can be made accessible to the users if the {prod-short} cluster is running using a Kubernetes ingress or an OpenShift route and to the other components within the workspace. You can create an endpoint for your application or database, if your application or database server is listening on a port and you want to be able to directly interact with it yourself or you want other components to interact with it.
 
+TEMP UPDATE - DOC
+
 ## Procedure
 
 1. Specify endpoints properties as shown in the following example:
