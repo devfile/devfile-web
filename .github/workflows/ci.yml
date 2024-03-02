@@ -26,7 +26,7 @@ concurrency:
 jobs:
   main:
     name: Main Job
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest-large
 
     env:
       NX_SKIP_NX_CACHE: true
