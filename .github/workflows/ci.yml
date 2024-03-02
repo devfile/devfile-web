@@ -26,10 +26,11 @@ concurrency:
 jobs:
   main:
     name: Main Job
-    runs-on: ubuntu-latest-8-cores
+    runs-on: ubuntu-latest
 
     env:
       NX_SKIP_NX_CACHE: true
+      NODE_OPTIONS: "--max-old-space-size=4096"
 
     steps:
       - name: Checkout
