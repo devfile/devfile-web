@@ -30,7 +30,7 @@ jobs:
 
     env:
       NX_SKIP_NX_CACHE: true
-      NODE_OPTIONS: "--max-old-space-size=4096"
+      NODE_OPTIONS: '--max-old-space-size=4096'
 
     steps:
       - name: Checkout
