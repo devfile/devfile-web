@@ -57,8 +57,8 @@ jobs:
         run: |
           yarn nx affected --target=test --parallel=3 --ci --code-coverage
   
-  build:
-    name: Build
+  node-build:
+    name: Node Build
     runs-on: ubuntu-latest
 
     env:
@@ -84,6 +84,30 @@ jobs:
       - name: Build
         run: |
           yarn nx affected --target=build --parallel=3
+
+  docker-build:
+    name: Docker Build
+    runs-on: ubuntu-latest
+
+    env:
+      NX_SKIP_NX_CACHE: true
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Install
+        run: |
+          yarn install --frozen-lockfile
 
       - name: Docker Build
         run: |
