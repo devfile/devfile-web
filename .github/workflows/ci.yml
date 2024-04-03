@@ -24,8 +24,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  main:
-    name: Main Job
+  test-and-lint:
+    name: Test and Lint
     runs-on: ubuntu-latest
 
     env:
@@ -56,6 +56,30 @@ jobs:
       - name: Test
         run: |
           yarn nx affected --target=test --parallel=3 --ci --code-coverage
+  
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    env:
+      NX_SKIP_NX_CACHE: true
+      
+    steps:
+      - name: Checkout
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Install
+        run: |
+          yarn install --frozen-lockfile
 
       - name: Build
         run: |
@@ -64,6 +88,30 @@ jobs:
       - name: Docker Build
         run: |
           yarn nx affected --target=docker-build --parallel=3
+
+  e2e:
+    name: E2E
+    runs-on: ubuntu-latest
+
+    env:
+      NX_SKIP_NX_CACHE: true
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: 'package.json'
+
+      - name: Set SHA
+        uses: nrwl/nx-set-shas@v2
+
+      - name: Install
+        run: |
+          yarn install --frozen-lockfile
 
       - name: E2E
         run: |
