@@ -37,12 +37,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version-file: 'package.json'
 
       - name: Set SHA
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@76907e7e5d3cd17ddb5e2b123389f054bffcdd03 #v4.0.0
 
       - name: Install
         run: |
@@ -70,12 +70,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version-file: 'package.json'
 
       - name: Set SHA
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@76907e7e5d3cd17ddb5e2b123389f054bffcdd03 #v4.0.0
 
       - name: Install
         run: |
@@ -98,12 +98,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version-file: 'package.json'
 
       - name: Set SHA
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@76907e7e5d3cd17ddb5e2b123389f054bffcdd03 #v4.0.0
 
       - name: Install
         run: |
@@ -126,12 +126,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
           node-version-file: 'package.json'
 
       - name: Set SHA
-        uses: nrwl/nx-set-shas@v2
+        uses: nrwl/nx-set-shas@76907e7e5d3cd17ddb5e2b123389f054bffcdd03 #v4.0.0
 
       - name: Install
         run: |
