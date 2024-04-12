@@ -34,16 +34,15 @@ export function getDevfileTags(
 }
 
 /**
- * Checks if the given tag is equal to depracatedTag and returns the necessary css classes
+ * Checks if the given tag is equal to depracatedTag
  *
- * @returns the class names according to the given tag
+ * @returns bolean value
  */
-export function getDevfileTagClasses(tag: string): string {
-  let colorTag = 'devfile';
+export function isDeprecatedDevfile(tag: string): boolean {
   if (tag === DeprecatedTag) {
-    colorTag = DeprecatedTag.toLowerCase();
+    return true;
   }
-  return `bg-${colorTag}/5 hover:bg-${colorTag}/10 active:bg-${colorTag}/20 border-${colorTag}/50 text-${colorTag} inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium`;
+  return false;
 }
 
 export default getDevfileTags;

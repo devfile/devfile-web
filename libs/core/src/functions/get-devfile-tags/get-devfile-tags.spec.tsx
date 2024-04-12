@@ -15,7 +15,7 @@
  */
 
 import { VersionDevfile, Devfile, Registry } from '../fetch-devfiles/fetch-devfiles';
-import { DeprecatedTag, getDevfileTags, getDevfileTagClasses } from './get-devfile-tags';
+import { DeprecatedTag, getDevfileTags, isDeprecatedDevfile } from './get-devfile-tags';
 
 let undefinedVersionDevfile: undefined;
 
@@ -66,11 +66,7 @@ describe('getDevfileTags', () => {
 
 describe('getDevfileTags', () => {
   it('should execute successfully', () => {
-    const devfileClassName =
-      'bg-devfile/5 hover:bg-devfile/10 active:bg-devfile/20 border-devfile/50 text-devfile inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium';
-    const deprecatedClassName =
-      'bg-deprecated/5 hover:bg-deprecated/10 active:bg-deprecated/20 border-deprecated/50 text-deprecated inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium';
-    expect(getDevfileTagClasses(DeprecatedTag)).toEqual(deprecatedClassName);
-    expect(getDevfileTagClasses('tag')).toEqual(devfileClassName);
+    expect(isDeprecatedDevfile(DeprecatedTag)).toEqual(true);
+    expect(isDeprecatedDevfile('tag')).toEqual(false);
   });
 });
