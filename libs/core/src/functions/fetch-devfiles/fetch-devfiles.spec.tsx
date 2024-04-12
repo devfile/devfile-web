@@ -45,6 +45,7 @@ describe('fetchDevfiles', () => {
       .map((devfile) => ({
         ...devfile,
         _registry: devfileRegistries[0],
+        _deprecated: 'No',
       }))
       .sort((a, b) =>
         a.displayName.localeCompare(b.displayName, 'en', {
