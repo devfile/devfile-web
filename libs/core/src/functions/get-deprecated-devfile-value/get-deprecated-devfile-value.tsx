@@ -26,9 +26,7 @@ export const IsNotDeprecatedValue = 'No';
  *
  * @returns 'Yes' or 'No'
  */
-export function getDeprecatedDevfileValue(
-  devfile: DevfileJson,
-): string {
+export function getDeprecatedDevfileValue(devfile: DevfileJson): string {
   if (devfile.tags.includes(DeprecatedTag)) {
     return IsDeprecatedValue;
   }

@@ -16,8 +16,11 @@
 
 import { DevfileJson } from '../fetch-devfiles/fetch-devfiles';
 import { DeprecatedTag } from '../get-devfile-tags/get-devfile-tags';
-import { IsNotDeprecatedValue, IsDeprecatedValue, getDeprecatedDevfileValue } from './get-deprecated-devfile-value';
-
+import {
+  IsNotDeprecatedValue,
+  IsDeprecatedValue,
+  getDeprecatedDevfileValue,
+} from './get-deprecated-devfile-value';
 
 let deprecatedDevfileJson: DevfileJson;
 

@@ -141,7 +141,10 @@ function sortFilterElements(filterElements: FilterElement[]): FilterElement[] {
 
 function getFilterElements(
   devfiles: Devfile[],
-  property: keyof Pick<Devfile, 'tags' | 'type' | 'provider' | 'language' | '_registry' | '_deprecated' >,
+  property: keyof Pick<
+    Devfile,
+    'tags' | 'type' | 'provider' | 'language' | '_registry' | '_deprecated'
+  >,
   queryParam: string[],
 ): FilterElement[] {
   let elements: string[] = [];
