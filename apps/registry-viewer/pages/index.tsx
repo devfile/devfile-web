@@ -155,7 +155,7 @@ function getFilterElements(
         // _deprecated
         prev.push(value);
       } else {
-        // _registry,
+        // _registry
         prev.push(value.name);
       }
     }
