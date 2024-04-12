@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { getDeprecatedDevfileValue } from '../get-deprecated-devfile-value/get-devfile-tags';
+import { getDeprecatedDevfileValue } from '../get-deprecated-devfile-value/get-deprecated-devfile-value';
 
 interface DevfileJsonBase {
   name: string;
