@@ -16,7 +16,7 @@
 
 import { Devfile, VersionDevfile } from '../fetch-devfiles/fetch-devfiles';
 
-export const deprecatedTag = 'Deprecated';
+export const DeprecatedTag = 'Deprecated';
 /**
  * Checks if a versionDevfile exists and returns its tags. If
  * it doesn't exists returns the devfile tags
@@ -40,8 +40,8 @@ export function getDevfileTags(
  */
 export function getDevfileTagClasses(tag: string): string {
   let colorTag = 'devfile';
-  if (tag === deprecatedTag) {
-    colorTag = deprecatedTag.toLowerCase();
+  if (tag === DeprecatedTag) {
+    colorTag = DeprecatedTag.toLowerCase();
   }
   return `bg-${colorTag}/5 hover:bg-${colorTag}/10 active:bg-${colorTag}/20 border-${colorTag}/50 text-${colorTag} inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium`;
 }

@@ -29,6 +29,7 @@ export interface FilterParams {
   types: FilterElement[];
   providers: FilterElement[];
   languages: FilterElement[];
+  deprecated: FilterParams[];
 }
 
 const filters: {
@@ -37,6 +38,7 @@ const filters: {
   capitalize: boolean;
 }[] = [
   { name: 'Registries', property: 'registries', capitalize: false },
+  { name: 'Deprecated', property: 'deprecated', capitalize: false },
   { name: 'Tags', property: 'tags', capitalize: false },
   { name: 'Types', property: 'types', capitalize: true },
   { name: 'Providers', property: 'providers', capitalize: false },

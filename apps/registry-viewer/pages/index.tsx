@@ -141,7 +141,7 @@ function sortFilterElements(filterElements: FilterElement[]): FilterElement[] {
 
 function getFilterElements(
   devfiles: Devfile[],
-  property: keyof Pick<Devfile, 'tags' | 'type' | 'provider' | 'language' | '_registry'>,
+  property: keyof Pick<Devfile, 'tags' | 'type' | 'provider' | 'language' | '_registry' | '_deprecated' >,
   queryParam: string[],
 ): FilterElement[] {
   let elements: string[] = [];
@@ -152,9 +152,10 @@ function getFilterElements(
       if (Array.isArray(value)) {
         prev.push(...value);
       } else if (typeof value === 'string') {
+        // _deprecated
         prev.push(value);
       } else {
-        // _registry
+        // _registry,
         prev.push(value.name);
       }
     }
@@ -194,6 +195,7 @@ export const getServerSideProps: GetServerSideProps<IndexProps> = async (context
   const typeParam = getArrayParam(context.query.types);
   const providerParam = getArrayParam(context.query.providers);
   const languageParam = getArrayParam(context.query.languages);
+  const deprecatedParam = getArrayParam(context.query.deprecated);
 
   // get the devfiles
   const devfileRegistries = getDevfileRegistries();
@@ -213,11 +215,13 @@ export const getServerSideProps: GetServerSideProps<IndexProps> = async (context
       isSearchIn(devfile.tags, tagParam) &&
       isSearchIn(devfile.type, typeParam) &&
       isSearchIn(devfile.provider, providerParam) &&
-      isSearchIn(devfile.language, languageParam),
+      isSearchIn(devfile.language, languageParam) &&
+      isSearchIn(devfile._deprecated, deprecatedParam),
   );
 
   // get the filter elements
   const registries = getFilterElements(devfiles, '_registry', registryParam);
+  const deprecated = getFilterElements(devfiles, '_deprecated', deprecatedParam);
   const tags = getFilterElements(devfiles, 'tags', tagParam);
   const types = getFilterElements(devfiles, 'type', typeParam);
   const providers = getFilterElements(devfiles, 'provider', providerParam);
@@ -242,6 +246,7 @@ export const getServerSideProps: GetServerSideProps<IndexProps> = async (context
         types,
         providers,
         languages,
+        deprecated,
       },
     },
   };

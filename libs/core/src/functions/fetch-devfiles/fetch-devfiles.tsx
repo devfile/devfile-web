@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+import { getDeprecatedDevfileValue } from '../get-deprecated-devfile-value/get-devfile-tags';
+
 interface DevfileJsonBase {
   name: string;
   displayName: string;
@@ -68,6 +70,7 @@ export interface Registry {
 
 export type Devfile = DevfileJson & {
   _registry: Registry;
+  _deprecated: string;
 };
 
 export interface DevfileParams {
@@ -95,6 +98,7 @@ export async function fetchDevfiles(registries: Registry[]): Promise<Devfile[]> 
       devfileJsons[devfileRegistryIndex].map((devfile) => ({
         ...devfile,
         _registry: registry,
+        _deprecated: getDeprecatedDevfileValue(devfile),
       })),
     )
     .sort((a, b) =>
