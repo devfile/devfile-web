@@ -29,7 +29,7 @@ export interface FilterParams {
   types: FilterElement[];
   providers: FilterElement[];
   languages: FilterElement[];
-  deprecated: FilterParams[];
+  deprecated: FilterElement[];
 }
 
 const filters: {
