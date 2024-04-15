@@ -23,7 +23,7 @@ import { compareSemanticVersions, type Devfile } from '../../functions';
 import type { DevfileSpec } from '../../types';
 import {
   getDevfileTags,
-  getDevfileTagClasses,
+  isDeprecatedDevfile,
 } from '../../functions/get-devfile-tags/get-devfile-tags';
 
 export interface DevfileDatalistProps {
@@ -131,9 +131,21 @@ export function DevfileDatalist(props: DevfileDatalistProps): JSX.Element {
               <ul className="flex flex-wrap gap-2">
                 {devfileTags.map((tag) => (
                   <li key={tag}>
-                    <Link href={`/?tags=${tag}`} className={getDevfileTagClasses(tag)}>
-                      {tag}
-                    </Link>
+                    {isDeprecatedDevfile(tag) ? (
+                      <Link
+                        href={`/?tags=${tag}`}
+                        className="bg-deprecated/5 hover:bg-deprecated/10 active:bg-deprecated/20 border-deprecated/50 text-deprecated inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium"
+                      >
+                        {tag}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={`/?tags=${tag}`}
+                        className="bg-devfile/5 hover:bg-devfile/10 active:bg-devfile/20 border-devfile/50 text-devfile inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium"
+                      >
+                        {tag}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

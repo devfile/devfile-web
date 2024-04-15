@@ -19,7 +19,7 @@ import Link from 'next/link';
 import slugify from '@sindresorhus/slugify';
 import { Devfile } from '../../functions';
 
-import { getDevfileTagClasses } from '../../functions/get-devfile-tags/get-devfile-tags';
+import { isDeprecatedDevfile } from '../../functions/get-devfile-tags/get-devfile-tags';
 
 export interface DevfileGridProps {
   devfiles: Devfile[];
@@ -75,11 +75,23 @@ export function DevfileGrid(props: DevfileGridProps): JSX.Element {
               </div>
               {devfile.tags && (
                 <div className="mt-2 flex flex-wrap gap-2 md:mt-4">
-                  {devfile.tags.slice(0, 4).map((tag) => (
-                    <span key={tag} className={getDevfileTagClasses(tag)}>
-                      {tag}
-                    </span>
-                  ))}
+                  {devfile.tags.slice(0, 4).map((tag) =>
+                    isDeprecatedDevfile(tag) ? (
+                      <span
+                        key={tag}
+                        className="bg-deprecated/5 hover:bg-deprecated/10 active:bg-deprecated/20 border-deprecated/50 text-deprecated inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ) : (
+                      <span
+                        key={tag}
+                        className="bg-devfile/5 hover:bg-devfile/10 active:bg-devfile/20 border-devfile/50 text-devfile inline-flex items-center rounded border px-2.5 py-0.5 text-xs font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ),
+                  )}
                 </div>
               )}
             </Link>

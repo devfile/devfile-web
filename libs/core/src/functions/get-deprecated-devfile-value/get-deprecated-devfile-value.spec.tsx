@@ -14,36 +14,37 @@
  * limitations under the License.
  */
 
-import { VersionDevfile, Devfile, Registry } from '../fetch-devfiles/fetch-devfiles';
-import { DeprecatedTag, getDevfileTags, isDeprecatedDevfile } from './get-devfile-tags';
+import { DevfileJson } from '../fetch-devfiles/fetch-devfiles';
+import { DeprecatedTag } from '../get-devfile-tags/get-devfile-tags';
+import {
+  IsNotDeprecatedValue,
+  IsDeprecatedValue,
+  getDeprecatedDevfileValue,
+} from './get-deprecated-devfile-value';
 
-let undefinedVersionDevfile: undefined;
+let deprecatedDevfileJson: DevfileJson;
 
-let versionDevfile: VersionDevfile;
+let nonDeprecatedDevfileJson: DevfileJson;
 
-let devfile: Devfile;
-
-let registry: Registry;
-
-describe('getDevfileTags', () => {
+describe('getDeprecatedDevfileValue', () => {
   it('should execute successfully', () => {
-    registry = {
-      name: '',
-      url: '',
-      fqdn: '',
-    };
-    versionDevfile = {
-      version: '2.2.1',
-      schemaVersion: '2.1.0',
-      tags: ['one', 'two'],
-      default: true,
+    deprecatedDevfileJson = {
+      name: 'some devfile',
+      displayName: 'display name',
       description: 'some description',
+      type: 'stack',
+      tags: ['three', 'four', DeprecatedTag],
       icon: '',
-      starterProjects: [],
+      projectType: 'python',
+      language: 'python',
+      versions: [],
+      provider: 'provider',
+      architectures: [],
+      git: {
+        remotes: {},
+      },
     };
-    devfile = {
-      _registry: registry,
-      _deprecated: 'False',
+    nonDeprecatedDevfileJson = {
       name: 'some devfile',
       displayName: 'display name',
       description: 'some description',
@@ -59,14 +60,7 @@ describe('getDevfileTags', () => {
         remotes: {},
       },
     };
-    expect(getDevfileTags(undefinedVersionDevfile, devfile)).toEqual(devfile.tags);
-    expect(getDevfileTags(versionDevfile, devfile)).toEqual(versionDevfile.tags);
-  });
-});
-
-describe('getDevfileTags', () => {
-  it('should execute successfully', () => {
-    expect(isDeprecatedDevfile(DeprecatedTag)).toEqual(true);
-    expect(isDeprecatedDevfile('tag')).toEqual(false);
+    expect(getDeprecatedDevfileValue(deprecatedDevfileJson)).toEqual(IsDeprecatedValue);
+    expect(getDeprecatedDevfileValue(nonDeprecatedDevfileJson)).toEqual(IsNotDeprecatedValue);
   });
 });
