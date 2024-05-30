@@ -33,6 +33,12 @@ ARG NEXT_PUBLIC_DOCSEARCH_APP_ID
 ARG NEXT_PUBLIC_DOCSEARCH_API_KEY
 ARG NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
 
+# Building different architectures via emulation is slow with Yarn
+# This increases the timeout period so it can properly download dependencies
+# Value is in milliseconds and is set to 60 minutes
+# To increase/decrease you can override via --build-arg YARN_TIMEOUT=x in your build command
+ARG YARN_TIMEOUT=3600000
+
 # Check if the PROJECT_NAME build argument is set
 RUN \
   if [ "$PROJECT_NAME" == "landing-page" ] || [ "$PROJECT_NAME" == "registry-viewer" ]; then echo "Building project \"${PROJECT_NAME}\"."; \
@@ -43,7 +49,7 @@ WORKDIR /app
 # Install dependencies
 COPY package.json yarn.lock* ./
 RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile; \
+  if [ -f yarn.lock ]; then yarn --frozen-lockfile --network-timeout $YARN_TIMEOUT; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
