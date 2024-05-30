@@ -130,7 +130,7 @@ jobs:
 
       - name: Docker Build
         run: |
-          yarn nx affected --target=docker-build --parallel=3
+          yarn nx affected --target=docker-build --parallel=4
 
   e2e:
     name: E2E
