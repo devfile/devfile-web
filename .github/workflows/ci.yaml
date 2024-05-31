@@ -128,9 +128,14 @@ jobs:
         run: |
           yarn install --frozen-lockfile
 
-      - name: Docker Build
+      - name: Docker Build for linux/amd64
         run: |
-          yarn nx affected --target=docker-build --parallel=4
+          yarn nx affected --target=docker-build-amd64 --parallel=3
+      
+      - name: Docker Build for linux/arm64
+        run: |
+          yarn nx affected --target=docker-build-arm64 --parallel=3
+
 
   e2e:
     name: E2E
