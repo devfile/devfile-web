@@ -18,4 +18,4 @@ import { DocVersions } from '../types';
 
 export const docVersions = ['2.0.0', '2.1.0', '2.2.0', '2.2.1', '2.2.2', '2.3.0'] as const;
 
-export const defaultVersion: DocVersions = '2.2.2';
+export const defaultVersion: DocVersions = '2.3.0';
