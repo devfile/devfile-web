@@ -99,6 +99,23 @@ jobs:
         uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
         with:
           fetch-depth: 0
+      
+      - name: Free Disk Space
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be #v1.3.1
+        with:
+          tool-cache: false
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: true
+          docker-images: true
+          swap-storage: true
+        
+      - name: Set up QEMU # Enables arm64 image building
+        uses: docker/setup-qemu-action@68827325e0b33c7199eb31dd4e31fbe9023e06e3 #v3.0.0
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@d70bba72b1f3fd22344832f00baa16ece964efeb #v3.3.0
 
       - uses: actions/setup-node@8f152de45cc393bb48ce5d89d36b731f54556e65 #v4.0.0
         with:
@@ -111,9 +128,14 @@ jobs:
         run: |
           yarn install --frozen-lockfile
 
-      - name: Docker Build
+      - name: Docker Build for linux/amd64
         run: |
-          yarn nx affected --target=docker-build --parallel=3
+          yarn nx affected --target=docker-build-amd64 --parallel=3
+      
+      - name: Docker Build for linux/arm64
+        run: |
+          yarn nx affected --target=docker-build-arm64 --parallel=3
+
 
   e2e:
     name: E2E

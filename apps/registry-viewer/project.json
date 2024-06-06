@@ -58,10 +58,18 @@
         "command": "cd ./apps/registry-viewer/ && next-sitemap --config ./next-sitemap.config.mjs && cp -a ./dist/public/. ./dist/exported"
       }
     },
-    "docker-build": {
+    "docker-build-amd64": {
       "executor": "nx:run-commands",
+      "description": "Build docker image for the linux/amd64 architecture",
       "options": {
-        "command": "docker build -t nextjs-docker . --build-arg PROJECT_NAME=registry-viewer"
+        "command": "docker build --platform=linux/amd64 -t nextjs-docker-amd64 . --build-arg PROJECT_NAME=registry-viewer"
+      }
+    },
+    "docker-build-arm64": {
+      "executor": "nx:run-commands",
+      "description": "Build docker image for the linux/arm64 architecture",
+      "options": {
+        "command": "docker build --platform=linux/arm64 -t nextjs-docker-arm64 . --build-arg PROJECT_NAME=registry-viewer"
       }
     },
     "test": {
