@@ -13,9 +13,9 @@ Join the [Devfile Community](https://groups.google.com/g/devfiles-community) gro
 
 ### Meetings
 
-We run regular meetings that are open to anyone who wants to participate. The meetings take place every Monday at 9 AM EST. To join the meetings, please join the [Devfile Community Google Group](https://groups.google.com/g/devfiles-community).
+The meetings are ad-hoc and are arranged at our discretion based on discussions on our [slack channel](#slack). Meetings are open to anyone who wants to participate. To join the meetings, please join the [Devfile Community Google Group](https://groups.google.com/g/devfiles-community).
 
-In addition to joining our regular meetings, we welcome anyone who wants to suggest topics for discussion. If you have a specific topic you’d like to raise, please add it to the agenda for the upcoming meeting. The agenda can be found in the calendar event for each meeting.
+We welcome anyone who wants to suggest topics for discussion. If you have a specific topic you’d like to raise, please add it to the agenda for the upcoming meeting. The agenda can be found in the calendar event for each meeting.
 
 We look forward to hearing your ideas!
 
