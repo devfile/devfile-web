@@ -19,7 +19,7 @@ automates and simplifies your development process.
     - Get started with [odo](https://odo.dev/docs/user-guides/quickstart/nodejs).
 - Create a workspace in `Eclipse Che` with a community sample backed by the devfile specification to start building your application in the language of your choice.
     - [Quick start with Eclipse Che](./quickstart-che)
-    - Get started with [Eclipse Che](https://www.eclipse.org/che/).
+    - Get started with [Eclipse Che](https://www.eclipse.dev/che/).
 - Use blueprints in `Amazon CodeCatalyst` to quickly build a "Modern three-tier web application". Start working on the source code with a Dev Environment that uses a devfile to pre-determine and install the required project tools and application libraries.
     - Get started with [Amazon CodeCatalyst](https://docs.aws.amazon.com/codecatalyst/latest/userguide/getting-started-template-project.html).
 - Set up a remote development environment that links to your Git repository using `JetBrains Space Cloud Dev` and the devfile specification.
