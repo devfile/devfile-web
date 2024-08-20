@@ -1,14 +1,22 @@
-## What does this PR do / why we need it
+# Description of Changes
+_Summarize the changes you made as part of this pull request._
 
-## Which issue(s) does this PR fix
+# Related Issue(s)
+_Link the GitHub/GitLab/JIRA issues that are related to this PR._
 
-Fixes #?
-
-## PR acceptance criteria
-
+# Acceptance Criteria
+<!-- _Check the relevant boxes below_ -->
 - [ ] Unit Tests
 - [ ] E2E Tests
 - [ ] Documentation
 _Update the [sidebar](https://github.com/devfile/devfile-web/tree/main/apps/landing-page#configuring-navigation) if there is a new file added or an existing filename is changed_
 
-## How to test changes / Special notes to the reviewer
+# Tests Performed
+_Explain what tests you personally ran to ensure the changes are functioning as expected._
+
+
+# How To Test
+_Instructions for the reviewer on how to test your changes._
+
+# Notes To Reviewer
+_Any notes you would like to include for the reviewer._
