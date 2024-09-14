@@ -182,14 +182,14 @@ The component and commands here allow the developer to build, run, debug, and te
 ### Procedure
 
 1. Add an image component to define the image building process
-    1. Label your image tag with `imageNameSelector`
+    1. Label your image tag with `imageName`
     2. Define your `dockerfile` with your file path, build context and if your build requires root privileges
 
     ```yaml
     components:
       - name: outerloop-build
         image:
-          imageNameSelector: landingpage-image:latest
+          imageName: landingpage-image:latest
           dockerfile:
             uri: docker/Dockerfile
             buildContext: .
@@ -212,7 +212,7 @@ The component and commands here allow the developer to build, run, debug, and te
     components:
       - name: outerloop-build
         image:
-          imageNameSelector: landingpage-image:latest
+          imageName: landingpage-image:latest
             dockerfile:
               uri: docker/Dockerfile
               buildContext: .
@@ -261,7 +261,7 @@ metadata:
 components:
   - name: outerloop-build
     image:
-      imageNameSelector: landingpage-image:latest
+      imageName: landingpage-image:latest
       dockerfile:
         uri: docker/Dockerfile
         buildContext: .
