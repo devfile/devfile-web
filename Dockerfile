@@ -122,6 +122,10 @@ COPY --from=builder --chown=nextjs:0 /app/apps/${PROJECT_NAME}/dist/.next/static
 
 RUN chown -R 1001:0 ./apps/${PROJECT_NAME} && chmod -R g=u ./apps/${PROJECT_NAME}
 
+# Add license
+RUN mkdir -p /licenses
+COPY LICENSE /licenses
+
 USER 1001
 
 EXPOSE 3000
