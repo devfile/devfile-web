@@ -49,7 +49,7 @@
     "sharp": "^0.32.6",
     "tslib": "^2.0.0",
     "use-query-params": "^2.1.2",
-    "usehooks-ts": "^2.6.0"
+    "usehooks-ts": "^2.16.0"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
