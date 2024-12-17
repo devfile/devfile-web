@@ -19,7 +19,7 @@
   "browserslist": "defaults, not ie <= 11",
   "private": true,
   "dependencies": {
-    "@algolia/client-search": "^4.14.2",
+    "@algolia/client-search": "^4.24.0",
     "@beam-australia/react-env": "^3.1.1",
     "@docsearch/react": "^3.1.1",
     "@headlessui/react": "^1.7.0",
