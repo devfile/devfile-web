@@ -2082,10 +2082,10 @@
   optionalDependencies:
     "@types/markdown-it" "12.2.3"
 
-"@markdoc/next.js@^0.2.1":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@markdoc/next.js/-/next.js-0.2.2.tgz#7128bd468c3909cae7bb2c3c503fb211cc043be0"
-  integrity sha512-qHCwcTwyHOHrvxmUcueL+RREhHJxef9p6MS45CxHIChV9JHBcWOJt9v++T8HCf4iCbCdnIVCcR9OYzOj3Kq7XQ==
+"@markdoc/next.js@^0.3.7":
+  version "0.3.7"
+  resolved "https://registry.yarnpkg.com/@markdoc/next.js/-/next.js-0.3.7.tgz#0bfd3bcd2b060c45ab35245f6b928a35929f8e3d"
+  integrity sha512-lp/J0Lfx8YPWes82HOMSDvXBfIkJxPKfEwgzGTwfFBJUGBNM1TBvchaaAzDP2X+HRORP4jNcGbJrZoXSdon0BQ==
   dependencies:
     js-yaml "^4.1.0"
 
