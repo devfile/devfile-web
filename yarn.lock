@@ -2104,10 +2104,10 @@
     got "^11.8.5"
     os-filter-obj "^2.0.0"
 
-"@next/bundle-analyzer@^13.2.0":
-  version "13.2.0"
-  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.2.0.tgz#f7fa232a03a7fac7e5bbaf4f69a569b7337b7e3d"
-  integrity sha512-ygZLD/hEMQ1ea0/Crp66AZ6PDHCBffgkO410X5d165c+Nlgnn6hf2M+gOML6GndDm+Gh0yWR7LLL/VIVpF/oyg==
+"@next/bundle-analyzer@^13.5.8":
+  version "13.5.8"
+  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-13.5.8.tgz#3d9929cb2e893e048b57f14342c053431c6b8326"
+  integrity sha512-B/6xFehMbPnBqw6Wtf0iWuOTTHAmymeKS5xKOlaEG0BrGffGZGQ3KTJycMYG6ujLG9A2uCcuTX2vd0M6F5xM3w==
   dependencies:
     webpack-bundle-analyzer "4.7.0"
 
