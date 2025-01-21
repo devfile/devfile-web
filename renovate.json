@@ -6,8 +6,14 @@
     ":gitSignOff"
   ],
   "timezone": "America/Toronto",
-  "schedule": ["after 9pm on tuesday and thursday"],
   "enabledManagers": ["tekton"],
+  "packageRules": [
+    {
+      "description": "Schedule Konflux tekton task updates Tuesday and Thursday nights (9 PM - 12 AM)",
+      "matchManagers": ["tekton"],
+      "schedule": ["* 21-23 * * 2,4"]
+    }
+  ],
   "prHourlyLimit": 20,
   "prConcurrentLimit": 10
 }
