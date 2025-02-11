@@ -21,7 +21,7 @@
   "dependencies": {
     "@algolia/client-search": "^4.14.2",
     "@beam-australia/react-env": "^3.1.1",
-    "@docsearch/react": "^3.1.1",
+    "@docsearch/react": "^3.8.3",
     "@headlessui/react": "^1.7.19",
     "@heroicons/react": "^2.0.13",
     "@markdoc/markdoc": "^0.2.1",
