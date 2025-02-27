@@ -2076,11 +2076,12 @@
   dependencies:
     "@lukeed/csprng" "^1.0.0"
 
-"@markdoc/markdoc@^0.2.1":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@markdoc/markdoc/-/markdoc-0.2.2.tgz#cea8b7f0935408dc7180865077c0fb61ba70e51e"
-  integrity sha512-0TiD9jmA5h5znN4lxo7HECAu3WieU5g5vUsfByeucrdR/x88hEilpt16EydFyJwJddQ/3w5HQgW7Ovy62r4cyw==
+"@markdoc/markdoc@^0.5.0":
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/@markdoc/markdoc/-/markdoc-0.5.1.tgz#9b2327500cf72543517cda52714e168ccc1707e9"
+  integrity sha512-W2apYOglq0hOnvWbhE70yl6V9++FG+YPFKNHmgiSjv0HTmdJaMLt+NA1LMqoH5LasSiTI7R0yVc5ofjaFh39Pg==
   optionalDependencies:
+    "@types/linkify-it" "^3.0.1"
     "@types/markdown-it" "12.2.3"
 
 "@markdoc/next.js@^0.2.1":
@@ -4128,6 +4129,11 @@
   version "3.0.2"
   resolved "https://registry.yarnpkg.com/@types/linkify-it/-/linkify-it-3.0.2.tgz#fd2cd2edbaa7eaac7e7f3c1748b52a19143846c9"
   integrity sha512-HZQYqbiFVWufzCwexrvh694SOim8z2d+xJl5UNamcvQFejLY/2YUtzXHYi3cHdI7PMlS8ejH2slRAOJQ32aNbA==
+
+"@types/linkify-it@^3.0.1":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@types/linkify-it/-/linkify-it-3.0.5.tgz#1e78a3ac2428e6d7e6c05c1665c242023a4601d8"
+  integrity sha512-yg6E+u0/+Zjva+buc3EIb+29XEg4wltq7cSmd4Uc2EE/1nUVmxyzpX6gUXD0V8jIrG0r7YeOGVIbYRkxeooCtw==
 
 "@types/markdown-it@12.2.3":
   version "12.2.3"
