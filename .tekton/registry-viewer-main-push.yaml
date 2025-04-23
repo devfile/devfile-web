@@ -484,7 +484,7 @@ spec:
         - name: name
           value: sast-coverity-check
         - name: bundle
-          value: quay.io/konflux-ci/tekton-catalog/task-sast-coverity-check:0.3@sha256:fe1f5bfb484c075b44bae3abd02e270eea2bfb1fbd50006bd9556cac75977d5a
+          value: quay.io/konflux-ci/tekton-catalog/task-sast-coverity-check:0.2@sha256:aba8d22607fe4784c79f502b7c50c5a5cb8e1a24dcd4667cc3a90c8e5e9843e7
         - name: kind
           value: task
         resolver: bundles
