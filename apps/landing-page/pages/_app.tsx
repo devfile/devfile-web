@@ -82,7 +82,7 @@ function collectHeadings(
 }
 
 const websiteName = 'Devfile.io';
-const websiteDescription = 'An open standard defining containerized development environments.';
+const websiteDescription = 'An open standard for containerized development environments.';
 
 function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
   const { markdoc } = pageProps as MarkdocNextJsPageProps;
