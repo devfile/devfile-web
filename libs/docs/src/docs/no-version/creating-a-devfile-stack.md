@@ -34,7 +34,7 @@ There you can include yourself as a reviewer (For more information check the [ow
     metadata:
       name: tutorial-stack
       displayName: Tutorial Stack
-      description: Test stack based on .Net 6.0
+      description: Test stack based on .Net 8.0
       icon: https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png
       tags:
         - .NET
@@ -50,7 +50,7 @@ There you can include yourself as a reviewer (For more information check the [ow
         git:
         checkoutFrom:
             remote: origin
-            revision: dotnet-6.0
+            revision: dotnet-8.0
         remotes:
             origin: https://github.com/redhat-developer/s2i-dotnetcore-ex
         subDir: app
@@ -61,7 +61,7 @@ There you can include yourself as a reviewer (For more information check the [ow
     components:
     - name: dotnet
         container:
-        image: registry.access.redhat.com/ubi8/dotnet-60:6.0
+        image: registry.access.redhat.com/ubi8/dotnet-80:8.0-9
         args: ["tail", "-f", "/dev/null"]
         mountSources: true
         env:
@@ -74,7 +74,7 @@ There you can include yourself as a reviewer (For more information check the [ow
             - name: ASPNETCORE_URLS
             value: http://*:8080
         endpoints:
-            - name: http-dotnet60
+            - name: http-dotnet80
             targetPort: 8080
     ```
 
@@ -105,7 +105,7 @@ There you can include yourself as a reviewer (For more information check the [ow
     metadata:
     name: tutorial-stack
     displayName: Tutorial Stack
-    description: Test stack based on .Net 6.0
+    description: Test stack based on .Net 8.0
     icon: https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png
     tags:
         - .NET
@@ -117,14 +117,14 @@ There you can include yourself as a reviewer (For more information check the [ow
         git:
         checkoutFrom:
             remote: origin
-            revision: dotnet-6.0
+            revision: dotnet-8.0
         remotes:
             origin: https://github.com/redhat-developer/s2i-dotnetcore-ex
         subDir: app
     components:
     - name: dotnet
         container:
-        image: registry.access.redhat.com/ubi8/dotnet-60:6.0
+        image: registry.access.redhat.com/ubi8/dotnet-80:8.0-9
         args: ["tail", "-f", "/dev/null"]
         mountSources: true
         env:
@@ -137,7 +137,7 @@ There you can include yourself as a reviewer (For more information check the [ow
             - name: ASPNETCORE_URLS
             value: http://*:8080
         endpoints:
-            - name: http-dotnet60
+            - name: http-dotnet80
             targetPort: 8080
     commands:
     - id: build
@@ -162,7 +162,7 @@ There you can include yourself as a reviewer (For more information check the [ow
     ```yaml {% filename="stack.yaml" %}
     name: tutorial-stack
     displayName: Tutorial Stack
-    description: Test stack based on .Net 6.0
+    description: Test stack based on .Net 8.0
     icon: https://github.com/dotnet/brand/raw/main/logo/dotnet-logo.png
     versions:
     - version: 2.2.0
