@@ -21,10 +21,11 @@ import { useLinks } from '../../hooks';
 export interface FooterProps {
   websiteName: string;
   websiteDescription?: string;
+  lfTrademarkUsageUrl?: string;
 }
 
 export function Footer(props: FooterProps): JSX.Element {
-  const { websiteName, websiteDescription } = props;
+  const { websiteName, websiteDescription, lfTrademarkUsageUrl } = props;
 
   const { footerNavigation } = useLinks();
 
@@ -47,6 +48,19 @@ export function Footer(props: FooterProps): JSX.Element {
             </Link>
             {websiteDescription && (
               <p className="text-base text-slate-500 dark:text-slate-400">{websiteDescription}</p>
+            )}
+            {lfTrademarkUsageUrl && (
+              <p className="text-base text-slate-500 dark:text-slate-400">
+                The Linux Foundation® (TLF) has registered trademarks and uses trademarks. For a
+                list of TLF trademarks, see&nbsp;
+                <Link
+                  href={lfTrademarkUsageUrl}
+                  className="text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                >
+                  Trademark Usage
+                </Link>
+                .
+              </p>
             )}
             <div className="flex space-x-6">
               {footerNavigation.social.map((item) => (

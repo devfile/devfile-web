@@ -83,6 +83,7 @@ function collectHeadings(
 
 const websiteName = 'Devfile.io';
 const websiteDescription = 'An open standard defining containerized development environments.';
+const lfTrademarkUsageUrl = 'https://www.linuxfoundation.org/trademark-usage/';
 
 function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
   const { markdoc } = pageProps as MarkdocNextJsPageProps;
@@ -114,7 +115,11 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
                 <Component {...pageProps} />
               </LandingPageLayout>
             </div>
-            <Footer websiteName={websiteName} websiteDescription={websiteDescription} />
+            <Footer
+              websiteName={websiteName}
+              websiteDescription={websiteDescription}
+              lfTrademarkUsageUrl={lfTrademarkUsageUrl}
+            />
           </div>
         </NavigationProvider>
       </LinksProvider>
