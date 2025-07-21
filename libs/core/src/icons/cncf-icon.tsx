@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { DarkMode, LightMode } from '../components';
 import { SVGProps } from 'react';
+import { DarkMode, LightMode } from '../components';
 
 export function CncfIcon(props: SVGProps<SVGSVGElement>): JSX.Element {
   return (

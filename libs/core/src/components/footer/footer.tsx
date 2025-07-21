@@ -59,7 +59,7 @@ export function Footer(props: FooterProps): JSX.Element {
                   className="text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
                   target="_blank"
                 >
-                  {lfTrademarkUsageUrl.replace(/https:\/\/|http:\/\//g, "")}
+                  {lfTrademarkUsageUrl.replace(/https:\/\/|http:\/\//g, '')}
                 </Link>
                 .
               </p>
