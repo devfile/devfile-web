@@ -14,6 +14,15 @@
  * limitations under the License.
  */
 
-export { Convert as ConvertDevfileSpec, type DevfileSpec } from './devfile-spec';
-export * from './custom-404';
-export * from './props';
+/**
+ * Interface of a URL entity object
+ */
+export interface UrlEntity {
+  text: string;
+  href: string;
+}
+
+/**
+ * Type of Link property fields
+ */
+export type LinkProp = UrlEntity;

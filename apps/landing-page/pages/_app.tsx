@@ -118,7 +118,10 @@ function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
             <Footer
               websiteName={websiteName}
               websiteDescription={websiteDescription}
-              lfTrademarkUsageUrl={lfTrademarkUsageUrl}
+              lfTrademarkUsageLink={{
+                href: lfTrademarkUsageUrl,
+                text: lfTrademarkUsageUrl.replace(/http:\/\/|https:\/\//g, ''),
+              }}
             />
           </div>
         </NavigationProvider>

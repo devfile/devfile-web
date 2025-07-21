@@ -39,7 +39,13 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
             <Header websiteName={websiteName} />
             <Component {...pageProps} />
           </div>
-          <Footer websiteName={websiteName} lfTrademarkUsageUrl={lfTrademarkUsageUrl} />
+          <Footer
+            websiteName={websiteName}
+            lfTrademarkUsageLink={{
+              href: lfTrademarkUsageUrl,
+              text: lfTrademarkUsageUrl.replace(/http:\/\/|https:\/\//g, ''),
+            }}
+          />
         </div>
       </LinksProvider>
     </AnalyticsProvider>
