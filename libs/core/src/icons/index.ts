@@ -27,3 +27,4 @@ export * from './red-hat-icon';
 export * from './slack-icon';
 export * from './theming-icon';
 export * from './warning-icon';
+export * from './cncf-icon';

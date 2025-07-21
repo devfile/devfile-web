@@ -47,3 +47,4 @@ export * from './devfile-datalist/devfile-datalist';
 export * from './devfile-codeblock/devfile-codeblock';
 export * from './custom-404/custom-404';
 export * from './video/video';
+export * from './cncf-project-section/cncf-project-section';
