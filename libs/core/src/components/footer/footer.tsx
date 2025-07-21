@@ -52,8 +52,9 @@ export function Footer(props: FooterProps): JSX.Element {
             {lfTrademarkUsageUrl && (
               <p className="text-base text-slate-500 dark:text-slate-400">
                 Copyright © Devfile a Series of LF Projects, LLC
-                <br/>
-                For website terms of use, trademark policy and other project policies please see&nbsp;
+                <br />
+                For website terms of use, trademark policy and other project policies please
+                see&nbsp;
                 <Link
                   href={lfTrademarkUsageUrl}
                   className="text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
