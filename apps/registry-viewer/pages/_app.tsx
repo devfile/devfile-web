@@ -27,7 +27,7 @@ const analyticsConfig = {
 };
 
 const websiteName = 'Devfile Registry';
-const lfTrademarkUsageUrl = 'https://www.linuxfoundation.org/trademark-usage/';
+const lfTrademarkUsageUrl = 'https://lfprojects.org/policies/';
 
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
