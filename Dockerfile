@@ -13,7 +13,7 @@
 # limitations under the License.
 
 # Install dependencies only when needed
-FROM registry.access.redhat.com/ubi9/nodejs-18-minimal AS deps
+FROM registry.access.redhat.com/ubi9/nodejs-22-minimal AS deps
 USER root
 
 # Install yarn & node-gyp dependency
@@ -54,7 +54,7 @@ RUN \
   fi
 
 # Rebuild the source code only when needed
-FROM registry.access.redhat.com/ubi9/nodejs-18-minimal AS builder
+FROM registry.access.redhat.com/ubi9/nodejs-22-minimal AS builder
 USER root
 
 # Install yarn
@@ -85,7 +85,7 @@ ENV NEXT_TELEMETRY_DISABLED 1
 RUN yarn nx build ${PROJECT_NAME} --skip-nx-cache
 
 # Production image, copy all the files and run next
-FROM registry.access.redhat.com/ubi9/nodejs-18-minimal AS runner
+FROM registry.access.redhat.com/ubi9/nodejs-22-minimal AS runner
 USER root
 
 # Install shadow-utils to use groupadd and useradd
