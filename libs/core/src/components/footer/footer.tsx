@@ -17,14 +17,16 @@
 import Link from 'next/link';
 import { DevfileIcon } from '../../icons';
 import { useLinks } from '../../hooks';
+import { LinkProp } from '../../types/props';
 
 export interface FooterProps {
   websiteName: string;
   websiteDescription?: string;
+  lfTrademarkUsageLink?: LinkProp;
 }
 
 export function Footer(props: FooterProps): JSX.Element {
-  const { websiteName, websiteDescription } = props;
+  const { websiteName, websiteDescription, lfTrademarkUsageLink } = props;
 
   const { footerNavigation } = useLinks();
 
@@ -47,6 +49,22 @@ export function Footer(props: FooterProps): JSX.Element {
             </Link>
             {websiteDescription && (
               <p className="text-base text-slate-500 dark:text-slate-400">{websiteDescription}</p>
+            )}
+            {lfTrademarkUsageLink && (
+              <p className="text-base text-slate-500 dark:text-slate-400">
+                Copyright © Devfile a Series of LF Projects, LLC
+                <br />
+                For website terms of use, trademark policy and other project policies please
+                see&nbsp;
+                <Link
+                  href={lfTrademarkUsageLink.href}
+                  className="text-base text-slate-500 hover:text-slate-600 dark:text-slate-400 dark:hover:text-slate-300"
+                  target="_blank"
+                >
+                  {lfTrademarkUsageLink.text}
+                </Link>
+                .
+              </p>
             )}
             <div className="flex space-x-6">
               {footerNavigation.social.map((item) => (

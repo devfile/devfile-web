@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-export * from './amazon-web-services-icon';
-export * from './devfile-icon';
-export * from './github-icon';
-export * from './ibm-icon';
-export * from './installation-icon';
-export * from './jetbrains-icon';
-export * from './lightbulb-icon';
-export * from './plugins-icon';
-export * from './presets-icon';
-export * from './red-hat-icon';
-export * from './slack-icon';
-export * from './theming-icon';
-export * from './warning-icon';
-export * from './cncf-icon';
+/**
+ * Interface of a URL entity object
+ */
+export interface UrlEntity {
+  text: string;
+  href: string;
+}
+
+/**
+ * Type of Link property fields
+ */
+export type LinkProp = UrlEntity;

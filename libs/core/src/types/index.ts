@@ -16,3 +16,4 @@
 
 export { Convert as ConvertDevfileSpec, type DevfileSpec } from './devfile-spec';
 export * from './custom-404';
+export * from './props';

@@ -14,22 +14,19 @@
  * limitations under the License.
  */
 
-import {
-  CncfProjectSection,
-  Hero,
-  KeyFeaturesSection,
-  ValuePropositionSection,
-} from '@devfile-web/core';
+import { CncfIcon } from '../../icons';
 
-export function Index(): JSX.Element {
+export function CncfProjectSection(): JSX.Element {
   return (
-    <>
-      <Hero />
-      <ValuePropositionSection />
-      <KeyFeaturesSection />
-      <CncfProjectSection />
-    </>
+    <div className="relative -z-10 bg-slate-50 py-16 dark:bg-slate-900 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-md px-4 text-center sm:max-w-3xl sm:px-6 lg:max-w-7xl lg:px-8">
+        <CncfIcon id="cncf-logo" className="mx-auto max-w-prose text-slate-500" />
+        <p className="mx-auto mt-5 max-w-prose text-xl text-slate-500 dark:text-slate-400">
+          We are a Cloud Native Computing Foundation sandbox project.
+        </p>
+      </div>
+    </div>
   );
 }
 
-export default Index;
+export default CncfProjectSection;

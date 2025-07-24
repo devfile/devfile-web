@@ -27,6 +27,7 @@ const analyticsConfig = {
 };
 
 const websiteName = 'Devfile Registry';
+const lfTrademarkUsageUrl = 'https://lfprojects.org/policies/';
 
 function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
   return (
@@ -38,7 +39,13 @@ function CustomApp({ Component, pageProps }: AppProps): JSX.Element {
             <Header websiteName={websiteName} />
             <Component {...pageProps} />
           </div>
-          <Footer websiteName={websiteName} />
+          <Footer
+            websiteName={websiteName}
+            lfTrademarkUsageLink={{
+              href: lfTrademarkUsageUrl,
+              text: lfTrademarkUsageUrl.replace(/http:\/\/|https:\/\//g, ''),
+            }}
+          />
         </div>
       </LinksProvider>
     </AnalyticsProvider>
