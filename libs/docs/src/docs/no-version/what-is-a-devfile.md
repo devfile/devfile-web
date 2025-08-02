@@ -8,7 +8,7 @@ your project in a development container. You can create devfile from scratch or
 adopt existing from [public community registry](https://registry.devfile.io/viewer).
 
 Certain build tools and IDEs can automatically process the devfile
-to configure and build a running application from a development project.
+to configure, build, and run an application from a development project.
 
 Using devfile, the tools and IDE can:
 
