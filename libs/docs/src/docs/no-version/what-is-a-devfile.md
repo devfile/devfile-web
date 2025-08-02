@@ -10,7 +10,7 @@ adopt existing from [public community registry](https://registry.devfile.io/view
 Certain build tools and IDEs can automatically process the devfile
 to configure, build, and run an application from a development project.
 
-Using devfile, the tools and IDE can:
+Using devfile, the tools or IDE can:
 
 - Take in the repository hosting your application source code.
 
