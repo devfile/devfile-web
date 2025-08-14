@@ -1,34 +1,4 @@
 {
-  "npmScope": "devfile-web",
-  "affected": {
-    "defaultBase": "main"
-  },
-  "cli": {
-    "defaultCollection": "@nrwl/next"
-  },
-  "implicitDependencies": {
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
-    },
-    ".eslintrc.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/nx-cloud",
-      "options": {
-        "cacheableOperations": [
-          "build",
-          "export",
-          "postexport",
-          "lint",
-          "test",
-          "e2e"
-        ],
-        "accessToken": "ZjYyYTI1N2UtMDYwNy00MzcxLWJlMjYtZTE4MTRhOTNmYzE5fHJlYWQtd3JpdGU="
-      }
-    }
-  },
   "targetDependencies": {
     "build": [
       {
@@ -50,5 +20,33 @@
       }
     }
   },
-  "defaultProject": "landing-page"
+  "defaultProject": "landing-page",
+  "namedInputs": {
+    "default": ["{projectRoot}/**/*", "sharedGlobals"],
+    "sharedGlobals": [],
+    "production": ["default"]
+  },
+  "targetDefaults": {
+    "build": {
+      "inputs": ["production", "^production"],
+      "cache": true
+    },
+    "export": {
+      "cache": true
+    },
+    "postexport": {
+      "cache": true
+    },
+    "lint": {
+      "cache": true
+    },
+    "test": {
+      "cache": true
+    },
+    "e2e": {
+      "cache": true
+    }
+  },
+  "nxCloudAccessToken": "ZjYyYTI1N2UtMDYwNy00MzcxLWJlMjYtZTE4MTRhOTNmYzE5fHJlYWQtd3JpdGU=",
+  "defaultBase": "main"
 }

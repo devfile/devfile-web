@@ -1,7 +1,10 @@
 {
+  "name": "landing-page",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/landing-page",
   "projectType": "application",
+  "tags": [],
+  "implicitDependencies": ["docs"],
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",
@@ -75,7 +78,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/landing-page"],
+      "outputs": ["{workspaceRoot}/coverage/apps/landing-page"],
       "options": {
         "jestConfig": "apps/landing-page/jest.config.ts",
         "passWithNoTests": true
@@ -88,7 +91,5 @@
         "lintFilePatterns": ["apps/landing-page/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["docs"]
+  }
 }

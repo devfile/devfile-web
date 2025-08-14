@@ -40,11 +40,12 @@ const nextConfig = {
   experimental: {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
+  transpilePackages: ['@devfile-web/core'],
   nx: {
     svgr: false,
   },
 };
 
-const plugins = [withBundleAnalyzer, withNx];
+const plugins = [withBundleAnalyzer, withNx.withNx];
 
 module.exports = plugins.reduce((config, plugin) => plugin(config), nextConfig);

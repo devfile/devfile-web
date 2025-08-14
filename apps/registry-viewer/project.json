@@ -1,7 +1,9 @@
 {
+  "name": "registry-viewer",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/registry-viewer",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",
@@ -74,7 +76,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/registry-viewer"],
+      "outputs": ["{workspaceRoot}/coverage/apps/registry-viewer"],
       "options": {
         "jestConfig": "apps/registry-viewer/jest.config.ts",
         "passWithNoTests": true
@@ -87,6 +89,5 @@
         "lintFilePatterns": ["apps/registry-viewer/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": []
+  }
 }
