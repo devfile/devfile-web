@@ -7,7 +7,7 @@
   "implicitDependencies": ["registry-viewer"],
   "targets": {
     "e2e": {
-      "executor": "@nrwl/cypress:cypress",
+      "executor": "@nx/cypress:cypress",
       "dependsOn": ["^build"],
       "options": {
         "cypressConfig": "apps/registry-viewer-e2e/cypress.config.ts",
@@ -21,7 +21,7 @@
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/registry-viewer-e2e/**/*.{js,ts}"]

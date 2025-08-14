@@ -16,7 +16,7 @@
 
 /* eslint-disable global-require */
 const defaultTheme = require('tailwindcss/defaultTheme');
-const { createGlobPatternsForDependencies } = require('@nrwl/react/tailwind');
+const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
 const { join } = require('node:path');
 
 /** @type {import('tailwindcss').Config} */

@@ -15,7 +15,7 @@
  */
 
 const path = require('node:path');
-const withNx = require('@nrwl/next/plugins/with-nx');
+const withNx = require('@nx/next/plugins/with-nx');
 const withMarkdoc = require('@markdoc/next.js');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
@@ -26,7 +26,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH;
 
 /**
- * @type {import('@nrwl/next/plugins/with-nx').WithNxOptions}
+ * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  * */
 const nextConfig = {
   basePath,
