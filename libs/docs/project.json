@@ -1,33 +1,35 @@
 {
+  "name": "docs",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "libs/docs/src",
   "projectType": "library",
+  "tags": [],
   "targets": {
     "build": {
-      "executor": "@nrwl/js:swc",
+      "executor": "@nx/js:swc",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/libs/docs",
         "main": "libs/docs/src/index.ts",
         "tsConfig": "libs/docs/tsconfig.lib.json",
-        "assets": ["libs/docs/*.md"]
+        "assets": ["libs/docs/*.md"],
+        "swcrc": "libs/docs/.lib.swcrc"
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["libs/docs/**/*.ts"]
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/docs"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/libs/docs"],
       "options": {
         "jestConfig": "libs/docs/jest.config.ts",
         "passWithNoTests": true
       }
     }
-  },
-  "tags": []
+  }
 }
