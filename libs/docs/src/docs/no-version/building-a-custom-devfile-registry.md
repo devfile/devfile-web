@@ -69,12 +69,14 @@ your cloud or cluster to form the devfile registry.
 
 ### Procedure
 
-1. Navigate to the `build-tools/` directory that contains the registry build scripts (for example, `devfile/registry-support/build-tools`), where `build_image.sh` is located.
+1. Clone the [devfile/registry-support](https://github.com/devfile/registry-support) repository.
 
-2. Run `./build_image.sh <path-to-devfile-registry-folder>` to build a
+2. Navigate to the `build-tools/` directory within the cloned repository where `build_image.sh` is located.
+
+3. Run `./build_image.sh <path-to-devfile-registry-folder>` to build a
     devfile registry repository.
 
-3. In a multi-stage Docker build, add a Dockerfile to your devfile
+4. In a multi-stage Docker build, add a Dockerfile to your devfile
     registry repository. Make sure the Dockerfile contains the
     following:
 
@@ -97,7 +99,7 @@ your cloud or cluster to form the devfile registry.
     COPY --from=builder /build/stacks /stacks
     ```
 
-4. Run `docker build -t devfile-index` to build the devfile registry
+5. Run `docker build -t devfile-index` to build the devfile registry
     into a container image.
 
 The build script builds the index generator, generates the `index.json`
