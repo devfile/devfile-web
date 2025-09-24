@@ -65,19 +65,19 @@ export const custom404Navigation: Custom404Navigation = [
   {
     name: 'Registry',
     description: 'Browse devfile stacks and samples',
-    image: Squares2X2Icon,
+    image: Squares2X2Icon as any,
     href: '/',
   },
   {
     name: 'Documentation',
     description: 'Learn how to integrate devfile with your app',
-    image: BookOpenIcon,
+    image: BookOpenIcon as any,
     href: `https://devfile.io/docs/${defaultVersion}/what-is-a-devfile`,
   },
   {
     name: 'API Reference',
     description: 'A complete API reference for devfile',
-    image: Bars4Icon,
+    image: Bars4Icon as any,
     href: `https://devfile.io/docs/${defaultVersion}/devfile-schema`,
   },
 ];

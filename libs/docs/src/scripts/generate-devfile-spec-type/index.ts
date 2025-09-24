@@ -30,7 +30,7 @@ export interface Config {
 }
 
 async function quicktypeJSONSchema(
-  targetLanguage: string,
+  targetLanguage: any,
   typeName: string,
   jsonSchemaString: string,
 ): Promise<SerializedRenderResult> {
