@@ -109,6 +109,7 @@
     "jest-environment-jsdom": "29.4.3",
     "jest-fetch-mock": "^3.0.3",
     "nx": "18.3.5",
+    "nx-cloud": "^19.1.0",
     "postcss": "8.4.21",
     "postcss-focus-visible": "^8.0.2",
     "postcss-import": "^15.1.0",
