@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-const { getJestProjects } = require('@nrwl/jest');
+const { getJestProjects } = require('@nx/jest');
 
-/** @type {import('ts-jest/dist/types').InitialOptionsTsJest} */
+/** @type {import('ts-jest/dist/types').JestConfigWithTsJest} */
 module.exports = {
   projects: getJestProjects(),
   preset: 'ts-jest',

@@ -11,3 +11,5 @@
 **/*/__ENV.js
 libs/core/src/types/devfile-spec.ts
 .yarn/
+
+/.nx/cache

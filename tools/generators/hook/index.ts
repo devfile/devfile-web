@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { Tree, formatFiles, installPackagesTask } from '@nrwl/devkit';
-import { names, getProjects } from '@nrwl/devkit';
+import { Tree, formatFiles, installPackagesTask } from '@nx/devkit';
+import { names, getProjects } from '@nx/devkit';
 
 export default async function (host: Tree, schema: any) {
   const { className, fileName } = names(schema.name);

@@ -1,7 +1,10 @@
 {
+  "name": "landing-page",
   "$schema": "..\\..\\node_modules\\nx\\schemas\\project-schema.json",
   "sourceRoot": "apps/landing-page",
   "projectType": "application",
+  "tags": [],
+  "implicitDependencies": ["docs"],
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",
@@ -11,7 +14,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "dependsOn": ["prebuild"],
@@ -27,7 +30,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "dependsOn": ["prebuild"],
       "options": {
@@ -46,7 +49,7 @@
       }
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "landing-page:build:production"
@@ -74,21 +77,19 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/landing-page"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/landing-page"],
       "options": {
         "jestConfig": "apps/landing-page/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/landing-page/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": [],
-  "implicitDependencies": ["docs"]
+  }
 }

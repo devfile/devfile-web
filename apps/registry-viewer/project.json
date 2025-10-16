@@ -1,7 +1,9 @@
 {
+  "name": "registry-viewer",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/registry-viewer",
   "projectType": "application",
+  "tags": [],
   "targets": {
     "prebuild": {
       "executor": "nx:run-commands",
@@ -10,7 +12,7 @@
       }
     },
     "build": {
-      "executor": "@nrwl/next:build",
+      "executor": "@nx/next:build",
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "dependsOn": ["prebuild"],
@@ -26,7 +28,7 @@
       }
     },
     "serve": {
-      "executor": "@nrwl/next:server",
+      "executor": "@nx/next:server",
       "defaultConfiguration": "development",
       "dependsOn": ["prebuild"],
       "options": {
@@ -45,7 +47,7 @@
       }
     },
     "export": {
-      "executor": "@nrwl/next:export",
+      "executor": "@nx/next:export",
       "dependsOn": ["build"],
       "options": {
         "buildTarget": "registry-viewer:build:production"
@@ -73,20 +75,19 @@
       }
     },
     "test": {
-      "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/registry-viewer"],
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/apps/registry-viewer"],
       "options": {
         "jestConfig": "apps/registry-viewer/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
-      "executor": "@nrwl/linter:eslint",
+      "executor": "@nx/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
         "lintFilePatterns": ["apps/registry-viewer/**/*.{ts,tsx,js,jsx}"]
       }
     }
-  },
-  "tags": []
+  }
 }
