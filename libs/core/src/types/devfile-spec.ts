@@ -26,6 +26,11 @@ export interface DevfileSpec {
      */
     components?: DevfileSpecComponent[];
     /**
+     * Additional projects related to the main project in the devfile, contianing names and
+     * sources locations
+     */
+    dependentProjects?: DevfileSpecDependentProject[];
+    /**
      * Bindings of commands to events. Each command is referred-to by its name.
      */
     events?: Events;
@@ -801,6 +806,77 @@ export interface PurpleVolume {
     size?: string;
 }
 
+export interface DevfileSpecDependentProject {
+    /**
+     * Map of implementation-dependant free-form YAML attributes.
+     */
+    attributes?: { [key: string]: any };
+    /**
+     * Path relative to the root of the projects to which this project should be cloned into.
+     * This is a unix-style relative path (i.e. uses forward slashes). The path is invalid if it
+     * is absolute or tries to escape the project root through the usage of '..'. If not
+     * specified, defaults to the project name.
+     */
+    clonePath?: string;
+    /**
+     * Project's Git source
+     */
+    git?: FluffyGit;
+    /**
+     * Project name
+     */
+    name: string;
+    /**
+     * Project's Zip source
+     */
+    zip?: PurpleZip;
+}
+
+/**
+ * Project's Git source
+ */
+export interface FluffyGit {
+    /**
+     * Defines from what the project should be checked out. Required if there are more than one
+     * remote configured
+     */
+    checkoutFrom?: FluffyCheckoutFrom;
+    /**
+     * The remotes map which should be initialized in the git project. Projects must have at
+     * least one remote configured while StarterProjects & Image Component's Git source can only
+     * have at most one remote configured.
+     */
+    remotes: { [key: string]: string };
+}
+
+/**
+ * Defines from what the project should be checked out. Required if there are more than one
+ * remote configured
+ */
+export interface FluffyCheckoutFrom {
+    /**
+     * The remote name should be used as init. Required if there are more than one remote
+     * configured
+     */
+    remote?: string;
+    /**
+     * The revision to checkout from. Should be branch name, tag or commit id. Default branch is
+     * used if missing or specified revision is not found.
+     */
+    revision?: string;
+}
+
+/**
+ * Project's Zip source
+ */
+export interface PurpleZip {
+    /**
+     * Zip project's source location address. Should be file path of the archive, e.g.
+     * file://$FILE_PATH
+     */
+    location?: string;
+}
+
 /**
  * Bindings of commands to events. Each command is referred-to by its name.
  */
@@ -921,6 +997,11 @@ export interface Parent {
      * according to K8S strategic merge patch standard rules.
      */
     components?: ParentComponent[];
+    /**
+     * Overrides of dependentProjects encapsulated in a parent devfile. Overriding is done
+     * according to K8S strategic merge patch standard rules.
+     */
+    dependentProjects?: ParentDependentProject[];
     /**
      * Id in a registry that contains a Devfile yaml file
      */
@@ -1393,7 +1474,7 @@ export interface FluffyDockerfile {
     /**
      * Dockerfile's Git source
      */
-    git?: FluffyGit;
+    git?: TentacledGit;
     /**
      * Specify if a privileged builder pod is required.
      *
@@ -1428,12 +1509,12 @@ export interface FluffyDevfileRegistry {
 /**
  * Dockerfile's Git source
  */
-export interface FluffyGit {
+export interface TentacledGit {
     /**
      * Defines from what the project should be checked out. Required if there are more than one
      * remote configured
      */
-    checkoutFrom?: FluffyCheckoutFrom;
+    checkoutFrom?: TentacledCheckoutFrom;
     /**
      * Location of the Dockerfile in the Git repository when using git as Dockerfile src.
      * Defaults to Dockerfile.
@@ -1451,7 +1532,7 @@ export interface FluffyGit {
  * Defines from what the project should be checked out. Required if there are more than one
  * remote configured
  */
-export interface FluffyCheckoutFrom {
+export interface TentacledCheckoutFrom {
     /**
      * The remote name should be used as init. Required if there are more than one remote
      * configured
@@ -1644,15 +1725,7 @@ export interface FluffyVolume {
     size?: string;
 }
 
-/**
- * Reference to a Kubernetes CRD of type DevWorkspaceTemplate
- */
-export interface ParentKubernetes {
-    name:       string;
-    namespace?: string;
-}
-
-export interface ParentProject {
+export interface ParentDependentProject {
     /**
      * Map of implementation-dependant free-form YAML attributes.
      */
@@ -1667,83 +1740,11 @@ export interface ParentProject {
     /**
      * Project's Git source
      */
-    git?: TentacledGit;
-    /**
-     * Project name
-     */
-    name: string;
-    /**
-     * Project's Zip source
-     */
-    zip?: PurpleZip;
-}
-
-/**
- * Project's Git source
- */
-export interface TentacledGit {
-    /**
-     * Defines from what the project should be checked out. Required if there are more than one
-     * remote configured
-     */
-    checkoutFrom?: TentacledCheckoutFrom;
-    /**
-     * The remotes map which should be initialized in the git project. Projects must have at
-     * least one remote configured while StarterProjects & Image Component's Git source can only
-     * have at most one remote configured.
-     */
-    remotes?: { [key: string]: string };
-}
-
-/**
- * Defines from what the project should be checked out. Required if there are more than one
- * remote configured
- */
-export interface TentacledCheckoutFrom {
-    /**
-     * The remote name should be used as init. Required if there are more than one remote
-     * configured
-     */
-    remote?: string;
-    /**
-     * The revision to checkout from. Should be branch name, tag or commit id. Default branch is
-     * used if missing or specified revision is not found.
-     */
-    revision?: string;
-}
-
-/**
- * Project's Zip source
- */
-export interface PurpleZip {
-    /**
-     * Zip project's source location address. Should be file path of the archive, e.g.
-     * file://$FILE_PATH
-     */
-    location?: string;
-}
-
-export interface ParentStarterProject {
-    /**
-     * Map of implementation-dependant free-form YAML attributes.
-     */
-    attributes?: { [key: string]: any };
-    /**
-     * Description of a starter project
-     */
-    description?: string;
-    /**
-     * Project's Git source
-     */
     git?: StickyGit;
     /**
      * Project name
      */
     name: string;
-    /**
-     * Sub-directory from a starter project to be used as root for starter project.
-     */
-    subDir?: string;
     /**
      * Project's Zip source
      */
@@ -1795,7 +1796,15 @@ export interface FluffyZip {
     location?: string;
 }
 
-export interface DevfileSpecProject {
+/**
+ * Reference to a Kubernetes CRD of type DevWorkspaceTemplate
+ */
+export interface ParentKubernetes {
+    name:       string;
+    namespace?: string;
+}
+
+export interface ParentProject {
     /**
      * Map of implementation-dependant free-form YAML attributes.
      */
@@ -1835,7 +1844,7 @@ export interface IndigoGit {
      * least one remote configured while StarterProjects & Image Component's Git source can only
      * have at most one remote configured.
      */
-    remotes: { [key: string]: string };
+    remotes?: { [key: string]: string };
 }
 
 /**
@@ -1866,7 +1875,7 @@ export interface TentacledZip {
     location?: string;
 }
 
-export interface DevfileSpecStarterProject {
+export interface ParentStarterProject {
     /**
      * Map of implementation-dependant free-form YAML attributes.
      */
@@ -1907,7 +1916,7 @@ export interface IndecentGit {
      * least one remote configured while StarterProjects & Image Component's Git source can only
      * have at most one remote configured.
      */
-    remotes: { [key: string]: string };
+    remotes?: { [key: string]: string };
 }
 
 /**
@@ -1931,6 +1940,149 @@ export interface IndecentCheckoutFrom {
  * Project's Zip source
  */
 export interface StickyZip {
+    /**
+     * Zip project's source location address. Should be file path of the archive, e.g.
+     * file://$FILE_PATH
+     */
+    location?: string;
+}
+
+export interface DevfileSpecProject {
+    /**
+     * Map of implementation-dependant free-form YAML attributes.
+     */
+    attributes?: { [key: string]: any };
+    /**
+     * Path relative to the root of the projects to which this project should be cloned into.
+     * This is a unix-style relative path (i.e. uses forward slashes). The path is invalid if it
+     * is absolute or tries to escape the project root through the usage of '..'. If not
+     * specified, defaults to the project name.
+     */
+    clonePath?: string;
+    /**
+     * Project's Git source
+     */
+    git?: HilariousGit;
+    /**
+     * Project name
+     */
+    name: string;
+    /**
+     * Project's Zip source
+     */
+    zip?: IndigoZip;
+}
+
+/**
+ * Project's Git source
+ */
+export interface HilariousGit {
+    /**
+     * Defines from what the project should be checked out. Required if there are more than one
+     * remote configured
+     */
+    checkoutFrom?: HilariousCheckoutFrom;
+    /**
+     * The remotes map which should be initialized in the git project. Projects must have at
+     * least one remote configured while StarterProjects & Image Component's Git source can only
+     * have at most one remote configured.
+     */
+    remotes: { [key: string]: string };
+}
+
+/**
+ * Defines from what the project should be checked out. Required if there are more than one
+ * remote configured
+ */
+export interface HilariousCheckoutFrom {
+    /**
+     * The remote name should be used as init. Required if there are more than one remote
+     * configured
+     */
+    remote?: string;
+    /**
+     * The revision to checkout from. Should be branch name, tag or commit id. Default branch is
+     * used if missing or specified revision is not found.
+     */
+    revision?: string;
+}
+
+/**
+ * Project's Zip source
+ */
+export interface IndigoZip {
+    /**
+     * Zip project's source location address. Should be file path of the archive, e.g.
+     * file://$FILE_PATH
+     */
+    location?: string;
+}
+
+export interface DevfileSpecStarterProject {
+    /**
+     * Map of implementation-dependant free-form YAML attributes.
+     */
+    attributes?: { [key: string]: any };
+    /**
+     * Description of a starter project
+     */
+    description?: string;
+    /**
+     * Project's Git source
+     */
+    git?: AmbitiousGit;
+    /**
+     * Project name
+     */
+    name: string;
+    /**
+     * Sub-directory from a starter project to be used as root for starter project.
+     */
+    subDir?: string;
+    /**
+     * Project's Zip source
+     */
+    zip?: IndecentZip;
+}
+
+/**
+ * Project's Git source
+ */
+export interface AmbitiousGit {
+    /**
+     * Defines from what the project should be checked out. Required if there are more than one
+     * remote configured
+     */
+    checkoutFrom?: AmbitiousCheckoutFrom;
+    /**
+     * The remotes map which should be initialized in the git project. Projects must have at
+     * least one remote configured while StarterProjects & Image Component's Git source can only
+     * have at most one remote configured.
+     */
+    remotes: { [key: string]: string };
+}
+
+/**
+ * Defines from what the project should be checked out. Required if there are more than one
+ * remote configured
+ */
+export interface AmbitiousCheckoutFrom {
+    /**
+     * The remote name should be used as init. Required if there are more than one remote
+     * configured
+     */
+    remote?: string;
+    /**
+     * The revision to checkout from. Should be branch name, tag or commit id. Default branch is
+     * used if missing or specified revision is not found.
+     */
+    revision?: string;
+}
+
+/**
+ * Project's Zip source
+ */
+export interface IndecentZip {
     /**
      * Zip project's source location address. Should be file path of the archive, e.g.
      * file://$FILE_PATH
@@ -2107,6 +2259,7 @@ const typeMap: any = {
         { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
         { json: "commands", js: "commands", typ: u(undefined, a(r("DevfileSpecCommand"))) },
         { json: "components", js: "components", typ: u(undefined, a(r("DevfileSpecComponent"))) },
+        { json: "dependentProjects", js: "dependentProjects", typ: u(undefined, a(r("DevfileSpecDependentProject"))) },
         { json: "events", js: "events", typ: u(undefined, r("Events")) },
         { json: "metadata", js: "metadata", typ: u(undefined, r("Metadata")) },
         { json: "parent", js: "parent", typ: u(undefined, r("Parent")) },
@@ -2267,6 +2420,24 @@ const typeMap: any = {
         { json: "ephemeral", js: "ephemeral", typ: u(undefined, true) },
         { json: "size", js: "size", typ: u(undefined, "") },
     ], false),
+    "DevfileSpecDependentProject": o([
+        { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
+        { json: "clonePath", js: "clonePath", typ: u(undefined, "") },
+        { json: "git", js: "git", typ: u(undefined, r("FluffyGit")) },
+        { json: "name", js: "name", typ: "" },
+        { json: "zip", js: "zip", typ: u(undefined, r("PurpleZip")) },
+    ], false),
+    "FluffyGit": o([
+        { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("FluffyCheckoutFrom")) },
+        { json: "remotes", js: "remotes", typ: m("") },
+    ], false),
+    "FluffyCheckoutFrom": o([
+        { json: "remote", js: "remote", typ: u(undefined, "") },
+        { json: "revision", js: "revision", typ: u(undefined, "") },
+    ], false),
+    "PurpleZip": o([
+        { json: "location", js: "location", typ: u(undefined, "") },
+    ], false),
     "Events": o([
         { json: "postStart", js: "postStart", typ: u(undefined, a("")) },
         { json: "postStop", js: "postStop", typ: u(undefined, a("")) },
@@ -2293,6 +2464,7 @@ const typeMap: any = {
         { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
         { json: "commands", js: "commands", typ: u(undefined, a(r("ParentCommand"))) },
         { json: "components", js: "components", typ: u(undefined, a(r("ParentComponent"))) },
+        { json: "dependentProjects", js: "dependentProjects", typ: u(undefined, a(r("ParentDependentProject"))) },
         { json: "id", js: "id", typ: u(undefined, "") },
         { json: "kubernetes", js: "kubernetes", typ: u(undefined, r("ParentKubernetes")) },
         { json: "projects", js: "projects", typ: u(undefined, a(r("ParentProject"))) },
@@ -2401,7 +2573,7 @@ const typeMap: any = {
         { json: "args", js: "args", typ: u(undefined, a("")) },
         { json: "buildContext", js: "buildContext", typ: u(undefined, "") },
         { json: "devfileRegistry", js: "devfileRegistry", typ: u(undefined, r("FluffyDevfileRegistry")) },
-        { json: "git", js: "git", typ: u(undefined, r("FluffyGit")) },
+        { json: "git", js: "git", typ: u(undefined, r("TentacledGit")) },
         { json: "rootRequired", js: "rootRequired", typ: u(undefined, true) },
         { json: "uri", js: "uri", typ: u(undefined, "") },
     ], false),
@@ -2409,12 +2581,12 @@ const typeMap: any = {
         { json: "id", js: "id", typ: u(undefined, "") },
         { json: "registryUrl", js: "registryUrl", typ: u(undefined, "") },
     ], false),
-    "FluffyGit": o([
-        { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("FluffyCheckoutFrom")) },
+    "TentacledGit": o([
+        { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("TentacledCheckoutFrom")) },
         { json: "fileLocation", js: "fileLocation", typ: u(undefined, "") },
         { json: "remotes", js: "remotes", typ: u(undefined, m("")) },
     ], false),
-    "FluffyCheckoutFrom": o([
+    "TentacledCheckoutFrom": o([
         { json: "remote", js: "remote", typ: u(undefined, "") },
         { json: "revision", js: "revision", typ: u(undefined, "") },
     ], false),
@@ -2454,34 +2626,11 @@ const typeMap: any = {
         { json: "ephemeral", js: "ephemeral", typ: u(undefined, true) },
         { json: "size", js: "size", typ: u(undefined, "") },
     ], false),
-    "ParentKubernetes": o([
-        { json: "name", js: "name", typ: "" },
-        { json: "namespace", js: "namespace", typ: u(undefined, "") },
-    ], false),
-    "ParentProject": o([
+    "ParentDependentProject": o([
         { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
         { json: "clonePath", js: "clonePath", typ: u(undefined, "") },
-        { json: "git", js: "git", typ: u(undefined, r("TentacledGit")) },
-        { json: "name", js: "name", typ: "" },
-        { json: "zip", js: "zip", typ: u(undefined, r("PurpleZip")) },
-    ], false),
-    "TentacledGit": o([
-        { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("TentacledCheckoutFrom")) },
-        { json: "remotes", js: "remotes", typ: u(undefined, m("")) },
-    ], false),
-    "TentacledCheckoutFrom": o([
-        { json: "remote", js: "remote", typ: u(undefined, "") },
-        { json: "revision", js: "revision", typ: u(undefined, "") },
-    ], false),
-    "PurpleZip": o([
-        { json: "location", js: "location", typ: u(undefined, "") },
-    ], false),
-    "ParentStarterProject": o([
-        { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
-        { json: "description", js: "description", typ: u(undefined, "") },
         { json: "git", js: "git", typ: u(undefined, r("StickyGit")) },
         { json: "name", js: "name", typ: "" },
-        { json: "subDir", js: "subDir", typ: u(undefined, "") },
         { json: "zip", js: "zip", typ: u(undefined, r("FluffyZip")) },
     ], false),
     "StickyGit": o([
@@ -2495,7 +2644,11 @@ const typeMap: any = {
     "FluffyZip": o([
         { json: "location", js: "location", typ: u(undefined, "") },
     ], false),
-    "DevfileSpecProject": o([
+    "ParentKubernetes": o([
+        { json: "name", js: "name", typ: "" },
+        { json: "namespace", js: "namespace", typ: u(undefined, "") },
+    ], false),
+    "ParentProject": o([
         { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
         { json: "clonePath", js: "clonePath", typ: u(undefined, "") },
         { json: "git", js: "git", typ: u(undefined, r("IndigoGit")) },
@@ -2504,7 +2657,7 @@ const typeMap: any = {
     ], false),
     "IndigoGit": o([
         { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("IndigoCheckoutFrom")) },
-        { json: "remotes", js: "remotes", typ: m("") },
+        { json: "remotes", js: "remotes", typ: u(undefined, m("")) },
     ], false),
     "IndigoCheckoutFrom": o([
         { json: "remote", js: "remote", typ: u(undefined, "") },
@@ -2513,7 +2666,7 @@ const typeMap: any = {
     "TentacledZip": o([
         { json: "location", js: "location", typ: u(undefined, "") },
     ], false),
-    "DevfileSpecStarterProject": o([
+    "ParentStarterProject": o([
         { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
         { json: "description", js: "description", typ: u(undefined, "") },
         { json: "git", js: "git", typ: u(undefined, r("IndecentGit")) },
@@ -2523,13 +2676,50 @@ const typeMap: any = {
     ], false),
     "IndecentGit": o([
         { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("IndecentCheckoutFrom")) },
-        { json: "remotes", js: "remotes", typ: m("") },
+        { json: "remotes", js: "remotes", typ: u(undefined, m("")) },
     ], false),
     "IndecentCheckoutFrom": o([
         { json: "remote", js: "remote", typ: u(undefined, "") },
         { json: "revision", js: "revision", typ: u(undefined, "") },
     ], false),
     "StickyZip": o([
+        { json: "location", js: "location", typ: u(undefined, "") },
+    ], false),
+    "DevfileSpecProject": o([
+        { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
+        { json: "clonePath", js: "clonePath", typ: u(undefined, "") },
+        { json: "git", js: "git", typ: u(undefined, r("HilariousGit")) },
+        { json: "name", js: "name", typ: "" },
+        { json: "zip", js: "zip", typ: u(undefined, r("IndigoZip")) },
+    ], false),
+    "HilariousGit": o([
+        { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("HilariousCheckoutFrom")) },
+        { json: "remotes", js: "remotes", typ: m("") },
+    ], false),
+    "HilariousCheckoutFrom": o([
+        { json: "remote", js: "remote", typ: u(undefined, "") },
+        { json: "revision", js: "revision", typ: u(undefined, "") },
+    ], false),
+    "IndigoZip": o([
+        { json: "location", js: "location", typ: u(undefined, "") },
+    ], false),
+    "DevfileSpecStarterProject": o([
+        { json: "attributes", js: "attributes", typ: u(undefined, m("any")) },
+        { json: "description", js: "description", typ: u(undefined, "") },
+        { json: "git", js: "git", typ: u(undefined, r("AmbitiousGit")) },
+        { json: "name", js: "name", typ: "" },
+        { json: "subDir", js: "subDir", typ: u(undefined, "") },
+        { json: "zip", js: "zip", typ: u(undefined, r("IndecentZip")) },
+    ], false),
+    "AmbitiousGit": o([
+        { json: "checkoutFrom", js: "checkoutFrom", typ: u(undefined, r("AmbitiousCheckoutFrom")) },
+        { json: "remotes", js: "remotes", typ: m("") },
+    ], false),
+    "AmbitiousCheckoutFrom": o([
+        { json: "remote", js: "remote", typ: u(undefined, "") },
+        { json: "revision", js: "revision", typ: u(undefined, "") },
+    ], false),
+    "IndecentZip": o([
         { json: "location", js: "location", typ: u(undefined, "") },
     ], false),
     "Kind": [
