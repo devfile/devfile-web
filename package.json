@@ -48,7 +48,7 @@
     "remark-gfm": "^3.0.1",
     "sharp": "^0.32.6",
     "tslib": "^2.0.0",
-    "use-query-params": "^2.2.1",
+    "use-query-params": "^2.2.2",
     "usehooks-ts": "^2.6.0"
   },
   "devDependencies": {
