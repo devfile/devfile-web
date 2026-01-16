@@ -1,0 +1,8 @@
+# Snyk (https://snyk.io) policy file
+# Exclusions from vulnerability scanning
+version: v1.25.0
+exclude:
+  global:
+    - package.json
+    - package-lock.json
+    - yarn.lock
