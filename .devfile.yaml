@@ -28,7 +28,7 @@ metadata:
     - Registry
     - Documentation
     - devfile.io
-  version: 1.1.0
+  version: 1.2.0
 components:
   - name: image-builder
     image:
@@ -41,7 +41,6 @@ components:
     attributes:
       container-overrides:
         securityContext:
-          runAsUser: 1001
           allowPrivilegeEscalation: false
           runAsNonRoot: true
           capabilities:
@@ -81,7 +80,10 @@ commands:
   # Install dependency packages
   - id: build
     exec:
-      commandLine: yarn install --frozen-lockfile --global-folder /.yarn
+      commandLine: yarn install --immutable
+      env:
+        - name: PREFIX
+          value: /.yarn
       component: runner
       workingDir: ${PROJECT_SOURCE}
       hotReloadCapable: true
