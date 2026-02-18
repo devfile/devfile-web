@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-schemaVersion: 2.2.0
+schemaVersion: 2.2.2
 metadata:
   name: devfile-web
   displayName: Devfile Web Services
@@ -48,8 +48,7 @@ components:
           seccompProfile:
             type: "RuntimeDefault"
     container:
-      image: node:22-alpine
-      command: ['tail', '-f', '/dev/null']
+      image: quay.io/devfile/universal-developer-image@sha256:99d87fc6f1c9114db7456c419fa4556f63c1c057b6bffde57a1f7429652c7b56
       mountSources: true
       memoryLimit: "{{memoryLimit}}"
       volumeMounts:
@@ -123,6 +122,6 @@ variables:
   # Profile of the image on quay.io
   profile: devfile
   # Memory limit on runner, default: 1Gi
-  memoryLimit: 1Gi
+  memoryLimit: 2Gi
   # Deployment configuration to use
   deployConfig: development
