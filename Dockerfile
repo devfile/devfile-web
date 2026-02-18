@@ -19,7 +19,7 @@ USER root
 # Install corepack & node-gyp dependency
 RUN microdnf install -y python3 gcc-c++ make && \
   npm install --build-from-resource node-gyp && \
-  npm install -g corepack
+  npm install -g corepack@0.34.6
 
 # Install yarn v4
 RUN corepack install -g yarn@4
@@ -60,7 +60,7 @@ FROM registry.access.redhat.com/ubi9/nodejs-22-minimal@sha256:ff6a2fec646bbc42f6
 USER root
 
 # Install corepack
-RUN npm install -g corepack
+RUN npm install -g corepack@0.34.6
 
 # Install yarn v4
 RUN corepack install -g yarn@4
