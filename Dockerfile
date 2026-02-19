@@ -49,7 +49,8 @@ RUN \
 WORKDIR /app
 
 # Install dependencies
-COPY package.json .yarnrc.yml yarn.lock* ./
+COPY package.json yarn.lock* ./
+RUN echo "nodeLinker: node-modules" > .yarnrc.yml
 RUN \
   if [ -f yarn.lock ]; then yarn install --immutable; \
   else echo "Lockfile not found." && exit 1; \
