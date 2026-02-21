@@ -6,7 +6,7 @@ Monorepo for web related devfile projects
 
 ## Getting started
 
-This project uses [`yarn`](https://classic.yarnpkg.com/lang/en/docs/install).
+This project uses [`yarn`](https://yarnpkg.com/getting-started/install).
 
 It is highly recommended to download the [Nx Console](https://nx.dev/using-nx/console#download) extension for your IDE if available.
 

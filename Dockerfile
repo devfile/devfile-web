@@ -16,11 +16,13 @@
 FROM registry.access.redhat.com/ubi9/nodejs-22-minimal@sha256:ff6a2fec646bbc42f67a48753206fd5dd785aab3e6ab2f611afaba2514f1d39d AS deps
 USER root
 
-# Install yarn & node-gyp dependency
-RUN \
-  curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-  microdnf install -y yarn python3 gcc-c++ make && \
-  npm install --build-from-resource node-gyp
+# Install corepack & node-gyp dependency
+RUN microdnf install -y python3 gcc-c++ make && \
+  npm install --build-from-resource node-gyp && \
+  npm install -g corepack@0.34.6
+
+# Install yarn v4
+RUN corepack install -g yarn@4
 
 # Project non-specific args
 ARG PROJECT_NAME
@@ -37,7 +39,7 @@ ARG NEXT_PUBLIC_DOCSEARCH_INDEX_NAME
 # This increases the timeout period so it can properly download dependencies
 # Value is in milliseconds and is set to 60 minutes
 # To increase/decrease you can override via --build-arg YARN_TIMEOUT=x in your build command
-ARG YARN_TIMEOUT=3600000
+ARG YARN_HTTP_TIMEOUT=3600000
 
 # Check if the PROJECT_NAME build argument is set
 RUN \
@@ -48,8 +50,9 @@ WORKDIR /app
 
 # Install dependencies
 COPY package.json yarn.lock* ./
+RUN echo "nodeLinker: node-modules" > .yarnrc.yml
 RUN \
-  if [ -f yarn.lock ]; then yarn --frozen-lockfile --network-timeout $YARN_TIMEOUT; \
+  if [ -f yarn.lock ]; then yarn install --immutable; \
   else echo "Lockfile not found." && exit 1; \
   fi
 
@@ -57,10 +60,11 @@ RUN \
 FROM registry.access.redhat.com/ubi9/nodejs-22-minimal@sha256:ff6a2fec646bbc42f67a48753206fd5dd785aab3e6ab2f611afaba2514f1d39d AS builder
 USER root
 
-# Install yarn
-RUN \
-  curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | tee /etc/yum.repos.d/yarn.repo && \
-  microdnf install -y yarn
+# Install corepack
+RUN npm install -g corepack@0.34.6
+
+# Install yarn v4
+RUN corepack install -g yarn@4
 
 # Project non-specific args
 ARG PROJECT_NAME

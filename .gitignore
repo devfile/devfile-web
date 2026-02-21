@@ -49,3 +49,7 @@ Thumbs.db
 .odo/env
 .odo/odo-file-index.json
 .odo
+
+# .yarn files
+.yarn/install-state.gz
+.yarn/cache

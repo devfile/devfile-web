@@ -48,7 +48,7 @@ jobs:
 
       - name: Install
         run: |
-          yarn install --frozen-lockfile
+          yarn install --immutable
 
       - name: Lint
         run: |
@@ -81,7 +81,7 @@ jobs:
 
       - name: Install
         run: |
-          yarn install --frozen-lockfile
+          yarn install --immutable
 
       - name: Build
         run: |
@@ -126,7 +126,7 @@ jobs:
 
       - name: Install
         run: |
-          yarn install --frozen-lockfile
+          yarn install --immutable
 
       - name: Docker Build for linux/amd64
         run: |
@@ -159,7 +159,7 @@ jobs:
 
       - name: Install
         run: |
-          yarn install --frozen-lockfile
+          yarn install --immutable
 
       - name: E2E
         run: |
