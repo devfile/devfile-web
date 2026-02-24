@@ -120,7 +120,7 @@
     "ts-jest": "^29.0.1",
     "typescript": "^4.9.3",
     "url-loader": "^4.1.1",
-    "webpack": "^5.94.0"
+    "webpack": "^5.104.1"
   },
   "packageManager": "yarn@4.12.0"
 }
