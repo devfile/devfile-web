@@ -82,7 +82,7 @@ function collectHeadings(
 }
 
 const websiteName = 'Devfile.io';
-const websiteDescription = 'An open standard defining containerized development environments.';
+const websiteDescription = 'An open standard for containerized development environments.';
 const lfTrademarkUsageUrl = 'https://lfprojects.org/policies/';
 
 function LandingPage({ Component, pageProps }: AppProps): JSX.Element {
