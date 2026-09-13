@@ -72,7 +72,7 @@ export function Hero(): JSX.Element {
                 Simplify and accelerate your workflow.
               </p>
               <p className="mt-3 text-2xl tracking-tight text-slate-400">
-                An open standard defining containerized development environments.
+                An open standard for containerized development environments.
               </p>
               <div className="mt-8 flex gap-4 md:justify-center lg:justify-start">
                 <Button
