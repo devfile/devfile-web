@@ -11,6 +11,10 @@ _Link the GitHub/GitLab/JIRA issues that are related to this PR._
 - [ ] Documentation
 _Update the [sidebar](https://github.com/devfile/devfile-web/tree/main/apps/landing-page#configuring-navigation) if there is a new file added or an existing filename is changed_
 
+- [ ] [AI Governance](https://github.com/devfile/api/blob/main/GOVERNANCE.md#ai-governance) (if applicable)
+
+_AI-assisted contributions must comply with the project's review, licensing, and attribution requirements._
+
 # Tests Performed
 _Explain what tests you personally ran to ensure the changes are functioning as expected._
 
